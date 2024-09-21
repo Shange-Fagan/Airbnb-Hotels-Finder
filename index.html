@@ -1165,7 +1165,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"false"
     },
     // ... Add other markers here
@@ -1179,7 +1179,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
     {
@@ -1192,7 +1192,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
     {
@@ -1205,7 +1205,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
     {
@@ -1218,7 +1218,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
     {
@@ -1231,7 +1231,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
     {
@@ -1244,7 +1244,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
     {
@@ -1257,7 +1257,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
     {
@@ -1270,7 +1270,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       loading:"eager",
       width:"275",
       height:"250",
-      scrolling:"no",
+      scrolling:"yes",
       allowfullscreen:"true"
     },
   ];
@@ -1474,7 +1474,7 @@ window.addEventListener('pointerdown', (event) => {
     // Always update the content and attach the iframe, even if previously clicked
     contentDiv.innerHTML = `
       <div class="loading-spinner" style="pointer-events:none;"></div>
-      <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
+      <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
     `;
 
     const iframe = labelDiv.querySelector('iframe');
