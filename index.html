@@ -403,7 +403,7 @@ iframe::-webkit-scrollbar {
 	
 	  /* Style the select dropdown */
 select {
-  position: relative;
+  position: absolute;
   left: 0;
   top: 75px;
   padding: 4.5px 9.5px;
@@ -415,24 +415,12 @@ select {
   z-index: 9999;
   cursor: pointer;
   appearance: none;
-  /*background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');*/
-  /*background-repeat: no-repeat;
-  background-position: right 10px center;
-background-size: 10px; */ /* Adjust this as needed */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+background-size: 10px; /* Adjust this as needed */
 overflow: hidden;
 }
-	  /* Arrow icon for the dropdown */
-select::after {
-  content: '▼'; /* Unicode for down arrow */
-  font-size: 12px; /* Adjust size if necessary */
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  pointer-events: none;
-  color: rgba(255, 255, 255, 0.75); /* Matches the select text color */
-}
-
 
 /* Style the dropdown options */
 select option {
