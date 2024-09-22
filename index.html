@@ -1809,7 +1809,13 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       allowfullscreen:"true"
     },
   ];
-
+  let markers; // Declare it globally once
+	  
+function clearMarkers() {
+  if (markers) {
+    scene.remove(markers); // Removes only markers, not the entire scene
+  }
+}
 
    document.getElementById('filtersHeader').addEventListener('change', function() {
   const where = document.getElementById('whereSelect').value;
@@ -1829,41 +1835,44 @@ function generateAirbnbUrl(where, when, who) {
 }
 
 // Load markers with generic data
-function loadMarkers(markersData) {
-  scene.clear(); // Clear previous markers
-  const markerCount = markersData.length;
-  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+function loadMarkers(data) {
+  clearMarkers(); // First clear the existing markers
+  
+  const markerCount = data.length;
+  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount); // No redeclaration
+  const dummy = new THREE.Object3D();
 
-  markersData.forEach((marker, index) => {
+  data.forEach((marker, index) => {
     const [radius, phi, theta] = marker.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
     dummy.lookAt(dummy.position.clone().setLength(radius + 1));
     dummy.updateMatrix();
     markers.setMatrixAt(index, dummy.matrix);
-    marker.worldPosition = dummy.position.clone();
   });
 
   scene.add(markers);
-  setupMarkerInteraction(); // Add interactivity
+  setupMarkerInteraction(); // Add marker interaction again after loading
 }
 
-// Filter markers by selected region
+
+/*// Filter markers by selected region
 function filterMarkersByRegion(region) {
   const filteredMarkers = genericMarkersData.filter(marker => marker.region === region);
   loadMarkers(filteredMarkers);
-}
-
-// Handle region selection (pan to region and filter markers)
-function onRegionSelect(region) {
-  panToRegion(region); // Pan the camera
-  filterMarkersByRegion(region); // Update markers
-}
+}*/
 
 // Event listener for region selection
 document.getElementById('regionSelect').addEventListener('change', (event) => {
   const selectedRegion = event.target.value;
-  onRegionSelect(selectedRegion);
+  onRegionSelect(selectedRegion); // Pan and filter markers
 });
+
+// Function to filter markers and pan the globe
+function onRegionSelect(region) {
+  panToRegion(region);
+  filterMarkersByRegion(region); // Update markers based on region
+}
+
 
 // Call this initially to show all markers
 loadMarkers(genericMarkersData);
@@ -2091,7 +2100,7 @@ let activeLabel = null; // Keep track of open iframe
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
-}
+
 	  
 // Set up marker click event
 function setupMarkerInteraction() {
