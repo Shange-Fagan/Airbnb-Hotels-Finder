@@ -403,17 +403,21 @@ iframe::-webkit-scrollbar {
 }
 	
 /* Full-screen popup for region selection */
-#regionSelectionPopup {
-  position: fixed;
+	  
+#regionSelect {
+  position: relative; /* Ensure proper positioning */
+  /*position: fixed;*/
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(255, 255, 255, 0.8); /* Transparent */
-  z-index: 9999;
+  /*z-index: 9999;*/
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10000; /* Ensure it's on top */
+  pointer-events: auto; /* Ensure click events are allowed */
 }
 
 #selectRegionHeader {
