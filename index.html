@@ -13,7 +13,8 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: hidden; /* Ensures no scrollbars appear */
+  position: relative;
   /*font-family: "Syne", sans-serif;*/
 }
 
@@ -438,7 +439,7 @@ select:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.3); /* Transparent background */
   padding: 20px;
   border-radius: 12px;
   z-index: 9999;
@@ -446,6 +447,7 @@ select:hover {
   text-align: center;
   width: 300px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px); /* Optional: adds blur effect to background */
 }
 
 /* Dropdown Styling */
@@ -486,7 +488,10 @@ select:hover {
   cursor: pointer;
 }
 
-	
+canvas {
+  z-index: 1; /* Makes sure the globe is behind the popup */
+}
+
 	/* Responsive Design */
     @media (max-width: 768px) {
       /* Adjust the size and placement of the globe on mobile */
