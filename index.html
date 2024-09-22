@@ -97,72 +97,72 @@ iframe {
   </div>
 </div>
 
-<script type="module">
-  import * as THREE from "https://unpkg.com/three/build/three.module.js";
-  import { OrbitControls } from "https://unpkg.com/three/examples/jsm/controls/OrbitControls.js";
+<script src="https://unpkg.com/three/build/three.min.js"></script>
+<script src="https://unpkg.com/three/examples/js/controls/OrbitControls.js"></script>
 
-  // Scene Setup
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-  camera.position.set(20, 0.5, 15).setLength(25);
+<script>
+// Scene Setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+camera.position.set(20, 0.5, 15).setLength(25);
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  document.getElementById('globeContainer').appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.getElementById('globeContainer').appendChild(renderer.domElement);
 
-  // Controls
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.25;
-  controls.enableZoom = true;
-  controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.5;
+// Controls
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.25;
+controls.enableZoom = true;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.5;
 
-  // Animation loop
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+// Load initial globe texture
+const textureLoader = new THREE.TextureLoader();
+const globeGeometry = new THREE.SphereGeometry(5, 32, 32);
+const globeMaterial = new THREE.MeshBasicMaterial({
+  map: textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
+});
+const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+scene.add(globe);
+
+// Event listener for region selection
+document.getElementById('submitRegion').addEventListener('click', function() {
+  const region = document.getElementById('regionSelect').value;
+  panToRegion(region);
+  document.getElementById('welcomeOverlay').style.display = 'none';
+});
+
+// Function to pan the camera to the selected region
+function panToRegion(region) {
+  switch (region) {
+    case 'africa':
+      camera.position.set(5.1, 1.2, 1.5);
+      break;
+    case 'europe':
+      camera.position.set(5.1, 0.7, 1.8);
+      break;
+    case 'america':
+      camera.position.set(5.1, 0.9, 0);
+      break;
+    case 'asia':
+      camera.position.set(5.1, 0.9, 3);
+      break;
+    default:
+      console.log('Region not recognized');
   }
-  animate();
-
-  // Load initial globe texture
-  const textureLoader = new THREE.TextureLoader();
-  const globeGeometry = new THREE.SphereGeometry(5, 32, 32);
-  const globeMaterial = new THREE.MeshBasicMaterial({
-    map: textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
-  });
-  const globe = new THREE.Mesh(globeGeometry, globeMaterial);
-  scene.add(globe);
-
-  // Event listener for region selection
-  document.getElementById('submitRegion').addEventListener('click', function() {
-    const region = document.getElementById('regionSelect').value;
-    panToRegion(region);
-    document.getElementById('welcomeOverlay').style.display = 'none';
-  });
-
-  // Function to pan the camera to the selected region
-  function panToRegion(region) {
-    switch (region) {
-      case 'africa':
-        camera.position.set(5.1, 1.2, 1.5);
-        break;
-      case 'europe':
-        camera.position.set(5.1, 0.7, 1.8);
-        break;
-      case 'america':
-        camera.position.set(5.1, 0.9, 0);
-        break;
-      case 'asia':
-        camera.position.set(5.1, 0.9, 3);
-        break;
-      default:
-        console.log('Region not recognized');
-    }
-    camera.lookAt(0, 0, 0);
-  }
+  camera.lookAt(0, 0, 0);
+}
 </script>
 
 
