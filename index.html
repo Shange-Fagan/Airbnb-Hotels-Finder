@@ -642,19 +642,43 @@ overflow: hidden;
   <option value="midPrice">Mid Price ($100-$200 per night maximum)</option>
   <option value="expensive">Most Expensive ($300+ per night)</option>
 </select>
-	<div id="welcomePopup" class="popup">
-  <h2>Welcome to Airbnb Assistant</h2>
-  <p>Please select your region:</p>
-  <select id="regionSelect">
-    <option value="africa">Africa</option>
-    <option value="europe">Europe</option>
-    <option value="america">America</option>
-    <option value="south america">South America</option>
-    <option value="asia">Asia</option>
-    <!-- Add more regions if needed -->
-  </select>
-  <button id="submitRegion">Submit</button>
+	
+<div id="regionSelectionPopup">
+  <div id="selectRegionHeader">
+    <h2>Welcome to Airbnb Assistant</h2>
+    <p>Please select your region</p>
+    <select id="regionSelect">
+      <option value="africa">Africa</option>
+      <option value="europe">Europe</option>
+      <option value="america">America</option>
+      <option value="south america">South America</option>
+      <option value="asia">Asia</option>
+      <!-- Add more regions as needed -->
+    </select>
+  </div>
 </div>
+
+<div id="content">
+  <div id="globeContainer">
+    <!-- Three.js globe will be rendered here -->
+  </div>
+  <div id="iframeContainer">
+    <iframe id="airbnbIframe" src=""></iframe>
+  </div>
+</div>
+
+<div id="filtersHeader">
+  <select id="whereSelect">
+    <!-- Populate countries based on region -->
+  </select>
+  <input type="date" id="whenSelect">
+  <select id="whoSelect">
+    <option value="2">2 Adults</option>
+    <option value="4">4 Adults</option>
+    <!-- Add more options -->
+  </select>
+</div>
+
 
 
 
