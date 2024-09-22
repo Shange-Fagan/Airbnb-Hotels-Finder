@@ -2097,7 +2097,41 @@ function closeIframe(event) {
   }, 3000); // Adjust time as needed
 });*/
 
+// Function to search holidays based on user input
+function searchHoliday() {
+  const userInput = document.getElementById('holidaySearch').value.toLowerCase();
+  
+  // Sample input: "2 adults, no children, 2 weeks, spain"
+  const filters = {
+    adults: /(\d+)\s*adults/.exec(userInput),
+    children: /(\d+)\s*children/.exec(userInput),
+    weeks: /(\d+)\s*weeks/.exec(userInput),
+    location: /(\w+)/.exec(userInput.match(/spain|france|america|africa|japan/i) || [""])[0]
+  };
 
+  const matchedMarkers = markersData.filter(marker => {
+    const locationMatch = marker.iframeSrc.toLowerCase().includes(filters.location);
+    return locationMatch; // Add more conditions for filtering based on adults, children, etc.
+  });
+
+  if (matchedMarkers.length > 0) {
+    // Display matching markers
+    matchedMarkers.forEach(marker => {
+      displayMarker(marker);
+    });
+  } else {
+    alert("No matching holidays found.");
+  }
+}
+
+// Function to display the selected marker's iframe
+function displayMarker(marker) {
+  // Assuming each marker has an associated iframe
+  const iframeContainer = document.getElementById(`label-${marker.id}`);
+  iframeContainer.classList.add('active');
+  const contentDiv = iframeContainer.querySelector('.content');
+  contentDiv.innerHTML = `<iframe src="${marker.iframeSrc}" frameborder="0" width="275" height="249"></iframe>`;
+}
 
 
 // Animation Loop
