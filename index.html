@@ -13,8 +13,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: hidden; /* Ensures no scrollbars appear */
-  position: relative;
+  overflow: hidden;
   /*font-family: "Syne", sans-serif;*/
 }
 
@@ -401,105 +400,40 @@ iframe::-webkit-scrollbar {
   position: relative;
   display: inline-block; /* Ensures it wraps tightly around marker label */
 }
-	   /* Ensure the overlay is transparent */
-#welcomeOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* 80% transparent white */
-  z-index: 10; /* Make sure this is above the Three.js canvas */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-
-#welcomeSign {
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent welcome sign */
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  pointer-events: auto;
-}
-
-/* Close button */
-#welcomeOverlayClose {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255, 0, 0, 0.8); /* Red button */
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-	  canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1; /* Make sure the canvas is below the welcome sign */
-}
 	
-/* Full-screen popup for region selection */
-	  
-#regionSelect {
-  position: relative; /* Ensure proper positioning */
-  /*position: fixed;*/
-  top: 0;
+	  /* Style the select dropdown */
+select {
+  position: absolute;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.8); /* Transparent */
-  /*z-index: 9999;*/
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000; /* Ensure it's on top */
-  pointer-events: auto; /* Ensure click events are allowed */
+  top: 75px;
+  padding: 4.5px 9.5px;
+  font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.75);
+  z-index: 9999;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+background-size: 10px; /* Adjust this as needed */
+overflow: hidden;
 }
 
-#selectRegionHeader {
-  font-size: 24px;
+/* Style the dropdown options */
+select option {
+  background-color: white;
   color: #333;
 }
 
-#filtersHeader {
-  font-size: 18px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-around;
+/* Hover effect for the dropdown */
+select:hover {
+  border-color: #007BFF;
+  background-color: rgba(225, 225, 255, 0.2);
 }
 
-#filtersHeader select {
-  padding: 8px;
-  font-size: 14px;
-}
-
-/* Split screen layout */
-#content {
-  display: flex;
-}
-
-#globeContainer {
-  width: 50%;
-  position: relative;
-}
-
-#iframeContainer {
-  width: 50%;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
 	/* Responsive Design */
     @media (max-width: 768px) {
       /* Adjust the size and placement of the globe on mobile */
@@ -510,7 +444,7 @@ iframe {
       }
 	    select {
     padding: 3px 7px;
-    top: 80px;    
+    top: 75px;    
     font-size: 10px;
     background-color: rgba(255, 255, 255, 0.2);
 overflow: hidden;    
@@ -580,8 +514,6 @@ overflow: hidden;
         padding: 2.5px 0;
       }
     }
-
-
 
 
 </style>
@@ -654,56 +586,10 @@ overflow: hidden;
   <iframe id="newsIframenighttheme" width="900" height="1600" src="https://rss.app/embed/v1/list/l8d8McKVHYpe6MzA" frameborder="0"></iframe>
 </div>
 	<select id="airbnbSelector">
-  <option value="general">Show All</option>
-  <option value="cheapest">Cheapest ($100 per night maximum)</option>
-  <option value="midPrice">Mid Price ($100-$200 per night maximum)</option>
-  <option value="expensive">Most Expensive ($300+ per night)</option>
+  <option value="cheapest">Cheapest</option>
+  <option value="midPrice">Mid Price</option>
+  <option value="expensive">Most Expensive</option>
 </select>
-	
-
-<div id="welcomeOverlay">
-  <div id="welcomeSign">
-    <h2>Welcome to Airbnb Assistant</h2>
-    <p>Please select your region</p>
-    <button id="welcomeOverlayClose">X</button>
-    <!-- Region selection or other inputs -->
-      <select id="regionSelect">
-      <option value="africa">Africa</option>
-      <option value="europe">Europe</option>
-      <option value="america">America</option>
-      <option value="south america">South America</option>
-      <option value="asia">Asia</option>
-      <!-- Add more regions as needed -->
-    </select>
-  </div>
-</div>
-
-	
-
-<div id="content">
-  <div id="globeContainer">
-    <!-- Three.js globe will be rendered here -->
-  </div>
-  <div id="iframeContainer">
-    <iframe id="airbnbIframe" src=""></iframe>
-  </div>
-</div>
-
-<div id="filtersHeader">
-  <select id="whereSelect">
-    <!-- Populate countries based on region -->
-  </select>
-  <input type="date" id="whenSelect">
-  <select id="whoSelect">
-    <option value="2">2 Adults</option>
-    <option value="4">4 Adults</option>
-    <!-- Add more options -->
-  </select>
-</div>
-
-
-
-
 
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
@@ -820,10 +706,6 @@ overflow: hidden;
 
   // Display the close button in both cases
   closeNewsButton.style.display = 'flex';
-});
-	  
-document.getElementById('welcomeOverlayClose').addEventListener('click', () => {
-  document.getElementById('welcomeOverlay').style.display = 'none';
 });
 
 
@@ -1355,11 +1237,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 
 
     // Markers Data
-	  
-  let markers; // Declare globally for marker handling
-	  
-  // Data for Airbnb markers
-  const genericMarkersData = [
+  const markersData = [
     {
       //Africa
       id: 1,
@@ -1479,105 +1357,764 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       allowfullscreen:"true"
     },
   ];
-
-  
-// Clear existing markers
-function clearMarkers() {
-  if (markers) {
-    scene.remove(markers);
-  }
+  const markersDataforCheapestAirbnbs = [
+    {
+      //Africa
+      id: 1,
+      position: [5.1, 1.2, 1.5],
+      iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"false"
+    },
+    // ... Add other markers here
+    {
+      //Europe
+      id: 2,
+      position: [5.1, 0.7, 1.8],
+      iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //America
+      id: 3,
+      position: [5.1, 0.9, 0],
+      iframeSrc: "https://rss.app/embed/v1/list/chAYVOo3llbQzNLo",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //South America
+      id: 4,
+      position: [5.1, 1.6, 0.4],
+      iframeSrc: "https://rss.app/embed/v1/list/DP9kzxo2dohbbgST",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Middle East
+      id: 5,
+      position: [5.1, 1, 2.3],
+      iframeSrc: "https://rss.app/embed/v1/list/JCYAnBzooyfhbDvO",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Asia
+      id: 6,
+      position: [5.1, 0.9, 3],
+      iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Japan
+      id: 7,
+      position: [5.1, 0.9, 4],
+      iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      // Jamaica
+      id: 8,
+      position: [5.1, 1.2, 0.2],
+      iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //UK
+      id: 9,
+      position: [5.1, 0.6, 1.45],
+      iframeSrc: "https://rss.app/embed/v1/list/VQIhB1FM0tC17q5Y",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+  ];
+	  const markersDataforMidPriceAirbnbs = [
+    {
+      //Africa
+      id: 1,
+      position: [5.1, 1.2, 1.5],
+      iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"false"
+    },
+    // ... Add other markers here
+    {
+      //Europe
+      id: 2,
+      position: [5.1, 0.7, 1.8],
+      iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //America
+      id: 3,
+      position: [5.1, 0.9, 0],
+      iframeSrc: "https://rss.app/embed/v1/list/chAYVOo3llbQzNLo",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //South America
+      id: 4,
+      position: [5.1, 1.6, 0.4],
+      iframeSrc: "https://rss.app/embed/v1/list/DP9kzxo2dohbbgST",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Middle East
+      id: 5,
+      position: [5.1, 1, 2.3],
+      iframeSrc: "https://rss.app/embed/v1/list/JCYAnBzooyfhbDvO",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Asia
+      id: 6,
+      position: [5.1, 0.9, 3],
+      iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Japan
+      id: 7,
+      position: [5.1, 0.9, 4],
+      iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      // Jamaica
+      id: 8,
+      position: [5.1, 1.2, 0.2],
+      iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //UK
+      id: 9,
+      position: [5.1, 0.6, 1.45],
+      iframeSrc: "https://rss.app/embed/v1/list/VQIhB1FM0tC17q5Y",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+  ];
+	  const markersDataforExpensiveAirbnbs = [
+    {
+      //Africa
+      id: 1,
+      position: [5.1, 1.2, 1.5],
+      iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"false"
+    },
+    // ... Add other markers here
+    {
+      //Europe
+      id: 2,
+      position: [5.1, 0.7, 1.8],
+      iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //America
+      id: 3,
+      position: [5.1, 0.9, 0],
+      iframeSrc: "https://rss.app/embed/v1/list/chAYVOo3llbQzNLo",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //South America
+      id: 4,
+      position: [5.1, 1.6, 0.4],
+      iframeSrc: "https://rss.app/embed/v1/list/DP9kzxo2dohbbgST",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Middle East
+      id: 5,
+      position: [5.1, 1, 2.3],
+      iframeSrc: "https://rss.app/embed/v1/list/JCYAnBzooyfhbDvO",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Asia
+      id: 6,
+      position: [5.1, 0.9, 3],
+      iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Japan
+      id: 7,
+      position: [5.1, 0.9, 4],
+      iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      // Jamaica
+      id: 8,
+      position: [5.1, 1.2, 0.2],
+      iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //UK
+      id: 9,
+      position: [5.1, 0.6, 1.45],
+      iframeSrc: "https://rss.app/embed/v1/list/VQIhB1FM0tC17q5Y",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+  ];
+  // Marker Geometry and Material
+  const markerGeometry = new THREE.PlaneGeometry();
+  // const markerGeometry = new THREE.PlaneGeometry(5, 5); // Increase size for mobile
+if (window.innerWidth <= 768) {
+  markerGeometry.scale(1.25, 1.25, 1.25); // Scale markers for mobile
 }
 
-// Load markers dynamically
-function loadMarkers(data) {
-  clearMarkers(); // Clear old markers
 
-  const markerCount = data.length;
-  const markerGeometry = new THREE.PlaneGeometry(0.05, 0.05);
-  const markerMaterial = new THREE.MeshBasicMaterial({ color: "red" });
-  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  
+  // Creating Markers
+  const markerCount = markersData.length;
+  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  
   const dummy = new THREE.Object3D();
-
-  data.forEach((marker, index) => {
-    const [radius, phi, theta] = marker.position;
+  const phaseArray = [];
+  
+  markersData.forEach((data, index) => {
+    const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
     dummy.lookAt(dummy.position.clone().setLength(radius + 1));
     dummy.updateMatrix();
     markers.setMatrixAt(index, dummy.matrix);
+    phaseArray.push(Math.random());
+    data.worldPosition = dummy.position.clone();
+  });
+  
+  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
+  scene.add(markers);
+    // Labels Container
+  const labelsContainer = document.getElementById('labels-container');
+  
+  // Create Labels
+markersData.forEach((data) => {
+  // Create Label Div
+  const labelDiv = document.createElement('div');
+  labelDiv.className = 'marker-label';
+  labelDiv.id = `label-${data.id}`;
+
+  // Close Button
+  const closeButton = document.createElement('button');
+  closeButton.className = 'close-button';
+  closeButton.innerText = '×';
+  labelDiv.appendChild(closeButton);
+
+  // Close Button Event Listener
+  closeButton.addEventListener('click', (event) => {
+    console.log('Close button clicked'); // Check if this appears in the console
+    event.stopPropagation(); // Stop the event from propagating up the DOM
+    labelDiv.classList.remove('active');
+    
+    // Resume globe autorotation when the label is closed
+    controls.autoRotate = true;
+    
+    // Re-enable the OrbitControls
+    controls.enabled = true;
+  });
+
+  // Content Div
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'content';
+  labelDiv.appendChild(contentDiv);
+
+  // Append to Labels Container
+  labelsContainer.appendChild(labelDiv);
+
+  // CSS2DObject
+  const labelObject = new CSS2DObject(labelDiv);
+  labelObject.position.copy(data.worldPosition);
+  scene.add(labelObject);
+
+  // Store label object for interaction
+  data.labelObject = labelObject;
+  labelDiv.addEventListener('mousedown', (event) => {
+    event.stopPropagation();
+  });
+  labelDiv.addEventListener('touchstart', (event) => {
+    event.stopPropagation();
+  });
+});
+
+// Raycaster for Interaction
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+	  
+/*let activeLabel = null; // Keep track of the currently open iframe
+	  
+window.addEventListener('pointerdown', (event) => {
+  pointer.x = (event.clientX / innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+
+  const intersects = raycaster.intersectObject(markers).filter((m) => {
+    return m.uv.subScalar(0.5).length() * 2 < 0.25;
+  });
+
+  if (intersects.length > 0) {
+    const instanceId = intersects[0].instanceId;
+    const data = markersData[instanceId];
+	  
+	  // Update Label Content
+    const labelDiv = document.getElementById(`label-${data.id}`);
+    const contentDiv = labelDiv.querySelector('.content');
+	  
+	  // Check if the iframe is related to the marker (specific iframe)
+    if (!contentDiv.querySelector('iframe')) {
+	  // Add loading spinner inside the content div
+    contentDiv.innerHTML = `
+    <div class="loading-spinner" style="pointer-events:none;"></div>
+    <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
+    `;
+
+    const iframe = labelDiv.querySelector('iframe');
+    const spinner = contentDiv.querySelector('.loading-spinner');
+	   
+	    // Show Label
+    labelDiv.classList.add('active');
+	    
+	    iframe.addEventListener('load', () => {
+	console.log('Iframe loaded');
+	    
+	// Hide loading spinner when iframe finishes loading
+      spinner.style.display = 'none';
+      iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
+      */ /*iframe.contentWindow.addEventListener('blur', () => {
+	console.log('Iframe lost focus');
+        controls.enabled = true; // Re-enable the controls when iframe loses focus
+      });*/ /*
+		    // Close any previously active label
+      if (activeLabel && activeLabel !== labelDiv) {
+        activeLabel.classList.remove('active');
+      }
+		    // Set the new active label
+      activeLabel = labelDiv;
+	    
+    });
+	  // Show loading spinner
+    //const loadingIcon = document.getElementById('loadingIcon');
+    //loadingIcon.style.display = 'block';
+	  
+    // Add a listener to detect when the iframe loses focus and re-enable the controls
+    console.log(iframe); // Check if the iframe element is being correctly selected
+	  
+	*/    
+// Close iframe when clicking outside of it
+	  
+    // Close iframe when clicking outside of it
+    /*document.addEventListener('click', function(event) {
+  if (!labelDiv.contains(event.target)) {
+    // Check if the label is already active, toggle it off
+    if (labelDiv.classList.contains('active')) {
+      labelDiv.classList.remove('active');
+      controls.autoRotate = true;
+      controls.enabled = true;
+    } else {
+      // Re-enable the iframe on click
+      labelDiv.classList.add('active');
+      controls.autoRotate = false;
+      controls.enabled = false;
+    }
+  }
+});*/    
+/*        document.addEventListener('pointerdown', function(event) {
+          if (!labelDiv.contains(event.target)) {
+          labelDiv.classList.remove('active');
+          controls.autoRotate = true;
+          controls.enabled = true;
+          activeLabel = null; // No active label after close
+        }
+      });
+
+	    // Stop the globe's autorotation and disable OrbitControls
+    controls.autoRotate = false;
+    controls.enabled = false; // Disable the controls while interacting with the iframe
+
+  }
+}
+});*/
+	  // Define different markers data sets
+const markersDataSets = {
+  cheapest: markersDataforCheapestAirbnbs,
+  midPrice: markersDataforMidPriceAirbnbs,
+  expensive: markersDataforExpensiveAirbnbs,
+};
+
+let activeMarkersData = markersDataforCheapestAirbnbs; // Default to cheapest
+let activeLabel = null; // Keep track of open iframe
+//let markers; // Declare it outside, so it is accessible globally.
+
+function loadMarkers(selectedCategory) {
+  // Remove existing markers from the scene
+  scene.remove(markers);
+	
+// Set active markers data
+  activeMarkersData = markersDataSets[selectedCategory];
+
+  // Create new markers for the selected category
+  //const markerCount = activeMarkersData.length;
+  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  //const dummy = new THREE.Object3D();
+
+  activeMarkersData.forEach((data, index) => {
+    const [radius, phi, theta] = data.position;
+    dummy.position.setFromSphericalCoords(radius, phi, theta);
+    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+    dummy.updateMatrix();
+    markers.setMatrixAt(index, dummy.matrix);
+    data.worldPosition = dummy.position.clone();
   });
 
   scene.add(markers);
-  setupMarkerInteraction(); // Add interactivity
+
+  // Add interactivity to the new markers
+  setupMarkerInteraction();
 }
-
-// Pan camera to selected region
-function panToRegion(region) {
-  switch (region) {
-    case 'africa':
-      camera.position.set(5.1, 1.2, 1.5);
-      break;
-    case 'europe':
-      camera.position.set(5.1, 0.7, 1.8);
-      break;
-    case 'america':
-      camera.position.set(5.1, 0.9, 0);
-      break;
-    default:
-      console.log('Unknown region');
-  }
-  camera.lookAt(0, 0, 0); // Make camera always look at the globe's center
-}
-
-// Event listener for region selection
-document.getElementById('regionSelect').addEventListener('change', function (event) {
-  const selectedRegion = event.target.value;
-  panToRegion(selectedRegion); // Pan camera
-  const filteredMarkers = genericMarkersData.filter(marker => marker.region === selectedRegion);
-  loadMarkers(filteredMarkers); // Load region-specific markers
-});
-
-// Setup marker interaction (hover/click)
+	  
+// Set up marker click event
 function setupMarkerInteraction() {
-  window.addEventListener('pointerdown', function (event) {
-    const raycaster = new THREE.Raycaster();
-    const pointer = new THREE.Vector2();
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  window.addEventListener('pointerdown', (event) => {
+    pointer.x = (event.clientX / innerWidth) * 2 - 1;
+    pointer.y = -(event.clientY / innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
 
-    const intersects = raycaster.intersectObject(markers);
+    const intersects = raycaster.intersectObject(markers).filter((m) => {
+      return m.uv.subScalar(0.5).length() * 2 < 0.25;
+    });
+
     if (intersects.length > 0) {
       const instanceId = intersects[0].instanceId;
-      const marker = genericMarkersData[instanceId];
-      displayMarkerInfo(marker); // Display info when a marker is clicked
+      const data = activeMarkersData[instanceId];
+
+	    // Update Label Content
+      const labelDiv = document.getElementById(`label-${data.id}`);
+      const contentDiv = labelDiv.querySelector('.content');
+
+	    // Check if the iframe is already loaded
+	    if (!contentDiv.querySelector('iframe')) {
+		    // Always update the content and attach the iframe, even if previously clicked
+    contentDiv.innerHTML = `
+      <div class="loading-spinner" style="pointer-events:none;"></div>
+      <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
+    `;
+    labelDiv.classList.add('active');
+    controls.autoRotate = false;
+    controls.enabled = false;
+
+    // Disable pointer events on the globe while interacting with the iframe
+    renderer.domElement.style.pointerEvents = 'none';
+		    
+    const iframe = labelDiv.querySelector('iframe');
+    const spinner = contentDiv.querySelector('.loading-spinner');
+
+	   iframe.addEventListener('load', () => {
+          spinner.style.display = 'none';
+          iframe.style.pointerEvents = 'all';
+        });
+    labelDiv.classList.add('active');
+
+        // Close any previously active label
+        if (activeLabel && activeLabel !== labelDiv) {
+          activeLabel.classList.remove('active');
+        }
+        activeLabel = labelDiv;
+}
+	    // Remove previous `pointerdown` listeners if any
+    document.removeEventListener('pointerdown', closeIframe);
+
+    // Add event listener to close iframe when clicking outside
+    document.addEventListener('pointerdown', closeIframe);
     }
   });
+	// Function to close the active iframe if clicked outside
+function closeIframe(event) {
+  if (activeLabel && !activeLabel.contains(event.target)) {
+    activeLabel.classList.remove('active');
+    controls.autoRotate = true;
+    controls.enabled = true;
+    renderer.domElement.style.pointerEvents = 'all'; // Re-enable interaction with the globe
+    activeLabel = null; // Clear the active label
 }
-
-// Display marker info (load iframe in a div or as a popup)
-function displayMarkerInfo(marker) {
-  const iframeContainer = document.getElementById('iframeContainer');
-  iframeContainer.innerHTML = `
-    <iframe src="${marker.iframeSrc}" width="100%" height="300px"></iframe>
-  `;
 }
+}
+	  // Add event listener for dropdown selection
+document.getElementById('airbnbSelector').addEventListener('change', function() {
+  const selectedCategory = this.value;
+  loadMarkers(selectedCategory);
+});
 
-// Main animation loop
+// Load markers for default category on page load
+loadMarkers('cheapest');
+		    
+	 /* let activeLabel = null; // Keep track of the currently open iframe
+
+window.addEventListener('pointerdown', (event) => {
+  pointer.x = (event.clientX / innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+
+  const intersects = raycaster.intersectObject(markers).filter((m) => {
+    return m.uv.subScalar(0.5).length() * 2 < 0.25;
+  });
+
+  if (intersects.length > 0) {
+    const instanceId = intersects[0].instanceId;
+    const data = markersData[instanceId];
+
+    // Update Label Content
+    const labelDiv = document.getElementById(`label-${data.id}`);
+    const contentDiv = labelDiv.querySelector('.content');
+
+    // Always update the content and attach the iframe, even if previously clicked
+    contentDiv.innerHTML = `
+      <div class="loading-spinner" style="pointer-events:none;"></div>
+      <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
+    `;
+
+    const iframe = labelDiv.querySelector('iframe');
+    const spinner = contentDiv.querySelector('.loading-spinner');
+
+    labelDiv.classList.add('active');
+    controls.autoRotate = false;
+    controls.enabled = false;
+
+    // Disable pointer events on the globe while interacting with the iframe
+    renderer.domElement.style.pointerEvents = 'none';
+
+    iframe.addEventListener('load', () => {
+      spinner.style.display = 'none';
+      iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
+
+      // Close any previously active label
+      if (activeLabel && activeLabel !== labelDiv) {
+        activeLabel.classList.remove('active');
+      }
+
+      // Set the new active label
+      activeLabel = labelDiv;
+    });
+
+    // Remove previous `pointerdown` listeners if any
+    document.removeEventListener('pointerdown', closeIframe);
+
+    // Add event listener to close iframe when clicking outside
+    document.addEventListener('pointerdown', closeIframe);
+  }
+});
+
+// Function to close the active iframe if clicked outside
+function closeIframe(event) {
+  if (activeLabel && !activeLabel.contains(event.target)) {
+    activeLabel.classList.remove('active');
+    controls.autoRotate = true;
+    controls.enabled = true;
+    renderer.domElement.style.pointerEvents = 'all'; // Re-enable interaction with the globe
+    activeLabel = null; // Clear the active label
+  }
+}
+}*/
+
+
+
+
+	  // Loading spinner functionality
+/*document.getElementById('labels-container').addEventListener('click', function() {
+  const loadingIcon = document.getElementById('loadingIcon');
+  
+  // Show loading icon when iframe is clicked
+  loadingIcon.style.display = 'block';
+  
+  // Hide the loading icon after a set timeout (3 seconds in this case)
+  setTimeout(() => {
+    loadingIcon.style.display = 'none';
+  }, 3000); // Adjust time as needed
+});*/
+
+
+
+
+// Animation Loop
+const clock = new THREE.Clock();
+
 function animate() {
   requestAnimationFrame(animate);
-  controls.update(); // Update controls (for autorotation and zooming)
-  renderer.render(scene, camera); // Render scene
-  labelRenderer.render(scene, camera); // Render labels if any
+  TWEEN.update(); // Required to make the transition work
+  // Update time uniform
+  globalUniforms.time.value = clock.getElapsedTime();
+
+  // Update controls
+  if (controls.enabled) {
+    controls.update();
+  }
+
+  // Render
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
 }
 
 animate();
 
-</script>
-
-</body>
-</html>
-
-</script>
-
+  </script>
 </body>
 </html>
