@@ -1501,6 +1501,10 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       scene.remove(markers);
     }
   }
+	  document.getElementById('welcomeOverlayClose').addEventListener('click', () => {
+  document.getElementById('welcomeOverlay').style.display = 'none';
+});
+
 
   // Event listener for filters (where, when, who)
   document.getElementById('filtersHeader').addEventListener('change', function () {
