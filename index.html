@@ -821,6 +821,10 @@ overflow: hidden;
   // Display the close button in both cases
   closeNewsButton.style.display = 'flex';
 });
+	  
+document.getElementById('welcomeOverlayClose').addEventListener('click', () => {
+  document.getElementById('welcomeOverlay').style.display = 'none';
+});
 
 
 	 /* document.getElementById('newsButton').addEventListener('click', function() {
