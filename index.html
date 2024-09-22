@@ -402,38 +402,7 @@ iframe::-webkit-scrollbar {
   display: inline-block; /* Ensures it wraps tightly around marker label */
 }
 	
-	  /* Style the select dropdown */
-/*select {
-  position: absolute;
-  left: 0;
-  top: 80px;
-  padding: 4.5px 9.5px;
-  font-size: 12px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.75);
-  z-index: 9999;
-  cursor: pointer;
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 15px center;
-background-size: 10px;*//* Adjust this as needed */
-/*overflow: hidden;
-}*/
-
-/* Style the dropdown options */
-/*select option {
-  background-color: white;
-  color: #333;
-}*/
-
-/* Hover effect for the dropdown */
-/*select:hover {
-  border-color: #007BFF;
-  background-color: rgba(225, 225, 255, 0.2);
-}*//* Full-screen popup for region selection */
+/* Full-screen popup for region selection */
 #regionSelectionPopup {
   position: fixed;
   top: 0;
@@ -573,7 +542,7 @@ overflow: hidden;
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.8); /* 80% transparent white */
-  z-index: 1000; /* Make sure it is above the globe */
+  z-index: 10; /* Make sure this is above the Three.js canvas */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -599,6 +568,13 @@ overflow: hidden;
   border-radius: 50%;
   cursor: pointer;
 }
+	  canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Make sure the canvas is below the welcome sign */
+}
+
 
 
 
