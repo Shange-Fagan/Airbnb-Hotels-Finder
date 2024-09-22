@@ -754,10 +754,11 @@ overflow: hidden;
   const closeNewsButton = document.getElementById('closeNewsButton');
 		  
 	document.getElementById('submitRegion').addEventListener('click', () => {
-  const region = document.getElementById('regionSelect').value;
-  panToRegion(region);
-  document.getElementById('regionPopup').style.display = 'none';
+  const selectedRegion = document.getElementById('regionSelect').value;
+  document.getElementById('regionPopup').style.display = 'none'; // Hide the popup
+  panToRegion(selectedRegion); // Function to pan to the selected region on the globe
 });
+
 
 function panToRegion(region) {
   switch (region) {
