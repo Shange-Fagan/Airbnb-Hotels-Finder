@@ -277,6 +277,36 @@ a, button, input, select, iframe {
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
     }
+	  #header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+	  
+#regionPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+	  #content {
+  display: none;
+  flex-direction: row;
+}
+#globeContainer {
+  width: 50%;
+}
+#iframeContainer {
+  width: 50%;
+}
+
+
 	  
 /* Remove scrollbar from iframes */
 iframe::-webkit-scrollbar {
