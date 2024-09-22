@@ -1867,23 +1867,60 @@ function panToRegion(region) {
 function generateAirbnbUrl(where, when, who) {
   return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${who}`;
 }
-
-
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
   // const markerGeometry = new THREE.PlaneGeometry(5, 5); // Increase size for mobile
 if (window.innerWidth <= 768) {
   markerGeometry.scale(1.25, 1.25, 1.25); // Scale markers for mobile
 }
-
-
-  
   // Creating Markers
-  const markerCount = markersData.length;
+  //const markerCount = markersData.length;
+  const markerCount = data.length;
   const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   
   const dummy = new THREE.Object3D();
   const phaseArray = [];
+
+// Function to load markers initially with generic data
+function loadMarkers(data) {
+  scene.clear(); // Remove any previous markers
+  //const markerCount = data.length;
+  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+
+  data.forEach((marker, index) => {
+    const [radius, phi, theta] = marker.position;
+    dummy.position.setFromSphericalCoords(radius, phi, theta);
+    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+    dummy.updateMatrix();
+    markers.setMatrixAt(index, dummy.matrix);
+    marker.worldPosition = dummy.position.clone();
+  });
+
+  scene.add(markers);
+  setupMarkerInteraction();
+}
+
+// Function to filter markers by region
+function filterMarkersByRegion(region) {
+  const filteredMarkers = genericMarkersData.filter(marker => marker.region === region);
+  loadMarkers(filteredMarkers);
+}
+
+// Example of calling the panToRegion and filtering
+function onRegionSelect(region) {
+  panToRegion(region); // Pan the camera to the selected region
+  filterMarkersByRegion(region); // Filter markers and update the globe
+}
+
+// Call loadMarkers with all data initially to show all markers
+loadMarkers(genericMarkersData);
+
+// Setup event listener for region selection
+document.getElementById('regionSelect').addEventListener('change', (event) => {
+  const selectedRegion = event.target.value;
+  onRegionSelect(selectedRegion);
+});
+
   
   markersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
@@ -1896,7 +1933,7 @@ if (window.innerWidth <= 768) {
   });
   
   markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
-  scene.add(markers);
+  //scene.add(markers);
     // Labels Container
   const labelsContainer = document.getElementById('labels-container');
   
