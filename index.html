@@ -98,8 +98,8 @@ iframe {
 </div>
 
 <script type="module">
-  import * as THREE from "https://unpkg.com/three@0.136.0/build/three.module.js";
-  import { OrbitControls } from "https://unpkg.com/three@0.136.0/examples/jsm/controls/OrbitControls.js";
+  import * as THREE from "https://unpkg.com/three/build/three.module.js";
+  import { OrbitControls } from "https://unpkg.com/three/examples/jsm/controls/OrbitControls.js";
 
   // Scene Setup
   const scene = new THREE.Scene();
@@ -131,7 +131,7 @@ iframe {
   const textureLoader = new THREE.TextureLoader();
   const globeGeometry = new THREE.SphereGeometry(5, 32, 32);
   const globeMaterial = new THREE.MeshBasicMaterial({
-    map: textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
+    map: textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
   });
   const globe = new THREE.Mesh(globeGeometry, globeMaterial);
   scene.add(globe);
@@ -164,6 +164,7 @@ iframe {
     camera.lookAt(0, 0, 0);
   }
 </script>
+
 
 </body>
 </html>
