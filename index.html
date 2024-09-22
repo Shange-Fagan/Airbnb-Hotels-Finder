@@ -781,6 +781,8 @@ function panToRegion(region) {
     case 'asia':
       camera.position.set(5.1, 0.9, 3);
       break;
+      default:
+     console.log('Region not recognized');
   }
   camera.lookAt(0, 0, 0);
 }
