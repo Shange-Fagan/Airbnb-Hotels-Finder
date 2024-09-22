@@ -1809,25 +1809,42 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       allowfullscreen:"true"
     },
   ];
-	  document.getElementById('submitRegion').addEventListener('click', function() {
-  const region = document.getElementById('regionSelect').value;
 
-  // Pan the globe to the selected region
-  if (region === 'africa') {
-    camera.position.set(5, 1.2, 1.5);
-  } else if (region === 'europe') {
-    camera.position.set(5, 0.7, 1.8);
-  } else if (region === 'america') {
-    camera.position.set(5.1, 0.9, 0);
-  } else if (region === 'south america') {
-    camera.position.set(5.1, 1.6, 0.4);
-  } else if (region === 'asia') {
-    camera.position.set(5.1, 0.9, 3);
+ document.getElementById('regionSelect').addEventListener('change', function() {
+  const region = this.value;
+  panToRegion(region);  // Function to pan the globe to the region's coordinates
+  document.getElementById('regionSelectionPopup').style.display = 'none';
+});
+
+function panToRegion(region) {
+  switch (region) {
+    case 'africa':
+      camera.position.set(5.1, 1.2, 1.5);
+      break;
+    case 'europe':
+      camera.position.set(5.1, 0.7, 1.8);
+      break;
+    case 'america':
+      camera.position.set(5.1, 0.9, 0);
+      break;
+    case 'south america':
+      camera.position.set(5.1, 1.6, 0.4);
+      break;
+    case 'asia':
+      camera.position.set(5.1, 0.9, 3);
+      break;
+    default:
+      console.log('Region not recognized');
   }
-  controls.update();
+  
+  camera.lookAt(0, 0, 0);  // Ensure the camera is looking at the center of the globe
+}
 
-  // Close the popup
-  document.getElementById('welcomePopup').classList.add('hidden');
+  // Move the camera based on region coordinates
+  camera.position.set(coordinates.x, coordinates.y, 5);
+  camera.lookAt(0, 0, 0);
+}
+
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
   // const markerGeometry = new THREE.PlaneGeometry(5, 5); // Increase size for mobile
