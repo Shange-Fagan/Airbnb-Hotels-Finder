@@ -277,10 +277,75 @@ a, button, input, select, iframe {
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
     }
-	  #header {
+	  /* Airbnb-style Header */
+#header {
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  justify-content: center; /* Center the header content */
+  align-items: center;
+  background-color: white; /* White background */
+  padding: 20px; /* Padding for spacing */
+  border-bottom: 1px solid #e0e0e0; /* Light bottom border */
+}
+
+#header input, #header select {
+  font-size: 16px; /* Larger font for inputs */
+  padding: 10px 15px; /* Padding inside inputs */
+  border: 1px solid #e0e0e0; /* Border similar to Airbnb */
+  border-radius: 25px; /* Rounded corners for inputs */
+  margin-right: 10px; /* Spacing between input fields */
+  width: 250px; /* Set width for input fields */
+}
+
+#header input:focus, #header select:focus {
+  outline: none;
+  border-color: #ff385c; /* Red outline for focus similar to Airbnb */
+}
+
+#header button {
+  background-color: #ff385c; /* Airbnb red color */
+  border: none;
+  padding: 10px 25px; /* Padding for button */
+  border-radius: 25px; /* Rounded button */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#header button:hover {
+  background-color: #e03a56; /* Darker red on hover */
+}
+
+#header .search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#header .search-section input {
+  margin-right: 10px; /* Spacing between the input fields */
+}
+
+#header .logo {
+  margin-right: auto; /* Push logo to the left */
+  font-weight: bold;
+  font-size: 20px;
+  color: #ff385c; /* Airbnb logo color */
+}
+
+@media (max-width: 768px) {
+  #header {
+    flex-direction: column;
+  }
+
+  #header input {
+    width: 100%; /* Full-width input fields on mobile */
+    margin-bottom: 10px;
+  }
+
+  #header button {
+    width: 100%; /* Full-width button on mobile */
+  }
 }
 	  
 #regionPopup {
