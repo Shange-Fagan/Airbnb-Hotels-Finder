@@ -1862,7 +1862,7 @@ const markersDataSets = {
 
 let activeMarkersData = markersDataforCheapestAirbnbs; // Default to cheapest
 let activeLabel = null; // Keep track of open iframe
-let markers; // Declare it outside, so it is accessible globally.
+//let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
@@ -1872,9 +1872,9 @@ function loadMarkers(selectedCategory) {
   activeMarkersData = markersDataSets[selectedCategory];
 
   // Create new markers for the selected category
-  const markerCount = activeMarkersData.length;
-  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  const dummy = new THREE.Object3D();
+  //const markerCount = activeMarkersData.length;
+  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  //const dummy = new THREE.Object3D();
 
   activeMarkersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
