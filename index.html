@@ -1862,6 +1862,7 @@ const markersDataSets = {
 
 let activeMarkersData = markersDataforCheapestAirbnbs; // Default to cheapest
 let activeLabel = null; // Keep track of open iframe
+let markers; // Declare it outside, so it is accessible globally.
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
