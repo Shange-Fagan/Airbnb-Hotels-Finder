@@ -754,6 +754,22 @@ function panToRegion(region) {
   }
   camera.lookAt(0, 0, 0);
 }
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const where = document.getElementById('where').value;
+  const when = document.getElementById('when').value;
+  const guests = document.getElementById('guests').value;
+
+  // Show results iframe
+  const iframeSrc = generateAirbnbUrl(where, when, guests);
+  document.getElementById('resultsIframe').src = iframeSrc;
+
+  // Adjust layout
+  document.getElementById('content').style.display = 'flex';
+});
+
+function generateAirbnbUrl(where, when, guests) {
+  return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
+}
 
 
   if (isDay) {
