@@ -2095,20 +2095,20 @@ window.addEventListener('pointerdown', (event) => {
 }
 });*/
 	  // Define different markers data sets
-const markersDataSets = {
+/*const markersDataSets = {
   general: markersData,
   cheapest: markersDataforCheapestAirbnbs,
   midPrice: markersDataforMidPriceAirbnbs,
   expensive: markersDataforExpensiveAirbnbs,
-};
+};*/
 
 let activeMarkersData = markersData; // Default
 let activeLabel = null; // Keep track of open iframe
 //let markers; // Declare it outside, so it is accessible globally.
 
-function loadMarkers(selectedCategory) {
+/*function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
-  scene.remove(markers);
+  scene.remove(markers);*/
 	
 // Set active markers data
   activeMarkersData = markersDataSets[selectedCategory];
@@ -2127,7 +2127,7 @@ function loadMarkers(selectedCategory) {
     data.worldPosition = dummy.position.clone();
   });
 
-  scene.add(markers);
+  //scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
