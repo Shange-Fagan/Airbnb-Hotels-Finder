@@ -1853,6 +1853,43 @@ window.addEventListener('pointerdown', (event) => {
   }
 }
 });*/
+	  // Define different markers data sets
+const markersDataSets = {
+  cheapest: markersDataforCheapestAirbnbs,
+  midPrice: markersDataforMidPriceAirbnbs,
+  expensive: markersDataforExpensiveAirbnbs,
+};
+
+let activeMarkersData = markersDataforCheapestAirbnbs; // Default to cheapest
+let activeLabel = null; // Keep track of open iframe
+
+function loadMarkers(selectedCategory) {
+  // Remove existing markers from the scene
+  scene.remove(markers);
+	
+// Set active markers data
+  activeMarkersData = markersDataSets[selectedCategory];
+
+  // Create new markers for the selected category
+  const markerCount = activeMarkersData.length;
+  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  const dummy = new THREE.Object3D();
+
+  activeMarkersData.forEach((data, index) => {
+    const [radius, phi, theta] = data.position;
+    dummy.position.setFromSphericalCoords(radius, phi, theta);
+    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+    dummy.updateMatrix();
+    markers.setMatrixAt(index, dummy.matrix);
+    data.worldPosition = dummy.position.clone();
+  });
+
+  scene.add(markers);
+
+  // Add interactivity to the new markers
+  setupMarkerInteraction();
+}
+
 	  let activeLabel = null; // Keep track of the currently open iframe
 
 window.addEventListener('pointerdown', (event) => {
