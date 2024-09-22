@@ -2,169 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Airbnb-Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/js/favicon.ico" type="image/x-icon">
-  <style>
-  /* Global Styles */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: hidden; 
-  position: relative;
-}
-
-#welcomeOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#welcomeSign {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-button, select {
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-/* Split screen layout */
-#content {
-  display: flex;
-}
-
-#globeContainer {
-  width: 50%;
-  position: relative;
-}
-
-#iframeContainer {
-  width: 50%;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-  </style>
+  <title>Hotels Finder</title>
 </head>
 <body>
-
-<!-- Welcome Overlay -->
-<div id="welcomeOverlay">
-  <div id="welcomeSign">
-    <h2>Welcome to Airbnb Assistant</h2>
-    <p>Please select your region</p>
-    <select id="regionSelect">
-      <option value="africa">Africa</option>
-      <option value="europe">Europe</option>
-      <option value="america">America</option>
-      <option value="asia">Asia</option>
-    </select>
-    <button id="submitRegion">Submit</button>
-  </div>
-</div>
-
-<!-- Content Section -->
-<div id="content">
   <div id="globeContainer"></div>
-  <div id="iframeContainer">
-    <iframe id="airbnbIframe" src=""></iframe>
-  </div>
-</div>
+  
+  <!-- Load three.js and OrbitControls -->
+  <script src="https://unpkg.com/three@0.136.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
+  
+  <script>
+    // Check that THREE is properly loaded
+    if (typeof THREE !== "undefined") {
+      console.log("THREE.js loaded successfully");
+    } else {
+      console.error("THREE.js failed to load");
+    }
 
-<script src="https://unpkg.com/three/build/three.min.js"></script>
-<script src="https://unpkg.com/three/examples/js/controls/OrbitControls.js"></script>
+    // Scene Setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+    camera.position.set(20, 0.5, 15).setLength(25);
 
-<script>
-// Scene Setup
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-camera.position.set(20, 0.5, 15).setLength(25);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.getElementById('globeContainer').appendChild(renderer.domElement);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-document.getElementById('globeContainer').appendChild(renderer.domElement);
+    // Controls
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.enableZoom = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.5;
 
-// Controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.25;
-controls.enableZoom = true;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.5;
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
 
-// Animation loop
-function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
-}
-animate();
-
-// Load initial globe texture
-const textureLoader = new THREE.TextureLoader();
-const globeGeometry = new THREE.SphereGeometry(5, 32, 32);
-const globeMaterial = new THREE.MeshBasicMaterial({
-  map: textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
-});
-const globe = new THREE.Mesh(globeGeometry, globeMaterial);
-scene.add(globe);
-
-// Event listener for region selection
-document.getElementById('submitRegion').addEventListener('click', function() {
-  const region = document.getElementById('regionSelect').value;
-  panToRegion(region);
-  document.getElementById('welcomeOverlay').style.display = 'none';
-});
-
-// Function to pan the camera to the selected region
-function panToRegion(region) {
-  switch (region) {
-    case 'africa':
-      camera.position.set(5.1, 1.2, 1.5);
-      break;
-    case 'europe':
-      camera.position.set(5.1, 0.7, 1.8);
-      break;
-    case 'america':
-      camera.position.set(5.1, 0.9, 0);
-      break;
-    case 'asia':
-      camera.position.set(5.1, 0.9, 3);
-      break;
-    default:
-      console.log('Region not recognized');
-  }
-  camera.lookAt(0, 0, 0);
-}
-</script>
-
-
+    // Load initial globe texture
+    const textureLoader = new THREE.TextureLoader();
+    const globeGeometry = new THREE.SphereGeometry(5, 32, 32);
+    const globeMaterial = new THREE.MeshBasicMaterial({
+      map: textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
+    });
+    const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+    scene.add(globe);
+  </script>
 </body>
 </html>
