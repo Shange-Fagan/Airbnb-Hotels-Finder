@@ -1810,47 +1810,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     },
   ];
 
- document.getElementById('regionSelect').addEventListener('change', function() {
-  const region = this.value;
-  panToRegion(region);  // Function to pan the globe to the region's coordinates
-  document.getElementById('regionSelectionPopup').style.display = 'none';
-});
 
-function panToRegion(region) {
-  switch (region) {
-    case 'africa':
-      camera.position.set(5.1, 1.2, 1.5);
-      break;
-    case 'europe':
-      camera.position.set(5.1, 0.7, 1.8);
-      break;
-    case 'america':
-      camera.position.set(5.1, 0.9, 0);
-      break;
-    case 'south america':
-      camera.position.set(5.1, 1.6, 0.4);
-      break;
-    case 'asia':
-      camera.position.set(5.1, 0.9, 3);
-      break;
-    case 'middle east':
-      camera.position.set(5.1, 1, 2.3);
-      break;
-    case 'japan':
-      camera.position.set(5.1, 0.9, 4);
-      break;
-    case 'jamaica':
-      camera.position.set(5.1, 1.2, 0.2);
-      break;
-    case 'uk':
-      camera.position.set(5.1, 0.6, 1.45);
-      break;
-    default:
-      console.log('Region not recognized');
-  }
-  
-  camera.lookAt(0, 0, 0);  // Ensure the camera is looking at the center of the globe
-}
    document.getElementById('filtersHeader').addEventListener('change', function() {
   const where = document.getElementById('whereSelect').value;
   const when = document.getElementById('whenSelect').value;
