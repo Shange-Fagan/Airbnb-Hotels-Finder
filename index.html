@@ -400,9 +400,11 @@ iframe::-webkit-scrollbar {
   position: relative;
   display: inline-block; /* Ensures it wraps tightly around marker label */
 }
+	
 	  /* Style the select dropdown */
 select {
-  left: 0px;
+  position: relative;
+  left: 0;
   top: 55px;
   padding: 4.5px 9.5px;
   font-size: 12px;
@@ -412,46 +414,25 @@ select {
   color: rgba(255, 255, 255, 0.75);
   z-index: 9999;
   cursor: pointer;
-  /*font-size: 16px;*/
-  /*border: 2px solid #ccc;*/
-  /*border-radius: 5px;*/
-  /*background-color: #f9f9f9;*/
-  /*color: #333;*/
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-/* Arrow icon for the dropdown */
-select::after {
-  content: '▼';
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  pointer-events: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
 }
 
 /* Style the dropdown options */
 select option {
   background-color: white;
-  padding: 8px;
   color: #333;
 }
 
 /* Hover effect for the dropdown */
 select:hover {
   border-color: #007BFF;
-  background-color: #e6f2ff;
+  background-color: rgba(225, 225, 255, 0.2);
 }
 
-/* Option hover effect */
-select option:hover {
-  background-color: #007BFF;
-  color: #fff;
-}
-
-	  
 	/* Responsive Design */
     @media (max-width: 768px) {
       /* Adjust the size and placement of the globe on mobile */
@@ -461,54 +442,11 @@ select option:hover {
         top: 55px;
       }
 	    select {
-  left: 0px;
-  top: 55px;
-  padding: 3px 7px;
-  font-size: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.75);
-  z-index: 9999;
-  cursor: pointer;
-  /*font-size: 16px;*/
-  /*border: 2px solid #ccc;*/
-  /*border-radius: 5px;*/
-  /*background-color: #f9f9f9;*/
-  /*color: #333;*/
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-/* Arrow icon for the dropdown */
-select::after {
-  content: '▼';
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  pointer-events: none;
-}
-
-/* Style the dropdown options */
-select option {
-  background-color: white;
-  padding: 8px;
-  color: #333;
-}
-
-/* Hover effect for the dropdown */
-select:hover {
-  border-color: #007BFF;
-  background-color: #e6f2ff;
-}
-
-/* Option hover effect */
-select option:hover {
-  background-color: #007BFF;
-  color: #fff;
-}
+    padding: 3px 7px;
+    font-size: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+	    
 	    #newsButton {
         font-size: 10px;
         padding: 3px 7px;
