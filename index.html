@@ -1310,7 +1310,126 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       allowfullscreen:"true"
     },
   ];
-  
+  const markersDataforcheapestAirbnbs = [
+    {
+      //Africa
+      id: 1,
+      position: [5.1, 1.2, 1.5],
+      iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"false"
+    },
+    // ... Add other markers here
+    {
+      //Europe
+      id: 2,
+      position: [5.1, 0.7, 1.8],
+      iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //America
+      id: 3,
+      position: [5.1, 0.9, 0],
+      iframeSrc: "https://rss.app/embed/v1/list/chAYVOo3llbQzNLo",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //South America
+      id: 4,
+      position: [5.1, 1.6, 0.4],
+      iframeSrc: "https://rss.app/embed/v1/list/DP9kzxo2dohbbgST",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Middle East
+      id: 5,
+      position: [5.1, 1, 2.3],
+      iframeSrc: "https://rss.app/embed/v1/list/JCYAnBzooyfhbDvO",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Asia
+      id: 6,
+      position: [5.1, 0.9, 3],
+      iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //Japan
+      id: 7,
+      position: [5.1, 0.9, 4],
+      iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      // Jamaica
+      id: 8,
+      position: [5.1, 1.2, 0.2],
+      iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+    {
+      //UK
+      id: 9,
+      position: [5.1, 0.6, 1.45],
+      iframeSrc: "https://rss.app/embed/v1/list/VQIhB1FM0tC17q5Y",
+      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
+      frameborder:"0",
+      loading:"eager",
+      width:"275",
+      height:"300",
+      scrolling:"yes",
+      allowfullscreen:"true"
+    },
+  ];
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
   // const markerGeometry = new THREE.PlaneGeometry(5, 5); // Increase size for mobile
