@@ -4,56 +4,132 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hotels Finder</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; }
+    #globeContainer { width: 100vw; height: 100vh; }
+    #welcomeOverlay { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(255, 255, 255, 0.8); z-index: 9999; display: flex; justify-content: center; align-items: center; }
+    #welcomeSign { background-color: rgba(255, 255, 255, 0.9); padding: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; }
+    #regionSelect { padding: 10px; font-size: 16px; }
+    button { margin-top: 10px; padding: 10px; cursor: pointer; }
+  </style>
 </head>
 <body>
-  <div id="globeContainer"></div>
-  
-  <!-- Load three.js and OrbitControls -->
-  <script src="https://unpkg.com/three@0.136.0/build/three.min.js"></script>
-  <script src="https://unpkg.com/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
-  
-  <script>
-    // Check that THREE is properly loaded
-    if (typeof THREE !== "undefined") {
-      console.log("THREE.js loaded successfully");
-    } else {
-      console.error("THREE.js failed to load");
-    }
 
-    // Scene Setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-    camera.position.set(20, 0.5, 15).setLength(25);
+<div id="globeContainer"></div>
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.getElementById('globeContainer').appendChild(renderer.domElement);
+<!-- Region Selection Overlay -->
+<div id="welcomeOverlay">
+  <div id="welcomeSign">
+    <h2>Welcome to Airbnb Assistant</h2>
+    <p>Please select your region</p>
+    <select id="regionSelect">
+      <option value="africa">Africa</option>
+      <option value="europe">Europe</option>
+      <option value="america">America</option>
+      <option value="south america">South America</option>
+      <option value="asia">Asia</option>
+      <option value="middle east">Middle East</option>
+      <option value="japan">Japan</option>
+      <option value="jamaica">Jamaica</option>
+      <option value="uk">UK</option>
+    </select>
+    <button id="regionSelectButton">Submit</button>
+  </div>
+</div>
 
-    // Controls
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.25;
-    controls.enableZoom = true;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.5;
+<!-- Load three.js and OrbitControls -->
+<script src="https://unpkg.com/three@0.136.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.136.0/examples/js/controls/OrbitControls.js"></script>
 
-    // Animation loop
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    }
-    animate();
+<script>
+  // Scene Setup
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+  camera.position.set(20, 0.5, 15).setLength(25);
 
-    // Load initial globe texture
-    const textureLoader = new THREE.TextureLoader();
-    const globeGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const globeMaterial = new THREE.MeshBasicMaterial({
-      map: textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  document.getElementById('globeContainer').appendChild(renderer.domElement);
+
+  // Controls
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.25;
+  controls.enableZoom = true;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.5;
+
+  // Load initial globe texture
+  const textureLoader = new THREE.TextureLoader();
+  const globeGeometry = new THREE.SphereGeometry(5, 32, 32);
+  const globeMaterial = new THREE.MeshBasicMaterial({
+    map: textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"),
+  });
+  const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+  scene.add(globe);
+
+  // Markers Data
+  const markersData = [
+    { region: 'africa', position: [5.1, 1.2, 1.5], color: '#ff3232' },
+    { region: 'europe', position: [5.1, 0.7, 1.8], color: '#ff3232' },
+    { region: 'america', position: [5.1, 0.9, 0], color: '#ff3232' },
+    // Add other markers here...
+  ];
+
+  let markers;
+
+  function loadMarkers(region) {
+    if (markers) scene.remove(markers); // Clear previous markers
+
+    const markerGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: '#ff3232' });
+
+    markers = new THREE.Group();
+
+    markersData.forEach(marker => {
+      if (marker.region === region || region === 'all') {
+        const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
+        markerMesh.position.set(...marker.position);
+        markers.add(markerMesh);
+      }
     });
-    const globe = new THREE.Mesh(globeGeometry, globeMaterial);
-    scene.add(globe);
-  </script>
+
+    scene.add(markers);
+  }
+
+  // Region selection
+  document.getElementById('regionSelectButton').addEventListener('click', function() {
+    const region = document.getElementById('regionSelect').value;
+    loadMarkers(region);
+    panToRegion(region);
+    document.getElementById('welcomeOverlay').style.display = 'none';
+  });
+
+  function panToRegion(region) {
+    switch (region) {
+      case 'africa': camera.position.set(5.1, 1.2, 1.5); break;
+      case 'europe': camera.position.set(5.1, 0.7, 1.8); break;
+      case 'america': camera.position.set(5.1, 0.9, 0); break;
+      case 'south america': camera.position.set(5.1, 1.6, 0.4); break;
+      case 'asia': camera.position.set(5.1, 0.9, 3); break;
+      case 'middle east': camera.position.set(5.1, 1, 2.3); break;
+      case 'japan': camera.position.set(5.1, 0.9, 4); break;
+      case 'jamaica': camera.position.set(5.1, 1.2, 0.2); break;
+      case 'uk': camera.position.set(5.1, 0.6, 1.45); break;
+      default: camera.position.set(20, 0.5, 15).setLength(25);
+    }
+    camera.lookAt(0, 0, 0);
+  }
+
+  // Animation loop
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>
+
 </body>
 </html>
