@@ -612,6 +612,7 @@ overflow: hidden;
     <option value="africa">Africa</option>
     <option value="europe">Europe</option>
     <option value="america">America</option>
+    <option value="south america">South America</option>
     <option value="asia">Asia</option>
     <!-- Add more regions if needed -->
   </select>
@@ -1747,6 +1748,25 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       allowfullscreen:"true"
     },
   ];
+	  document.getElementById('submitRegion').addEventListener('click', function() {
+  const region = document.getElementById('regionSelect').value;
+
+  // Pan the globe to the selected region
+  if (region === 'africa') {
+    camera.position.set(5, 1.2, 1.5);
+  } else if (region === 'europe') {
+    camera.position.set(5, 0.7, 1.8);
+  } else if (region === 'america') {
+    camera.position.set(5.1, 0.9, 0);
+  } else if (region === 'south america') {
+    camera.position.set(5.1, 1.6, 0.4);
+  } else if (region === 'asia') {
+    camera.position.set(5.1, 0.9, 3);
+  }
+  controls.update();
+
+  // Close the popup
+  document.getElementById('welcomePopup').classList.add('hidden');
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
   // const markerGeometry = new THREE.PlaneGeometry(5, 5); // Increase size for mobile
