@@ -770,6 +770,13 @@ document.getElementById('searchBtn').addEventListener('click', () => {
 function generateAirbnbUrl(where, when, guests) {
   return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
 }
+  function loadMarkersForRegion(region) {
+  const markersData = getMarkersDataForRegion(region);
+  markersData.forEach(marker => {
+    addMarkerToGlobe(marker);
+  });
+}
+
 
 
   if (isDay) {
