@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hotels Finder</title>
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; }
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
     #globeContainer { width: 100vw; height: 100vh; }
     #welcomeOverlay { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(255, 255, 255, 0.8); z-index: 9999; display: flex; justify-content: center; align-items: center; }
     #welcomeSign { background-color: rgba(255, 255, 255, 0.9); padding: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; }
@@ -46,7 +46,7 @@
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.set(20, 0.5, 15).setLength(25);
-
+  
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -101,12 +101,15 @@
   // Region selection
   document.getElementById('regionSelectButton').addEventListener('click', function() {
     const region = document.getElementById('regionSelect').value;
+    console.log('Selected Region:', region); // Debugging: Check selected region
     loadMarkers(region);
     panToRegion(region);
     document.getElementById('welcomeOverlay').style.display = 'none';
   });
 
   function panToRegion(region) {
+    let validRegion = true;
+
     switch (region) {
       case 'africa': camera.position.set(5.1, 1.2, 1.5); break;
       case 'europe': camera.position.set(5.1, 0.7, 1.8); break;
@@ -117,9 +120,16 @@
       case 'japan': camera.position.set(5.1, 0.9, 4); break;
       case 'jamaica': camera.position.set(5.1, 1.2, 0.2); break;
       case 'uk': camera.position.set(5.1, 0.6, 1.45); break;
-      default: camera.position.set(20, 0.5, 15).setLength(25);
+      default:
+        console.log('Invalid region:', region);
+        validRegion = false;
+        camera.position.set(20, 0.5, 15).setLength(25); // Default position
     }
-    camera.lookAt(0, 0, 0);
+
+    if (validRegion) {
+      camera.lookAt(0, 0, 0); // Ensure camera looks at the globe
+      console.log('Camera Position:', camera.position); // Debugging: Check camera position
+    }
   }
 
   // Animation loop
