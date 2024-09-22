@@ -550,9 +550,10 @@ overflow: hidden;
     <option value="africa">Africa</option>
     <option value="europe">Europe</option>
     <!-- more regions -->
-    <option value="america">Africa</option>
-    <option value="south america">Europe</option>
-    <option value="asia">Africa</option>
+    <option value="america">America</option>
+    <option value="south america">South America</option>
+    <option value="carribbean">Carribbean</option>
+    <option value="asia">Asia</option>
   </select>
   <button id="submitRegion">Submit</button>
 </div>
@@ -736,16 +737,22 @@ function panToRegion(region) {
       break;
     // other regions...
     case 'europe':
-      camera.position.set(5.1, 1.2, 1.5);
+      camera.position.set(5.1, 0.7, 1.8);
+      break;
+    case 'united kingdom':
+      camera.position.set(5.1, 0.6, 1.45);
       break;
     case 'america':
-      camera.position.set(5.1, 1.2, 1.5);
+      camera.position.set(5.1, 0.9, 0);
       break;
     case 'south america':
-      camera.position.set(5.1, 1.2, 1.5);
+      camera.position.set(5.1, 1.6, 0.4);
+      break;
+    case 'carribbean':
+      camera.position.set(5.1, 1.2, 0.2);
       break;
     case 'asia':
-      camera.position.set(5.1, 1.2, 1.5);
+      camera.position.set(5.1, 0.9, 3);
       break;
   }
   camera.lookAt(0, 0, 0);
