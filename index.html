@@ -55,7 +55,7 @@ a, button, input, select, iframe {
 #nightTicker {
   display: block; /* Show day ticker by default */
       position: fixed;
-      top: 0vh;
+      top: 25px;
       color: teal;
       width: 100%;
       font-family: Monospace;
@@ -66,7 +66,7 @@ a, button, input, select, iframe {
 	  #mobileTicker {
   display: none; /* Show day ticker by default */
       position: fixed;
-      top: 0vh;
+      top: 25px;
       color: teal;
       width: 100%;
       font-family: Monospace;
@@ -263,7 +263,7 @@ a, button, input, select, iframe {
     #toggleButton {
       position: absolute;
       right: 0px;
-      top: 55px;
+      top: 75px;
       padding: 4.5px 9.5px;
       font-size: 12px;
       background-color: rgba(255, 255, 255, 0.2);
@@ -288,7 +288,7 @@ a, button, input, select, iframe {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.75);
   padding: 20px;
   border-radius: 10px;
   z-index: 9999; /* Ensure it appears above the globe */
@@ -446,7 +446,7 @@ select {
   appearance: none;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');
   background-repeat: no-repeat;
-  background-position: right 5px center;
+  background-position: right 10px center;
 background-size: 10px; /* Adjust this as needed */
 overflow: hidden;
 }
@@ -491,7 +491,7 @@ overflow: hidden;
 	width: 100vw;
       }*/
 	    #mobileTicker {
-        height: 60px; /* Reduce height for mobile */
+        height: 85px; /* Reduce height for mobile */
         font-size: 12px;
 	width: 100vw;
       }
