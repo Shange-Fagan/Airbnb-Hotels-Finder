@@ -401,6 +401,48 @@ iframe::-webkit-scrollbar {
   position: relative;
   display: inline-block; /* Ensures it wraps tightly around marker label */
 }
+	   /* Ensure the overlay is transparent */
+#welcomeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8); /* 80% transparent white */
+  z-index: 10; /* Make sure this is above the Three.js canvas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#welcomeSign {
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent welcome sign */
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+/* Close button */
+#welcomeOverlayClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 0, 0, 0.8); /* Red button */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+	  canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Make sure the canvas is below the welcome sign */
+}
 	
 /* Full-screen popup for region selection */
 	  
@@ -538,48 +580,6 @@ overflow: hidden;
         padding: 2.5px 0;
       }
     }
-	  /* Ensure the overlay is transparent */
-#welcomeOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8); /* 80% transparent white */
-  z-index: 10; /* Make sure this is above the Three.js canvas */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-
-#welcomeSign {
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent welcome sign */
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  pointer-events: auto;
-}
-
-/* Close button */
-#welcomeOverlayClose {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255, 0, 0, 0.8); /* Red button */
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-	  canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1; /* Make sure the canvas is below the welcome sign */
-}
 
 
 
