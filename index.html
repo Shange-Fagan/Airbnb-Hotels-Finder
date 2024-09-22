@@ -400,6 +400,49 @@ iframe::-webkit-scrollbar {
   position: relative;
   display: inline-block; /* Ensures it wraps tightly around marker label */
 }
+	  /* Style the select dropdown */
+select {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Arrow icon for the dropdown */
+select::after {
+  content: '▼';
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Style the dropdown options */
+select option {
+  background-color: white;
+  padding: 8px;
+  color: #333;
+}
+
+/* Hover effect for the dropdown */
+select:hover {
+  border-color: #007BFF;
+  background-color: #e6f2ff;
+}
+
+/* Option hover effect */
+select option:hover {
+  background-color: #007BFF;
+  color: #fff;
+}
+
 	  
 	/* Responsive Design */
     @media (max-width: 768px) {
