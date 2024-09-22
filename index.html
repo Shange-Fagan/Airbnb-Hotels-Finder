@@ -1329,7 +1329,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 
 
     // Markers Data
-  const markersData = [
+  const genericMarkersData = [
     {
       //Africa
       id: 1,
@@ -1851,11 +1851,23 @@ function panToRegion(region) {
   
   camera.lookAt(0, 0, 0);  // Ensure the camera is looking at the center of the globe
 }
+   document.getElementById('filtersHeader').addEventListener('change', function() {
+  const where = document.getElementById('whereSelect').value;
+  const when = document.getElementById('whenSelect').value;
+  const who = document.getElementById('whoSelect').value;
 
-  // Move the camera based on region coordinates
-  camera.position.set(coordinates.x, coordinates.y, 5);
-  camera.lookAt(0, 0, 0);
+  // Update the iframe to show filtered results
+  const iframeSrc = generateAirbnbUrl(where, when, who);
+  document.getElementById('airbnbIframe').src = iframeSrc;
+
+  // Optionally update globe markers based on filters
+  updateMarkers(where, when, who);
+});
+
+function generateAirbnbUrl(where, when, who) {
+  return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${who}`;
 }
+
 
   // Marker Geometry and Material
   const markerGeometry = new THREE.PlaneGeometry();
