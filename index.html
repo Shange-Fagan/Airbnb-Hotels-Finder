@@ -1329,6 +1329,10 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 
 
     // Markers Data
+	  
+  let markers; // Declare globally for marker handling
+	  
+  // Data for Airbnb markers
   const genericMarkersData = [
     {
       //Africa
@@ -1449,841 +1453,167 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       allowfullscreen:"true"
     },
   ];
-  const markersDataforCheapestAirbnbs = [
-    {
-      //Africa
-      id: 1,
-      position: [5.1, 1.2, 1.5],
-      iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"false"
-    },
-    // ... Add other markers here
-    {
-      //Europe
-      id: 2,
-      position: [5.1, 0.7, 1.8],
-      iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //America
-      id: 3,
-      position: [5.1, 0.9, 0],
-      iframeSrc: "https://rss.app/embed/v1/list/chAYVOo3llbQzNLo",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //South America
-      id: 4,
-      position: [5.1, 1.6, 0.4],
-      iframeSrc: "https://rss.app/embed/v1/list/DP9kzxo2dohbbgST",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Middle East
-      id: 5,
-      position: [5.1, 1, 2.3],
-      iframeSrc: "https://rss.app/embed/v1/list/JCYAnBzooyfhbDvO",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Asia
-      id: 6,
-      position: [5.1, 0.9, 3],
-      iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Japan
-      id: 7,
-      position: [5.1, 0.9, 4],
-      iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      // Jamaica
-      id: 8,
-      position: [5.1, 1.2, 0.2],
-      iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //UK
-      id: 9,
-      position: [5.1, 0.6, 1.45],
-      iframeSrc: "https://rss.app/embed/v1/list/hYXu3ucKZnwqvQwS",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-  ];
-	  const markersDataforMidPriceAirbnbs = [
-    {
-      //Africa
-      id: 1,
-      position: [5.1, 1.2, 1.5],
-      iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"false"
-    },
-    // ... Add other markers here
-    {
-      //Europe
-      id: 2,
-      position: [5.1, 0.7, 1.8],
-      iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //America
-      id: 3,
-      position: [5.1, 0.9, 0],
-      iframeSrc: "https://rss.app/embed/v1/list/chAYVOo3llbQzNLo",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //South America
-      id: 4,
-      position: [5.1, 1.6, 0.4],
-      iframeSrc: "https://rss.app/embed/v1/list/DP9kzxo2dohbbgST",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Middle East
-      id: 5,
-      position: [5.1, 1, 2.3],
-      iframeSrc: "https://rss.app/embed/v1/list/JCYAnBzooyfhbDvO",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Asia
-      id: 6,
-      position: [5.1, 0.9, 3],
-      iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Japan
-      id: 7,
-      position: [5.1, 0.9, 4],
-      iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      // Jamaica
-      id: 8,
-      position: [5.1, 1.2, 0.2],
-      iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //UK
-      id: 9,
-      position: [5.1, 0.6, 1.45],
-      iframeSrc: "https://rss.app/embed/v1/list/CcAHjdn43GAMkEVH",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-  ];
-	  const markersDataforExpensiveAirbnbs = [
-    {
-      //Africa
-      id: 1,
-      position: [5.1, 1.2, 1.5],
-      iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"false"
-    },
-    // ... Add other markers here
-    {
-      //Europe
-      id: 2,
-      position: [5.1, 0.7, 1.8],
-      iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //America
-      id: 3,
-      position: [5.1, 0.9, 0],
-      iframeSrc: "https://rss.app/embed/v1/list/chAYVOo3llbQzNLo",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //South America
-      id: 4,
-      position: [5.1, 1.6, 0.4],
-      iframeSrc: "https://rss.app/embed/v1/list/DP9kzxo2dohbbgST",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Middle East
-      id: 5,
-      position: [5.1, 1, 2.3],
-      iframeSrc: "https://rss.app/embed/v1/list/JCYAnBzooyfhbDvO",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Asia
-      id: 6,
-      position: [5.1, 0.9, 3],
-      iframeSrc: "https://rss.app/embed/v1/list/pUeauCbzsXuVe3eC",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //Japan
-      id: 7,
-      position: [5.1, 0.9, 4],
-      iframeSrc: "https://rss.app/embed/v1/list/d6hKxeycgIlya2NK",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      // Jamaica
-      id: 8,
-      position: [5.1, 1.2, 0.2],
-      iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-    {
-      //UK
-      id: 9,
-      position: [5.1, 0.6, 1.45],
-      iframeSrc: "https://rss.app/embed/v1/list/9IX52kHz0usEhvmS",
-      sandbox:"allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox",
-      frameborder:"0",
-      loading:"eager",
-      width:"275",
-      height:"300",
-      scrolling:"yes",
-      allowfullscreen:"true"
-    },
-  ];
-  let markers; // Declare it globally once
-	  
-function clearMarkers() {
-  if (markers) {
-    scene.remove(markers); // Removes only markers, not the entire scene
-  }
-}
-
-   document.getElementById('filtersHeader').addEventListener('change', function() {
-  const where = document.getElementById('whereSelect').value;
-  const when = document.getElementById('whenSelect').value;
-  const who = document.getElementById('whoSelect').value;
-
-  // Update the iframe to show filtered results
-  const iframeSrc = generateAirbnbUrl(where, when, who);
-  document.getElementById('airbnbIframe').src = iframeSrc;
-
-  // Optionally update globe markers based on filters
-  updateMarkers(where, when, who);
-});
-
-function generateAirbnbUrl(where, when, who) {
-  return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${who}`;
-}
-
-// Load markers with generic data
-function loadMarkers(data) {
-  clearMarkers(); // First clear the existing markers
-  
-  const markerCount = data.length;
-  markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount); // No redeclaration
-  const dummy = new THREE.Object3D();
-
-  data.forEach((marker, index) => {
-    const [radius, phi, theta] = marker.position;
-    dummy.position.setFromSphericalCoords(radius, phi, theta);
-    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
-    dummy.updateMatrix();
-    markers.setMatrixAt(index, dummy.matrix);
-  });
-
-  scene.add(markers);
-  setupMarkerInteraction(); // Add marker interaction again after loading
-}
 
 
-/*// Filter markers by selected region
-function filterMarkersByRegion(region) {
-  const filteredMarkers = genericMarkersData.filter(marker => marker.region === region);
-  loadMarkers(filteredMarkers);
-}*/
-
-// Event listener for region selection
-document.getElementById('regionSelect').addEventListener('change', (event) => {
-  const selectedRegion = event.target.value;
-  onRegionSelect(selectedRegion); // Pan and filter markers
-});
-
-// Function to filter markers and pan the globe
-function onRegionSelect(region) {
-  panToRegion(region);
-  filterMarkersByRegion(region); // Update markers based on region
-}
-
-
-// Call this initially to show all markers
-loadMarkers(genericMarkersData);
-
-// Camera panning to region
-function panToRegion(region) {
-  switch (region) {
-    case 'africa':
-      camera.position.set(5.1, 1.2, 1.5);
-      break;
-    case 'europe':
-      camera.position.set(5.1, 0.7, 1.8);
-      break;
-    case 'america':
-      camera.position.set(5.1, 0.9, 0);
-      break;
-    case 'south america':
-      camera.position.set(5.1, 1.6, 0.4);
-      break;
-    case 'asia':
-      camera.position.set(5.1, 0.9, 3);
-      break;
-    case 'middle east':
-      camera.position.set(5.1, 1, 2.3);
-      break;
-    case 'japan':
-      camera.position.set(5.1, 0.9, 4);
-      break;
-    case 'jamaica':
-      camera.position.set(5.1, 1.2, 0.2);
-      break;
-    case 'uk':
-      camera.position.set(5.1, 0.6, 1.45);
-      break;
-    default:
-      console.log('Region not recognized');
-  }
-
-  camera.lookAt(0, 0, 0); // Ensure camera looks at the globe
-}
-
-    // Labels Container
-  const labelsContainer = document.getElementById('labels-container');
-  
-  // Create Labels
-markersData.forEach((data) => {
-  // Create Label Div
-  const labelDiv = document.createElement('div');
-  labelDiv.className = 'marker-label';
-  labelDiv.id = `label-${data.id}`;
-
-  // Close Button
-  const closeButton = document.createElement('button');
-  closeButton.className = 'close-button';
-  closeButton.innerText = '×';
-  labelDiv.appendChild(closeButton);
-
-  // Close Button Event Listener
-  closeButton.addEventListener('click', (event) => {
-    console.log('Close button clicked'); // Check if this appears in the console
-    event.stopPropagation(); // Stop the event from propagating up the DOM
-    labelDiv.classList.remove('active');
-    
-    // Resume globe autorotation when the label is closed
-    controls.autoRotate = true;
-    
-    // Re-enable the OrbitControls
-    controls.enabled = true;
-  });
-
-  // Content Div
-  const contentDiv = document.createElement('div');
-  contentDiv.className = 'content';
-  labelDiv.appendChild(contentDiv);
-
-  // Append to Labels Container
-  labelsContainer.appendChild(labelDiv);
-
-  // CSS2DObject
-  const labelObject = new CSS2DObject(labelDiv);
-  labelObject.position.copy(data.worldPosition);
-  scene.add(labelObject);
-
-  // Store label object for interaction
-  data.labelObject = labelObject;
-  labelDiv.addEventListener('mousedown', (event) => {
-    event.stopPropagation();
-  });
-  labelDiv.addEventListener('touchstart', (event) => {
-    event.stopPropagation();
-  });
-});
-
-// Raycaster for Interaction
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2();
-	  
-/*let activeLabel = null; // Keep track of the currently open iframe
-	  
-window.addEventListener('pointerdown', (event) => {
-  pointer.x = (event.clientX / innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-  raycaster.setFromCamera(pointer, camera);
-
-  const intersects = raycaster.intersectObject(markers).filter((m) => {
-    return m.uv.subScalar(0.5).length() * 2 < 0.25;
-  });
-
-  if (intersects.length > 0) {
-    const instanceId = intersects[0].instanceId;
-    const data = markersData[instanceId];
-	  
-	  // Update Label Content
-    const labelDiv = document.getElementById(`label-${data.id}`);
-    const contentDiv = labelDiv.querySelector('.content');
-	  
-	  // Check if the iframe is related to the marker (specific iframe)
-    if (!contentDiv.querySelector('iframe')) {
-	  // Add loading spinner inside the content div
-    contentDiv.innerHTML = `
-    <div class="loading-spinner" style="pointer-events:none;"></div>
-    <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
-    `;
-
-    const iframe = labelDiv.querySelector('iframe');
-    const spinner = contentDiv.querySelector('.loading-spinner');
-	   
-	    // Show Label
-    labelDiv.classList.add('active');
-	    
-	    iframe.addEventListener('load', () => {
-	console.log('Iframe loaded');
-	    
-	// Hide loading spinner when iframe finishes loading
-      spinner.style.display = 'none';
-      iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
-      */ /*iframe.contentWindow.addEventListener('blur', () => {
-	console.log('Iframe lost focus');
-        controls.enabled = true; // Re-enable the controls when iframe loses focus
-      });*/ /*
-		    // Close any previously active label
-      if (activeLabel && activeLabel !== labelDiv) {
-        activeLabel.classList.remove('active');
-      }
-		    // Set the new active label
-      activeLabel = labelDiv;
-	    
-    });
-	  // Show loading spinner
-    //const loadingIcon = document.getElementById('loadingIcon');
-    //loadingIcon.style.display = 'block';
-	  
-    // Add a listener to detect when the iframe loses focus and re-enable the controls
-    console.log(iframe); // Check if the iframe element is being correctly selected
-	  
-	*/    
-// Close iframe when clicking outside of it
-	  
-    // Close iframe when clicking outside of it
-    /*document.addEventListener('click', function(event) {
-  if (!labelDiv.contains(event.target)) {
-    // Check if the label is already active, toggle it off
-    if (labelDiv.classList.contains('active')) {
-      labelDiv.classList.remove('active');
-      controls.autoRotate = true;
-      controls.enabled = true;
-    } else {
-      // Re-enable the iframe on click
-      labelDiv.classList.add('active');
-      controls.autoRotate = false;
-      controls.enabled = false;
+  // Function to clear markers
+  function clearMarkers() {
+    if (markers) {
+      scene.remove(markers);
     }
   }
-});*/    
-/*        document.addEventListener('pointerdown', function(event) {
-          if (!labelDiv.contains(event.target)) {
+
+  // Event listener for filters (where, when, who)
+  document.getElementById('filtersHeader').addEventListener('change', function () {
+    const where = document.getElementById('whereSelect').value;
+    const when = document.getElementById('whenSelect').value;
+    const who = document.getElementById('whoSelect').value;
+
+    // Update iframe with filtered results
+    const iframeSrc = generateAirbnbUrl(where, when, who);
+    document.getElementById('airbnbIframe').src = iframeSrc;
+
+    // Optionally update markers on the globe based on filters
+    updateMarkers(where, when, who);
+  });
+
+  // Generate the Airbnb URL based on filters
+  function generateAirbnbUrl(where, when, who) {
+    return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${who}`;
+  }
+
+  // Function to load markers
+  function loadMarkers(data) {
+    clearMarkers(); // Clear old markers first
+
+    const markerCount = data.length;
+    markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+    const dummy = new THREE.Object3D();
+
+    data.forEach((marker, index) => {
+      const [radius, phi, theta] = marker.position;
+      dummy.position.setFromSphericalCoords(radius, phi, theta);
+      dummy.lookAt(dummy.position.clone().setLength(radius + 1));
+      dummy.updateMatrix();
+      markers.setMatrixAt(index, dummy.matrix);
+    });
+
+    scene.add(markers); // Add new markers to the scene
+    setupMarkerInteraction();
+  }
+
+  // Event listener for region selection
+  document.getElementById('regionSelect').addEventListener('change', (event) => {
+    const selectedRegion = event.target.value;
+    onRegionSelect(selectedRegion);
+  });
+
+  // Pan the camera to the selected region
+  function onRegionSelect(region) {
+    panToRegion(region);
+    filterMarkersByRegion(region); // Optionally filter markers by region
+  }
+
+  // Pan camera to region
+  function panToRegion(region) {
+    switch (region) {
+      case 'africa':
+        camera.position.set(5.1, 1.2, 1.5);
+        break;
+      case 'europe':
+        camera.position.set(5.1, 0.7, 1.8);
+        break;
+      case 'america':
+        camera.position.set(5.1, 0.9, 0);
+        break;
+      case 'south america':
+        camera.position.set(5.1, 1.6, 0.4);
+        break;
+      case 'asia':
+        camera.position.set(5.1, 0.9, 3);
+        break;
+      case 'middle east':
+        camera.position.set(5.1, 1, 2.3);
+        break;
+      case 'japan':
+        camera.position.set(5.1, 0.9, 4);
+        break;
+      case 'jamaica':
+        camera.position.set(5.1, 1.2, 0.2);
+        break;
+      case 'uk':
+        camera.position.set(5.1, 0.6, 1.45);
+        break;
+      default:
+        console.log('Region not recognized');
+    }
+    camera.lookAt(0, 0, 0); // Always make the camera look at the center of the globe
+  }
+
+  // Function to filter markers by region (optional)
+  function filterMarkersByRegion(region) {
+    const filteredMarkers = genericMarkersData.filter(marker => marker.region === region);
+    loadMarkers(filteredMarkers);
+  }
+
+  // Interaction setup for markers
+  function setupMarkerInteraction() {
+    window.addEventListener('pointerdown', (event) => {
+      pointer.x = (event.clientX / innerWidth) * 2 - 1;
+      pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+
+      const intersects = raycaster.intersectObject(markers);
+      if (intersects.length > 0) {
+        const instanceId = intersects[0].instanceId;
+        const data = genericMarkersData[instanceId];
+        openMarkerIframe(data);
+      }
+    });
+  }
+
+  // Function to handle iframe loading for markers
+  function openMarkerIframe(data) {
+    const labelDiv = document.getElementById(`label-${data.id}`);
+    const contentDiv = labelDiv.querySelector('.content');
+
+    if (!contentDiv.querySelector('iframe')) {
+      contentDiv.innerHTML = `
+        <div class="loading-spinner"></div>
+        <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen></iframe>
+      `;
+
+      const iframe = contentDiv.querySelector('iframe');
+      iframe.addEventListener('load', () => {
+        contentDiv.querySelector('.loading-spinner').style.display = 'none';
+      });
+
+      // Handle iframe close when clicking outside
+      document.addEventListener('pointerdown', (event) => {
+        if (!labelDiv.contains(event.target)) {
           labelDiv.classList.remove('active');
           controls.autoRotate = true;
           controls.enabled = true;
-          activeLabel = null; // No active label after close
         }
-      });
-
-	    // Stop the globe's autorotation and disable OrbitControls
-    controls.autoRotate = false;
-    controls.enabled = false; // Disable the controls while interacting with the iframe
-
-  }
-}
-});*/
-	  // Define different markers data sets
-/*const markersDataSets = {
-  general: markersData,
-  cheapest: markersDataforCheapestAirbnbs,
-  midPrice: markersDataforMidPriceAirbnbs,
-  expensive: markersDataforExpensiveAirbnbs,
-};*/
-
-let activeMarkersData = markersData; // Default
-let activeLabel = null; // Keep track of open iframe
-//let markers; // Declare it outside, so it is accessible globally.
-
-/*function loadMarkers(selectedCategory) {
-  // Remove existing markers from the scene
-  scene.remove(markers);*/
-	
-// Set active markers data
-  activeMarkersData = markersDataSets[selectedCategory];
-
-  // Create new markers for the selected category
-  //const markerCount = activeMarkersData.length;
-  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  //const dummy = new THREE.Object3D();
-
-  activeMarkersData.forEach((data, index) => {
-    const [radius, phi, theta] = data.position;
-    dummy.position.setFromSphericalCoords(radius, phi, theta);
-    dummy.lookAt(dummy.position.clone().setLength(radius + 1));
-    dummy.updateMatrix();
-    markers.setMatrixAt(index, dummy.matrix);
-    data.worldPosition = dummy.position.clone();
-  });
-
-  //scene.add(markers);
-
-  // Add interactivity to the new markers
-  setupMarkerInteraction();
-
-	  
-// Set up marker click event
-function setupMarkerInteraction() {
-  window.addEventListener('pointerdown', (event) => {
-    pointer.x = (event.clientX / innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-
-    const intersects = raycaster.intersectObject(markers).filter((m) => {
-      return m.uv.subScalar(0.5).length() * 2 < 0.25;
-    });
-
-    if (intersects.length > 0) {
-      const instanceId = intersects[0].instanceId;
-      const data = activeMarkersData[instanceId];
-
-	    // Update Label Content
-      const labelDiv = document.getElementById(`label-${data.id}`);
-      const contentDiv = labelDiv.querySelector('.content');
-
-	    // Check if the iframe is already loaded
-	    if (!contentDiv.querySelector('iframe')) {
-		    // Always update the content and attach the iframe, even if previously clicked
-    contentDiv.innerHTML = `
-      <div class="loading-spinner" style="pointer-events:none;"></div>
-      <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
-    `;
-    labelDiv.classList.add('active');
-    controls.autoRotate = false;
-    controls.enabled = false;
-
-    // Disable pointer events on the globe while interacting with the iframe
-    renderer.domElement.style.pointerEvents = 'none';
-		    
-    const iframe = labelDiv.querySelector('iframe');
-    const spinner = contentDiv.querySelector('.loading-spinner');
-
-	   iframe.addEventListener('load', () => {
-          spinner.style.display = 'none';
-          iframe.style.pointerEvents = 'all';
-        });
-    labelDiv.classList.add('active');
-
-        // Close any previously active label
-        if (activeLabel && activeLabel !== labelDiv) {
-          activeLabel.classList.remove('active');
-        }
-        activeLabel = labelDiv;
-}
-	    // Remove previous `pointerdown` listeners if any
-    document.removeEventListener('pointerdown', closeIframe);
-
-    // Add event listener to close iframe when clicking outside
-    document.addEventListener('pointerdown', closeIframe);
+      }, { once: true });
     }
-  });
-	// Function to close the active iframe if clicked outside
-function closeIframe(event) {
-  if (activeLabel && !activeLabel.contains(event.target)) {
-    activeLabel.classList.remove('active');
-    controls.autoRotate = true;
-    controls.enabled = true;
-    renderer.domElement.style.pointerEvents = 'all'; // Re-enable interaction with the globe
-    activeLabel = null; // Clear the active label
-}
-}
-}
-	  // Add event listener for dropdown selection
-document.getElementById('airbnbSelector').addEventListener('change', function() {
-  const selectedCategory = this.value;
-  loadMarkers(selectedCategory);
-});
-
-// Load markers for default category on page load
-loadMarkers('cheapest');
-		    
-	 /* let activeLabel = null; // Keep track of the currently open iframe
-
-window.addEventListener('pointerdown', (event) => {
-  pointer.x = (event.clientX / innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-  raycaster.setFromCamera(pointer, camera);
-
-  const intersects = raycaster.intersectObject(markers).filter((m) => {
-    return m.uv.subScalar(0.5).length() * 2 < 0.25;
-  });
-
-  if (intersects.length > 0) {
-    const instanceId = intersects[0].instanceId;
-    const data = markersData[instanceId];
-
-    // Update Label Content
-    const labelDiv = document.getElementById(`label-${data.id}`);
-    const contentDiv = labelDiv.querySelector('.content');
-
-    // Always update the content and attach the iframe, even if previously clicked
-    contentDiv.innerHTML = `
-      <div class="loading-spinner" style="pointer-events:none;"></div>
-      <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
-    `;
-
-    const iframe = labelDiv.querySelector('iframe');
-    const spinner = contentDiv.querySelector('.loading-spinner');
-
-    labelDiv.classList.add('active');
-    controls.autoRotate = false;
-    controls.enabled = false;
-
-    // Disable pointer events on the globe while interacting with the iframe
-    renderer.domElement.style.pointerEvents = 'none';
-
-    iframe.addEventListener('load', () => {
-      spinner.style.display = 'none';
-      iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
-
-      // Close any previously active label
-      if (activeLabel && activeLabel !== labelDiv) {
-        activeLabel.classList.remove('active');
-      }
-
-      // Set the new active label
-      activeLabel = labelDiv;
-    });
-
-    // Remove previous `pointerdown` listeners if any
-    document.removeEventListener('pointerdown', closeIframe);
-
-    // Add event listener to close iframe when clicking outside
-    document.addEventListener('pointerdown', closeIframe);
-  }
-});
-
-// Function to close the active iframe if clicked outside
-function closeIframe(event) {
-  if (activeLabel && !activeLabel.contains(event.target)) {
-    activeLabel.classList.remove('active');
-    controls.autoRotate = true;
-    controls.enabled = true;
-    renderer.domElement.style.pointerEvents = 'all'; // Re-enable interaction with the globe
-    activeLabel = null; // Clear the active label
-  }
-}
-}*/
-
-
-
-
-	  // Loading spinner functionality
-/*document.getElementById('labels-container').addEventListener('click', function() {
-  const loadingIcon = document.getElementById('loadingIcon');
-  
-  // Show loading icon when iframe is clicked
-  loadingIcon.style.display = 'block';
-  
-  // Hide the loading icon after a set timeout (3 seconds in this case)
-  setTimeout(() => {
-    loadingIcon.style.display = 'none';
-  }, 3000); // Adjust time as needed
-});*/
-	  
-
-
-// Animation Loop
-const clock = new THREE.Clock();
-
-function animate() {
-  requestAnimationFrame(animate);
-  TWEEN.update(); // Required to make the transition work
-  // Update time uniform
-  globalUniforms.time.value = clock.getElapsedTime();
-
-  // Update controls
-  if (controls.enabled) {
-    controls.update();
   }
 
-  // Render
-  renderer.render(scene, camera);
-  labelRenderer.render(scene, camera);
-}
+  // Animation loop
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    TWEEN.update(); // Needed for transitions
+    globalUniforms.time.value = clock.getElapsedTime();
 
-animate();
+    if (controls.enabled) {
+      controls.update();
+    }
 
-  </script>
+    renderer.render(scene, camera);
+    labelRenderer.render(scene, camera);
+  }
+  animate();
+</script>
+
 </body>
 </html>
