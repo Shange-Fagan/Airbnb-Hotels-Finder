@@ -719,6 +719,23 @@ overflow: hidden;
   const newsOverlayDay = document.getElementById('newsOverlay');
   const newsOverlayNight = document.getElementById('newsOverlaynighttheme');
   const closeNewsButton = document.getElementById('closeNewsButton');
+		  
+	document.getElementById('submitRegion').addEventListener('click', () => {
+  const region = document.getElementById('regionSelect').value;
+  panToRegion(region);
+  document.getElementById('regionPopup').style.display = 'none';
+});
+
+function panToRegion(region) {
+  switch (region) {
+    case 'africa':
+      camera.position.set(5.1, 1.2, 1.5);
+      break;
+    // other regions...
+  }
+  camera.lookAt(0, 0, 0);
+}
+
 
   if (isDay) {
     // Show day theme news overlay
