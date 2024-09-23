@@ -302,7 +302,8 @@ a, button, input, select, iframe {
   font-size: 16px; /* Larger font for inputs */
   padding: 10px 15px; /* Padding inside inputs */
   border: 0px solid #e0e0e0; /* Border similar to Airbnb */
-	color: rgba(255, 255, 255, 0.75);
+	/*color: rgba(255, 255, 255, 0.75);*/
+	color: #222222;
        background-color: rgba(255, 255, 255, 0.15);
   border-radius: 25px; /* Rounded corners for inputs */
   margin-right: 10px; /* Spacing between input fields */
@@ -368,7 +369,26 @@ a, button, input, select, iframe {
     width: 100%; /* Full-width button on mobile */
   }
 }
-	  
+	  #header input::placeholder {
+  color: #717171; /* Light gray placeholder text */
+  font-size: 16px; /* Airbnb-style font size */
+}
+
+#header input {
+  color: #222222; /* Darker gray/black for user-inputted text */
+  background-color: white;
+  border: 1px solid #e0e0e0; /* Light border similar to Airbnb */
+  padding: 10px 15px;
+  border-radius: 25px; /* Rounded edges */
+  width: 250px;
+  margin-right: 10px;
+}
+
+#header input:focus {
+  border-color: #ff385c; /* Red border when focused, Airbnb style */
+  outline: none;
+}
+
 #regionPopup {
   position: fixed;
   top: 50%;
