@@ -1092,73 +1092,77 @@ overflow: hidden;
     document.getElementById('confirmationMessage').style.display = 'none';
   }, 5000);
 });
-		  // Event listener for Region Select button
-document.getElementById('regionSelectBtn').style.display = 'block'; // Always visible now
-document.getElementById('regionSelectBtn').addEventListener('click', function() {
-  // Show the dropdown menu with regions
-  let regionSelect = document.createElement('select');
-  regionSelect.id = 'regionSelectDropdown';
-  regionSelect.innerHTML = `
-    <option value="africa">Africa</option>
-    <option value="europe">Europe</option>
-    <option value="america">America</option>
-    <option value="south america">South America</option>
-    <option value="caribbean">Caribbean</option>
-    <option value="asia">Asia</option>
-  `;
-  
-  this.insertAdjacentElement('afterend', regionSelect);
+  // Always visible region select button
+  document.getElementById('regionSelectBtn').style.display = 'block';
 
-  // Pan the camera to the selected region when changed
-  regionSelect.addEventListener('change', function() {
-    let selectedRegion = this.value;
-    panToRegion(selectedRegion); // Pan function
+  document.getElementById('regionSelectBtn').addEventListener('click', function() {
+    // Check if dropdown already exists to avoid adding multiple
+    if (!document.getElementById('regionSelectDropdown')) {
+      // Create the dropdown menu with regions
+      let regionSelect = document.createElement('select');
+      regionSelect.id = 'regionSelectDropdown';
+      regionSelect.innerHTML = `
+        <option value="africa">Africa</option>
+        <option value="europe">Europe</option>
+        <option value="america">America</option>
+        <option value="south america">South America</option>
+        <option value="carribbean">Carribbean</option>
+        <option value="asia">Asia</option>
+      `;
+      
+      this.insertAdjacentElement('afterend', regionSelect);
+
+      // Pan the camera to the selected region when changed
+      regionSelect.addEventListener('change', function() {
+        let selectedRegion = this.value;
+        panToRegion(selectedRegion); // Call pan function with selected region
+      });
+    }
   });
-});
 
-// Function to pan the camera to the selected region
-function panToRegion(region) {
-  let position;
-  switch (region) {
-    case 'africa':
-      position = { x: 15, y: 0, z: 5 };
-      break;
-    case 'europe':
-      position = { x: 10, y: 2, z: 3 };
-      break;
-    case 'america':
-      position = { x: -5, y: 0, z: 8 };
-      break;
-    case 'south america':
-      position = { x: -5, y: -2, z: 6 };
-      break;
-    case 'caribbean':
-      position = { x: -2, y: 1, z: 5 };
-      break;
-    case 'asia':
-      position = { x: 10, y: 1, z: 10 };
-      break;
-    default:
-      console.log('Region not recognized');
-      return;
+  // Function to pan the camera to the selected region
+  function panToRegion(region) {
+    let position;
+    switch (region) {
+      case 'africa':
+        position = { x: 15, y: 0, z: 5 };
+        break;
+      case 'europe':
+        position = { x: 10, y: 2, z: 3 };
+        break;
+      case 'america':
+        position = { x: -5, y: 0, z: 8 };
+        break;
+      case 'south america':
+        position = { x: -5, y: -2, z: 6 };
+        break;
+      case 'carribbean':
+        position = { x: -2, y: 1, z: 5 };
+        break;
+      case 'asia':
+        position = { x: 10, y: 1, z: 10 };
+        break;
+      default:
+        console.log('Region not recognized');
+        return;
+    }
+
+    // Animate camera panning
+    animateCameraPan(position.x, position.y, position.z);
+    camera.lookAt(0, 0, 0);
   }
 
-  // Animate camera panning
-  animateCameraPan(position.x, position.y, position.z);
-  camera.lookAt(0, 0, 0);
-}
-
-// Smooth camera panning using tween.js
-function animateCameraPan(x, y, z) {
-  new TWEEN.Tween(camera.position)
-    .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .onUpdate(function() {
-      camera.lookAt(0, 0, 0);
-    })
-    .start();
-}
-		  });
+  // Smooth camera panning using tween.js
+  function animateCameraPan(x, y, z) {
+    new TWEEN.Tween(camera.position)
+      .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
+      .easing(TWEEN.Easing.Quadratic.InOut)
+      .onUpdate(function() {
+        camera.lookAt(0, 0, 0);
+      })
+      .start();
+  }
+});
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
