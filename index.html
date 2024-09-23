@@ -549,20 +549,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #regionSelectBtn {
   position: absolute;
   top: 150px; /* Adjusted top position under Cheapest button */
-  left: 20px;
-  background-color: #ff385c;
-  color: white;
-  padding: 12px 25px;
-  border: none;
+  left: 36px;
+  padding: 4.5px 9.5px; /* Add padding for a better look */
+  border: 0px solid #e0e0e0; /* Add a border to separate the dropdown */
   border-radius: 25px;
-  font-size: 16px;
+  font-size: 12px; /* Increase the font size for better readability */
   cursor: pointer;
   transition: background-color 0.3s ease;
-  z-index: 9999; /* Make sure it's visible above the globe */
+  color: rgba(255, 255, 255, 0.75); /* Keep the light gray text color */
+  background-color: rgba(255, 255, 255, 0.15); /* Transparent background with slight white tint */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  appearance: none; /* Removes the default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center; /* Adjusted to move the arrow down */
+  background-size: 10px; /* Adjust the size of the arrow */
+  z-index: 10000;
 }
 
 #regionSelectBtn:hover {
-  background-color: #e03a56;
+  background-color: rgba(225, 225, 225, 0.35);
+   border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
 }
 
 
