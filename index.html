@@ -1208,6 +1208,14 @@ overflow: hidden;
         controls.autoRotate = false; // Disable auto-rotation
         })
       .start();
+	  // Add zooming to the pan
+    new TWEEN.Tween(camera)
+        .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function() {
+            camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
+        })
+        .start();
   }
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
