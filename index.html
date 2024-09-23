@@ -1161,6 +1161,7 @@ overflow: hidden;
 	  // Reset zoom to default value before transitioning
   camera.zoom = 1;
   camera.updateProjectionMatrix(); // Apply the reset zoom value
+	  console.log(`Camera reset zoom to default: zoomLevel=${camera.zoom}`);
 
     switch (region) {
         case 'africa':
@@ -1226,6 +1227,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
         .onComplete(function() {
             // After zoom and panning complete, restart slow auto-rotation
             // Delay re-enabling auto-rotation slightly to avoid conflicts
+		console.log('Zoom and pan complete');
             setTimeout(function() {
                 console.log("Resuming auto-rotation");
                 controls.autoRotate = true;
