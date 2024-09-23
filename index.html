@@ -1253,37 +1253,6 @@ overflow: hidden;
     })
         .start();
   }
-
-	  // Adding Blue Orb Shader Effect
-function addBlueOrbEffect() {
-    const blueOrbShaderMaterial = new THREE.ShaderMaterial({
-        vertexShader: `
-            varying vec3 vertexNormal;
-            void main() {
-                vertexNormal = normalize(normalMatrix * normal);
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            }
-        `,
-        fragmentShader: `
-            varying vec3 vertexNormal;
-            void main() {
-                float intensity = pow(0.8 - dot(vertexNormal, vec3(0, 0, 1.0)), 2.0);
-                gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity;
-            }
-        `,
-        blending: THREE.AdditiveBlending,
-        side: THREE.BackSide,
-    });
-
-    const atmosphere = new THREE.Mesh(
-        new THREE.SphereGeometry(5.3, 32, 32), // Slightly larger than the globe
-        blueOrbShaderMaterial
-    );
-    scene.add(atmosphere);
-}
-
-// Call the addBlueOrbEffect function to create the blue orb effect around the globe
-addBlueOrbEffect();
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
