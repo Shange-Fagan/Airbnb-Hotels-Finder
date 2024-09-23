@@ -1248,8 +1248,11 @@ overflow: hidden;
         })
 	    .onComplete(function() {
       // After zoom and panning complete, restart slow auto-rotation
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.25; // Slow rotation speed
+      // Delay re-enabling auto-rotation slightly to avoid conflicts
+            setTimeout(function() {
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 0.25; // Slow rotation speed
+            }, 500); // 500ms delay
     })
         .start();
   }
