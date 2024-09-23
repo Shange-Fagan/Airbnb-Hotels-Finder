@@ -1195,6 +1195,10 @@ overflow: hidden;
       .onUpdate(function() {
         camera.lookAt(0, 0, 0);
       })
+      .onComplete(function() {
+       // Once the panning animation is complete, disable rotation
+        controls.autoRotate = false; // Disable auto-rotation
+        })
       .start();
   }
 document.getElementById('searchBtn').addEventListener('click', () => {
