@@ -1090,6 +1090,20 @@ overflow: hidden;
   const newsOverlayDay = document.getElementById('newsOverlay');
   const newsOverlayNight = document.getElementById('newsOverlaynighttheme');
   const closeNewsButton = document.getElementById('closeNewsButton');
+		  if (isDay) {
+    // Show day theme news overlay
+    newsOverlayDay.style.display = 'flex';
+    newsOverlayNight.style.display = 'none';
+  } else {
+    // Show night theme news overlay
+    newsOverlayNight.style.display = 'flex';
+    newsOverlayDay.style.display = 'none';
+  }
+
+  // Display the close button in both cases
+  closeNewsButton.style.display = 'flex';
+
+	  });
 		  
 	/*document.getElementById('submitRegion').addEventListener('click', () => {
   const selectedRegion = document.getElementById('regionSelect').value;
@@ -1189,7 +1203,6 @@ overflow: hidden;
       })
       .start();
   }
-});
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
@@ -1212,22 +1225,6 @@ function generateAirbnbUrl(where, when, guests) {
     addMarkerToGlobe(marker);
   });
 }
-
-
-
-  if (isDay) {
-    // Show day theme news overlay
-    newsOverlayDay.style.display = 'flex';
-    newsOverlayNight.style.display = 'none';
-  } else {
-    // Show night theme news overlay
-    newsOverlayNight.style.display = 'flex';
-    newsOverlayDay.style.display = 'none';
-  }
-
-  // Display the close button in both cases
-  closeNewsButton.style.display = 'flex';
-
 
 	 /* document.getElementById('newsButton').addEventListener('click', function() {
   const newsOverlay = document.getElementById('newsOverlay');
