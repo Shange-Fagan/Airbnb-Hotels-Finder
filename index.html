@@ -1107,6 +1107,9 @@ overflow: hidden;
   setTimeout(function() {
     document.getElementById('confirmationMessage').style.display = 'none';
   }, 5000);
+// Pan to the selected region
+  panToRegion(selectedRegion);
+});
 });
    // Always visible region select button
   document.getElementById('regionSelectBtn').style.display = 'block';
