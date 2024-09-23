@@ -1177,6 +1177,21 @@ document.getElementById('regionSelectBtn').addEventListener('click', function() 
   animateCameraPan(position.x, position.y, position.z);
   camera.lookAt(0, 0, 0);
 }*/
+		  document.getElementById('submitRegion').addEventListener('click', function() {
+  // Close the initial region popup
+  document.getElementById('regionPopup').style.display = 'none';
+
+  // Show the confirmation message
+  document.getElementById('confirmationMessage').style.display = 'block';
+
+  // Hide the confirmation message after 5 seconds
+  setTimeout(function() {
+    document.getElementById('confirmationMessage').style.display = 'none';
+
+    /*// Show the region select button
+    document.getElementById('regionSelectBtn').style.display = 'block';*/
+  }, 5000);
+});
 		  // Event listener for Region Select button
 document.getElementById('regionSelectBtn').style.display = 'block'; // Always visible now
 document.getElementById('regionSelectBtn').addEventListener('click', function() {
