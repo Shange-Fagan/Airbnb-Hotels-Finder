@@ -1187,17 +1187,12 @@ overflow: hidden;
             return;
     }
 
-    // Animate camera panning and zooming
-    animateCameraPan(position.x, position.y, position.z, zoomLevel);
     
 	  // Stop auto-rotation after the panning is complete
-    //controls.autoRotate = false; // This will stop the auto-rotation
-	  setTimeout(function() {
     controls.autoRotate = false; // This will stop the auto-rotation
-  }, 5000);
-    controls.autoRotate = false;
-    controls.autoRotateSpeed = 0.125;
-    camera.lookAt(0, 0, 0);
+
+	  // Animate camera panning and zooming
+    animateCameraPan(position.x, position.y, position.z, zoomLevel);
   }
 
   // Smooth camera panning using tween.js
