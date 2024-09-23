@@ -1162,34 +1162,33 @@ function stopAllTweens() {
   // Function to pan the camera to the selected region
   // Function to pan the camera to the selected region
 	  // Function to pan the camera to the selected region
-function panToRegion(region) {
+	  function panToRegion(region) {
     let targetPosition;
     let zoomLevel;
 
-    // Define the target coordinates for each region
     switch (region) {
         case 'africa':
-            targetPosition = { x: 0.5, y: 0, z: 4.7 };
-            zoomLevel = 1.5;
+            position = { x: 4.79, y: 0, z: 1.74 };
+            zoomLevel = 1.5; // Adjust zoom level as needed
             break;
         case 'europe':
-            targetPosition = { x: 2.5, y: 3.2, z: 2.5 };
+            position = { x: 3.13, y: 3.91, z: 0.55 };
             zoomLevel = 1.8;
             break;
         case 'america':
-            targetPosition = { x: -3.5, y: 0.5, z: -3.2 };
+            position = { x: -0.89, y: 3.28, z: -3.92 };
             zoomLevel = 2.0;
             break;
         case 'south america':
-            targetPosition = { x: -2.8, y: -2.5, z: -3.4 };
+            position = { x: 1.99, y: -1.32, z: -4.42 };
             zoomLevel = 1.7;
             break;
         case 'carribbean':
-            targetPosition = { x: -3.1, y: 0.7, z: -2.8 };
+            position = { x: 0.71, y: 1.74, z: -4.36 };
             zoomLevel = 1.6;
             break;
         case 'asia':
-            targetPosition = { x: 4, y: 0.5, z: 2 };
+            position = { x: 0, y: 2.55, z: 4.42 };
             zoomLevel = 1.9;
             break;
         default:
