@@ -1496,6 +1496,22 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 	  const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+
+// Ensure correct wrapping
+dayTexture.wrapS = THREE.ClampToEdgeWrapping;
+dayTexture.wrapT = THREE.ClampToEdgeWrapping;
+
+// Use appropriate filtering
+dayTexture.minFilter = THREE.LinearFilter;
+dayTexture.magFilter = THREE.LinearFilter;
+
+	  // Ensure correct wrapping
+nightTexture.wrapS = THREE.ClampToEdgeWrapping;
+nightTexture.wrapT = THREE.ClampToEdgeWrapping;
+
+// Use appropriate filtering
+nightTexture.minFilter = THREE.LinearFilter;
+nightTexture.magFilter = THREE.LinearFilter;
   
 	  const shaderMaterial2 = new THREE.ShaderMaterial({
   uniforms: {
