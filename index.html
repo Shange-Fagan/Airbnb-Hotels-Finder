@@ -1165,6 +1165,35 @@ overflow: hidden;
     switch (region) {
         case 'africa':
             position = { x: 0.5, y: 0, z: 4.7 };
+            zoomLevel = 1.5; // Adjust zoom level
+            break;
+        case 'europe':
+            position = { x: 2.5, y: 3.2, z: 2.5 };
+            zoomLevel = 1.8; // Adjust zoom level
+            break;
+        case 'america':
+            position = { x: -3.5, y: 0.5, z: -3.2 };
+            zoomLevel = 2.0; // Adjust zoom level
+            break;
+        case 'south america':
+            position = { x: -2.8, y: -2.5, z: -3.4 };
+            zoomLevel = 1.7; // Adjust zoom level
+            break;
+        case 'carribbean':
+            position = { x: -3.1, y: 0.7, z: -2.8 };
+            zoomLevel = 1.6; // Adjust zoom level
+            break;
+        case 'asia':
+            position = { x: 4, y: 0.5, z: 2 };
+            zoomLevel = 1.9; // Adjust zoom level
+            break;
+        default:
+            console.log('Region not recognized');
+            return;
+    }
+    /*{
+        case 'africa':
+            position = { x: 0.5, y: 0, z: 4.7 };
             zoomLevel = 10; // Adjust zoom level
             break;
         case 'europe':
@@ -1190,7 +1219,8 @@ overflow: hidden;
         default:
             console.log('Region not recognized');
             return;
-    }
+    }*/
+
 
     
 	  // Stop auto-rotation after the panning is complete
