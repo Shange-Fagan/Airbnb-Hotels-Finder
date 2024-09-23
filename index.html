@@ -390,6 +390,16 @@ a, button, input, select, iframe {
   border-color: #ff385c; /* Red border when focused, Airbnb style */
   outline: none;
 }
+	  /* Styling for the placeholder text in all inputs, including the date input */
+input::placeholder {
+  color: rgba(255, 255, 255, 0.75); /* Light gray color for consistency */
+}
+
+/* If you want to target only the date input field */
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
+}
+
 
 #regionPopup {
   position: fixed;
