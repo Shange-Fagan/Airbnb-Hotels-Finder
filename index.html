@@ -589,6 +589,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #regionSelectDropdown:hover {
   background-color: rgba(245, 245, 245, 0.9);
 }
+	  #regionSelectBtn, #submitRegion {
+  z-index: 10000; /* Ensure these elements are interactive */
+}
 
 	  
 /* Remove scrollbar from iframes */
@@ -1224,7 +1227,6 @@ function generateAirbnbUrl(where, when, guests) {
 
   // Display the close button in both cases
   closeNewsButton.style.display = 'flex';
-});
 
 
 	 /* document.getElementById('newsButton').addEventListener('click', function() {
