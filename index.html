@@ -1161,74 +1161,61 @@ function stopAllTweens() {
 }
   // Function to pan the camera to the selected region
   // Function to pan the camera to the selected region
+	  // Function to pan the camera to the selected region
 function panToRegion(region) {
-    let position;
+    let targetPosition;
     let zoomLevel;
-    
-    // Stop all ongoing tweens to ensure no conflicting animations
-    TWEEN.removeAll();
 
-    // Reset zoom to default value before transitioning
-    camera.zoom = 1;
-    camera.updateProjectionMatrix(); // Apply the reset zoom value
-
-    // Switch case for different regions and zoom levels
+    // Define the target coordinates for each region
     switch (region) {
         case 'africa':
-            position = { x: 0.5, y: 0, z: 4.7 };
-            zoomLevel = 1.5; // Adjust zoom level
+            targetPosition = { x: 0.5, y: 0, z: 4.7 };
+            zoomLevel = 1.5;
             break;
         case 'europe':
-            position = { x: 2.5, y: 3.2, z: 2.5 };
-            zoomLevel = 1.8; // Adjust zoom level
+            targetPosition = { x: 2.5, y: 3.2, z: 2.5 };
+            zoomLevel = 1.8;
             break;
         case 'america':
-            position = { x: -3.5, y: 0.5, z: -3.2 };
-            zoomLevel = 2.0; // Adjust zoom level
+            targetPosition = { x: -3.5, y: 0.5, z: -3.2 };
+            zoomLevel = 2.0;
             break;
         case 'south america':
-            position = { x: -2.8, y: -2.5, z: -3.4 };
-            zoomLevel = 1.7; // Adjust zoom level
+            targetPosition = { x: -2.8, y: -2.5, z: -3.4 };
+            zoomLevel = 1.7;
             break;
         case 'carribbean':
-            position = { x: -3.1, y: 0.7, z: -2.8 };
-            zoomLevel = 1.6; // Adjust zoom level
+            targetPosition = { x: -3.1, y: 0.7, z: -2.8 };
+            zoomLevel = 1.6;
             break;
         case 'asia':
-            position = { x: 4, y: 0.5, z: 2 };
-            zoomLevel = 1.9; // Adjust zoom level
+            targetPosition = { x: 4, y: 0.5, z: 2 };
+            zoomLevel = 1.9;
             break;
         default:
             console.log('Region not recognized');
             return;
     }
 
-    console.log(`Panning to ${region} with position: x=${position.x}, y=${position.y}, z=${position.z} and zoomLevel=${zoomLevel}`);
-    
-    // Stop auto-rotation during the panning
+    // Stop auto-rotation before the panning starts
     controls.autoRotate = false;
 
-    // Animate camera panning and zooming
-    animateCameraPan(position.x, position.y, position.z, zoomLevel);
+    // Animate the camera to move from the current position to the new region
+    animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomLevel);
 }
 
-// Smooth camera panning using tween.js
-function animateCameraPan(x, y, z, zoomLevel) {
-    console.log(`Starting pan to position: x=${x}, y=${y}, z=${z} with zoomLevel=${zoomLevel}`);
-    
-    // Create a tween for smooth camera panning
+// Smooth camera panning using tween.js, transitioning from current camera position
+function animateCameraPan(targetX, targetY, targetZ, zoomLevel) {
+    // Tween for the camera position
     new TWEEN.Tween(camera.position)
-        .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
+        .to({ x: targetX, y: targetY, z: targetZ }, 2000) // Smoothly pan over 2 seconds
         .easing(TWEEN.Easing.Quadratic.InOut)
         .onUpdate(function() {
-            camera.lookAt(0, 0, 0); // Always look at the center of the globe
-        })
-        .onComplete(function() {
-            console.log(`Finished panning to x=${x}, y=${y}, z=${z}`);
+            camera.lookAt(0, 0, 0); // Keep the camera looking at the center of the globe
         })
         .start();
 
-    // Create a tween for zooming
+    // Tween for the zoom level
     new TWEEN.Tween(camera)
         .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
         .easing(TWEEN.Easing.Quadratic.InOut)
@@ -1236,7 +1223,6 @@ function animateCameraPan(x, y, z, zoomLevel) {
             camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
         })
         .onComplete(function() {
-            console.log(`Zooming complete with zoomLevel=${zoomLevel}`);
             // After zoom and panning complete, restart slow auto-rotation
             setTimeout(function() {
                 controls.autoRotate = true;
