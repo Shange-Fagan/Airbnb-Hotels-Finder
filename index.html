@@ -1156,28 +1156,35 @@ overflow: hidden;
   // Function to pan the camera to the selected region
   function panToRegion(region) {
     let position;
+    let zoomLevel;
     switch (region) {
-      case 'africa':
-        position = { x: 15, y: 0, z: 5 };
-        break;
-      case 'europe':
-        position = { x: 10, y: 2, z: 3 };
-        break;
-      case 'america':
-        position = { x: -5, y: 0, z: 8 };
-        break;
-      case 'south america':
-        position = { x: -5, y: -2, z: 6 };
-        break;
-      case 'carribbean':
-        position = { x: -2, y: 1, z: 5 };
-        break;
-      case 'asia':
-        position = { x: 10, y: 1, z: 10 };
-        break;
-      default:
-        console.log('Region not recognized');
-        return;
+        case 'africa':
+            position = { x: 15, y: 0, z: 5 };
+            zoomLevel = 10; // Adjust zoom level
+            break;
+        case 'europe':
+            position = { x: 10, y: 2, z: 3 };
+            zoomLevel = 8; // Adjust zoom level
+            break;
+        case 'america':
+            position = { x: -5, y: 0, z: 8 };
+            zoomLevel = 12; // Adjust zoom level
+            break;
+        case 'south america':
+            position = { x: -5, y: -2, z: 6 };
+            zoomLevel = 10; // Adjust zoom level
+            break;
+        case 'carribbean':
+            position = { x: -2, y: 1, z: 5 };
+            zoomLevel = 9; // Adjust zoom level
+            break;
+        case 'asia':
+            position = { x: 10, y: 1, z: 10 };
+            zoomLevel = 10; // Adjust zoom level
+            break;
+        default:
+            console.log('Region not recognized');
+            return;
     }
 
     // Animate camera panning
