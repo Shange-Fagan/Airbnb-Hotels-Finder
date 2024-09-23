@@ -1153,7 +1153,12 @@ overflow: hidden;
     }
   });
 
-
+// Function to stop all existing tweens
+function stopAllTweens() {
+    TWEEN.getAll().forEach(function(tween) {
+        tween.stop(); // Stop each tween
+    });
+}
   // Function to pan the camera to the selected region
 	  // Stop all ongoing tweens
     stopAllTweens();
