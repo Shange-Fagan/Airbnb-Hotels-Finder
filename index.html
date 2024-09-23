@@ -1131,6 +1131,9 @@ overflow: hidden;
       
       this.insertAdjacentElement('afterend', regionSelect);
 
+// Ensure it's visible and styled correctly
+    regionSelect.style.display = 'block';
+
       // Pan the camera to the selected region when changed
       regionSelect.addEventListener('change', function() {
         let selectedRegion = this.value;
