@@ -489,13 +489,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin-bottom: 50px; /* Add space between title and content */
 }
 
-#regionPopup select {
+	#regionPopup select {
   font-size: 16px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #e0e0e0;
   margin-bottom: 20px; /* Space between select and button */
-  width: 100%; /* Make it responsive */
+  width: calc(100% - 20px); /* Adjust width to fit better within the container */
+  margin-left: 10px; /* Center the select dropdown inside the popup */
+  margin-right: 10px; /* Add equal padding to the right */
+  box-sizing: border-box; /* Ensure padding and borders are included in the width */
+  background-color: #f9f9f9; /* Light background to improve look */
+  appearance: none; /* Remove default select arrow styling for a custom look */
+  -webkit-appearance: none; /* For WebKit browsers */
+}
+	  #regionPopup select:focus {
+  outline: none; /* Remove the blue outline on focus */
+  border-color: #007bff; /* Highlight with a blue border on focus */
+}
+
+#regionPopup select option {
+  padding: 10px; /* Add padding to options */
 }
 
 #regionPopup button {
