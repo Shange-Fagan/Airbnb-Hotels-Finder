@@ -1163,7 +1163,7 @@ function stopAllTweens() {
   // Function to pan the camera to the selected region
 	  // Function to pan the camera to the selected region
 	  function panToRegion(region) {
-    let targetPosition;
+    let position;
     let zoomLevel;
 
     switch (region) {
@@ -1200,7 +1200,7 @@ function stopAllTweens() {
     controls.autoRotate = false;
 
     // Animate the camera to move from the current position to the new region
-    animateCameraPan(targetPosition.x, targetPosition.y, targetPosition.z, zoomLevel);
+    animateCameraPan(position.x, position.y, position.z, zoomLevel);
 }
 
 // Smooth camera panning using tween.js, transitioning from current camera position
