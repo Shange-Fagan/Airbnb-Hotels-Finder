@@ -1187,8 +1187,9 @@ overflow: hidden;
             return;
     }
 
-    // Animate camera panning
-    animateCameraPan(position.x, position.y, position.z);
+    // Animate camera panning and zooming
+    animateCameraPan(position.x, position.y, position.z, zoomLevel);
+    
 	  // Stop auto-rotation after the panning is complete
     controls.autoRotate = false; // This will stop the auto-rotation
     camera.lookAt(0, 0, 0);
