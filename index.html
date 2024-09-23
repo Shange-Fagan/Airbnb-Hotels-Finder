@@ -1222,40 +1222,47 @@ overflow: hidden;
     }*/
 
 
-    
+    // Log position and zoom for debugging
+    console.log(`Panning to ${region} with position: x=${position.x}, y=${position.y}, z=${position.z} and zoomLevel=${zoomLevel}`);
+
 	  // Stop auto-rotation after the panning is complete
     controls.autoRotate = false; // This will stop the auto-rotation
 
 	  // Animate camera panning and zooming
     animateCameraPan(position.x, position.y, position.z, zoomLevel);
   }
+	  // Smooth camera panning using tween.js
+function animateCameraPan(x, y, z, zoomLevel) {
+    // Log the pan and zoom start
+    console.log(`Starting pan to position: x=${x}, y=${y}, z=${z} with zoomLevel=${zoomLevel}`);
 
-  // Smooth camera panning using tween.js
-  function animateCameraPan(x, y, z) {
+    // Pan camera to the selected position
     new TWEEN.Tween(camera.position)
-      .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
-      .easing(TWEEN.Easing.Quadratic.InOut)
-      .onUpdate(function() {
-        camera.lookAt(0, 0, 0);
-      })
-      .start();
-	  // Add zooming to the pan
+        .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function() {
+            camera.lookAt(0, 0, 0); // Ensure camera always looks at the center
+        })
+        .start();
+
+    // Zoom camera to the desired zoom level
     new TWEEN.Tween(camera)
         .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
         .easing(TWEEN.Easing.Quadratic.InOut)
         .onUpdate(function() {
             camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
         })
-	    .onComplete(function() {
-      // After zoom and panning complete, restart slow auto-rotation
-      // Delay re-enabling auto-rotation slightly to avoid conflicts
+        .onComplete(function() {
+            // After zoom and panning complete, restart slow auto-rotation
+            // Delay re-enabling auto-rotation slightly to avoid conflicts
             setTimeout(function() {
+                console.log("Resuming auto-rotation");
                 controls.autoRotate = true;
                 controls.autoRotateSpeed = 0.25; // Slow rotation speed
             }, 500); // 500ms delay
-    })
+        })
         .start();
-  }
+}
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
