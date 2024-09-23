@@ -1182,6 +1182,8 @@ overflow: hidden;
 
     // Animate camera panning
     animateCameraPan(position.x, position.y, position.z);
+	  // Stop auto-rotation after the panning is complete
+    controls.autoRotate = false; // This will stop the auto-rotation
     camera.lookAt(0, 0, 0);
   }
 
