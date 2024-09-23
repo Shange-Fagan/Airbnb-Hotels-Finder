@@ -429,7 +429,7 @@ a, button, input, select, iframe {
 
 
 
-#regionPopup {
+/*#regionPopup {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -437,9 +437,54 @@ a, button, input, select, iframe {
   background-color: rgba(255, 255, 255, 0.15);
   padding: 20px;
   border-radius: 10px;
-  z-index: 9999; /* Ensure it appears above the globe */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999;*//* Ensure it appears above the globe */
+ /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}*/
+	  #regionPopup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.85); /* Increased opacity for readability */
+  padding: 30px 40px; /* Increase padding for more breathing space */
+  border-radius: 15px; /* Slightly more rounded corners */
+  z-index: 9999; /* Ensure it appears above all other elements */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow for better separation */
+  backdrop-filter: blur(10px); /* Apply background blur effect */
+  text-align: center; /* Center the text and elements inside the popup */
+  max-width: 400px; /* Limit the width for smaller screens */
+  width: 100%;
 }
+
+#regionPopup h1, #regionPopup h2 {
+  color: #333; /* Darker text color for better readability */
+  margin-bottom: 20px; /* Add space between title and content */
+}
+
+#regionPopup select {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 20px; /* Space between select and button */
+  width: 100%; /* Make it responsive */
+}
+
+#regionPopup button {
+  background-color: #ff385c; /* Airbnb red */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#regionPopup button:hover {
+  background-color: #e03a56; /* Slightly darker red on hover */
+}
+
 	  #content {
   display: none;
   flex-direction: row;
