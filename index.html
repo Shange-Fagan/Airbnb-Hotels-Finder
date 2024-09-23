@@ -305,7 +305,7 @@ a, button, input, select, iframe {
   border: 0px solid #e0e0e0; /* Border similar to Airbnb */
 	/*color: rgba(255, 255, 255, 0.75);*/
 	/*color: #222222;*/
-	color: #717171;
+	/*color: #717171;*/
        background-color: rgba(255, 255, 255, 0.15);
   border-radius: 25px; /* Rounded corners for inputs */
   margin-right: 10px; /* Spacing between input fields */
@@ -371,10 +371,10 @@ a, button, input, select, iframe {
     width: 100%; /* Full-width button on mobile */
   }
 }
-	  #header input::placeholder {
-  color: #717171; /* Light gray placeholder text */
-  font-size: 16px; /* Airbnb-style font size */
-}
+	  /*#header input::placeholder {
+  color: #717171;*//* Light gray placeholder text */
+  /*font-size: 16px;*//* Airbnb-style font size */
+/*}*/
 
 #header input {
   color: #222222; /* Darker gray/black for user-inputted text */
@@ -392,14 +392,40 @@ a, button, input, select, iframe {
   outline: none;
 }
 	  /* Styling for the placeholder text in all inputs, including the date input */
-input::placeholder {
-  color: rgba(255, 255, 255, 0.75); /* Light gray color for consistency */
+/* General Placeholder Styling */
+#header input::placeholder {
+  color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
+  opacity: 1; /* Ensure full opacity */
 }
 
-/* If you want to target only the date input field */
-input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
+/* Styling for Specific Inputs */
+#header input[type="text"]::placeholder,
+#header input[type="date"]::placeholder {
+  color: rgba(255, 255, 255, 0.75); /* Light gray placeholder for text and date inputs */
+  opacity: 1; /* Ensure full opacity */
 }
+
+/* Older browser support for placeholders */
+#header input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#header input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#header input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#header input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#header input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
 
 
 #regionPopup {
