@@ -1246,29 +1246,6 @@ function animateCameraPan(x, y, z, zoomLevel) {
         .start();
 }
 
-// Animation loop that ensures the TWEEN library is updated
-const clock = new THREE.Clock();
-function animate() {
-    requestAnimationFrame(animate);
-    
-    // Update tween animations
-    TWEEN.update(); 
-
-    // Update time uniform for any shaders if needed
-    globalUniforms.time.value = clock.getElapsedTime();
-
-    // Update controls
-    if (controls.enabled) {
-        controls.update();
-    }
-
-    // Render the scene
-    renderer.render(scene, camera);
-    labelRenderer.render(scene, camera); // If you're using labelRenderer
-}
-
-animate(); // Start the animation loop
-
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
@@ -2678,8 +2655,30 @@ function closeIframe(event) {
 
 // Animation Loop
 //const clock = new THREE.Clock();
-
+// Animation loop that ensures the TWEEN library is updated
+const clock = new THREE.Clock();
 function animate() {
+    requestAnimationFrame(animate);
+    
+    // Update tween animations
+    TWEEN.update(); 
+
+    // Update time uniform for any shaders if needed
+    globalUniforms.time.value = clock.getElapsedTime();
+
+    // Update controls
+    if (controls.enabled) {
+        controls.update();
+    }
+
+    // Render the scene
+    renderer.render(scene, camera);
+    labelRenderer.render(scene, camera); // If you're using labelRenderer
+}
+
+animate(); // Start the animation loop
+	  
+/*function animate() {
   requestAnimationFrame(animate);
   TWEEN.update(); // Required to make the transition work
   // Update time uniform
@@ -2695,7 +2694,7 @@ function animate() {
   labelRenderer.render(scene, camera);
 }
 
-animate();
+animate();*/
 
   </script>
 </body>
