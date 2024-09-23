@@ -1203,10 +1203,10 @@ overflow: hidden;
       .onUpdate(function() {
         camera.lookAt(0, 0, 0);
       })
-      .onComplete(function() {
+      /*.onComplete(function() {
        // Once the panning animation is complete, disable rotation
         controls.autoRotate = false; // Disable auto-rotation
-        })
+        })*/
       .start();
 	  // Add zooming to the pan
     new TWEEN.Tween(camera)
@@ -1215,6 +1215,11 @@ overflow: hidden;
         .onUpdate(function() {
             camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
         })
+	    .onComplete(function() {
+      // After zoom and panning complete, restart slow auto-rotation
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.125; // Slow rotation speed
+    })
         .start();
   }
 document.getElementById('searchBtn').addEventListener('click', () => {
