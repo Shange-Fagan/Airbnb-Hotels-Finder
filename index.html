@@ -545,10 +545,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* Region Select Button Styling */
+/* Region Select Button Styling */
 #regionSelectBtn {
   position: absolute;
-  right: 20px;
-  top: 100px;
+  top: 150px; /* Adjusted top position under Cheapest button */
+  left: 20px;
   background-color: #ff385c;
   color: white;
   padding: 12px 25px;
@@ -557,7 +558,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  z-index: 9999;
+  z-index: 9999; /* Make sure it's visible above the globe */
 }
 
 #regionSelectBtn:hover {
