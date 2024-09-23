@@ -2598,7 +2598,16 @@ function closeIframe(event) {
   }, 3000); // Adjust time as needed
 });*/
 
-
+// Smooth camera panning using tween.js
+function animateCameraPan(x, y, z) {
+  new TWEEN.Tween(camera.position)
+    .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(function() {
+      camera.lookAt(0, 0, 0);
+    })
+    .start();
+}
 
 
 // Animation Loop
