@@ -1160,18 +1160,19 @@ function stopAllTweens() {
     });
 }
   // Function to pan the camera to the selected region
-  function panToRegion(region) {
-	  // Stop all ongoing tweens
-    stopAllTweens();
+  // Function to pan the camera to the selected region
+function panToRegion(region) {
     let position;
     let zoomLevel;
-	  // Reset zoom to default value before transitioning
-	  // Reset zoom and camera position to default values before transitioning
-    camera.position.set(0, 0, 5); // Reset camera to a default position
-  camera.zoom = 1;
-  camera.updateProjectionMatrix(); // Apply the reset zoom value
-	  console.log(`Camera reset zoom to default: zoomLevel=${camera.zoom}`);
+    
+    // Stop all ongoing tweens to ensure no conflicting animations
+    TWEEN.removeAll();
 
+    // Reset zoom to default value before transitioning
+    camera.zoom = 1;
+    camera.updateProjectionMatrix(); // Apply the reset zoom value
+
+    // Switch case for different regions and zoom levels
     switch (region) {
         case 'africa':
             position = { x: 0.5, y: 0, z: 4.7 };
@@ -1202,46 +1203,71 @@ function stopAllTweens() {
             return;
     }
 
-
-    // Log position and zoom for debugging
     console.log(`Panning to ${region} with position: x=${position.x}, y=${position.y}, z=${position.z} and zoomLevel=${zoomLevel}`);
+    
+    // Stop auto-rotation during the panning
+    controls.autoRotate = false;
 
-	  // Stop auto-rotation after the panning is complete
-    controls.autoRotate = false; // This will stop the auto-rotation
-
-	  // Animate camera panning and zooming
+    // Animate camera panning and zooming
     animateCameraPan(position.x, position.y, position.z, zoomLevel);
-  }
-	  // Smooth camera panning using tween.js
+}
+
+// Smooth camera panning using tween.js
 function animateCameraPan(x, y, z, zoomLevel) {
     console.log(`Starting pan to position: x=${x}, y=${y}, z=${z} with zoomLevel=${zoomLevel}`);
-
-    // Create tween for camera position
+    
+    // Create a tween for smooth camera panning
     new TWEEN.Tween(camera.position)
         .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
         .easing(TWEEN.Easing.Quadratic.InOut)
-        .onUpdate(function () {
-            camera.lookAt(0, 0, 0); // Keep the camera centered on the globe
+        .onUpdate(function() {
+            camera.lookAt(0, 0, 0); // Always look at the center of the globe
+        })
+        .onComplete(function() {
+            console.log(`Finished panning to x=${x}, y=${y}, z=${z}`);
         })
         .start();
 
-    // Create tween for zoom
+    // Create a tween for zooming
     new TWEEN.Tween(camera)
         .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
         .easing(TWEEN.Easing.Quadratic.InOut)
-        .onUpdate(function () {
+        .onUpdate(function() {
             camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
         })
-        .onComplete(function () {
-            console.log('Zoom and pan complete');
-            setTimeout(function () {
+        .onComplete(function() {
+            console.log(`Zooming complete with zoomLevel=${zoomLevel}`);
+            // After zoom and panning complete, restart slow auto-rotation
+            setTimeout(function() {
                 controls.autoRotate = true;
                 controls.autoRotateSpeed = 0.25; // Slow rotation speed
-                console.log('Resuming auto-rotation with slow speed');
-            }, 500); // Delay to avoid conflicts
+            }, 500); // 500ms delay
         })
         .start();
 }
+
+// Animation loop that ensures the TWEEN library is updated
+const clock = new THREE.Clock();
+function animate() {
+    requestAnimationFrame(animate);
+    
+    // Update tween animations
+    TWEEN.update(); 
+
+    // Update time uniform for any shaders if needed
+    globalUniforms.time.value = clock.getElapsedTime();
+
+    // Update controls
+    if (controls.enabled) {
+        controls.update();
+    }
+
+    // Render the scene
+    renderer.render(scene, camera);
+    labelRenderer.render(scene, camera); // If you're using labelRenderer
+}
+
+animate(); // Start the animation loop
 
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
