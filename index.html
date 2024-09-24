@@ -1351,8 +1351,8 @@ const fragmentShader = `
 const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.02, 64, 64);
 const atmosphereMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    'c': { type: 'f', value: 0.8 },
-    'p': { type: 'f', value: 2.0 },
+    'c': { type: 'f', value: 0.7 }, // Adjust the glow intensity
+    'p': { type: 'f', value: 4.0 }, // Increase to make the glow tighter to the globe
     glowColor: { type: 'c', value: new THREE.Color(0x00aaff) },
     viewVector: { type: 'v3', value: camera.position }
   },
