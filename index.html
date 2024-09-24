@@ -1367,24 +1367,15 @@ scene.add(cloudMesh2);*/
   let globe;
 
   function initGlobeVisualization() {
+const textureLoader = new THREE.TextureLoader();
+	  
+  const dayTextureUrl = 'js/Earth_Diffuse.jpg';  // Use the URL of the texture
+  const dayBumpMapUrl = '//unpkg.com/three-globe/example/img/earth-topology.png';
+
 	  const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
-    const textureLoader = new THREE.TextureLoader();
-    const dayTexture = textureLoader.load('js/Earth_Diffuse.jpg');
-    const dayBumpMap = textureLoader.load('//unpkg.com/three-globe/example/img/earth-topology.png');
-// Ensure correct wrapping
-dayTexture.wrapS = THREE.ClampToEdgeWrapping;
-dayTexture.wrapT = THREE.ClampToEdgeWrapping;
-
-// Use appropriate filtering
-dayTexture.minFilter = THREE.LinearFilter;
-dayTexture.magFilter = THREE.LinearFilter;
-
-    // Initialize scene, camera, renderer
-    //const scene = new THREE.Scene();
-    //const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    //const renderer = new THREE.WebGLRenderer();
+	  
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
@@ -1392,12 +1383,21 @@ dayTexture.magFilter = THREE.LinearFilter;
 
     // Initialize globe with textures
     globe = new ThreeGlobe()
-      .globeImageUrl('js/Earth_Diffuse.jpg')
-      .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png');
+      .globeImageUrl(dayTextureUrl)
+      .bumpImageUrl(dayBumpMapUrl);
 
     scene.add(globe);
 
-    globe.pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
+	  // Start with the globe centered view
+  panGlobeToRegion({ lat: 0, lon: 0 });
+
+	  // Ensure correct wrapping
+dayTexture.wrapS = THREE.ClampToEdgeWrapping;
+dayTexture.wrapT = THREE.ClampToEdgeWrapping;
+
+// Use appropriate filtering
+dayTexture.minFilter = THREE.LinearFilter;
+dayTexture.magFilter = THREE.LinearFilter;
 
     // Load city markers
     loadCityMarkers(globe);
@@ -1408,6 +1408,12 @@ dayTexture.magFilter = THREE.LinearFilter;
       renderer.render(scene, camera);
     }
     animate();
+	  // Handle window resize
+  window.addEventListener('resize', function () {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
   }
 
   function loadCityMarkers(globe) {
