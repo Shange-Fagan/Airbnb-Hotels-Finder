@@ -915,7 +915,6 @@ overflow: hidden;
   <h2>Welcome to Airbnb Assistant</h2>
   <p>Select your region</p>
   <select id="regionSelect">
-    <option value="world">World</option>
     <option value="africa">Africa</option>
     <option value="europe">Europe</option>
     <!-- more regions -->
@@ -923,6 +922,7 @@ overflow: hidden;
     <option value="south america">South America</option>
     <option value="carribbean">Carribbean</option>
     <option value="asia">Asia</option>
+    <option value="world">World</option>
   </select>
   <button id="submitRegion">Submit</button>
 </div>
@@ -1151,13 +1151,13 @@ overflow: hidden;
       let regionSelect = document.createElement('select');
       regionSelect.id = 'regionSelectDropdown';
       regionSelect.innerHTML = `
-        <option value="world">World</option>
         <option value="africa">Africa</option>
         <option value="europe">Europe</option>
         <option value="america">America</option>
         <option value="south america">South America</option>
         <option value="carribbean">Carribbean</option>
         <option value="asia">Asia</option>
+	<option value="world">World</option>
       `;
       
       this.insertAdjacentElement('afterend', regionSelect);
@@ -1190,10 +1190,6 @@ function stopAllTweens() {
     camera.updateProjectionMatrix(); // Apply the reset zoom value
 
     switch (region) {
-	case 'world':
-            position = { x: 5.79, y: 0, z: 1.74 };
-            zoomLevel = -1.5; // Adjust zoom level as needed
-            break;
         case 'africa':
             position = { x: 5.79, y: 0, z: 1.74 };
             zoomLevel = 1.5; // Adjust zoom level as needed
@@ -1217,6 +1213,10 @@ function stopAllTweens() {
         case 'asia':
             position = { x: -0.89, y: 3.28, z: -3.92 };
             zoomLevel = 1.9;
+            break;
+        case 'world':
+            position = { x: 5.79, y: 0, z: 1.74 };
+            zoomLevel = 1.0; // Adjust zoom level as needed
             break;
         default:
             console.log('Region not recognized');
