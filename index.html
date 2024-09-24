@@ -1364,33 +1364,33 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
 	  
-  let globe2;
+  let globe;
 
   function initGlobeVisualization() {
-    const textureLoader = new THREE.TextureLoader();
-    const dayTexture = textureLoader.load('path/to/earth-day-texture.jpg');
-    const dayBumpMap = textureLoader.load('path/to/earth-bump-map.jpg');
+    //const textureLoader = new THREE.TextureLoader();
+    const dayTexture = textureLoader.load('js/Earth_Diffuse.jpg');
+    const dayBumpMap = textureLoader.load('//unpkg.com/three-globe/example/img/earth-topology.png');
 
     // Initialize scene, camera, renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
+    //const scene = new THREE.Scene();
+    //const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    //const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
     camera.position.set(0, 0, 100);  // Set a good camera position
 
     // Initialize globe with textures
-    globe2 = new ThreeGlobe()
+    globe = new ThreeGlobe()
       .globeImageUrl(dayTexture)
       .bumpImageUrl(dayBumpMap);
 
-    scene.add(globe2);
+    scene.add(globe);
 
-    globe2.pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
+    globe.pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
 
     // Load city markers
-    loadCityMarkers(globe2);
+    loadCityMarkers(globe);
 
     // Start animation
     function animate() {
@@ -1414,8 +1414,8 @@ scene.add(cloudMesh2);*/
   }
 
   function panGlobeToRegion(regionCoordinates) {
-    if (globe2) {
-      globe2.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
+    if (globe) {
+      globe.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
     } else {
       console.error('Globe is not initialized.');
     }
@@ -1730,7 +1730,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 	  // Load Textures
   //const textureLoader = new THREE.TextureLoader();
   //const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-	 const dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
+	 //const dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
     //const dayTexture = textureLoader.load("textures/earth-blue-marble-with-clouds.jpeg");
 //const dayTexture = textureLoader.load("textures/8k_earth_daymap.jpg");
   const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
@@ -2009,14 +2009,14 @@ normalMap: normalMap,
   /*specular: 0x222222,*/
   specular: new THREE.Color('grey'), // Color of reflection, subtle for realism
 });
-	  let globe = new THREE.Mesh(geometry2, material);
+	  //let globe = new THREE.Mesh(geometry2, material);
   //let globe2 = new THREE.Mesh(geometry, material2);
   /*scene.add(atmosphere);*/
   //scene.add(globe);
   //scene.add(globe2);*/
 
   // custom globe material
-  const globeMaterial = globe.material;
+  /*const globeMaterial = globe.material;
   material.bumpScale = 10;
   new THREE.TextureLoader().load(
     "//unpkg.com/three-globe/example/img/earth-water.png",
@@ -2025,7 +2025,7 @@ normalMap: normalMap,
       globeMaterial.specular = new THREE.Color("grey");
       globeMaterial.shininess = 15;
     }
-  );
+  );*/
   /*setTimeout(() => {
     // wait for scene to be populated (asynchronously)
     var dl = new THREE.DirectionalLight(0xffffff, 1);
