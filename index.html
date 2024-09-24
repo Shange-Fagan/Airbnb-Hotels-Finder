@@ -1408,62 +1408,6 @@ scene.add(cloudMesh2);*/
   displayRegionMarkers(where);
   });*/
 
-	  
-	  // Function to perform the region search and split the screen
-    function performSearch(searchUrl, regionCoordinates) {
-      // Update iframe with the Airbnb search URL
-      document.getElementById('airbnbIframe').src = searchUrl;
-
-      // Split the screen by adding the "split-screen" class
-      document.getElementById('container').classList.add('split-screen');
-
-      // Pan the globe to the detected region
-      panGlobeToRegion(regionCoordinates);  // Example function to move the globe camera
-    }
-
-    // Example trigger for performing the search
-    document.getElementById('searchBtn').addEventListener('click', function () {
-      const searchUrl = 'https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&guests=${guests}&checkout=${checkout}&price_min=${priceMin}&price_max=${priceMax}';  // Replace with actual search URL logic
-      const regionCoordinates = { lat: 50, lon: 10 };  // Example: Center of Europe
-      performSearch(searchUrl, regionCoordinates);
-    });
-
-    // Placeholder for globe initialization (if needed)
-    initGlobeVisualization(); // Initialize the globe here
-
-  function initGlobeVisualization() {
-	  const globe = window.Globe()(document.getElementById('globe-container'))
-  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-  .pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
-
-    // Load markers
-    loadCityMarkers(globe);
-
-    return globe;
-  }
-
-  function loadCityMarkers(globe) {
-    fetch('js/cities_xyz.geojson')
-      .then(response => response.json())
-      .then(data => {
-        const markers = data.features.map(city => ({
-          lat: city.geometry.coordinates[1],
-          lon: city.geometry.coordinates[0],
-          cityName: city.properties.name
-        }));
-        globe.pointsData(markers);
-      });
-  }
-
-  function panGlobeToRegion(regionCoordinates) {
-    const globe = initGlobeVisualization();
-    globe.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
-  }
-
-  window.onload = initGlobeVisualization();  // Call this when the page loads
-
-
 /*document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
