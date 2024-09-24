@@ -1833,7 +1833,7 @@ nightTexture.magFilter = THREE.LinearFilter;
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
         .start();
-        globe2.material.map = nightTexture;
+        //globe2.material.map = nightTexture;
         //scene.background = nightCubeMap;
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
@@ -1847,7 +1847,7 @@ nightTexture.magFilter = THREE.LinearFilter;
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
         .start();
-        globe2.material.map = nightTexture;
+        //lobe2.material.map = nightTexture;
         //scene.background = nightCubeMap;
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
@@ -1872,7 +1872,7 @@ nightTexture.magFilter = THREE.LinearFilter;
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 0 }, 20000)  // Smooth transition over 2 seconds
         .start();
-        globe2.material.map = dayTexture;
+        //globe2.material.map = dayTexture;
         //scene.background = dayCubeMap;
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
@@ -1886,7 +1886,7 @@ nightTexture.magFilter = THREE.LinearFilter;
         new TWEEN.Tween(shaderMaterial2.uniforms.transition)
         .to({ value: 0 }, 20000)  // Smooth transition over 2 seconds
         .start();
-        globe2.material.map = dayTexture;
+        //globe2.material.map = dayTexture;
         //scene.background = dayCubeMap;
         // Set a solid blue color for the background
         //scene.background = new THREE.Color(0x87CEEB); // Light sky blue
@@ -1900,7 +1900,7 @@ nightTexture.magFilter = THREE.LinearFilter;
 	document.getElementById("mobileTicker").style.display = "none";
 		}
       }
-      globe2.material.needsUpdate = true;
+      //globe2.material.needsUpdate = true;
       isDay = !isDay;
     }
 
