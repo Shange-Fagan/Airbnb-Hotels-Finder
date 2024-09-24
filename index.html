@@ -1461,7 +1461,7 @@ scene.add(cloudMesh2);*/
     globe.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
   }
 
-  initGlobeVisualization();  // Call this when the page loads
+  window.onload = initGlobeVisualization();  // Call this when the page loads
 
 
 /*document.getElementById('searchBtn').addEventListener('click', () => {
