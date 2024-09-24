@@ -1985,15 +1985,15 @@ dl.position.set(1, 1, 1);
 //scene.add(dl); // Add the light to the scene
 	  });
 // White directional light at half intensity shining from the top, with reduced intensity
-const directionalLight = new THREE.DirectionalLight(0x909090, 0.3); // Reduced intensity
+const directionalLight = new THREE.DirectionalLight(0x909090, 0.5); // Reduced intensity
 directionalLight.position.set(-1, -1, -1);
 scene.add(directionalLight);
 
-var dl2 = new THREE.DirectionalLight(0xffffff, 0.3); // Reduced intensity
+var dl2 = new THREE.DirectionalLight(0xffffff, 0.5); // Reduced intensity
 dl2.position.set(0, 1, 1);
 //scene.add(dl2);
 
-var dl3 = new THREE.DirectionalLight(0xffffff, 0.3); // Reduced intensity
+var dl3 = new THREE.DirectionalLight(0xffffff, 0.5); // Reduced intensity
 dl3.position.set(3, 2, 1);
 //scene.add(dl3);
 
@@ -2001,19 +2001,19 @@ dl3.position.set(3, 2, 1);
 const light2 = new THREE.AmbientLight(0x808080); // soft white light
 scene.add(light2);
 
-var light = new THREE.DirectionalLight(0xf0f0f0, 0.3); // Reduced intensity
+var light = new THREE.DirectionalLight(0xf0f0f0, 0.5); // Reduced intensity
 light.position.set(5, 3, 5);
 scene.add(light);
 
 // Update intensity for directional lights dynamically if needed
-directionalLight.intensity = 0.3;
-dl2.intensity = 0.3;
-dl3.intensity = 0.3;
+directionalLight.intensity = 0.5;
+dl2.intensity = 0.5;
+dl3.intensity = 0.5;
 
 
 
     // Markers Data
-  const markersData = [
+  const markersData2 = [
     {
       //Africa
       id: 1,
