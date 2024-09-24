@@ -1427,6 +1427,39 @@ scene.add(cloudMesh2);*/
     // Placeholder for globe initialization (if needed)
     initGlobeVisualization(); // Initialize the globe here
 
+  function initGlobeVisualization() {
+    const globe = Globe()(document.getElementById('globe-container'))
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+      .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+      .pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
+
+    // Load markers
+    loadCityMarkers(globe);
+
+    return globe;
+  }
+
+  function loadCityMarkers(globe) {
+    fetch('path_to_cities_xyz.geojson')
+      .then(response => response.json())
+      .then(data => {
+        const markers = data.features.map(city => ({
+          lat: city.geometry.coordinates[1],
+          lon: city.geometry.coordinates[0],
+          cityName: city.properties.name
+        }));
+        globe.pointsData(markers);
+      });
+  }
+
+  function panGlobeToRegion(regionCoordinates) {
+    const globe = initGlobeVisualization();
+    globe.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
+  }
+
+  initGlobeVisualization();  // Call this when the page loads
+
+
 /*document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
