@@ -1292,6 +1292,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
         .start();
 }
 const earthRadius = 5.1; // Adjust this to match your globe's size
+const textureLoader = new THREE.TextureLoader();
 // Create the atmosphere around the globe
 const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.1, 64, 64); // Slightly larger than the globe
 const atmosphereMaterial = new THREE.ShaderMaterial({
@@ -1509,7 +1510,7 @@ function checkTexturesLoaded() {
     //let isDay = true; // Track whether it's currently day or night
 
 // Load Textures
-const textureLoader = new THREE.TextureLoader();
+//const textureLoader = new THREE.TextureLoader();
 
 // Background Texture
    /* const loader = new THREE.TextureLoader();
