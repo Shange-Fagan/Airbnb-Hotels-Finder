@@ -1185,10 +1185,6 @@ function stopAllTweens() {
     camera.updateProjectionMatrix(); // Apply the reset zoom value
 
     switch (region) {
-        /*case 'africa':
-            position = { x: 2.79, y: 0, z: 1.74 };
-            zoomLevel = 1.5; // Adjust zoom level as needed
-            break;*/
         case 'africa':
             position = { x: 20.79, y: 0, z: 1.74 };
             zoomLevel = 1.5; // Adjust zoom level as needed
@@ -1214,8 +1210,8 @@ function stopAllTweens() {
             zoomLevel = 1.9;
             break;
         case 'world':
-            position = { x: 5.79, y: 0, z: 1.74 };
-            zoomLevel = 0.0; // Adjust zoom level as needed
+            position = { x: 0, y: 0, z: 10 }; // Zoomed-out, general view of the world
+            zoomLevel = 0.5; // Reduced zoom level to show the entire Earth
             break;
         default:
             console.log('Region not recognized');
