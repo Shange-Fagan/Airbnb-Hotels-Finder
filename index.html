@@ -1022,6 +1022,11 @@ overflow: hidden;
     CSS2DObject,
   } from "https://unpkg.com/three@0.136.0/examples/jsm/renderers/CSS2DRenderer.js";
     import { RGBELoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/RGBELoader.js';
+	  // Import necessary post-processing modules
+import { EffectComposer } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+
   
   // Scene Setup
   const scene = new THREE.Scene();
