@@ -1457,18 +1457,21 @@ const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
 	  
     		document.getElementById('searchBtn').addEventListener('click', function() {
-  const destination = document.getElementById('where').value;
-  const dates = document.getElementById('date').value;
-  const guests = document.getElementById('guests').value;
+  const where = document.getElementById('where').value;  // Get destination
+    const when = document.getElementById('date').value;  // Get date
+    const guests = document.getElementById('guests').value;  // Get guests count
 
-  const searchParams = {
-    destination,
-    dates,
-    guests
-  };
+    // Ensure that all required fields are filled
+    if (!where || !when || !guests) {
+      alert('Please fill in all fields before searching.');
+      return;
+    }
 
-  // Here, you'd normally send these searchParams to your server or handle it
-  console.log('User search params:', searchParams);
+    // Generate Airbnb search URL based on the inputs
+    const airbnbUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
+
+    // Redirect to the generated Airbnb URL
+    window.location.href = airbnbUrl;
 });
 
 /*document.getElementById('searchBtn').addEventListener('click', () => {
