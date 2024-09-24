@@ -894,7 +894,27 @@ overflow: hidden;
         padding: 2.5px 0;
       }
     }
+#splitScreen {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
 
+  #resultsContainer, #globeContainer {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  #resultsIframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  #globeCanvas {
+    width: 100%;
+    height: 100%;
+  }
 
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
@@ -952,7 +972,17 @@ overflow: hidden;
 
 <!-- Region Select button -->
 <button id="regionSelectBtn">Region Select</button>
+<div id="splitScreen">
+  <!-- Airbnb search results iframe -->
+  <div id="resultsContainer">
+    <iframe id="resultsIframe" width="100%" height="100%" frameborder="0"></iframe>
+  </div>
 
+  <!-- Globe container -->
+  <div id="globeContainer">
+    <canvas id="globeCanvas"></canvas>
+  </div>
+</div>
 
 <!-- Tickers -->
   <iframe
