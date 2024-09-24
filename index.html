@@ -1871,12 +1871,13 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   //shininess: 5,
   shininess: 15,
   map: dayTexture, // Start with day texture
-  specularMap: textureLoader.load("//unpkg.com/three-globe/example/img/earth-water.png"),
+  specularMap: specularMap,
   bumpMap: dayBumpMap, // Start with day bump map
   bumpScale: 0.05,
 normalMap: normalMap,
   blending: THREE.AdditiveBlending,
-  specular: 0x222222,
+  /*specular: 0x222222,*/
+  specular: new THREE.Color('grey'), // Color of reflection, subtle for realism
 });
 	  let globe = new THREE.Mesh(geometry2, material);
   let globe2 = new THREE.Mesh(geometry, material2);
