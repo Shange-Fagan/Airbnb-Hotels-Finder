@@ -1316,7 +1316,7 @@ const atmosphereMaterial = new THREE.ShaderMaterial({
 });
 const atmosphere2 = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
 scene.add(atmosphere2);
-	  const cloudTexture = textureLoader.load("textures/earth-blue-marble-with-clouds.jpeg");
+	  const cloudTexture = textureLoader.load("js/Earth_Cloud.jpg");
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
 const cloudMaterial = new THREE.MeshPhongMaterial({
   map: cloudTexture, // Use a high-quality cloud texture with transparency
