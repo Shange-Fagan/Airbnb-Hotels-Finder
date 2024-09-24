@@ -1317,7 +1317,7 @@ const atmosphereMaterial = new THREE.ShaderMaterial({
 });
 const atmosphere2 = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
 scene.add(atmosphere2);
-	  const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
+	  /*const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
 const cloudMaterial2 = new THREE.MeshPhongMaterial({
   map: cloudTexture2, // Use a high-quality cloud texture with transparency
@@ -1325,7 +1325,7 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
   opacity: 0.4 // Adjust for subtle effect
 });
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
-scene.add(cloudMesh2);
+scene.add(cloudMesh2);*/
 
 	  // Create a composer for post-processing
 const renderScene = new RenderPass(scene, camera);
@@ -1838,7 +1838,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     },
   });
 
-  const atmosphere = new THREE.Mesh(
+  /*const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(5.1, 128.1, 128.1),
     new THREE.ShaderMaterial({
       vertexShader: `
@@ -1865,7 +1865,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   );
 	  
 	atmosphere.scale.set(1, 1, 1);	
-	  
+	  */
   const material2 = new THREE.MeshPhongMaterial({
   //specular: 0x111111,
   //shininess: 5,
@@ -1881,7 +1881,7 @@ normalMap: normalMap,
 });
 	  let globe = new THREE.Mesh(geometry2, material);
   let globe2 = new THREE.Mesh(geometry, material2);
-  scene.add(atmosphere);
+  /*scene.add(atmosphere);*/
   scene.add(globe);
   scene.add(globe2);
 
