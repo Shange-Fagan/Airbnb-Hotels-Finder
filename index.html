@@ -1432,6 +1432,7 @@ scene.add(cloudMesh2);*/
     initGlobeVisualization(); // Initialize the globe here
 
   function initGlobeVisualization() {
+	  const Globe = window.Globe;
     const globe = Globe()(document.getElementById('globe-container'))
       .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
       .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
