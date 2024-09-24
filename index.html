@@ -1459,23 +1459,36 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
 	  
-    		
+
+
   document.getElementById('searchBtn').addEventListener('click', function() {
     const where = document.getElementById('where').value;  // Get destination
-    const when = document.getElementById('date').value;  // Get check-in date
+    const checkin = document.getElementById('date').value;  // Get check-in date
+    const checkout = document.getElementById('checkout').value;  // Get check-out date
     const guests = document.getElementById('guests').value;  // Get number of guests
+    const priceMin = document.getElementById('price_min').value;  // Get min price
     const priceMax = document.getElementById('price_max').value;  // Get max price
 
     // Ensure that required fields are filled
-    if (!where || !when || !guests) {
+    if (!where || !checkin || !guests) {
       alert('Please fill in all required fields before searching.');
       return;
     }
 
     // Generate Airbnb search URL
-    let airbnbUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
+    let airbnbUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&guests=${guests}`;
 
-    // Add maximum price to the URL if provided
+    // Add checkout date if provided
+    if (checkout) {
+      airbnbUrl += `&checkout=${checkout}`;
+    }
+
+    // Add minimum price if provided
+    if (priceMin) {
+      airbnbUrl += `&price_min=${priceMin}`;
+    }
+
+    // Add maximum price if provided
     if (priceMax) {
       airbnbUrl += `&price_max=${priceMax}`;
     }
@@ -1483,7 +1496,6 @@ scene.add(cloudMesh2);*/
     // Redirect to the generated Airbnb URL
     window.location.href = airbnbUrl;
   });
-
 /*document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
