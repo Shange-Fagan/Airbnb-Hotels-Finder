@@ -1291,6 +1291,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
         })
         .start();
 }
+const earthRadius = 5.1; // Adjust this to match your globe's size
 // Create the atmosphere around the globe
 const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.1, 64, 64); // Slightly larger than the globe
 const atmosphereMaterial = new THREE.ShaderMaterial({
@@ -1738,7 +1739,7 @@ const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
   */
   // Globe Material
-	const sphereWidth = 5.1;
+	const sphereWidth = earthRadius;
   const sphereHeight = 128.1;
   const sphereDepth = 128.1;
   const geometry = new THREE.SphereGeometry(
