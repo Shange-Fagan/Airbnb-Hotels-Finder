@@ -1117,7 +1117,7 @@ overflow: hidden;
 	
   const selectedRegion = document.getElementById('regionSelect').value;
 
-		  document.addEventListener("DOMContentLoaded", function() {
+		  /*document.addEventListener("DOMContentLoaded", function() {
 			  
   // Your existing event listeners and code go here
 			  
@@ -1135,7 +1135,30 @@ overflow: hidden;
 // Pan to the selected region
   panToRegion(selectedRegion);
 });
+});*/
+	  document.addEventListener("DOMContentLoaded", function() {
+
+  // Add event listener to the submit button
+  document.getElementById('submitRegion').addEventListener('click', function() {
+    // Close the initial region popup
+    document.getElementById('regionPopup').style.display = 'none';
+
+    // Show the confirmation message
+    document.getElementById('confirmationMessage').style.display = 'block';
+
+    // Hide the confirmation message after 10 seconds
+    setTimeout(function() {
+      document.getElementById('confirmationMessage').style.display = 'none';
+    }, 10000);
+
+    // Capture the selected region from the dropdown
+    const selectedRegion = document.getElementById('regionSelect').value;
+
+    // Pan to the selected region
+    panToRegion(selectedRegion);
+  });
 });
+
    // Always visible region select button
   document.getElementById('regionSelectBtn').style.display = 'block';
 
