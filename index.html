@@ -1291,8 +1291,104 @@ function animateCameraPan(x, y, z, zoomLevel) {
         })
         .start();
 }
-const earthRadius = 5.1; // Adjust this to match your globe's size
-const textureLoader = new THREE.TextureLoader();
+
+//const textureLoader = new THREE.TextureLoader();
+
+	  // Set up marker datasets
+const markersData = {
+    africa: [
+        { id: 1, priceCategory: 'cheapest', position: [5.1, 1.2, 1.5], iframeSrc: 'URL_FOR_AIRBNB_1' },
+        { id: 2, priceCategory: 'midPrice', position: [5.2, 1.3, 1.6], iframeSrc: 'URL_FOR_AIRBNB_2' },
+        // more Airbnbs in Africa...
+    ],
+    europe: [
+        { id: 1, priceCategory: 'cheapest', position: [5.1, 0.7, 1.8], iframeSrc: 'URL_FOR_AIRBNB_3' },
+        { id: 2, priceCategory: 'expensive', position: [5.2, 0.8, 1.9], iframeSrc: 'URL_FOR_AIRBNB_4' },
+        // more Airbnbs in Europe...
+    ],
+    // other regions...
+};
+
+const genericMarkers = [
+    { region: 'africa', position: [5.1, 1.2, 1.5] },
+    { region: 'europe', position: [5.1, 0.7, 1.8] },
+    // more generic region markers...
+];
+
+// Function to display generic region markers
+function showGenericMarkers() {
+    genericMarkers.forEach(data => {
+        addMarkerToGlobe(data.position, data.region);
+    });
+}
+
+// Function to display Airbnb markers for a selected region
+function showRegionMarkers(region, priceCategory = null) {
+    const regionData = markersData[region];
+    regionData.forEach(data => {
+        if (!priceCategory || data.priceCategory === priceCategory) {
+            addMarkerToGlobe(data.position, `Airbnb: ${data.id}`); // Show specific Airbnb markers
+        }
+    });
+}
+
+// Function to filter Airbnb markers based on price category
+function filterRegionMarkers(region, priceCategory) {
+    clearMarkers(); // Clear previously displayed markers
+    showGenericMarkers(); // Show generic markers for other regions
+    showRegionMarkers(region, priceCategory); // Show filtered markers for the selected region
+}
+
+// Function to add markers to the globe
+function addMarkerToGlobe(position, label) {
+    // Add marker to globe at given position
+    const markerGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff3232 });
+    const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+    marker.position.set(...position); // Set marker position
+    scene.add(marker);
+
+    // Optional: Attach label if needed
+}
+
+// Function to clear all markers from the globe
+function clearMarkers() {
+    // Remove all marker objects from the scene
+    for (let i = scene.children.length - 1; i >= 0; i--) {
+        const obj = scene.children[i];
+        if (obj.isMesh) {
+            scene.remove(obj);
+        }
+    }
+}
+
+// Function to handle region selection
+function handleRegionSelection(region) {
+    clearMarkers(); // Clear all previous markers
+    if (region === 'world') {
+        showGenericMarkers(); // Show only generic markers for all regions
+    } else {
+        showGenericMarkers(); // Show generic markers for other regions
+        showRegionMarkers(region); // Show detailed markers for the selected region
+    }
+}
+
+// Event listener for region selection dropdown
+document.getElementById('regionSelect').addEventListener('change', function() {
+    const selectedRegion = this.value;
+    handleRegionSelection(selectedRegion);
+});
+
+// Event listener for price filter dropdown
+document.getElementById('priceFilter').addEventListener('change', function() {
+    const selectedPriceCategory = this.value;
+    const selectedRegion = document.getElementById('regionSelect').value;
+    filterRegionMarkers(selectedRegion, selectedPriceCategory);
+});
+
+// Initially show world view with generic markers
+handleRegionSelection('world');
+
 	  
 	
 	  /*const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
@@ -1470,7 +1566,7 @@ function checkTexturesLoaded() {
     //let isDay = true; // Track whether it's currently day or night
 
 // Load Textures
-//const textureLoader = new THREE.TextureLoader();
+const textureLoader = new THREE.TextureLoader();
 
 // Background Texture
    /* const loader = new THREE.TextureLoader();
