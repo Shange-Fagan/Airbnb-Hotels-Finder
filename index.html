@@ -1293,78 +1293,8 @@ function animateCameraPan(x, y, z, zoomLevel) {
 }
 const earthRadius = 5.1; // Adjust this to match your globe's size
 const textureLoader = new THREE.TextureLoader();
-// Create the atmosphere around the globe
-const atmosphereGeometry2 = new THREE.SphereGeometry(earthRadius * 1.02, 128, 128); // Increase segments
-const atmosphereMaterial2 = new THREE.ShaderMaterial({
-    uniforms: {},
-    vertexShader: `
-        varying vec3 vNormal;
-        void main() {
-            vNormal = normalize(normalMatrix * normal);
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-    `,
-    fragmentShader: `
-        varying vec3 vNormal;
-        void main() {
-            float intensity = pow(0.8 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
-            gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity; // Adjust the color here
-        }
-    `,
-    side: THREE.BackSide, // Render inside-out
-    blending: THREE.AdditiveBlending,
-    transparent: true
-});
-const atmosphere2 = new THREE.Mesh(atmosphereGeometry2, atmosphereMaterial2);
-scene.add(atmosphere2);
 	  
-	  // Vertex Shader
-const vertexShader = `
-  varying vec3 vVertexWorldPosition;
-  varying vec3 vVertexNormal;
-  varying vec3 vViewVector;
-
-  void main() {
-    vVertexNormal = normalize(normalMatrix * normal);
-    vVertexWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
-    vViewVector = normalize(cameraPosition - vVertexWorldPosition);
-
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-// Fragment Shader
-const fragmentShader = `
-  uniform vec3 glowColor;
-  uniform float c;
-  uniform float p;
-  varying vec3 vViewVector;
-  varying vec3 vVertexNormal;
-
-  void main() {
-    float intensity = pow(c - dot(vVertexNormal, vViewVector), p);
-    gl_FragColor = vec4(glowColor * intensity, 1.0);
-  }
-`;
-
-// Create the atmosphere (glow effect)
-const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.02, 128, 128); // Increase segments
-const atmosphereMaterial = new THREE.ShaderMaterial({
-  uniforms: {
-    'c': { type: 'f', value: 0.7 }, // Adjust the glow intensity
-    'p': { type: 'f', value: 4.0 }, // Increase to make the glow tighter to the globe
-    glowColor: { type: 'c', value: new THREE.Color(0x00aaff) },
-    viewVector: { type: 'v3', value: camera.position }
-  },
-  vertexShader: vertexShader,
-  fragmentShader: fragmentShader,
-  side: THREE.BackSide,
-  blending: THREE.AdditiveBlending,
-  transparent: true
-});
-const atmosphereMesh = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-scene.add(atmosphereMesh);
-
+	
 	  /*const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
 const cloudMaterial2 = new THREE.MeshPhongMaterial({
@@ -1374,25 +1304,6 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 });
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
-
-	  // Create a composer for post-processing
-// Create a composer for post-processing
-const renderScene = new RenderPass(scene, camera);
-
-const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.5, // Strength of the glow
-    0.4, // Radius of the glow
-    0.85 // Threshold for brightness
-    /*2.0,  // higher intensity
-      0.5,  // medium spread radius
-      0.8   // slightly lower threshold to make bright areas glow more*/
-);
-
-// Adjust parameters for glow effect
-const composer = new EffectComposer(renderer);
-composer.addPass(renderScene);
-composer.addPass(bloomPass);
 	  
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
@@ -1887,7 +1798,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     },
   });
 
-  /*const atmosphere = new THREE.Mesh(
+  const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(5.1, 128.1, 128.1),
     new THREE.ShaderMaterial({
       vertexShader: `
@@ -1914,7 +1825,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   );
 	  
 	atmosphere.scale.set(1, 1, 1);	
-	  */
+	  
   const material2 = new THREE.MeshPhongMaterial({
   //specular: 0x111111,
   //shininess: 5,
