@@ -1409,7 +1409,22 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
 	  
-document.getElementById('searchBtn').addEventListener('click', () => {
+    		document.getElementById('searchBtn').addEventListener('click', function() {
+  const destination = document.getElementById('where').value;
+  const dates = document.getElementById('date').value;
+  const guests = document.getElementById('guests').value;
+
+  const searchParams = {
+    destination,
+    dates,
+    guests
+  };
+
+  // Here, you'd normally send these searchParams to your server or handle it
+  console.log('User search params:', searchParams);
+});
+
+/*document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
   const guests = document.getElementById('guests').value;
@@ -1420,9 +1435,9 @@ document.getElementById('searchBtn').addEventListener('click', () => {
 
   // Adjust layout
   document.getElementById('content').style.display = 'flex';
-});
+});*/
 
-function generateAirbnbUrl(where, when, guests) {
+/*function generateAirbnbUrl(where, when, guests) {
   return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
 }
   function loadMarkersForRegion(region) {
@@ -1430,7 +1445,7 @@ function generateAirbnbUrl(where, when, guests) {
   markersData.forEach(marker => {
     addMarkerToGlobe(marker);
   });
-}
+}*/
 
 	 /* document.getElementById('newsButton').addEventListener('click', function() {
   const newsOverlay = document.getElementById('newsOverlay');
