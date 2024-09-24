@@ -1168,6 +1168,17 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
             document.getElementById('globeIframe').src = globeIframeUrl;
             document.getElementById('listingsIframe').src = listingsIframeUrl;
         }
+	  // Inside the globe iframe (globe.js or within the iframe)
+window.addEventListener('message', (event) => {
+  if (event.data.type === 'highlightMarker') {
+    const markerIndex = event.data.index;
+    highlightMarker(markerIndex);  // Function to highlight a marker
+  } else if (event.data.type === 'unhighlightMarker') {
+    const markerIndex = event.data.index;
+    unhighlightMarker(markerIndex);  // Function to unhighlight a marker
+  }
+});
+
 
   const selectedRegion = document.getElementById('regionSelect').value;
 
