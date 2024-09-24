@@ -1376,22 +1376,20 @@ const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
 
 	  // Create a composer for post-processing
-const renderScene = new RenderPass(scene, camera);
 
-const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.5, // Strength of the glow
-    0.4, // Radius of the glow
-    0.85 // Threshold for brightness
-    /*2.0,  // higher intensity
-      0.5,  // medium spread radius
-      0.8   // slightly lower threshold to make bright areas glow more*/
-);
+	  const composer = new THREE.EffectComposer(renderer);
+const renderPass = new THREE.RenderPass(scene, camera);
+composer.addPass(renderPass);
 
-// Adjust parameters for glow effect
-const composer = new EffectComposer(renderer);
-composer.addPass(renderScene);
+const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85); 
+bloomPass.threshold = 0.1;
+bloomPass.strength = 1.5; // Glow intensity
+bloomPass.radius = 0.4;   // Glow spread
+/*2.0,  // higher intensity
+0.5,  // medium spread radius
+0.8   // slightly lower threshold to make bright areas glow more*/
 composer.addPass(bloomPass);
+
 	  
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
