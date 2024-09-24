@@ -1370,6 +1370,13 @@ scene.add(cloudMesh2);*/
     //const textureLoader = new THREE.TextureLoader();
     const dayTexture = textureLoader.load('js/Earth_Diffuse.jpg');
     const dayBumpMap = textureLoader.load('//unpkg.com/three-globe/example/img/earth-topology.png');
+// Ensure correct wrapping
+dayTexture.wrapS = THREE.ClampToEdgeWrapping;
+dayTexture.wrapT = THREE.ClampToEdgeWrapping;
+
+// Use appropriate filtering
+dayTexture.minFilter = THREE.LinearFilter;
+dayTexture.magFilter = THREE.LinearFilter;
 
     // Initialize scene, camera, renderer
     //const scene = new THREE.Scene();
@@ -1743,13 +1750,13 @@ const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth
 	  const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 
-// Ensure correct wrapping
+/*// Ensure correct wrapping
 dayTexture.wrapS = THREE.ClampToEdgeWrapping;
 dayTexture.wrapT = THREE.ClampToEdgeWrapping;
 
 // Use appropriate filtering
 dayTexture.minFilter = THREE.LinearFilter;
-dayTexture.magFilter = THREE.LinearFilter;
+dayTexture.magFilter = THREE.LinearFilter;*/
 
 
 	  // Ensure correct wrapping
