@@ -1367,7 +1367,10 @@ scene.add(cloudMesh2);*/
   let globe;
 
   function initGlobeVisualization() {
-    //const textureLoader = new THREE.TextureLoader();
+	  const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+    const textureLoader = new THREE.TextureLoader();
     const dayTexture = textureLoader.load('js/Earth_Diffuse.jpg');
     const dayBumpMap = textureLoader.load('//unpkg.com/three-globe/example/img/earth-topology.png');
 // Ensure correct wrapping
@@ -1389,8 +1392,8 @@ dayTexture.magFilter = THREE.LinearFilter;
 
     // Initialize globe with textures
     globe = new ThreeGlobe()
-      .globeImageUrl(dayTexture)
-      .bumpImageUrl(dayBumpMap);
+      .globeImageUrl('js/Earth_Diffuse.jpg')
+      .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png');
 
     scene.add(globe);
 
