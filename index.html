@@ -1363,102 +1363,89 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 });
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
-	  
-  let globe;
+	
+let globe;
 
-  function initGlobeVisualization() {
-const textureLoader = new THREE.TextureLoader();
-	  
-  const dayTextureUrl = 'js/Earth_Diffuse.jpg';  // Use the URL of the texture
-  const dayBumpMapUrl = '//unpkg.com/three-globe/example/img/earth-topology.png';
+function initGlobeVisualization() {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer();
+  
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-	  const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-	  
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+  camera.position.set(0, 0, 100);  // Set a good camera position
 
-    camera.position.set(0, 0, 100);  // Set a good camera position
+  // Initialize globe with textures
+  globe = new ThreeGlobe()
+    .globeImageUrl('js/Earth_Diffuse.jpg')  // Use the URL of the texture
+    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png');  // Example bump map URL
 
-    // Initialize globe with textures
-    globe = new ThreeGlobe()
-      .globeImageUrl(dayTextureUrl)
-      .bumpImageUrl(dayBumpMapUrl);
+  scene.add(globe);
 
-    scene.add(globe);
-
-	  // Start with the globe centered view
+  // Start with the globe centered view
   panGlobeToRegion({ lat: 0, lon: 0 });
 
-	  // Ensure correct wrapping
-/*dayTextureUrl.wrapS = THREE.ClampToEdgeWrapping;
-dayTextureUrl.wrapT = THREE.ClampToEdgeWrapping;
+  // Load city markers
+  loadCityMarkers(globe);
 
-// Use appropriate filtering
-dayTextureUrl.minFilter = THREE.LinearFilter;
-dayTextureUrl.magFilter = THREE.LinearFilter;*/
+  // Animation loop
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
 
-    // Load city markers
-    loadCityMarkers(globe);
-
-    // Start animation
-    function animate() {
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-    }
-    animate();
-	  // Handle window resize
+  // Handle window resizing
   window.addEventListener('resize', function () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
-  }
+}
 
-  function loadCityMarkers(globe) {
-    fetch('js/cities_xyz.geojson')
-      .then(response => response.json())
-      .then(data => {
-        const markers = data.features.map(city => ({
-          lat: city.geometry.coordinates[1],
-          lon: city.geometry.coordinates[0],
-          cityName: city.properties.name
-        }));
-        globe.pointsData(markers);  // Add markers to the globe
-      });
-  }
+function loadCityMarkers(globe) {
+  fetch('js/cities_xyz.geojson')
+    .then(response => response.json())
+    .then(data => {
+      const markers = data.features.map(city => ({
+        lat: city.geometry.coordinates[1],
+        lon: city.geometry.coordinates[0],
+        cityName: city.properties.name
+      }));
+      globe.pointsData(markers);  // Add markers to the globe
+    });
+}
 
-  function panGlobeToRegion(regionCoordinates) {
+function panGlobeToRegion(regionCoordinates) {
   if (globe) {
-    // Convert lat/lon to 3D coordinates (x, y, z) using THREE.js
     const lat = regionCoordinates.lat;
     const lon = regionCoordinates.lon;
 
     const phi = (90 - lat) * (Math.PI / 180);
     const theta = (lon + 180) * (Math.PI / 180);
 
-    // Calculate x, y, z position based on the spherical coordinates
-    const x = -500 * Math.sin(phi) * Math.cos(theta);
-    const y = 500 * Math.cos(phi);
-    const z = 500 * Math.sin(phi) * Math.sin(theta);
+    // Convert lat/lon to x, y, z spherical coordinates
+    const radius = 500;
+    const x = -radius * Math.sin(phi) * Math.cos(theta);
+    const y = radius * Math.cos(phi);
+    const z = radius * Math.sin(phi) * Math.sin(theta);
 
     camera.position.set(x, y, z);
-    camera.lookAt(globe.position);  // Make sure the camera is looking at the globe's center
+    camera.lookAt(globe.position);  // Make sure the camera is focused on the globe
   } else {
     console.error('Globe is not initialized.');
   }
 }
 
+function performSearch(searchUrl, regionCoordinates) {
+  document.getElementById('airbnbIframe').src = searchUrl;
+  document.getElementById('container').classList.add('split-screen');
+  panGlobeToRegion(regionCoordinates);
+}
 
-  function performSearch(searchUrl, regionCoordinates) {
-    document.getElementById('airbnbIframe').src = searchUrl;
-    document.getElementById('container').classList.add('split-screen');
-    panGlobeToRegion(regionCoordinates);
-  }
-
-  document.getElementById('searchBtn').addEventListener('click', function () {
-	  // Get values from input fields
+// Add an event listener for the search button
+document.getElementById('searchBtn').addEventListener('click', function () {
   const where = document.getElementById('location').value;
   const checkin = document.getElementById('checkin').value;
   const checkout = document.getElementById('checkout').value;
@@ -1466,19 +1453,18 @@ dayTextureUrl.magFilter = THREE.LinearFilter;*/
   const priceMin = document.getElementById('priceMin').value;
   const priceMax = document.getElementById('priceMax').value;
 
-  // Check if the required fields are filled out
   if (!where || !checkin || !checkout || !guests) {
     alert('Please fill out all required fields.');
     return;
   }
-	  
-    // Construct the Airbnb search URL dynamically with the input values
-  const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
-    const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
-    performSearch(searchUrl, regionCoordinates);
-  });
 
-  window.onload = initGlobeVisualization;  // Initialize globe when the page loads
+  const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+  const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
+  performSearch(searchUrl, regionCoordinates);
+});
+
+// Initialize globe when the page loads
+window.onload = initGlobeVisualization;
 
   /*document.getElementById('searchBtn').addEventListener('click', function() {
     const where = document.getElementById('where').value;  // Get destination
