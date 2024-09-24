@@ -1504,7 +1504,13 @@ scene.add(cloudMesh2);*/
     }
 
     // Redirect to the generated Airbnb URL
-    window.location.href = airbnbUrl;
+    //window.location.href = airbnbUrl;
+
+	  // Load the Airbnb search results into the iframe
+  document.getElementById('resultsIframe').src = airbnbUrl;
+
+	  // Collapse the region into detailed markers on the globe
+  displayRegionMarkers(where);
   });
 /*document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
