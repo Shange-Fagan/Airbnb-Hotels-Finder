@@ -1041,7 +1041,7 @@ overflow: hidden;
 <!-- Include Three.js -->
 	<!-- Add three.js and three-globe CDN links -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.126.1/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three-globe@2.24.2"></script>
+  <script src="https://unpkg.com/three-globe"></script>
   <!-- Main JavaScript -->
   <script type="module">
     // JavaScript code will go here
@@ -1927,7 +1927,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 	  
 	atmosphere.scale.set(1, 1, 1);	
 	  
-  /*const material2 = new THREE.MeshPhongMaterial({
+  const material2 = new THREE.MeshPhongMaterial({
   //specular: 0x111111,
   //shininess: 5,
   shininess: 15,
@@ -1938,12 +1938,12 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 normalMap: normalMap,
   blending: THREE.AdditiveBlending,
   /*specular: 0x222222,*/
-  /*specular: new THREE.Color('grey'), // Color of reflection, subtle for realism
-});*/
-	  let globe = new THREE.Mesh(geometry2, material);
+  specular: new THREE.Color('grey'), // Color of reflection, subtle for realism
+});
+	  //let globe = new THREE.Mesh(geometry2, material);
   //let globe2 = new THREE.Mesh(geometry, material2);
   /*scene.add(atmosphere);*/
-  scene.add(globe);
+  //scene.add(globe);
   //scene.add(globe2);*/
 
   // custom globe material
@@ -1982,19 +1982,10 @@ normalMap: normalMap,
  let globe2;  // Declare the globe variable globally so it can be accessed later
 
 function initGlobeVisualization() {
-  const material2 = new THREE.MeshPhongMaterial({
-    shininess: 15,
-    map: dayTexture, 
-    specularMap: specularMap,
-    bumpMap: dayBumpMap,
-    bumpScale: 0.05,
-    normalMap: normalMap,
-    blending: THREE.AdditiveBlending,
-    specular: new THREE.Color('grey'),
-  });
-
-const geometry = new THREE.SphereGeometry(5.099, 32, 32); // Example globe geometry
-  globe2 = new THREE.Mesh(geometry, material2);  // Assign to global globe variable
+  
+globe2 = new ThreeGlobe()
+  .globeImageUrl(dayTexture)
+  .bumpImageUrl(dayBumpMap);
 
   scene.add(globe2);  // Assuming the scene is already initialized
 
