@@ -1293,7 +1293,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
 }
 const earthRadius = 5.1; // Adjust this to match your globe's size
 // Create the atmosphere around the globe
-/*const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.1, 64, 64); // Slightly larger than the globe
+const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.1, 64, 64); // Slightly larger than the globe
 const atmosphereMaterial = new THREE.ShaderMaterial({
     uniforms: {},
     vertexShader: `
@@ -1315,7 +1315,7 @@ const atmosphereMaterial = new THREE.ShaderMaterial({
     transparent: true
 });
 const atmosphere2 = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-scene.add(atmosphere2);*/
+scene.add(atmosphere2);
 
 	  // Create a composer for post-processing
 const renderScene = new RenderPass(scene, camera);
