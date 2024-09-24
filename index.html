@@ -1364,7 +1364,76 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
 	  
+  let globe2;
 
+  function initGlobeVisualization() {
+    const textureLoader = new THREE.TextureLoader();
+    const dayTexture = textureLoader.load('path/to/earth-day-texture.jpg');
+    const dayBumpMap = textureLoader.load('path/to/earth-bump-map.jpg');
+
+    // Initialize scene, camera, renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    camera.position.set(0, 0, 100);  // Set a good camera position
+
+    // Initialize globe with textures
+    globe2 = new ThreeGlobe()
+      .globeImageUrl(dayTexture)
+      .bumpImageUrl(dayBumpMap);
+
+    scene.add(globe2);
+
+    globe2.pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
+
+    // Load city markers
+    loadCityMarkers(globe2);
+
+    // Start animation
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+    animate();
+  }
+
+  function loadCityMarkers(globe) {
+    fetch('js/cities_xyz.geojson')
+      .then(response => response.json())
+      .then(data => {
+        const markers = data.features.map(city => ({
+          lat: city.geometry.coordinates[1],
+          lon: city.geometry.coordinates[0],
+          cityName: city.properties.name
+        }));
+        globe.pointsData(markers);  // Add markers to the globe
+      });
+  }
+
+  function panGlobeToRegion(regionCoordinates) {
+    if (globe2) {
+      globe2.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
+    } else {
+      console.error('Globe is not initialized.');
+    }
+  }
+
+  function performSearch(searchUrl, regionCoordinates) {
+    document.getElementById('airbnbIframe').src = searchUrl;
+    document.getElementById('container').classList.add('split-screen');
+    panGlobeToRegion(regionCoordinates);
+  }
+
+  document.getElementById('searchBtn').addEventListener('click', function () {
+    const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&guests=${guests}&checkout=${checkout}&price_min=${priceMin}&price_max=${priceMax}`;
+    const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
+    performSearch(searchUrl, regionCoordinates);
+  });
+
+  window.onload = initGlobeVisualization;  // Initialize globe when the page loads
 
   /*document.getElementById('searchBtn').addEventListener('click', function() {
     const where = document.getElementById('where').value;  // Get destination
@@ -1957,68 +2026,6 @@ normalMap: normalMap,
       globeMaterial.shininess = 15;
     }
   );
-// Function to perform the region search and split the screen
-    function performSearch(searchUrl, regionCoordinates) {
-      // Update iframe with the Airbnb search URL
-      document.getElementById('airbnbIframe').src = searchUrl;
-
-      // Split the screen by adding the "split-screen" class
-      document.getElementById('container').classList.add('split-screen');
-
-      // Pan the globe to the detected region
-      panGlobeToRegion(regionCoordinates);  // Example function to move the globe camera
-    }
-
-    // Example trigger for performing the search
-    document.getElementById('searchBtn').addEventListener('click', function () {
-      const searchUrl = 'https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&guests=${guests}&checkout=${checkout}&price_min=${priceMin}&price_max=${priceMax}';  // Replace with actual search URL logic
-      const regionCoordinates = { lat: 50, lon: 10 };  // Example: Center of Europe
-      performSearch(searchUrl, regionCoordinates);
-    });
-
-    // Placeholder for globe initialization (if needed)
-    initGlobeVisualization(); // Initialize the globe here
-
- let globe2;  // Declare the globe variable globally so it can be accessed later
-
-function initGlobeVisualization() {
-  
-globe2 = new ThreeGlobe()
-  .globeImageUrl(dayTexture)
-  .bumpImageUrl(dayBumpMap);
-
-  scene.add(globe2);  // Assuming the scene is already initialized
-
-  globe2.pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
-
-  // Load markers
-  loadCityMarkers(globe2);
-}
-
-function panGlobeToRegion(regionCoordinates) {
-  if (globe2) {
-    globe2.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
-  } else {
-    console.error('Globe is not initialized.');
-  }
-}
-
-window.onload = initGlobeVisualization;  // Correctly initialize the globe when the window loads
-
-
-  function loadCityMarkers(globe) {
-    fetch('js/cities_xyz.geojson')
-      .then(response => response.json())
-      .then(data => {
-        const markers = data.features.map(city => ({
-          lat: city.geometry.coordinates[1],
-          lon: city.geometry.coordinates[0],
-          cityName: city.properties.name
-        }));
-        globe2.pointsData(markers);
-      });
-  }
-
   /*setTimeout(() => {
     // wait for scene to be populated (asynchronously)
     var dl = new THREE.DirectionalLight(0xffffff, 1);
