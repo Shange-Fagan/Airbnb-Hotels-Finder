@@ -1317,7 +1317,37 @@ const atmosphereMaterial = new THREE.ShaderMaterial({
 });
 const atmosphere2 = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
 scene.add(atmosphere2);*/
-	  const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.02, 64, 64);
+	  // Vertex Shader
+const vertexShader = `
+  varying vec3 vVertexWorldPosition;
+  varying vec3 vVertexNormal;
+  varying vec3 vViewVector;
+
+  void main() {
+    vVertexNormal = normalize(normalMatrix * normal);
+    vVertexWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
+    vViewVector = normalize(cameraPosition - vVertexWorldPosition);
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+// Fragment Shader
+const fragmentShader = `
+  uniform vec3 glowColor;
+  uniform float c;
+  uniform float p;
+  varying vec3 vViewVector;
+  varying vec3 vVertexNormal;
+
+  void main() {
+    float intensity = pow(c - dot(vVertexNormal, vViewVector), p);
+    gl_FragColor = vec4(glowColor * intensity, 1.0);
+  }
+`;
+
+// Create the atmosphere (glow effect)
+const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.02, 64, 64);
 const atmosphereMaterial = new THREE.ShaderMaterial({
   uniforms: {
     'c': { type: 'f', value: 0.8 },
