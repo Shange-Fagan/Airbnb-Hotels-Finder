@@ -1150,7 +1150,7 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
 
 	  });
 		  
-	// Example hover effect that changes the marker on the globe
+	/*// Example hover effect that changes the marker on the globe
         const listings = document.querySelectorAll('.listing');  // Assuming .listing is a class for each Airbnb
         listings.forEach((listing, index) => {
             listing.addEventListener('mouseover', () => {
@@ -1179,7 +1179,7 @@ window.addEventListener('message', (event) => {
     unhighlightMarker(markerIndex);  // Function to unhighlight a marker
   }
 });
-
+*/
 
   const selectedRegion = document.getElementById('regionSelect').value;
 
@@ -1343,7 +1343,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
 
 //const textureLoader = new THREE.TextureLoader();
 
-	  // Set up marker datasets
+	 /* // Set up marker datasets
 const markersData = {
     africa: [
         { id: 1, priceCategory: 'cheapest', position: [5.1, 1.2, 1.5], iframeSrc: 'URL_FOR_AIRBNB_1' },
@@ -1445,7 +1445,7 @@ document.getElementById('priceFilter').addEventListener('change', function() {
 // Initially show world view with generic markers
 handleRegionSelection('world');
 
-	  
+	  */
 	
 	  /*const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
@@ -1457,23 +1457,30 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
 	  
-    		document.getElementById('searchBtn').addEventListener('click', function() {
-  const where = document.getElementById('where').value;  // Get destination
-    const when = document.getElementById('date').value;  // Get date
-    const guests = document.getElementById('guests').value;  // Get guests count
+    		
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    const where = document.getElementById('where').value;  // Get destination
+    const when = document.getElementById('date').value;  // Get check-in date
+    const guests = document.getElementById('guests').value;  // Get number of guests
+    const priceMax = document.getElementById('price_max').value;  // Get max price
 
-    // Ensure that all required fields are filled
+    // Ensure that required fields are filled
     if (!where || !when || !guests) {
-      alert('Please fill in all fields before searching.');
+      alert('Please fill in all required fields before searching.');
       return;
     }
 
-    // Generate Airbnb search URL based on the inputs
-    const airbnbUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
+    // Generate Airbnb search URL
+    let airbnbUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
+
+    // Add maximum price to the URL if provided
+    if (priceMax) {
+      airbnbUrl += `&price_max=${priceMax}`;
+    }
 
     // Redirect to the generated Airbnb URL
     window.location.href = airbnbUrl;
-});
+  });
 
 /*document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
