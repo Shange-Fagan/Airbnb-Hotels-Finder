@@ -1315,6 +1315,22 @@ const atmosphereMaterial = new THREE.ShaderMaterial({
 });
 const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
 scene.add(atmosphere);
+
+	  // Create a composer for post-processing
+const renderScene = new RenderPass(scene, camera);
+
+const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.5, // Strength of the glow
+    0.4, // Radius of the glow
+    0.85 // Threshold for brightness
+);
+
+// Adjust parameters for glow effect
+const composer = new EffectComposer(renderer);
+composer.addPass(renderScene);
+composer.addPass(bloomPass);
+	  
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
@@ -2752,7 +2768,10 @@ function animate() {
     
     // Update tween animations
     TWEEN.update(); 
-
+	
+    // Use composer for the final rendering with bloom effect
+    composer.render();
+	
     // Update time uniform for any shaders if needed
     globalUniforms.time.value = clock.getElapsedTime();
 
