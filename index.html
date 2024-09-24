@@ -1392,12 +1392,12 @@ const renderer = new THREE.WebGLRenderer();
   panGlobeToRegion({ lat: 0, lon: 0 });
 
 	  // Ensure correct wrapping
-dayTexture.wrapS = THREE.ClampToEdgeWrapping;
-dayTexture.wrapT = THREE.ClampToEdgeWrapping;
+dayTextureUrl.wrapS = THREE.ClampToEdgeWrapping;
+dayTextureUrl.wrapT = THREE.ClampToEdgeWrapping;
 
 // Use appropriate filtering
-dayTexture.minFilter = THREE.LinearFilter;
-dayTexture.magFilter = THREE.LinearFilter;
+dayTextureUrl.minFilter = THREE.LinearFilter;
+dayTextureUrl.magFilter = THREE.LinearFilter;
 
     // Load city markers
     loadCityMarkers(globe);
@@ -2045,7 +2045,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   //specular: 0x111111,
   //shininess: 5,
   shininess: 15,
-  map: dayTexture, // Start with day texture
+  //map: dayTexture, // Start with day texture
   specularMap: specularMap,
   bumpMap: dayBumpMap, // Start with day bump map
   bumpScale: 0.05,
