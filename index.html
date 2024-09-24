@@ -1927,7 +1927,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 	  
 	atmosphere.scale.set(1, 1, 1);	
 	  
-  const material2 = new THREE.MeshPhongMaterial({
+  /*const material2 = new THREE.MeshPhongMaterial({
   //specular: 0x111111,
   //shininess: 5,
   shininess: 15,
@@ -1938,13 +1938,13 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
 normalMap: normalMap,
   blending: THREE.AdditiveBlending,
   /*specular: 0x222222,*/
-  specular: new THREE.Color('grey'), // Color of reflection, subtle for realism
-});
+  /*specular: new THREE.Color('grey'), // Color of reflection, subtle for realism
+});*/
 	  let globe = new THREE.Mesh(geometry2, material);
-  let globe2 = new THREE.Mesh(geometry, material2);
+  //let globe2 = new THREE.Mesh(geometry, material2);
   /*scene.add(atmosphere);*/
-  //scene.add(globe);
-  //scene.add(globe2);
+  scene.add(globe);
+  //scene.add(globe2);*/
 
   // custom globe material
   const globeMaterial = globe.material;
@@ -1957,6 +1957,76 @@ normalMap: normalMap,
       globeMaterial.shininess = 15;
     }
   );
+// Function to perform the region search and split the screen
+    function performSearch(searchUrl, regionCoordinates) {
+      // Update iframe with the Airbnb search URL
+      document.getElementById('airbnbIframe').src = searchUrl;
+
+      // Split the screen by adding the "split-screen" class
+      document.getElementById('container').classList.add('split-screen');
+
+      // Pan the globe to the detected region
+      panGlobeToRegion(regionCoordinates);  // Example function to move the globe camera
+    }
+
+    // Example trigger for performing the search
+    document.getElementById('searchBtn').addEventListener('click', function () {
+      const searchUrl = 'https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&guests=${guests}&checkout=${checkout}&price_min=${priceMin}&price_max=${priceMax}';  // Replace with actual search URL logic
+      const regionCoordinates = { lat: 50, lon: 10 };  // Example: Center of Europe
+      performSearch(searchUrl, regionCoordinates);
+    });
+
+    // Placeholder for globe initialization (if needed)
+    initGlobeVisualization(); // Initialize the globe here
+
+ let globe2;  // Declare the globe variable globally so it can be accessed later
+
+function initGlobeVisualization() {
+  const material2 = new THREE.MeshPhongMaterial({
+    shininess: 15,
+    map: dayTexture, 
+    specularMap: specularMap,
+    bumpMap: dayBumpMap,
+    bumpScale: 0.05,
+    normalMap: normalMap,
+    blending: THREE.AdditiveBlending,
+    specular: new THREE.Color('grey'),
+  });
+
+
+  globe2 = new THREE.Mesh(geometry, material2);  // Assign to global globe variable
+
+  scene.add(globe2);  // Assuming the scene is already initialized
+
+  globe2.pointOfView({ lat: 0, lng: 0 }, 1000);  // Full view
+
+  // Load markers
+  loadCityMarkers(globe2);
+}
+
+function panGlobeToRegion(regionCoordinates) {
+  if (globe2) {
+    globe2.pointOfView({ lat: regionCoordinates.lat, lng: regionCoordinates.lon }, 1000);  // Pan to region
+  } else {
+    console.error('Globe is not initialized.');
+  }
+}
+
+window.onload = initGlobeVisualization;  // Correctly initialize the globe when the window loads
+
+
+  function loadCityMarkers(globe) {
+    fetch('js/cities_xyz.geojson')
+      .then(response => response.json())
+      .then(data => {
+        const markers = data.features.map(city => ({
+          lat: city.geometry.coordinates[1],
+          lon: city.geometry.coordinates[0],
+          cityName: city.properties.name
+        }));
+        globe2.pointsData(markers);
+      });
+  }
 
   /*setTimeout(() => {
     // wait for scene to be populated (asynchronously)
