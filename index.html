@@ -915,6 +915,7 @@ overflow: hidden;
   <h2>Welcome to Airbnb Assistant</h2>
   <p>Select your region</p>
   <select id="regionSelect">
+    <option value="world">World</option>
     <option value="africa">Africa</option>
     <option value="europe">Europe</option>
     <!-- more regions -->
@@ -1150,6 +1151,7 @@ overflow: hidden;
       let regionSelect = document.createElement('select');
       regionSelect.id = 'regionSelectDropdown';
       regionSelect.innerHTML = `
+        <option value="world">World</option>
         <option value="africa">Africa</option>
         <option value="europe">Europe</option>
         <option value="america">America</option>
@@ -1188,6 +1190,10 @@ function stopAllTweens() {
     camera.updateProjectionMatrix(); // Apply the reset zoom value
 
     switch (region) {
+	case 'world':
+            position = { x: 5.79, y: 0, z: 1.74 };
+            zoomLevel = -1.5; // Adjust zoom level as needed
+            break;
         case 'africa':
             position = { x: 5.79, y: 0, z: 1.74 };
             zoomLevel = 1.5; // Adjust zoom level as needed
