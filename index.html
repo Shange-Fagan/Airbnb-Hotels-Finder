@@ -1607,8 +1607,10 @@ dayTexture.wrapS = THREE.ClampToEdgeWrapping;
 dayTexture.wrapT = THREE.ClampToEdgeWrapping;
 
 // Use appropriate filtering
-dayTexture.minFilter = THREE.LinearFilter;
+dayTexture.minFilter = THREE.LinearFilter; // Smooths texture when zoomed
 dayTexture.magFilter = THREE.LinearFilter;
+dayTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases texture quality at glancing angles
+
 
 	  // Ensure correct wrapping
 nightTexture.wrapS = THREE.ClampToEdgeWrapping;
@@ -1617,6 +1619,8 @@ nightTexture.wrapT = THREE.ClampToEdgeWrapping;
 // Use appropriate filtering
 nightTexture.minFilter = THREE.LinearFilter;
 nightTexture.magFilter = THREE.LinearFilter;
+nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases texture quality at glancing angles
+
   
 	  const shaderMaterial2 = new THREE.ShaderMaterial({
   uniforms: {
