@@ -889,7 +889,35 @@ overflow: hidden;
         padding: 2.5px 0;
       }
     }
+/* Divide the screen into two sections */
+    #container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+    /* Left section for the iframe */
+    #iframe-container {
+      width: 50%;
+      height: 100%;
+    }
+    /* Right section for the 3D globe */
+    #globe-container {
+      width: 50%;
+      height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+	  /* Split screen layout after search */
+    .split-screen #globe-container {
+      width: 50%;
+    }
 
+    .split-screen #iframe-container {
+      display: block;
+    }
 
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
