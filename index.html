@@ -653,7 +653,7 @@ iframe::-webkit-scrollbar {
 	  #newsButton {
     position: absolute;
       left: 40px;
-      top: 70px;
+      top: 200px;
       padding: 4.5px 9.5px;
       font-size: 12px;
       /*background-color: rgba(255, 255, 255, 0.2);*/
@@ -764,7 +764,7 @@ background-size: 10px; *//* Adjust this as needed */
 	  select {
   position: absolute;
   left: 36px;
-  top: 100px;
+  top: 250px;
   padding: 4.5px 9.5px; /* Add padding for a better look */
   font-size: 12px; /* Increase the font size for better readability */
   color: rgba(255, 255, 255, 0.75); /* Keep the light gray text color */
@@ -779,7 +779,6 @@ background-size: 10px; *//* Adjust this as needed */
   background-size: 12px; /* Adjust the size of the arrow */
   cursor: pointer;
   z-index: 10000;
-  display: none;
 }
 	  /* Optional: Ensures the arrow is moved down without changing the default */
 select::-ms-expand {
@@ -2666,7 +2665,7 @@ if (window.innerWidth <= 768) {
   });
   
   markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
-  scene.add(markers);
+  //scene.add(markers);
     // Labels Container
   const labelsContainer = document.getElementById('labels-container');
   
