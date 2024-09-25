@@ -893,12 +893,11 @@ overflow: hidden;
       }
     }
 /* Divide the screen into two sections */
-#container {
-	 position: relative;  /* Ensure container holds positioning for children */
-  display: flex;
-  height: 100vh;
+/*#container {
+	 position: relative;*/  /* Ensure container holds positioning for children */
+  /*height: 100vh;
   width: 100vw;
-}
+}*/
 
 /* Fullscreen globe when the page loads */
 #globe-container {
@@ -942,7 +941,6 @@ iframe {
 </head>
 <body>
 <!-- Container that holds both the iframe and the globe -->
-  <div id="container">
     <!-- Globe display -->
     <div id="globe-container"></div>
 
@@ -950,7 +948,7 @@ iframe {
     <div id="iframe-container">
       <iframe id="airbnbIframe" src="" style="width: 100%; height: 50%; display: none;"></iframe>
     </div>
-  </div>
+  
   
   <!-- Info Section -->
   <div id="info">Click the markers to show the label</div>
