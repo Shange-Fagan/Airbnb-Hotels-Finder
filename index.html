@@ -1943,7 +1943,7 @@ function initGlobe() {
 function loadGenericMarkers() {
   genericMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
-    const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);  // Flat marker 
+    const markerGeometry = new THREE.PlaneGeometry(0.1, 0.1);  // Flat marker 
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });  // Red color
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
@@ -1951,28 +1951,30 @@ function loadGenericMarkers() {
     globe2.add(markerMesh);
   });
 }
-
-// Function to load detailed markers for a specific region
-function loadDetailedMarkers(regionCoordinates) {
-	// Clear existing markers if needed
-  clearExistingMarkers();
-  const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Get detailed markers
-  detailedMarkers.forEach(marker => {
-    const [x, y, z] = marker.position;
-    const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);  // Flat marker
-    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide }); // Green for detailed markers
-    const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
-    markerMesh.position.set(x, y, z);
-    globe2.add(markerMesh);
-  });
-}
-	  // Helper function to clear existing markers
+	  // Function to clear existing markers
 function clearExistingMarkers() {
   const markers = globe2.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
   markers.forEach(marker => {
     globe2.remove(marker);  // Remove the marker
   });
 }
+
+// Function to load detailed markers for a specific region
+function loadDetailedMarkers(regionCoordinates) {
+	// Clear existing markers if needed
+  clearExistingMarkers();
+
+  const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Get detailed markers
+  detailedMarkers.forEach(marker => {
+    const [x, y, z] = marker.position;
+    const markerGeometry = new THREE.PlaneGeometry(0.1, 0.1);  // Flat marker
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide }); // Green for detailed markers
+    const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
+    markerMesh.position.set(x, y, z);
+    globe2.add(markerMesh);
+  });
+}
+	
 
 // Example: Get detailed markers for a region (dummy data)
 function getDetailedMarkersForRegion(regionCoordinates) {
@@ -2005,7 +2007,19 @@ function latLonToVector3(lat, lon, radius) {
   const z = radius * Math.sin(phi) * Math.sin(theta);
   return { x, y, z };
 }
-
+// Placeholder for getRegionCoordinates function
+function getRegionCoordinates(region) {
+  const regions = {
+    africa: { lat: 10, lon: 20 },
+    europe: { lat: 50, lon: 10 },
+    america: { lat: 40, lon: -100 },
+    'south america': { lat: -10, lon: -55 },
+    carribbean: { lat: 20, lon: -75 },
+    asia: { lat: 30, lon: 100 },
+    world: { lat: 0, lon: 0 },
+  };
+  return regions[region] || { lat: 0, lon: 0 };  // Default to world
+}
 // Animation loop
 //function animate() {
   //requestAnimationFrame(animate);
