@@ -1440,7 +1440,7 @@ const nightmarkerMaterial = new THREE.Color('#FE8C02');
 	  //const daymarkerMaterial = new THREE.Color('#00FF00');
 //const nightmarkerMaterial = new THREE.Color('#FFFFFF');
 
-/*const markerMaterial = new THREE.MeshBasicMaterial({
+const markerMaterial2 = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
@@ -1476,7 +1476,7 @@ const nightmarkerMaterial = new THREE.Color('#FE8C02');
       );
     },
   });
-  markerMaterial.defines = { USE_UV: '' };*/
+  markerMaterial.defines = { USE_UV: '' };
 
     // Track loaded textures
 let texturesLoaded = 0;
@@ -2804,7 +2804,7 @@ if (window.innerWidth <= 768) {
   
   // Creating Markers
   const markerCount = markersData.length;
-  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial2, markerCount);
   
   const dummy = new THREE.Object3D();
   const phaseArray = [];
