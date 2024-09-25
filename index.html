@@ -951,9 +951,12 @@ overflow: hidden;
   </footer>
 
 <div id="header">
-  <input type="text" id="where" placeholder="Search destinations">
-  <input type="date" id="Select dates">
-  <input type="number" id="guests" placeholder="Add guests">
+  <input type="text" id="where" name="destination" placeholder="Search destinations">
+  <input type="date" id="checkin" name="checkin" placeholder="Check-in date">
+  <input type="date" id="checkout" name="checkout" placeholder="Check-out date">
+  <input type="number" id="guests" name="guests" placeholder="Add guests">
+  <input type="number" id="price_min" name="price_min" placeholder="Min price (optional)">
+  <input type="number" id="price_max" name="price_max" placeholder="Max price (optional)">
   <button id="searchBtn">Search</button>
 </div>
 	
