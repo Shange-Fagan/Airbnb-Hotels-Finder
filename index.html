@@ -1964,7 +1964,7 @@ function initGlobe() {
 function loadGenericMarkers() {
   genericMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
-    const markerGeometry = new THREE.SphereGeometry(0.1, 8, 8);  // Small marker size
+    const markerGeometry = new THREE.PlaneGeometry(0.1, 8, 8);  // Small marker size
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });  // Red color
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
@@ -1978,7 +1978,7 @@ function loadDetailedMarkers(regionCoordinates) {
   const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Get detailed markers
   detailedMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
-    const markerGeometry = new THREE.SphereGeometry(0.1, 8, 8);  // Adjust size
+    const markerGeometry = new THREE.PlaneGeometry(0.1, 8, 8);  // Adjust size
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });  // Green for detailed markers
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.position.set(x, y, z);
