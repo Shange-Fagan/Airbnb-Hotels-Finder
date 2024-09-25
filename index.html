@@ -2027,7 +2027,7 @@ markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Floa
 
 markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
 // Add markers to the scene
-globe2.add(markerMesh);
+  scene.add(markerMesh);
   };
 	  // Function to clear existing markers
 function clearExistingMarkers() {
