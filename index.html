@@ -2106,20 +2106,39 @@ function panToRegion(region) {
   stopAllTweens();
   console.log(`Panning to x:${position.x}, y:${position.y}, z:${position.z}, zoom:${zoomLevel}`);  // Debug
   animateCameraPan(position.x, position.y, position.z, zoomLevel);
+	
+	  // Stop auto-rotation after panning
+    controls.autoRotate = false;
+
+    // Animate camera panning and zooming
+    animateCameraPan(position.x, position.y, position.z, zoomLevel);
 }
 
 function animateCameraPan(x, y, z, zoomLevel) {
-  new TWEEN.Tween(camera.position)
-    .to({ x, y, z }, 2000)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .onUpdate(() => camera.lookAt(0, 0, 0))
-    .start();
+    new TWEEN.Tween(camera.position)
+        .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function () {
+            camera.lookAt(0, 0, 0);
+        })
+        .start();
 
-  new TWEEN.Tween(camera)
-    .to({ zoom: zoomLevel }, 2000)
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .onUpdate(() => camera.updateProjectionMatrix())
-    .start();
+    // Add zooming to the pan
+    new TWEEN.Tween(camera)
+        .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function () {
+            camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
+        })
+        .onComplete(function () {
+            // After zoom and panning complete, restart slow auto-rotation
+            setTimeout(function () {
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 0.25; // Slow rotation speed
+            }, 500);
+        })
+        .start();
+
 }
 initGlobe();
 console.log('Globe:', globe2);
