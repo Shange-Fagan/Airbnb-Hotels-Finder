@@ -1960,32 +1960,8 @@ function loadGenericMarkers() {
     globe2.add(markerMesh);
   });
 }
-
-// Load city markers from GeoJSON and add them to the globe
-function loadCityMarkers(globe2) {
-  fetch('js/cities_xyz.geojson')
-    .then(response => response.json())
-    .then(data => {
-      data.features.forEach(city => {
-        const lat = city.geometry.coordinates[1];
-        const lon = city.geometry.coordinates[0];
-
-        // Convert lat/lon to 3D coordinates on the sphere
-        const { x, y, z } = latLonToVector3(lat, lon, 5);  // Radius is 5
-
-        // Create a marker (small sphere)
-        const markerGeometry = new THREE.SphereGeometry(0.05, 8, 8);  // Adjust size of marker
-        const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
-
-        // Position the marker
-        marker.position.set(x, y, z);
-
-        // Add marker to the globe
-        globe2.add(marker);
-      });
-    });
-}
+// Initialize the globe when the page loads
+window.onload = initGlobe;
 
 // Convert latitude and longitude to 3D vector coordinates on the globe
 function latLonToVector3(lat, lon, radius) {
@@ -2049,9 +2025,6 @@ document.getElementById('searchBtn').addEventListener('click', function () {
   const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
   performSearch(searchUrl, regionCoordinates);
 });
-
-// Initialize the globe when the page loads
-window.onload = initGlobe;
 
 
   // custom globe material
