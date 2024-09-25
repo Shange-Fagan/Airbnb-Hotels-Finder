@@ -1440,7 +1440,7 @@ const nightmarkerMaterial = new THREE.Color('#FE8C02');
 	  //const daymarkerMaterial = new THREE.Color('#00FF00');
 //const nightmarkerMaterial = new THREE.Color('#FFFFFF');
 
-const markerMaterial = new THREE.MeshBasicMaterial({
+/*const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
     onBeforeCompile: (shader) => {
       shader.uniforms.time = globalUniforms.time;
@@ -1476,8 +1476,7 @@ const markerMaterial = new THREE.MeshBasicMaterial({
       );
     },
   });
-  markerMaterial.defines = { USE_UV: '' };
-	  
+  markerMaterial.defines = { USE_UV: '' };*/
 
     // Track loaded textures
 let texturesLoaded = 0;
@@ -1941,16 +1940,95 @@ function initGlobe() {
 }
 // Function to load generic markers
 function loadGenericMarkers() {
-  genericMarkers.forEach(marker => {
-    const [x, y, z] = marker.position;
-    const markerGeometry = new THREE.PlaneGeometry(0.1, 0.1);  // Flat marker 
-    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });  // Red color
-    const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
-    markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
-    markerMesh.position.set(x, y, z);
-    globe2.add(markerMesh);
-  });
+
+    // Global uniforms, including time for animations
+
+// Marker material with custom shader for ripple effect
+const markerMaterial = new THREE.MeshBasicMaterial({
+  color: daymarkerMaterial, // You can define this color
+  onBeforeCompile: (shader) => {
+    // Add custom uniform for time
+    shader.uniforms.time = globalUniforms.time;
+
+    // Modify vertex shader to include the phase attribute
+    shader.vertexShader = `
+      attribute float phase;
+      varying float vPhase;
+      ${shader.vertexShader}
+    `.replace(
+      `#include <begin_vertex>`,
+      `#include <begin_vertex>
+        vPhase = phase; // de-synch of ripples
+      `
+    );
+
+    // Modify fragment shader to create ripple effects based on time
+    shader.fragmentShader = `
+      uniform float time;
+      varying float vPhase;
+      ${shader.fragmentShader}
+    `.replace(
+      `vec4 diffuseColor = vec4( diffuse, opacity );`,
+      `
+      vec2 lUv = (vUv - 0.5) * 2.;
+      float val = 0.;
+      float lenUv = length(lUv);
+      val = max(val, 1. - step(0.25, lenUv)); // central circle
+      val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
+      float tShift = fract(time * 0.5 + vPhase);
+      val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
+      if (val < 0.5) discard;
+
+      vec4 diffuseColor = vec4( diffuse, opacity );`
+    );
+  },
+});
 }
+// Define UV usage for the marker material
+markerMaterial.defines = { USE_UV: '' };
+
+// Marker geometry (planar markers with custom shader)
+const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2); // Adjust size as needed
+
+// Create the instanced mesh for markers
+const markerCount = genericMarkers.length;
+const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+
+// Dummy object for setting transformations per instance
+const dummy = new THREE.Object3D();
+
+// Add phase array for random ripple timing per marker
+const phaseArray = [];
+
+// Loop through markers and set position/rotation/scale for each instance
+genericMarkers.forEach((marker, index) => {
+  const [x, y, z] = marker.position;
+
+  // Set position using spherical coordinates
+  dummy.position.set(x, y, z);
+  
+  // Make the marker face outward from the globe (normal vector)
+  dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(5)); // Assuming radius 5 for the globe
+
+  // Apply the transformation to the dummy
+  dummy.updateMatrix();
+
+  // Set matrix for the instanced mesh
+  markerMesh.setMatrixAt(index, dummy.matrix);
+
+  // Assign a random phase for ripple timing
+  phaseArray.push(Math.random());
+});
+
+// Add phase attribute to the geometry
+markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
+
+markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
+// Add markers to the scene
+globe2.add(markerMesh);
+  };
 	  // Function to clear existing markers
 function clearExistingMarkers() {
   const markers = globe2.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
