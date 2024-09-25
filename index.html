@@ -2097,6 +2097,8 @@ function panToRegion(region) {
   let position, zoomLevel;
   camera.zoom = 1;  // Reset zoom
 
+  console.log(`Selected region: ${region}`);  // Debug
+	
   switch (region) {
     case 'africa': position = { x: 12.0, y: 0, z: 1.74 }; zoomLevel = 1.5; break;
     case 'europe': position = { x: 3.5, y: 2.91, z: 0.55 }; zoomLevel = 2.0; break;
