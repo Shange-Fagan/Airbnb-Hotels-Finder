@@ -1888,6 +1888,27 @@ normalMap: normalMap,
   scene.add(globe);
   //scene.add(globe2);
 	  let globe2;
+	  let globe, scene, camera, renderer, controls;
+
+const genericMarkers = [
+  {
+    // Africa
+    id: 1,
+    position: [5.1, 1.2, 1.5],
+  },
+  {
+    // Europe
+    id: 2,
+    position: [5.1, 0.7, 1.8],
+  },
+  {
+    // America
+    id: 3,
+    position: [5.1, 0.9, 0],
+  },
+  // ... Add other generic markers here (Middle East, Asia, etc.)
+];
+
 
 // Initialize custom globe
 function initGlobe() {
@@ -1909,6 +1930,8 @@ function initGlobe() {
   globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
 
+	// Load and display generic markers
+  loadGenericMarkers();
   // Add orbit controls for camera movement
   //controls = new THREE.OrbitControls(camera, renderer.domElement);
   //controls.enableZoom = true;
@@ -1917,7 +1940,12 @@ function initGlobe() {
   //animate();
 
   // Load and display markers from the GeoJSON file
-  loadCityMarkers(globe2);
+  //loadCityMarkers(globe2);
+	window.addEventListener('resize', function() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 }
 
 // Load city markers from GeoJSON and add them to the globe
