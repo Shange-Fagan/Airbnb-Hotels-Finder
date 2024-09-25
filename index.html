@@ -1198,7 +1198,7 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
   panToRegion(selectedRegion);
 });
 });*/
-	  document.addEventListener("DOMContentLoaded", function() {
+	    document.addEventListener("DOMContentLoaded", function() {
 
   // Add event listener to the submit button
   document.getElementById('submitRegion').addEventListener('click', function() {
@@ -1221,7 +1221,7 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
   });
 });
 
-   // Always visible region select button
+ /*  // Always visible region select button
   document.getElementById('regionSelectBtn').style.display = 'block';
 
   document.getElementById('regionSelectBtn').addEventListener('click', function() {
@@ -1335,7 +1335,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
             }, 500);
         })
         .start();
-}
+}*/
 const earthRadius = 5.1; // Adjust this to match your globe's size
 const textureLoader = new THREE.TextureLoader();
 
@@ -1888,145 +1888,95 @@ normalMap: normalMap,
   /*scene.add(atmosphere);*/
   scene.add(globe);
   //scene.add(globe2);
-	  let globe2;
+
+let globe2;
 
 const genericMarkers = [
-  {
-    // Africa
-    id: 1,
-    position: [5.1, 1.2, 1.5],
-  },
-  {
-    // Europe
-    id: 2,
-    position: [5.1, 0.7, 1.8],
-  },
-  {
-    // America
-    id: 3,
-    position: [5.1, 0.9, 0],
-  },
-   // ... Add other generic markers here (Middle East, Asia, etc.)
-  {
-    // South America
-    id: 4,
-    position: [5.1, 1.6, 0.4],
-  },
-  {
-    // Middle East
-    id: 5,
-    position: [5.1, 1, 2.3],
-  },
-  {
-    // Asia
-    id: 6,
-    position: [5.1, 0.9, 3],
-  },
-  {
-    // Japan
-    id: 7,
-    position: [5.1, 0.9, 4],
-  },
-  {
-    // Carribbean
-    id: 8,
-    position: [5.1, 1.2, 0.2],
-  },
-  {
-    // UK
-    id: 3,
-    position: [5.1, 0.6, 1.45],
-  },
+  { id: 1, position: [5.1, 1.2, 1.5], region: 'africa' },
+  { id: 2, position: [5.1, 0.7, 1.8], region: 'europe' },
+  { id: 3, position: [5.1, 0.9, 0], region: 'america' },
+  { id: 4, position: [5.1, 1.6, 0.4], region: 'south america' },
+  { id: 5, position: [5.1, 1, 2.3], region: 'middle east' },
+  { id: 6, position: [5.1, 0.9, 3], region: 'asia' },
+  { id: 7, position: [5.1, 0.9, 4], region: 'japan' },
+  { id: 8, position: [5.1, 1.2, 0.2], region: 'carribbean' },
+  { id: 9, position: [5.1, 0.6, 1.45], region: 'uk' },
 ];
 
-
-// Initialize custom globe
+// Initialize the globe and markers
 function initGlobe() {
   //scene = new THREE.Scene();
   //camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-  //camera.position.set(0, 0, 20);  // Adjust camera distance as needed
+  //camera.position.set(0, 0, 20); // Adjust camera distance as needed
 
   //renderer = new THREE.WebGLRenderer({ antialias: true });
-  //renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globe-container').appendChild(renderer.domElement);
 
+  //controls = new THREE.OrbitControls(camera, renderer.domElement);
+  //controls.enableZoom = true;
+  //controls.autoRotate = true;
+  //controls.autoRotateSpeed = 0.25; // Slow auto-rotation
+
   // Create globe geometry and material
-  const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
+  //const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
   //const textureLoader = new THREE.TextureLoader();
-  const globeMaterial = new THREE.MeshBasicMaterial({
-    map: textureLoader.load('js/Earth_Diffuse.jpg')  // Replace with your texture file path
-  });
+  //const globeMaterial = new THREE.MeshBasicMaterial({
+    //map: textureLoader.load('js/Earth_Diffuse.jpg'),
+  //});
 
   globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
 
-	// Load and display generic markers
+  // Load and display generic markers
   loadGenericMarkers();
-  // Add orbit controls for camera movement
-  //controls = new THREE.OrbitControls(camera, renderer.domElement);
-  //controls.enableZoom = true;
 
   // Start the animation loop
-  //animate();
+  animate();
 
-  // Load and display markers from the GeoJSON file
-  //loadCityMarkers(globe2);
-	window.addEventListener('resize', function() {
+  // Handle window resize
+  window.addEventListener('resize', function () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 }
-	  // Function to load generic markers
+
+// Function to load generic markers
 function loadGenericMarkers() {
   genericMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
     const markerGeometry = new THREE.SphereGeometry(0.1, 8, 8);  // Small marker size
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });  // Red color
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
-
-    // Position marker on the globe
+    markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
     markerMesh.position.set(x, y, z);
     globe2.add(markerMesh);
   });
 }
-	  
-// Initialize the globe when the page loads
-window.onload = initGlobe;
-	  
+
 // Function to load detailed markers for a specific region
 function loadDetailedMarkers(regionCoordinates) {
   const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Get detailed markers
-
   detailedMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
     const markerGeometry = new THREE.SphereGeometry(0.1, 8, 8);  // Adjust size
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });  // Green for detailed markers
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
-
-    // Position detailed marker on the globe
     markerMesh.position.set(x, y, z);
-    globe2.add(markerMesh);  // Add to the existing globe
+    globe2.add(markerMesh);
   });
 }
 
 // Example: Get detailed markers for a region (dummy data)
 function getDetailedMarkersForRegion(regionCoordinates) {
-  // Here, you would fetch or calculate more detailed markers based on the region
-  // For simplicity, we're returning new marker positions in the same region.
   return [
-    {
-      id: 101,
-      position: [regionCoordinates.lat + 0.1, regionCoordinates.lon + 0.1, 1.5],
-    },
-    {
-      id: 102,
-      position: [regionCoordinates.lat + 0.2, regionCoordinates.lon + 0.2, 1.8],
-    },
+    { id: 101, position: [regionCoordinates.lat + 0.1, regionCoordinates.lon + 0.1, 1.5] },
+    { id: 102, position: [regionCoordinates.lat + 0.2, regionCoordinates.lon + 0.2, 1.8] },
   ];
 }
 
-// Pan globe and load detailed markers on search
+// Pan globe to a region
 function panGlobeToRegion(regionCoordinates) {
   if (camera && controls) {
     const { x, y, z } = latLonToVector3(regionCoordinates.lat, regionCoordinates.lon, 20);
@@ -2040,34 +1990,27 @@ function panGlobeToRegion(regionCoordinates) {
   }
 }
 
-// Convert latitude and longitude to 3D vector coordinates on the globe
+// Convert latitude and longitude to 3D vector coordinates
 function latLonToVector3(lat, lon, radius) {
   const phi = (90 - lat) * (Math.PI / 180);
   const theta = (lon + 180) * (Math.PI / 180);
-
   const x = -(radius * Math.sin(phi) * Math.cos(theta));
   const y = radius * Math.cos(phi);
   const z = radius * Math.sin(phi) * Math.sin(theta);
-
   return { x, y, z };
 }
 
 // Animation loop
-//function animate() {
-  //requestAnimationFrame(animate);
-  //controls.update();
-  //renderer.render(scene, camera);
-//}
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
 
 // Perform search and pan the globe
 function performSearch(searchUrl, regionCoordinates) {
-  // Update iframe with the Airbnb search URL
   document.getElementById('airbnbIframe').src = searchUrl;
-  
-  // Show both the iframe and the globe by adding the 'split-screen' class
   document.getElementById('container').classList.add('split-screen');
-  
-  // Pan the globe to the selected region
   panGlobeToRegion(regionCoordinates);
 }
 
@@ -2080,18 +2023,73 @@ document.getElementById('searchBtn').addEventListener('click', function () {
   const priceMin = document.getElementById('price_min').value;
   const priceMax = document.getElementById('price_max').value;
 
-  // Ensure required fields are filled
   if (!where || !checkin || !checkout || !guests) {
     alert('Please fill out all required fields.');
     return;
   }
 
-  // Construct the Airbnb search URL dynamically with the input values
   const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
   const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
   performSearch(searchUrl, regionCoordinates);
 });
 
+// Always visible region select button
+document.getElementById('regionSelectBtn').style.display = 'block';
+document.getElementById('regionSelectBtn').addEventListener('click', function () {
+  if (!document.getElementById('regionSelectDropdown')) {
+    let regionSelect = document.createElement('select');
+    regionSelect.id = 'regionSelectDropdown';
+    regionSelect.innerHTML = `
+      <option value="africa">Africa</option>
+      <option value="europe">Europe</option>
+      <option value="america">America</option>
+      <option value="south america">South America</option>
+      <option value="carribbean">Carribbean</option>
+      <option value="asia">Asia</option>
+      <option value="world">World</option>
+    `;
+    this.insertAdjacentElement('afterend', regionSelect);
+    regionSelect.style.display = 'block';
+    regionSelect.addEventListener('change', function () {
+      let selectedRegion = this.value;
+      panToRegion(selectedRegion);
+    });
+  }
+});
+
+// Pan to region based on dropdown selection
+function panToRegion(region) {
+  let position, zoomLevel;
+  camera.zoom = 1;  // Reset zoom
+
+  switch (region) {
+    case 'africa': position = { x: 12.0, y: 0, z: 1.74 }; zoomLevel = 1.5; break;
+    case 'europe': position = { x: 3.5, y: 2.91, z: 0.55 }; zoomLevel = 2.0; break;
+    case 'america': position = { x: 0, y: 2.55, z: 4.42 }; zoomLevel = 2.0; break;
+    case 'south america': position = { x: 1.5, y: -0.5, z: 4.3 }; zoomLevel = 1.7; break;
+    case 'carribbean': position = { x: 0.65, y: 2.0, z: 4.6 }; zoomLevel = 2.4; break;
+    case 'asia': position = { x: -0.89, y: 3.28, z: -3.92 }; zoomLevel = 1.9; break;
+    case 'world': position = { x: 0, y: 0, z: 10 }; zoomLevel = 0.5; break;
+    default: return;
+  }
+
+  stopAllTweens();
+  animateCameraPan(position.x, position.y, position.z, zoomLevel);
+}
+
+function animateCameraPan(x, y, z, zoomLevel) {
+  new TWEEN.Tween(camera.position)
+    .to({ x, y, z }, 2000)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => camera.lookAt(0, 0, 0))
+    .start();
+
+  new TWEEN.Tween(camera)
+    .to({ zoom: zoomLevel }, 2000)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(() => camera.updateProjectionMatrix())
+    .start();
+}
 
   // custom globe material
   const globeMaterial = globe.material;
