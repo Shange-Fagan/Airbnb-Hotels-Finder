@@ -2899,9 +2899,6 @@ function animate() {
     // Update tween animations
     TWEEN.update(); 
 	
-    // Use composer for the final rendering with bloom effect
-    composer.render();
-	
     // Update time uniform for any shaders if needed
     globalUniforms.time.value = clock.getElapsedTime();
 
