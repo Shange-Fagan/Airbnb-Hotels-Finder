@@ -893,37 +893,44 @@ overflow: hidden;
       }
     }
 /* Divide the screen into two sections */
-    #container {
-      display: flex;
-      height: 100vh;
-      width: 100vw;
-    }
-    /* Left section for the iframe */
-    #iframe-container {
-      width: 50%;
-      height: 100%;
-    }
-    /* Right section for the 3D globe */
-    #globe-container {
-      width: 50%;
-      height: 100%;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-	  /* Split screen layout after search */
-    .split-screen #globe-container {
-      width: 50%;
-    }
+#container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
 
-    .split-screen #iframe-container {
-      display: block;
-    }
+/* Left section for the iframe */
+#iframe-container {
+  width: 50%;
+  height: 100%;
+  display: none;  /* Hidden initially */
+}
 
-	  #globe-container, .split-screen {
-  display: none;  /* Hidden by default */
+/* Right section for the 3D globe */
+#globe-container {
+  width: 50%;
+  height: 100%;
+  display: none;  /* Hidden initially */
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Split screen layout after search */
+.split-screen #globe-container,
+.split-screen #iframe-container {
+  display: block;  /* Show both sections after search */
+}
+
+.split-screen #iframe-container {
+  display: block;
+}
+
+.split-screen #globe-container {
+  display: block;
 }
 
 </style>
