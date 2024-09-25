@@ -1987,6 +1987,13 @@ function loadDetailedMarkers(regionCoordinates) {
     globe2.add(markerMesh);
   });
 }
+	  // Helper function to clear existing markers
+function clearExistingMarkers() {
+  const markers = globe2.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
+  markers.forEach(marker => {
+    globe2.remove(marker);  // Remove the marker
+  });
+}
 
 // Example: Get detailed markers for a region (dummy data)
 function getDetailedMarkersForRegion(regionCoordinates) {
