@@ -1935,14 +1935,6 @@ function initGlobe() {
   // Start the animation loop
   //animate();
 
-  // Handle window resize
-  window.addEventListener('resize', function () {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-}
-
 // Function to load generic markers
 function loadGenericMarkers() {
   genericMarkers.forEach(marker => {
