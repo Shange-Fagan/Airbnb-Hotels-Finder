@@ -951,8 +951,8 @@ display: block; /* Initially show the globe in full screen */
     <div id="globe-container"></div>
 
     <!-- Hidden iframe for Airbnb URL -->
-    <div id="iframe-container">
-      <iframe id="airbnbIframe" src="" style="width: 100%; height: 50%; border: none;"></iframe>
+    <div id="left-container"></div> <!-- Container for the RSS feed iframe -->
+      
     </div>
   </div>
   
@@ -2116,7 +2116,7 @@ function getRegionCoordinates(region) {
 //}
 
 // Perform search and pan the globe
-function performSearch(searchUrl, regionCoordinates) {
+/*function performSearch(searchUrl, regionCoordinates) {
 
 	// Ensure iframe exists before referencing
 const iframe = document.getElementById('airbnbIframe');
@@ -2129,9 +2129,9 @@ if (iframe) {
   document.getElementById('container').classList.add('split-screen');
 	
   panGlobeToRegion(regionCoordinates);
-}
+}*/
 
-// Trigger search and globe pan when search button is clicked
+/*// Trigger search and globe pan when search button is clicked
 document.getElementById('searchBtn').addEventListener('click', function () {
   const where = document.getElementById('where').value;
   const checkin = document.getElementById('checkin').value;
@@ -2148,7 +2148,42 @@ document.getElementById('searchBtn').addEventListener('click', function () {
   const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
   const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
   performSearch(searchUrl, regionCoordinates);
-});
+});*/
+	  // When the user clicks search, generate the search URL and fetch the RSS feed
+        document.getElementById('searchBtn').addEventListener('click', async function () {
+            const location = document.getElementById('where').value;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            const priceMin = document.getElementById('price-min').value;
+            const priceMax = document.getElementById('price-max').value;
+
+            if (!location || !checkin || !checkout || !guests) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+
+            // Generate the search URL dynamically
+            const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+
+            try {
+                // Make a request to the Node.js server to get the RSS feed URL
+                const response = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(searchUrl)}`);
+                const data = await response.json();
+
+                if (data.rssUrl) {
+                    // Create an iframe and set its src to the RSS feed URL
+                    const iframe = document.createElement('iframe');
+                    iframe.src = data.rssUrl;
+                    document.getElementById('left-container').innerHTML = '';  // Clear any previous content
+                    document.getElementById('left-container').appendChild(iframe);
+                } else {
+                    console.error('Failed to load RSS feed');
+                }
+            } catch (error) {
+                console.error('Error fetching RSS feed:', error);
+            }
+        });
 
 	  document.addEventListener("DOMContentLoaded", function() {
 
