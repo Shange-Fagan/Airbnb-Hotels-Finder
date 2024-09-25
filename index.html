@@ -1960,8 +1960,55 @@ function loadGenericMarkers() {
     globe2.add(markerMesh);
   });
 }
+	  
 // Initialize the globe when the page loads
 window.onload = initGlobe;
+	  
+// Function to load detailed markers for a specific region
+function loadDetailedMarkers(regionCoordinates) {
+  const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Get detailed markers
+
+  detailedMarkers.forEach(marker => {
+    const [x, y, z] = marker.position;
+    const markerGeometry = new THREE.SphereGeometry(0.1, 8, 8);  // Adjust size
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });  // Green for detailed markers
+    const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
+
+    // Position detailed marker on the globe
+    markerMesh.position.set(x, y, z);
+    globe2.add(markerMesh);  // Add to the existing globe
+  });
+}
+
+// Example: Get detailed markers for a region (dummy data)
+function getDetailedMarkersForRegion(regionCoordinates) {
+  // Here, you would fetch or calculate more detailed markers based on the region
+  // For simplicity, we're returning new marker positions in the same region.
+  return [
+    {
+      id: 101,
+      position: [regionCoordinates.lat + 0.1, regionCoordinates.lon + 0.1, 1.5],
+    },
+    {
+      id: 102,
+      position: [regionCoordinates.lat + 0.2, regionCoordinates.lon + 0.2, 1.8],
+    },
+  ];
+}
+
+// Pan globe and load detailed markers on search
+function panGlobeToRegion(regionCoordinates) {
+  if (camera && controls) {
+    const { x, y, z } = latLonToVector3(regionCoordinates.lat, regionCoordinates.lon, 20);
+    camera.position.set(x, y, z);
+    controls.update();
+
+    // Load detailed markers for the searched region
+    loadDetailedMarkers(regionCoordinates);
+  } else {
+    console.error('Camera or controls not initialized.');
+  }
+}
 
 // Convert latitude and longitude to 3D vector coordinates on the globe
 function latLonToVector3(lat, lon, radius) {
@@ -1981,17 +2028,6 @@ function latLonToVector3(lat, lon, radius) {
   //controls.update();
   //renderer.render(scene, camera);
 //}
-
-// Pan globe to a region based on latitude and longitude
-function panGlobeToRegion(regionCoordinates) {
-  if (camera && controls) {
-    const { x, y, z } = latLonToVector3(regionCoordinates.lat, regionCoordinates.lon, 20);  // Adjust camera distance as needed
-    camera.position.set(x, y, z);
-    controls.update();
-  } else {
-    console.error('Camera or controls not initialized.');
-  }
-}
 
 // Perform search and pan the globe
 function performSearch(searchUrl, regionCoordinates) {
