@@ -926,6 +926,16 @@ overflow: hidden;
      crossorigin="anonymous"></script>
 </head>
 <body>
+<!-- Container that holds both the iframe and the globe -->
+  <div id="container">
+    <!-- Globe display -->
+    <div id="globe-container"></div>
+
+    <!-- Hidden iframe for Airbnb URL -->
+    <div id="iframe-container">
+      <iframe id="airbnbIframe"></iframe>
+    </div>
+  </div>
   <!-- Info Section -->
   <div id="info">Click the markers to show the label</div>
   <div id="credits">
