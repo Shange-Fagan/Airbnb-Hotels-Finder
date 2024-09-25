@@ -1947,6 +1947,19 @@ function initGlobe() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 }
+	  // Function to load generic markers
+function loadGenericMarkers() {
+  genericMarkers.forEach(marker => {
+    const [x, y, z] = marker.position;
+    const markerGeometry = new THREE.SphereGeometry(0.1, 8, 8);  // Small marker size
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });  // Red color
+    const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
+
+    // Position marker on the globe
+    markerMesh.position.set(x, y, z);
+    globe2.add(markerMesh);
+  });
+}
 
 // Load city markers from GeoJSON and add them to the globe
 function loadCityMarkers(globe2) {
