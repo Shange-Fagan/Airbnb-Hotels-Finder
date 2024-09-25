@@ -1985,7 +1985,6 @@ const markerMaterial = new THREE.MeshBasicMaterial({
     );
   },
 });
-}
 // Define UV usage for the marker material
 markerMaterial.defines = { USE_UV: '' };
 
@@ -2028,7 +2027,7 @@ markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Floa
 markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
 // Add markers to the scene
   scene.add(markerMesh);
-  };
+};
 	  // Function to clear existing markers
 function clearExistingMarkers() {
   const markers = globe2.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
