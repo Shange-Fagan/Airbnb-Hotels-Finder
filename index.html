@@ -1877,7 +1877,7 @@ normalMap: normalMap,
   /*scene.add(atmosphere);*/
   scene.add(globe);
   //scene.add(globe2);
-	  let globe2, camera, scene, renderer, controls;
+	  let globe2;
 
 // Initialize custom globe
 function initGlobe() {
@@ -1891,7 +1891,7 @@ function initGlobe() {
 
   // Create globe geometry and material
   const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
-  const textureLoader = new THREE.TextureLoader();
+  //const textureLoader = new THREE.TextureLoader();
   const globeMaterial = new THREE.MeshBasicMaterial({
     map: textureLoader.load('js/Earth_Diffuse.jpg')  // Replace with your texture file path
   });
