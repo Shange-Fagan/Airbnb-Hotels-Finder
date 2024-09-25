@@ -1964,8 +1964,8 @@ function initGlobe() {
 function loadGenericMarkers() {
   genericMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
-    const markerGeometry = new THREE.PlaneGeometry(0.1, 8, 8);  // Small marker size
-    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });  // Red color
+    const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);  // Flat marker 
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide });  // Red color
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
     markerMesh.position.set(x, y, z);
@@ -1975,11 +1975,13 @@ function loadGenericMarkers() {
 
 // Function to load detailed markers for a specific region
 function loadDetailedMarkers(regionCoordinates) {
+	// Clear existing markers if needed
+  clearExistingMarkers();
   const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Get detailed markers
   detailedMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
-    const markerGeometry = new THREE.PlaneGeometry(0.1, 8, 8);  // Adjust size
-    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });  // Green for detailed markers
+    const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);  // Flat marker
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide }); // Green for detailed markers
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.position.set(x, y, z);
     globe2.add(markerMesh);
@@ -2090,7 +2092,7 @@ function panToRegion(region) {
     case 'world': position = { x: 0, y: 0, z: 10 }; zoomLevel = 0.5; break;
     default: return;
   }
-
+  console.log()
   stopAllTweens();
   animateCameraPan(position.x, position.y, position.z, zoomLevel);
 }
