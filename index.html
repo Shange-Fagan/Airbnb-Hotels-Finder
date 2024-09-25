@@ -2111,6 +2111,7 @@ function panToRegion(region) {
   }
   console.log()
   stopAllTweens();
+  console.log(`Panning to x:${position.x}, y:${position.y}, z:${position.z}, zoom:${zoomLevel}`);  // Debug
   animateCameraPan(position.x, position.y, position.z, zoomLevel);
 }
 
