@@ -1882,11 +1882,11 @@ normalMap: normalMap,
 // Initialize custom globe
 function initGlobe() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.set(0, 0, 20);  // Adjust camera distance as needed
+  //camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+  //camera.position.set(0, 0, 20);  // Adjust camera distance as needed
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  //renderer = new THREE.WebGLRenderer({ antialias: true });
+  //renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globeContainer').appendChild(renderer.domElement);
 
   // Create globe geometry and material
@@ -1900,8 +1900,8 @@ function initGlobe() {
   scene.add(globe2);
 
   // Add orbit controls for camera movement
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.enableZoom = true;
+  //controls = new THREE.OrbitControls(camera, renderer.domElement);
+  //controls.enableZoom = true;
 
   // Start the animation loop
   animate();
