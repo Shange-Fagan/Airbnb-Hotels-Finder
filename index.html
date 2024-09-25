@@ -1180,7 +1180,7 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
 	  });
 		  
 	
-  const selectedRegion = document.getElementById('regionSelect').value;
+  //const selectedRegion = document.getElementById('regionSelect').value;
 
 		  /*document.addEventListener("DOMContentLoaded", function() {
 			  
@@ -1605,7 +1605,7 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 	  // Load Textures
   //const textureLoader = new THREE.TextureLoader();
   //const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-	 const dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
+	 //const dayTexture = textureLoader.load("js/Earth_Diffuse.jpg");
     //const dayTexture = textureLoader.load("textures/earth-blue-marble-with-clouds.jpeg");
 //const dayTexture = textureLoader.load("textures/8k_earth_daymap.jpg");
   const nightTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-night.jpg");
@@ -1617,6 +1617,21 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 	  const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+
+	  //const textureLoader = new THREE.TextureLoader();
+
+// Load the texture
+const dayTexture = textureLoader.load(
+  'js/Earth_Diffuse.jpg',
+  function (texture) {
+    console.log('Texture loaded successfully');
+  },
+  undefined,
+  function (err) {
+    console.error('An error occurred loading the texture: ', err);
+  }
+);
+
 
 // Ensure correct wrapping
 dayTexture.wrapS = THREE.ClampToEdgeWrapping;
