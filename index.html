@@ -1098,7 +1098,7 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
   labelRenderer.domElement.style.top = '0px';
   document.body.appendChild(labelRenderer.domElement);
   
-  // Controls
+  /*// Controls
   const controls = new OrbitControls(camera, labelRenderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.25;
@@ -1106,7 +1106,7 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
   controls.minDistance = 15;
   controls.maxDistance = 25;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.5;
+  controls.autoRotateSpeed = 0.5;*/
 
 
    // Lighting - Reduced intensity to reduce glare
@@ -1934,10 +1934,14 @@ function initGlobe() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globe-container').appendChild(renderer.domElement);
 
-  //controls = new THREE.OrbitControls(camera, renderer.domElement);
-  //controls.enableZoom = true;
-  //controls.autoRotate = true;
-  //controls.autoRotateSpeed = 0.25; // Slow auto-rotation
+  const controls = new OrbitControls(camera, labelRenderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.25;
+  controls.enableZoom = true;
+  controls.minDistance = 15;
+  controls.maxDistance = 25;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.5;
 
   // Create globe geometry and material
   //const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
