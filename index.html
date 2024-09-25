@@ -1932,7 +1932,7 @@ function initGlobe() {
   loadGenericMarkers();
 
   // Start the animation loop
-  animate();
+  //animate();
 
   // Handle window resize
   window.addEventListener('resize', function () {
@@ -2001,11 +2001,11 @@ function latLonToVector3(lat, lon, radius) {
 }
 
 // Animation loop
-function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
-}
+//function animate() {
+  //requestAnimationFrame(animate);
+  //controls.update();
+  //renderer.render(scene, camera);
+//}
 
 // Perform search and pan the globe
 function performSearch(searchUrl, regionCoordinates) {
