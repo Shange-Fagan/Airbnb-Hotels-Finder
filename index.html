@@ -899,18 +899,27 @@ overflow: hidden;
   width: 100vw;
 }
 
-/* Left section for the iframe */
-#iframe-container {
-  width: 50%;
+/* Fullscreen globe when the page loads */
+#globe-container {
+  width: 100%;
   height: 100%;
-  display: none;  /* Hidden initially */
+  display: block; /* Initially show the globe in full screen */
 }
 
-/* Right section for the 3D globe */
-#globe-container {
-  width: 50%;
+/* Left section for the iframe (hidden initially) */
+#iframe-container {
+  width: 0%; /* Initially, the iframe is hidden */
   height: 100%;
-  display: none;  /* Hidden initially */
+}
+
+/* Make the iframe container and the globe split the screen after search */
+.split-screen #globe-container {
+  width: 50%;
+}
+
+.split-screen #iframe-container {
+  width: 50%;
+  display: block; /* Show iframe when split-screen is enabled */
 }
 
 iframe {
@@ -919,19 +928,6 @@ iframe {
   border: none;
 }
 
-/* Split screen layout after search */
-.split-screen #globe-container,
-.split-screen #iframe-container {
-  display: block;  /* Show both sections after search */
-}
-
-.split-screen #iframe-container {
-  display: block;
-}
-
-.split-screen #globe-container {
-  display: block;
-}
 
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
