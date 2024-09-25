@@ -1904,7 +1904,7 @@ function initGlobe() {
   //controls.enableZoom = true;
 
   // Start the animation loop
-  animate();
+  //animate();
 
   // Load and display markers from the GeoJSON file
   loadCityMarkers(globe2);
@@ -1949,11 +1949,11 @@ function latLonToVector3(lat, lon, radius) {
 }
 
 // Animation loop
-function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
-}
+//function animate() {
+  //requestAnimationFrame(animate);
+  //controls.update();
+  //renderer.render(scene, camera);
+//}
 
 // Pan globe to a region based on latitude and longitude
 function panGlobeToRegion(regionCoordinates) {
