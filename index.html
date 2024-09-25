@@ -1939,100 +1939,110 @@ function initGlobe() {
   //animate();
 }
 // Function to load generic markers
+// Function to load generic markers
 function loadGenericMarkers() {
 
-    // Global uniforms, including time for animations
+  // Marker material with custom shader for ripple effect
+  const markerMaterial = new THREE.MeshBasicMaterial({
+    color: daymarkerMaterial, // Ensure this color is defined
+    onBeforeCompile: (shader) => {
+      // Add custom uniform for time
+      shader.uniforms.time = globalUniforms.time; // Ensure globalUniforms.time is defined
 
-// Marker material with custom shader for ripple effect
-const markerMaterial = new THREE.MeshBasicMaterial({
-  color: daymarkerMaterial, // You can define this color
-  onBeforeCompile: (shader) => {
-    // Add custom uniform for time
-    shader.uniforms.time = globalUniforms.time;
+      // Modify vertex shader to include the phase attribute
+      shader.vertexShader = `
+        attribute float phase;
+        varying float vPhase;
+        ${shader.vertexShader}
+      `.replace(
+        `#include <begin_vertex>`,
+        `#include <begin_vertex>
+          vPhase = phase; // de-synch of ripples
+        `
+      );
 
-    // Modify vertex shader to include the phase attribute
-    shader.vertexShader = `
-      attribute float phase;
-      varying float vPhase;
-      ${shader.vertexShader}
-    `.replace(
-      `#include <begin_vertex>`,
-      `#include <begin_vertex>
-        vPhase = phase; // de-synch of ripples
-      `
-    );
+      // Modify fragment shader to create ripple effects based on time
+      shader.fragmentShader = `
+        uniform float time;
+        varying float vPhase;
+        ${shader.fragmentShader}
+      `.replace(
+        `vec4 diffuseColor = vec4( diffuse, opacity );`,
+        `
+        vec2 lUv = (vUv - 0.5) * 2.;
+        float val = 0.;
+        float lenUv = length(lUv);
+        val = max(val, 1. - step(0.25, lenUv)); // central circle
+        val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
 
-    // Modify fragment shader to create ripple effects based on time
-    shader.fragmentShader = `
-      uniform float time;
-      varying float vPhase;
-      ${shader.fragmentShader}
-    `.replace(
-      `vec4 diffuseColor = vec4( diffuse, opacity );`,
-      `
-      vec2 lUv = (vUv - 0.5) * 2.;
-      float val = 0.;
-      float lenUv = length(lUv);
-      val = max(val, 1. - step(0.25, lenUv)); // central circle
-      val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+        float tShift = fract(time * 0.5 + vPhase);
+        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
 
-      float tShift = fract(time * 0.5 + vPhase);
-      val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+        if (val < 0.5) discard;
 
-      if (val < 0.5) discard;
+        vec4 diffuseColor = vec4( diffuse, opacity );`
+      );
+    },
+  });
 
-      vec4 diffuseColor = vec4( diffuse, opacity );`
-    );
-  },
-});
-// Define UV usage for the marker material
-markerMaterial.defines = { USE_UV: '' };
+  // Define UV usage for the marker material
+  markerMaterial.defines = { USE_UV: '' };
 
-// Marker geometry (planar markers with custom shader)
-const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2); // Adjust size as needed
+  // Marker geometry (planar markers with custom shader)
+  const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2); // Adjust size as needed
 
-// Create the instanced mesh for markers
-const markerCount = genericMarkers.length;
-const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+  // Create the instanced mesh for markers
+  const markerCount = genericMarkers.length;
+  const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
 
-// Dummy object for setting transformations per instance
-const dummy = new THREE.Object3D();
+  // Dummy object for setting transformations per instance
+  const dummy = new THREE.Object3D();
 
-// Add phase array for random ripple timing per marker
-const phaseArray = [];
+  // Add phase array for random ripple timing per marker
+  const phaseArray = [];
 
-// Loop through markers and set position/rotation/scale for each instance
-genericMarkers.forEach((marker, index) => {
-  const [x, y, z] = marker.position;
+  // Loop through markers and set position/rotation/scale for each instance
+  genericMarkers.forEach((marker, index) => {
+    const [x, y, z] = marker.position;
 
-  // Set position using spherical coordinates
-  dummy.position.set(x, y, z);
+    // Set position using spherical coordinates
+    dummy.position.set(x, y, z);
   
-  // Make the marker face outward from the globe (normal vector)
-  dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(5)); // Assuming radius 5 for the globe
+    // Make the marker face outward from the globe (normal vector)
+    dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(5)); // Assuming radius 5 for the globe
 
-  // Apply the transformation to the dummy
-  dummy.updateMatrix();
+    // Apply the transformation to the dummy
+    dummy.updateMatrix();
 
-  // Set matrix for the instanced mesh
-  markerMesh.setMatrixAt(index, dummy.matrix);
+    // Set matrix for the instanced mesh
+    markerMesh.setMatrixAt(index, dummy.matrix);
 
-  // Assign a random phase for ripple timing
-  phaseArray.push(Math.random());
-});
+    // Assign a random phase for ripple timing
+    phaseArray.push(Math.random());
+  });
 
-// Add phase attribute to the geometry
-markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
+  // Add phase attribute to the geometry
+  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
 
-markerMesh.name = `marker-${marker.region}`;  // Assign a name for easy identification
-// Add markers to the scene
+  // Add markers to the scene
   scene.add(markerMesh);
 };
 	  // Function to clear existing markers
 function clearExistingMarkers() {
   const markers = globe2.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
+
   markers.forEach(marker => {
-    globe2.remove(marker);  // Remove the marker
+    // Dispose of the geometry and material to free up memory
+    if (marker.geometry) marker.geometry.dispose();
+    if (marker.material) {
+      // If the material is an array (multi-material), dispose each
+      if (Array.isArray(marker.material)) {
+        marker.material.forEach(mat => mat.dispose());
+      } else {
+        marker.material.dispose();
+      }
+    }
+    globe2.remove(marker);  // Remove the marker from the scene
   });
 }
 
