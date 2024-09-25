@@ -2086,59 +2086,65 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
 
 // Pan to region based on dropdown selection
 	  // Pan to region based on dropdown selection
+// Pan to region based on dropdown selection
 function panToRegion(region) {
-  let position;
+  let position, zoomLevel;
+  camera.zoom = 1;  // Reset zoom
 
   console.log(`Selected region: ${region}`);  // Debug
 
   switch (region) {
-    case 'africa': position = { x: 12.0, y: 0, z: 1.74 }; break;
-    case 'europe': position = { x: 3.5, y: 2.91, z: 0.55 }; break;
-    case 'america': position = { x: 0, y: 2.55, z: 4.42 }; break;
-    case 'south america': position = { x: 1.5, y: -0.5, z: 4.3 }; break;
-    case 'carribbean': position = { x: 0.65, y: 2.0, z: 4.6 }; break;
-    case 'asia': position = { x: -0.89, y: 3.28, z: -3.92 }; break;
-    case 'world': position = { x: 0, y: 0, z: 10 }; break;
+    case 'africa': position = { x: 12.0, y: 0, z: 1.74 }; zoomLevel = 1.5; break;
+    case 'europe': position = { x: 3.5, y: 2.91, z: 0.55 }; zoomLevel = 2.0; break;
+    case 'america': position = { x: 0, y: 2.55, z: 4.42 }; zoomLevel = 2.0; break;
+    case 'south america': position = { x: 1.5, y: -0.5, z: 4.3 }; zoomLevel = 1.7; break;
+    case 'carribbean': position = { x: 0.65, y: 2.0, z: 4.6 }; zoomLevel = 2.4; break;
+    case 'asia': position = { x: -0.89, y: 3.28, z: -3.92 }; zoomLevel = 1.9; break;
+    case 'world': position = { x: 0, y: 0, z: 10 }; zoomLevel = 0.5; break;
     default: return;
   }
-
-  stopAllTweens();  // Stop any active tweens before starting a new one
-
-  // Maintain the current zoom level instead of resetting it
-  const currentZoom = camera.zoom;
-  console.log(`Panning to x:${position.x}, y:${position.y}, z:${position.z}, keeping zoom:${currentZoom}`);  // Debug
-  
+  console.log()
+  stopAllTweens();
   // Stop auto-rotation after panning
-    controls.autoRotate = false;
-	
-  // Only pan the camera, do not zoom
-  animateCameraPan(position.x, position.y, position.z, currentZoom);  // Pass current zoom
+  controls.autoRotate = false;
+  console.log(`Panning to x:${position.x}, y:${position.y}, z:${position.z}, zoom:${zoomLevel}`);  // Debug
+  animateCameraPan(position.x, position.y, position.z, zoomLevel);
+    
 }
 
-// Animate camera panning and preserve current zoom level
 function animateCameraPan(x, y, z, zoomLevel) {
   new TWEEN.Tween(camera.position)
-    .to({ x, y, z }, 2000)  // Smoothly pan over 2 seconds
+    .to({ x, y, z }, 2000)
     .easing(TWEEN.Easing.Quadratic.InOut)
-    .onUpdate(function () {
-      camera.lookAt(0, 0, 0);  // Ensure the camera is always looking at the center of the globe
-    })
+    .onUpdate(() => camera.lookAt(0, 0, 0))
     .start();
-
-  // We are no longer changing zoom level, but still update camera projection
   new TWEEN.Tween(camera)
     .to({ zoom: zoomLevel }, 2000)
     .easing(TWEEN.Easing.Quadratic.InOut)
-    .onUpdate(function () {
-      camera.updateProjectionMatrix();  // Apply the zoom level change
-    }).onComplete(function () {
+    .onUpdate(() => camera.updateProjectionMatrix())
+    .start();
+    new TWEEN.Tween(camera.position)
+        .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function () {
+            camera.lookAt(0, 0, 0);
+        })
+        .start();
+    // Add zooming to the pan
+    new TWEEN.Tween(camera)
+        .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function () {
+            camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
+        })
+        .onComplete(function () {
             // After zoom and panning complete, restart slow auto-rotation
             setTimeout(function () {
                 controls.autoRotate = true;
                 controls.autoRotateSpeed = 0.25; // Slow rotation speed
             }, 500);
         })
-    .start();
+        .start();
 }
 initGlobe();
 console.log('Globe:', globe2);
