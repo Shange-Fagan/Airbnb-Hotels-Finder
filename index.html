@@ -2184,6 +2184,27 @@ document.getElementById('searchBtn').addEventListener('click', function () {
                 console.error('Error fetching RSS feed:', error);
             }
         });
+	  // Function to generate the dynamic RSS URL based on user input
+function generateRssUrl(searchUrl) {
+  // Extract parameters from the user input (e.g., searchUrl)
+  const urlParams = new URLSearchParams(searchUrl);
+
+  const checkin = urlParams.get('checkin') || '2024-09-25';
+  const checkout = urlParams.get('checkout') || '2024-09-26';
+  const adults = urlParams.get('adults') || '2';
+  const placeId = urlParams.get('place_id') || 'ChIJU1NoiDs6BIQREZgJa760ZO0';  // Default place_id for Mexico
+  
+  // Replace the parameters in the RSS URL template
+  const rssUrlTemplate = 'https://rss.app/new-rss-feed/rss-builder?cssGeneralTitle=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20a%3Anth-child(1)&cssContainer=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div&jsTimeout=auto&url=https%3A%2F%2Fwww.airbnb.com%2Fs%2FMexico%2Fhomes%3Ftab_id%3Dhome_tab%26refinement_paths%255B%255D%3D%252Fhomes%26adults%3D${adults}%26checkin%3D${checkin}%26checkout%3D${checkout}%26place_id%3D${placeId}';
+
+  return rssUrlTemplate;
+}
+
+// Example usage:
+const searchUrl = 'https://www.airbnb.com/s/Mexico/homes?checkin=2024-09-25&checkout=2024-09-26&adults=2&place_id=ChIJU1NoiDs6BIQREZgJa760ZO0';
+const dynamicRssUrl = generateRssUrl(searchUrl);
+console.log(dynamicRssUrl);  // Logs the updated RSS URL
+
 
 	  document.addEventListener("DOMContentLoaded", function() {
 
