@@ -1327,77 +1327,6 @@ function animateCameraPan(x, y, z, zoomLevel) {
 }
 const earthRadius = 5.1; // Adjust this to match your globe's size
 const textureLoader = new THREE.TextureLoader();
-// Create the atmosphere around the globe
-const atmosphereGeometry2 = new THREE.SphereGeometry(earthRadius * 1.02, 128, 128); // Increase segments
-const atmosphereMaterial2 = new THREE.ShaderMaterial({
-    uniforms: {},
-    vertexShader: `
-        varying vec3 vNormal;
-        void main() {
-            vNormal = normalize(normalMatrix * normal);
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-    `,
-    fragmentShader: `
-        varying vec3 vNormal;
-        void main() {
-            float intensity = pow(0.8 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
-            gl_FragColor = vec4(0.3, 0.6, 1.0, 1.0) * intensity; // Adjust the color here
-        }
-    `,
-    side: THREE.BackSide, // Render inside-out
-    blending: THREE.AdditiveBlending,
-    transparent: true
-});
-const atmosphere2 = new THREE.Mesh(atmosphereGeometry2, atmosphereMaterial2);
-scene.add(atmosphere2);
-	  
-	  // Vertex Shader
-const vertexShader = `
-  varying vec3 vVertexWorldPosition;
-  varying vec3 vVertexNormal;
-  varying vec3 vViewVector;
-
-  void main() {
-    vVertexNormal = normalize(normalMatrix * normal);
-    vVertexWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
-    vViewVector = normalize(cameraPosition - vVertexWorldPosition);
-
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-// Fragment Shader
-const fragmentShader = `
-  uniform vec3 glowColor;
-  uniform float c;
-  uniform float p;
-  varying vec3 vViewVector;
-  varying vec3 vVertexNormal;
-
-  void main() {
-    float intensity = pow(c - dot(vVertexNormal, vViewVector), p);
-    gl_FragColor = vec4(glowColor * intensity, 1.0);
-  }
-`;
-
-// Create the atmosphere (glow effect)
-const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.02, 128, 128); // Increase segments
-const atmosphereMaterial = new THREE.ShaderMaterial({
-  uniforms: {
-    'c': { type: 'f', value: 0.7 }, // Adjust the glow intensity
-    'p': { type: 'f', value: 4.0 }, // Increase to make the glow tighter to the globe
-    glowColor: { type: 'c', value: new THREE.Color(0x00aaff) },
-    viewVector: { type: 'v3', value: camera.position }
-  },
-  vertexShader: vertexShader,
-  fragmentShader: fragmentShader,
-  side: THREE.BackSide,
-  blending: THREE.AdditiveBlending,
-  transparent: true
-});
-const atmosphereMesh = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-scene.add(atmosphereMesh);
 
 	  /*const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
@@ -1408,25 +1337,6 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 });
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
-
-	  // Create a composer for post-processing
-// Create a composer for post-processing
-const renderScene = new RenderPass(scene, camera);
-
-const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.5, // Strength of the glow
-    0.4, // Radius of the glow
-    0.85 // Threshold for brightness
-    /*2.0,  // higher intensity
-      0.5,  // medium spread radius
-      0.8   // slightly lower threshold to make bright areas glow more*/
-);
-
-// Adjust parameters for glow effect
-const composer = new EffectComposer(renderer);
-composer.addPass(renderScene);
-composer.addPass(bloomPass);
 	  
 document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
@@ -1441,7 +1351,7 @@ document.getElementById('searchBtn').addEventListener('click', () => {
   document.getElementById('content').style.display = 'flex';
 });
 
-function generateAirbnbUrl(where, when, guests) {
+/*function generateAirbnbUrl(where, when, guests) {
   return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
 }
   function loadMarkersForRegion(region) {
@@ -1449,7 +1359,7 @@ function generateAirbnbUrl(where, when, guests) {
   markersData.forEach(marker => {
     addMarkerToGlobe(marker);
   });
-}
+}*/
 
 	 /* document.getElementById('newsButton').addEventListener('click', function() {
   const newsOverlay = document.getElementById('newsOverlay');
@@ -1963,10 +1873,128 @@ normalMap: normalMap,
   specular: new THREE.Color('grey'), // Color of reflection, subtle for realism
 });
 	  let globe = new THREE.Mesh(geometry2, material);
-  let globe2 = new THREE.Mesh(geometry, material2);
+  //let globe2 = new THREE.Mesh(geometry, material2);
   /*scene.add(atmosphere);*/
   scene.add(globe);
+  //scene.add(globe2);
+	  let globe2, camera, scene, renderer, controls;
+
+// Initialize custom globe
+function initGlobe() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.set(0, 0, 20);  // Adjust camera distance as needed
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById('globeContainer').appendChild(renderer.domElement);
+
+  // Create globe geometry and material
+  const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
+  const textureLoader = new THREE.TextureLoader();
+  const globeMaterial = new THREE.MeshBasicMaterial({
+    map: textureLoader.load('js/Earth_Diffuse.jpg')  // Replace with your texture file path
+  });
+
+  globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
+
+  // Add orbit controls for camera movement
+  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableZoom = true;
+
+  // Start the animation loop
+  animate();
+
+  // Load and display markers from the GeoJSON file
+  loadCityMarkers(globe2);
+}
+
+// Load city markers from GeoJSON and add them to the globe
+function loadCityMarkers(globe2) {
+  fetch('js/cities_xyz.geojson')
+    .then(response => response.json())
+    .then(data => {
+      data.features.forEach(city => {
+        const lat = city.geometry.coordinates[1];
+        const lon = city.geometry.coordinates[0];
+
+        // Convert lat/lon to 3D coordinates on the sphere
+        const { x, y, z } = latLonToVector3(lat, lon, 5);  // Radius is 5
+
+        // Create a marker (small sphere)
+        const markerGeometry = new THREE.SphereGeometry(0.05, 8, 8);  // Adjust size of marker
+        const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+
+        // Position the marker
+        marker.position.set(x, y, z);
+
+        // Add marker to the globe
+        globe2.add(marker);
+      });
+    });
+}
+
+// Convert latitude and longitude to 3D vector coordinates on the globe
+function latLonToVector3(lat, lon, radius) {
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+
+  const x = -(radius * Math.sin(phi) * Math.cos(theta));
+  const y = radius * Math.cos(phi);
+  const z = radius * Math.sin(phi) * Math.sin(theta);
+
+  return { x, y, z };
+}
+
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// Pan globe to a region based on latitude and longitude
+function panGlobeToRegion(regionCoordinates) {
+  if (camera && controls) {
+    const { x, y, z } = latLonToVector3(regionCoordinates.lat, regionCoordinates.lon, 20);  // Adjust camera distance as needed
+    camera.position.set(x, y, z);
+    controls.update();
+  } else {
+    console.error('Camera or controls not initialized.');
+  }
+}
+
+// Perform search and pan the globe
+function performSearch(searchUrl, regionCoordinates) {
+  document.getElementById('airbnbIframe').src = searchUrl;
+  document.getElementById('container').classList.add('split-screen');
+  panGlobeToRegion(regionCoordinates);
+}
+
+// Trigger search and globe pan when search button is clicked
+document.getElementById('searchBtn').addEventListener('click', function () {
+  const where = document.getElementById('location').value;
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  const guests = document.getElementById('guests').value;
+  const priceMin = document.getElementById('priceMin').value;
+  const priceMax = document.getElementById('priceMax').value;
+
+  if (!where || !checkin || !checkout || !guests) {
+    alert('Please fill out all required fields.');
+    return;
+  }
+
+  const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+  const regionCoordinates = { lat: 50, lon: 10 };  // Example: Set correct lat/lon for your region
+  performSearch(searchUrl, regionCoordinates);
+});
+
+// Initialize the globe when the page loads
+window.onload = initGlobe;
+
 
   // custom globe material
   const globeMaterial = globe.material;
