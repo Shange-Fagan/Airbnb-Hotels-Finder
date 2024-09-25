@@ -1907,7 +1907,7 @@ normalMap: normalMap,
 	  let globe = new THREE.Mesh(geometry2, material);
   //let globe2 = new THREE.Mesh(geometry, material2);
   /*scene.add(atmosphere);*/
-  scene.add(globe);
+  //scene.add(globe);
   //scene.add(globe2);
 
 let globe2;
@@ -2103,6 +2103,9 @@ function animateCameraPan(x, y, z, zoomLevel) {
     .onUpdate(() => camera.updateProjectionMatrix())
     .start();
 }
+initGlobe();
+console.log('Globe:', globe2);
+console.log('Camera:', camera);
 
   // custom globe material
   const globeMaterial = globe.material;
