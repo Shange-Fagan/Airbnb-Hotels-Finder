@@ -71,7 +71,7 @@ a, button, input, select, iframe {
       width: 100%;
       font-family: Monospace;
        text-align: center;
-      z-index: 9999;
+      z-index: 10000;
     
 }
 	  /* Responsive Ticker for Mobile */
@@ -141,7 +141,7 @@ a, button, input, select, iframe {
   /*z-index: 10;*/
   display: none; /* Hidden by default */
   pointer-events: auto; /* Ensure pointer events are enabled */
-  z-index: 9999; /* Make sure the label is above other elements */
+  z-index: 10000; /* Make sure the label is above other elements */
   /*background-color: rgba(255, 255, 255, 0.9);*/ /* Optional background for better visibility */
   /*overflow: hidden;*/ /* Hide any content that overflows */
 }
@@ -212,7 +212,7 @@ a, button, input, select, iframe {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  z-index: 20000; /* Ensure the close button is always on top */  /*display: flex;*/
+  z-index: 20001; /* Ensure the close button is always on top */  /*display: flex;*/
   display: none;
   justify-content: center;
   align-items: center;
@@ -270,7 +270,7 @@ a, button, input, select, iframe {
       /*border: 1px solid rgba(255, 255, 255, 0.25);*/
       /*border-radius: 8px;*/
       color: rgba(255, 255, 255, 0.75);
-      z-index: 10000;
+      z-index: 10001;
       cursor: pointer;
 	    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
        background-color: rgba(255, 255, 255, 0.15);
@@ -295,7 +295,7 @@ a, button, input, select, iframe {
   padding: 20px; /* Padding for spacing */
   border-bottom: 0px solid #e0e0e0; /* Light bottom border */
 	/*box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);*/
-	z-index: 10000;
+	z-index: 10001;
 	
 }
 
@@ -312,7 +312,7 @@ a, button, input, select, iframe {
   width: 250px; /* Set width for input fields */
 	/*box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);*/
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	z-index: 10001; /* Make sure inputs are interactive */
+	z-index: 10002; /* Make sure inputs are interactive */
 }
 
 #header input:focus, #header select:focus {
@@ -330,7 +330,7 @@ a, button, input, select, iframe {
   cursor: pointer;
   transition: background-color 0.3s ease;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-	z-index: 10001; /* Ensure the button is interactive */
+	z-index: 10002; /* Ensure the button is interactive */
 }
 
 #header button:hover {
@@ -343,7 +343,7 @@ a, button, input, select, iframe {
   justify-content: center;
   align-items: center;
 	  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	z-index: 10001; /* Ensure the entire search section is clickable */
+	z-index: 10002; /* Ensure the entire search section is clickable */
 }
 
 #header .search-section input {
@@ -475,7 +475,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: rgba(255, 255, 255, 0.15);
   padding: 45px 55px; /* Increase padding for more breathing space */
   border-radius: 15px; /* Slightly more rounded corners */
-  z-index: 10000; /* Ensure it appears above all other elements */
+  z-index: 10001; /* Ensure it appears above all other elements */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow for better separation */
   backdrop-filter: blur(10px); /* Apply background blur effect */
   text-align: center; /* Center the text and elements inside the popup */
@@ -492,7 +492,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	#regionPopup select {
   font-size: 16px;
   padding: 10px;
-  top: 110px;
+  top: 105px;
   center: 0px;
   border-radius: 10px;
   border: 1px solid #e0e0e0;
@@ -576,7 +576,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgba(255, 255, 255, 0.75); /* Keep the light gray text color */
   background-color: rgba(255, 255, 255, 0.15); /* Transparent background with slight white tint */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-  z-index: 10000;
+  z-index: 10001;
 }
 
 #regionSelectBtn:hover {
@@ -594,14 +594,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute; /* Adjust positioning */
   top: 200px; /* Adjust based on your layout */
   left: 50px; /* Adjust based on your layout */
-  z-index: 10001; /* Ensure it is visible above other elements */
+  z-index: 10002; /* Ensure it is visible above other elements */
 }
 	  
 #regionSelectDropdown:hover {
   background-color: rgba(245, 245, 245, 0.35);
 }
 	  #regionSelectBtn, #submitRegion {
-  z-index: 10000; /* Ensure these elements are interactive */
+  z-index: 10001; /* Ensure these elements are interactive */
 }
 
 	  
@@ -620,7 +620,7 @@ iframe::-webkit-scrollbar {
     display: none;  
     justify-content: center;
     align-items: center;
-    z-index: 10000; /* Ensure it's on top of everything */
+    z-index: 10001; /* Ensure it's on top of everything */
   }
 	  #newsOverlaynighttheme {
     position: absolute;
@@ -634,7 +634,7 @@ iframe::-webkit-scrollbar {
     display: none;  
     justify-content: center;
     align-items: center;
-    z-index: 10000; /* Ensure it's on top of everything */
+    z-index: 10001; /* Ensure it's on top of everything */
   }
   
   #newsIframe {
@@ -662,7 +662,7 @@ iframe::-webkit-scrollbar {
       /*border: 1px solid rgba(255, 255, 255, 0.25);*/
       /*border-radius: 8px;*/
       color: rgba(255, 255, 255, 0.75);
-      z-index: 10000; /* Higher than the iframe */
+      z-index: 10001; /* Higher than the iframe */
       cursor: pointer;
 	/*z-index: 9999;*/
      /*cursor: pointer;*/
@@ -692,7 +692,7 @@ iframe::-webkit-scrollbar {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  z-index: 10001;
+  z-index: 10002;
   /*display: flex;*/
   display: none;
   justify-content: center;
@@ -708,7 +708,7 @@ iframe::-webkit-scrollbar {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10001;
+  z-index: 10002;
   width: 50px; /* Adjust as needed */
   height: 50px;
 	display: none;
@@ -779,7 +779,7 @@ background-size: 10px; *//* Adjust this as needed */
   background-position: right 15px center; /* Adjusted to move the arrow down */
   background-size: 12px; /* Adjust the size of the arrow */
   cursor: pointer;
-  z-index: 10000;
+  z-index: 10001;
 }
 	  /* Optional: Ensures the arrow is moved down without changing the default */
 select::-ms-expand {
@@ -907,7 +907,7 @@ display: block; /* Initially show the globe in full screen */
   position: absolute; /* Ensure it is above other elements */
   top: 0;
   left: 0;
-  z-index: 10000;  /* Adjust to ensure it is above other elements */
+  z-index: 20000;  /* Adjust to ensure it is above other elements */
 }
 	  /* UI buttons that must be clickable over the globe */
 
