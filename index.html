@@ -1982,8 +1982,13 @@ function panGlobeToRegion(regionCoordinates) {
 
 // Perform search and pan the globe
 function performSearch(searchUrl, regionCoordinates) {
+  // Update iframe with the Airbnb search URL
   document.getElementById('airbnbIframe').src = searchUrl;
+  
+  // Show both the iframe and the globe by adding the 'split-screen' class
   document.getElementById('container').classList.add('split-screen');
+  
+  // Pan the globe to the selected region
   panGlobeToRegion(regionCoordinates);
 }
 
@@ -1996,13 +2001,15 @@ document.getElementById('searchBtn').addEventListener('click', function () {
   const priceMin = document.getElementById('priceMin').value;
   const priceMax = document.getElementById('priceMax').value;
 
+  // Ensure required fields are filled
   if (!where || !checkin || !checkout || !guests) {
     alert('Please fill out all required fields.');
     return;
   }
 
+  // Construct the Airbnb search URL dynamically with the input values
   const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
-  const regionCoordinates = { lat: 50, lon: 10 };  // Example: Set correct lat/lon for your region
+  const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
   performSearch(searchUrl, regionCoordinates);
 });
 
