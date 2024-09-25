@@ -1205,28 +1205,7 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
   panToRegion(selectedRegion);
 });
 });*/
-	    document.addEventListener("DOMContentLoaded", function() {
-
-  // Add event listener to the submit button
-  document.getElementById('submitRegion').addEventListener('click', function() {
-    // Close the initial region popup
-    document.getElementById('regionPopup').style.display = 'none';
-
-    // Show the confirmation message
-    document.getElementById('confirmationMessage').style.display = 'block';
-
-    // Hide the confirmation message after 10 seconds
-    setTimeout(function() {
-      document.getElementById('confirmationMessage').style.display = 'none';
-    }, 20000);
-
-    // Capture the selected region from the dropdown
-    const selectedRegion = document.getElementById('regionSelect').value;
-
-    // Pan to the selected region
-    panToRegion(selectedRegion);
-  });
-});
+	    
 
  /*  // Always visible region select button
   document.getElementById('regionSelectBtn').style.display = 'block';
@@ -2060,6 +2039,28 @@ document.getElementById('searchBtn').addEventListener('click', function () {
   performSearch(searchUrl, regionCoordinates);
 });
 
+	  document.addEventListener("DOMContentLoaded", function() {
+
+  // Add event listener to the submit button
+  document.getElementById('submitRegion').addEventListener('click', function() {
+    // Close the initial region popup
+    document.getElementById('regionPopup').style.display = 'none';
+
+    // Show the confirmation message
+    document.getElementById('confirmationMessage').style.display = 'block';
+
+    // Hide the confirmation message after 10 seconds
+    setTimeout(function() {
+      document.getElementById('confirmationMessage').style.display = 'none';
+    }, 20000);
+
+    // Capture the selected region from the dropdown
+    const selectedRegion = document.getElementById('regionSelect').value;
+
+    // Pan to the selected region
+    panToRegion(selectedRegion);
+  });
+});
 // Always visible region select button
 document.getElementById('regionSelectBtn').style.display = 'block';
 document.getElementById('regionSelectBtn').addEventListener('click', function () {
