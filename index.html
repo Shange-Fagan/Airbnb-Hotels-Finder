@@ -2030,7 +2030,12 @@ function getRegionCoordinates(region) {
 // Perform search and pan the globe
 function performSearch(searchUrl, regionCoordinates) {
   document.getElementById('airbnbIframe').src = searchUrl;
+
+	// Update iframe with the Airbnb search URL
+  iframe.src = searchUrl;
+	
   document.getElementById('container').classList.add('split-screen');
+	
   panGlobeToRegion(regionCoordinates);
 }
 
