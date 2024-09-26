@@ -2231,9 +2231,20 @@ function initGlobe() {
 
   //globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
+// Example of delaying marker rendering until the globe is fully ready
+function loadGlobeAndMarkers() {
+    if (globe2 && camera) {
+        // Now safe to add markers
+        loadGenericMarkers(); 
+        console.log('Globe and camera ready. Markers added.');
+    } else {
+        console.error('Globe or camera not initialized. Retrying...');
+        setTimeout(loadGlobeAndMarkers, 1000);  // Retry after 1 second
+    }
+}
 
-  // Load and display generic markers
-  loadGenericMarkers();
+// Initial load call
+loadGlobeAndMarkers();
 }
 
 // Function to load generic markers
