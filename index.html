@@ -2355,9 +2355,7 @@ genericMarkers.forEach((marker, index) => {
 
 // Add the markers to the globe
 globe2.add(markerMesh);
-console.log(`Marker ${index}: Lat: ${lat}, Lon: ${lon}, X: ${x}, Y: ${y}, Z: ${z}`);
-
-
+	
   // Add the phase attribute to the geometry
   markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(phaseArray, 1));
 
