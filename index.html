@@ -2271,7 +2271,14 @@ function loadGenericMarkers() {
     },
   });
 
-  const markerGeometry = new THREE.PlaneGeometry(5, 5);
+  // Marker Geometry and Material
+const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2);  // Use a smaller size, adjust as needed
+
+// Optionally scale markers for mobile
+if (window.innerWidth <= 768) {
+  markerGeometry.scale(1.25, 1.25, 1.25);  // Adjust as needed for mobile scaling
+}
+
   const markerCount = genericMarkers.length;
   const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
 
@@ -2312,7 +2319,14 @@ function loadDetailedMarkers(regionCoordinates) {
   const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates);
   detailedMarkers.forEach(marker => {
     const { x, y, z } = latLonToVector3(marker.position[0], marker.position[1], 5.1);  // Adjust radius as needed
-    const markerGeometry = new THREE.PlaneGeometry(2.5, 2.5);
+    // Marker Geometry and Material
+const markerGeometry = new THREE.PlaneGeometry(0.1, 0.1);  // Use a smaller size, adjust as needed
+
+// Optionally scale markers for mobile
+if (window.innerWidth <= 768) {
+  markerGeometry.scale(1.25, 1.25, 1.25);  // Adjust as needed for mobile scaling
+}
+
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
 
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
