@@ -1674,7 +1674,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
         scene.add(cloudMesh);
 	scene.background = daybackgroundTexture;
 // Toggle between Day/Night Textures and Cube Map
-    function toggleDayNight() {
+   /* function toggleDayNight() {
       if (isDay) {
 	        // Check if the user is on a mobile device
     if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
@@ -1758,6 +1758,70 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
 
 	// Add Event Listener to the Toggle Button
 	    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
+*/
+	  function toggleDayNight() {
+  // Ensure `isDay` is properly toggled
+  if (isDay) {
+    // Switching from Day to Night
+    if (window.innerWidth <= 768) {  // Mobile device
+      document.getElementById("nightTicker").style.display = "none";
+      document.getElementById("dayTicker").style.display = "none";
+      document.getElementById("mobileTicker").style.display = "block";
+    } else {  // Desktop
+      document.getElementById("dayTicker").style.display = "none";
+      document.getElementById("nightTicker").style.display = "block";
+      document.getElementById("mobileTicker").style.display = "none";
+    }
+
+    // Smooth transition to night
+    new TWEEN.Tween(shaderMaterial2.uniforms.transition)
+      .to({ value: 1 }, 20000)  // Smooth transition over 20 seconds
+      .start();
+    
+    // Update globe and scene for night
+    globe2.material.map = nightTexture;
+    scene.background = nightbackgroundTexture;
+    scene.remove(cloudMesh);  // Remove clouds for night
+    markerMaterial.color.set(nightmarkerMaterial);
+
+    // Update button text to switch back to Day
+    document.getElementById("toggleButton").textContent = "Switch to Day";
+  } else {
+    // Switching from Night to Day
+    if (window.innerWidth <= 768) {  // Mobile device
+      document.getElementById("nightTicker").style.display = "none";
+      document.getElementById("dayTicker").style.display = "none";
+      document.getElementById("mobileTicker").style.display = "block";
+    } else {  // Desktop
+      document.getElementById("dayTicker").style.display = "block";
+      document.getElementById("nightTicker").style.display = "none";
+      document.getElementById("mobileTicker").style.display = "none";
+    }
+
+    // Smooth transition to day
+    new TWEEN.Tween(shaderMaterial2.uniforms.transition)
+      .to({ value: 0 }, 20000)  // Smooth transition over 20 seconds
+      .start();
+
+    // Update globe and scene for day
+    globe2.material.map = dayTexture;
+    scene.background = daybackgroundTexture;
+    scene.add(cloudMesh);  // Add clouds for day
+    markerMaterial.color.set(daymarkerMaterial);
+
+    // Update button text to switch back to Night
+    document.getElementById("toggleButton").textContent = "Switch to Night";
+  }
+
+  // Ensure globe material updates
+  globe2.material.needsUpdate = true;
+
+  // Toggle the `isDay` state after the transition
+  isDay = !isDay;
+}
+
+// Add Event Listener to the Toggle Button
+document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 
 		/*// Load Textures
   //const textureLoader = new THREE.TextureLoader();
