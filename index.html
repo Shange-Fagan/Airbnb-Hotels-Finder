@@ -2248,13 +2248,12 @@ const genericMarkers = [
 
 globe2 = new THREE.Mesh(geometry, material2);
 // Initialize the globe and markers
-function initGlobe() {
+
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globe-container').appendChild(renderer.domElement);
 
   //globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
-}
 // Function to load generic markers
 
 // Marker Geometry and Material
