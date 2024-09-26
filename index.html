@@ -2314,7 +2314,7 @@ function loadGenericMarkers() {
   const phaseArray = new Float32Array(markerCount);  // Allocate phase array with same count as markers
   const globeRadius = 5.1;
   genericMarkers.forEach((marker, index) => {
-    const [lat, lon, altitude] = marker.position;  // Extract lat, lon, and altitude from the position array
+    const [radius, lat, lon] = marker.position;  // Extract radius, latitude, and longitude
     const { x, y, z } = latLonToVector3(lat, lon, globeRadius);  // Convert to 3D coordinates
 
     // Set position of the marker
