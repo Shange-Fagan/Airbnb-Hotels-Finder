@@ -2198,6 +2198,20 @@ function getRegionCoordinates(region) {
   };
   return regions[region] || { lat: 0, lon: 0 };  // Default to world
 }*/
+	  // Markers Data
+const markersData = [
+  // Each marker has [radius, phi, theta] format for spherical positioning
+  { id: 1, position: [5.1, 1.2, 1.5], iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18" },
+  { id: 2, position: [5.1, 0.7, 1.8], iframeSrc: "https://rss.app/embed/v1/list/sum7m4TJWVJk8HMN" },
+  // Add other markers here...
+  { id: 3, position: [5.1, 0.9, 0], iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18 },
+  { id: 4, position: [5.1, 1.6, 0.4], iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18 },
+  { id: 5, position: [5.1, 1, 2.3],iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18 },
+  { id: 6, position: [5.1, 0.9, 3], iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18 },
+  { id: 7, position: [5.1, 0.9, 4], iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18 },
+  { id: 8, position: [5.1, 1.2, 0.2], iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18 },
+  { id: 9, position: [5.1, 0.6, 1.45], iframeSrc: "https://rss.app/embed/v1/list/hKdSIKMe0o5AmG18 },
+];
 const genericMarkers = [
   { id: 1, position: [5.1, 1.2, 1.5], region: 'africa' },
   { id: 2, position: [5.1, 0.7, 1.8], region: 'europe' },
@@ -2258,87 +2272,37 @@ loadGlobeAndMarkers();
 // Function to load generic markers
 // Function to load generic markers
 function loadGenericMarkers() {
-  const markerMaterial = new THREE.MeshBasicMaterial({
-    color: daymarkerMaterial,
-    onBeforeCompile: (shader) => {
-      shader.uniforms.time = globalUniforms.time;
 
-      shader.vertexShader = `
-      varying vec2 vUv;  // Declare UV coordinate
-        attribute float phase;
-        varying float vPhase;
-        ${shader.vertexShader}
-      `.replace(
-        `#include <begin_vertex>`,
-        `#include <begin_vertex>
-          vPhase = phase;
-	  vUv = uv;  // Assign the UV coordinates from the geometry
-        `
-      );
+// Marker Geometry and Material
+const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2); // Adjust size as needed
+const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Red markers for visibility
 
-      shader.fragmentShader = `
-        uniform float time;
-        varying float vPhase;
-	varying vec2 vUv;  // Declare vUv here in the fragment shader
-        ${shader.fragmentShader}
-      `.replace(
-        `vec4 diffuseColor = vec4( diffuse, opacity );`,
-        `
-        vec2 lUv = (vUv - 0.5) * 2.;
-        float val = 0.;
-        float lenUv = length(lUv);
-        val = max(val, 1. - step(0.25, lenUv));
-        val = max(val, step(0.4, lenUv) - step(0.5, lenUv));
-        float tShift = fract(time * 0.5 + vPhase);
-        val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv));
-        if (val < 0.5) discard;
-        vec4 diffuseColor = vec4( diffuse, opacity );`
-      );
-    },
-  });
-
-  // Marker Geometry and Material
-  const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Reduced size for markers
-
-  // Optionally scale markers for mobile
-  if (window.innerWidth <= 768) {
-    markerGeometry.scale(0.5, 0.5, 0.5);  // Smaller for mobile
-  }
-
-  const markerCount = genericMarkers.length;
-  const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-
-  const dummy = new THREE.Object3D();
-  const phaseArray = new Float32Array(markerCount);  // Allocate phase array with same count as markers
-  const globeRadius = 5.1;
-	
-  genericMarkers.forEach((marker, index) => {
-    const [radius, lat, lon] = marker.position;  // Extract radius, latitude, and longitude
-    const { x, y, z } = latLonToVector3(lat, lon, globeRadius);  // Convert to 3D coordinates
-
-    // Set position of the marker
-     // Swap x and z in this case (assuming a different coordinate system)
-    dummy.position.set(z, y, x);  // Assign z to x, and x to z
-
-
-    // Make the marker face outward from the globe
-    dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(globeRadius));
-
-    // Update matrix for instanced mesh
-    dummy.updateMatrix();
-    markerMesh.setMatrixAt(index, dummy.matrix);
-
-    // Add random phase for each marker (used for ripple effect)
-    phaseArray[index] = Math.random();  
-  });
-
-  // Add the phase attribute to the geometry
-  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(phaseArray, 1));
-
-  // Add marker mesh to the globe
-  globe2.add(markerMesh);
+if (window.innerWidth <= 768) {
+  markerGeometry.scale(1.25, 1.25, 1.25); // Scale for mobile
 }
 
+// Creating Markers
+const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+
+const dummy = new THREE.Object3D();
+markersData.forEach((data, index) => {
+  const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
+
+  // Use setFromSphericalCoords for spherical positioning on the globe
+  dummy.position.setFromSphericalCoords(radius, phi, theta);
+  dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
+  dummy.updateMatrix();
+  markers.setMatrixAt(index, dummy.matrix);
+
+  data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
+});
+
+// Add the markers to the scene
+scene.add(markers);
+
+// Labels, Raycasting, and Interactions (leave as is from your original logic)
+
+}
 
 /*// Load detailed markers for a specific region
 function loadDetailedMarkers(regionCoordinates) {
@@ -2705,7 +2669,7 @@ directionalLight.intensity = 0.5;
 dl2.intensity = 0.5;
 dl3.intensity = 0.5;
     // Markers Data
-  const markersData = [
+  const markersData2 = [
     {
       //Africa
       id: 1,
@@ -3195,13 +3159,13 @@ if (window.innerWidth <= 768) {
 
   
   // Creating Markers
-  const markerCount = markersData.length;
+  const markerCount = markersData2.length;
   const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial2, markerCount);
   
   const dummy = new THREE.Object3D();
   const phaseArray = [];
   
-  markersData.forEach((data, index) => {
+  markersData2.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
     dummy.lookAt(dummy.position.clone().setLength(radius + 1));
