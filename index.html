@@ -2297,7 +2297,6 @@ function loadGenericMarkers() {
 
   // Marker Geometry and Material
 const markerGeometry = new THREE.PlaneGeometry(0.05, 0.05);  // Reduced size  // Use a smaller size, adjust as needed
-markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
 
 // Optionally scale markers for mobile
 if (window.innerWidth <= 768) {
@@ -2310,6 +2309,7 @@ if (window.innerWidth <= 768) {
 
   const dummy = new THREE.Object3D();
   const phaseArray = [];
+  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
 
   /*genericMarkers.forEach((marker, index) => {
     const { lat, lon } = getRegionCoordinates(marker.region); // Get lat/lon for the region
