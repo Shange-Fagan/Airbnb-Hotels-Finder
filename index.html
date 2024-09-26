@@ -2606,12 +2606,9 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
 // Add this line to debug the searchUrl
     console.log('Generated searchUrl: ', searchUrl);
     try {
-        // Fetch the placeId from the backend (which extracts it from Airbnb's page)
-        const response = await fetch(`http://localhost:3000/get-place-id?searchUrl=${encodeURIComponent(searchUrl)}`);
-        const data = await response.json();
 
             // Fetch the RSS feed URL using the final search URL
-            const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(finalSearchUrl)}`);
+            const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(searchUrl)}`);
             const rssData = await rssResponse.json();
 
             if (rssData.rssUrl) {
