@@ -2338,6 +2338,10 @@ genericMarkers.forEach((marker, index) => {
   // Convert lat/lon to 3D coordinates using the radius of the globe
   const { x, y, z } = latLonToVector3(lat, lon, radius);  // Use radius, latitude, longitude
 
+	// Log the marker's information (only inside the loop, where `index` is defined)
+    console.log(`Marker ${index}: Lat: ${lat}, Lon: ${lon}, X: ${x}, Y: ${y}, Z: ${z}`);
+
+
   // Set position of the marker
   dummy.position.set(x, y, z);
 
