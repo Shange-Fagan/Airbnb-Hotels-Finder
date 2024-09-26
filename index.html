@@ -2601,6 +2601,11 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         alert('Please fill out all required fields.');
         return;
     }
+	// Make the globe-container visible
+    const globeContainer = document.querySelector('.split-screen #globe-container');
+    if (globeContainer) {
+        globeContainer.style.display = 'block';  // Set display to block
+    }
 
     // Generate the initial Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
