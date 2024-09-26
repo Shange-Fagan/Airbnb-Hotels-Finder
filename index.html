@@ -3347,6 +3347,7 @@ window.addEventListener('pointerdown', (event) => {
 });*/
 	  // Define different markers data sets
 const markersDataSets = {
+    general: markersData,
   cheapest: markersDataforCheapestAirbnbs,
   midPrice: markersDataforMidPriceAirbnbs,
   expensive: markersDataforExpensiveAirbnbs,
@@ -3456,7 +3457,7 @@ document.getElementById('airbnbSelector').addEventListener('change', function() 
 });
 
 // Load markers for default category on page load
-//loadMarkers('cheapest');
+loadMarkers('general');
 		    
 	 /* let activeLabel = null; // Keep track of the currently open iframe
 
