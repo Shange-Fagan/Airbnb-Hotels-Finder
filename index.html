@@ -2611,6 +2611,9 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
             const rssData = await rssResponse.json();
 
             if (rssData.rssUrl) {
+		    // Set left-container to display block
+                 document.getElementById('left-container').style.display = 'block';
+
                 // Create an iframe and set its src to the RSS feed URL
                 const iframe = document.createElement('iframe');
                 iframe.src = rssData.rssUrl; // Set the correct RSS feed URL here
