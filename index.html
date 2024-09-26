@@ -2300,7 +2300,7 @@ function loadGenericMarkers() {
   });
 
   // Marker Geometry and Material
-  const markerGeometry = new THREE.PlaneGeometry(0.05, 0.05);  // Reduced size for markers
+  const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Reduced size for markers
 
   // Optionally scale markers for mobile
   if (window.innerWidth <= 768) {
@@ -2374,7 +2374,7 @@ function loadDetailedMarkers(regionCoordinates) {
     const { x, y, z } = latLonToVector3(marker.position[0], marker.position[1], globeRadius);
 
     // Create individual marker geometry and material
-    const markerGeometry = new THREE.PlaneGeometry(0.025, 0.025);  // Use smaller size for detailed markers
+    const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Use smaller size for detailed markers
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
 
     // Optionally scale markers for mobile
