@@ -2453,7 +2453,7 @@ document.getElementById('searchBtn').addEventListener('click', function () {
   const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
   performSearch(searchUrl, regionCoordinates);
 });*/
-	  // When the user clicks search, generate the search URL and fetch the RSS feed
+	/*  // When the user clicks search, generate the search URL and fetch the RSS feed
         document.getElementById('searchBtn').addEventListener('click', async function () {
             const location = document.getElementById('where').value;
             const checkin = document.getElementById('checkin').value;
@@ -2517,6 +2517,72 @@ function generateRssUrl(searchUrl) {
 const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
 const dynamicRssUrl = generateRssUrl(searchUrl);
 console.log(dynamicRssUrl);  // Logs the updated RSS URL
+*/
+	  // When the user clicks search, generate the search URL and fetch the RSS feed
+document.getElementById('searchBtn').addEventListener('click', async function () {
+    const location = document.getElementById('where').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = document.getElementById('guests').value;
+    const priceMin = document.getElementById('price-min').value;
+    const priceMax = document.getElementById('price-max').value;
+
+    // Ensure all required fields are filled out
+    if (!location || !checkin || !checkout || !guests) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+
+    // Generate the initial Airbnb search URL
+    const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+
+    try {
+        // Fetch the placeId from the backend (which extracts it from Airbnb's page)
+        const response = await fetch(`http://localhost:3000/get-place-id?searchUrl=${encodeURIComponent(searchUrl)}`);
+        const data = await response.json();
+
+        if (data.placeId) {
+            // Generate the final Airbnb search URL with the retrieved placeId
+            const finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}&place_id=${data.placeId}`;
+            
+            // Fetch the RSS feed URL using the final search URL
+            const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(finalSearchUrl)}`);
+            const rssData = await rssResponse.json();
+
+            if (rssData.rssUrl) {
+                // Create an iframe and set its src to the RSS feed URL
+                const iframe = document.createElement('iframe');
+                iframe.src = rssData.rssUrl; // Set the correct RSS feed URL here
+                iframe.width = '100%';
+                iframe.height = '500px';  // Adjust as necessary
+                document.getElementById('left-container').innerHTML = '';  // Clear previous content
+                document.getElementById('left-container').appendChild(iframe);
+            } else {
+                console.error('Failed to load RSS feed');
+            }
+        } else {
+            console.error('Failed to retrieve place ID');
+        }
+    } catch (error) {
+        console.error('Error fetching RSS feed:', error);
+    }
+});
+
+// Function to generate the dynamic RSS URL based on user input
+function generateRssUrl(searchUrl) {
+    // Extract parameters from the user input (e.g., searchUrl)
+    const urlParams = new URLSearchParams(searchUrl);
+
+    const checkin = urlParams.get('checkin') || '2024-09-25';
+    const checkout = urlParams.get('checkout') || '2024-09-26';
+    const adults = urlParams.get('adults') || '2';
+    const placeId = urlParams.get('place_id') || 'ChIJU1NoiDs6BIQREZgJa760ZO0';  // Default place_id for Mexico
+    
+    // Replace the parameters in the RSS URL template
+    const rssUrlTemplate = `https://rss.app/new-rss-feed/rss-builder?cssGeneralTitle=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20a%3Anth-child(1)&cssContainer=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div&jsTimeout=auto&url=https%3A%2F%2Fwww.airbnb.com%2Fs%2FMexico%2Fhomes%3Ftab_id%3Dhome_tab%26refinement_paths%255B%255D%3D%252Fhomes%26adults%3D${adults}%26checkin%3D${checkin}%26checkout%3D${checkout}%26place_id%3D${placeId}`;
+
+    return rssUrlTemplate;
+}
 
 
 	  document.addEventListener("DOMContentLoaded", function() {
