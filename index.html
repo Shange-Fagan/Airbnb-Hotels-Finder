@@ -2256,6 +2256,7 @@ loadGlobeAndMarkers();
 }
 
 // Function to load generic markers
+// Function to load generic markers
 function loadGenericMarkers() {
   const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
@@ -2288,12 +2289,9 @@ function loadGenericMarkers() {
         float lenUv = length(lUv);
         val = max(val, 1. - step(0.25, lenUv));
         val = max(val, step(0.4, lenUv) - step(0.5, lenUv));
-
         float tShift = fract(time * 0.5 + vPhase);
         val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv));
-
         if (val < 0.5) discard;
-
         vec4 diffuseColor = vec4( diffuse, opacity );`
       );
     },
@@ -2306,15 +2304,14 @@ function loadGenericMarkers() {
   if (window.innerWidth <= 768) {
     markerGeometry.scale(0.5, 0.5, 0.5);  // Smaller for mobile
   }
-  
+
   const markerCount = genericMarkers.length;
   const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-  
+
   const dummy = new THREE.Object3D();
   const phaseArray = new Float32Array(markerCount);  // Allocate phase array with same count as markers
   const globeRadius = 5.1;
-	
-  /*genericMarkers.forEach((marker, index) => {
+  genericMarkers.forEach((marker, index) => {
     const [radius, lat, lon] = marker.position;  // Extract radius, latitude, and longitude
     const { x, y, z } = latLonToVector3(lat, lon, globeRadius);  // Convert to 3D coordinates
 
@@ -2330,29 +2327,7 @@ function loadGenericMarkers() {
 
     // Add random phase for each marker (used for ripple effect)
     phaseArray[index] = Math.random();  
-  });*/
-	// Correctly destructure the position values
-genericMarkers.forEach((marker, index) => {
-  const [radius, lat, lon] = marker.position;  // Extract radius, latitude, and longitude from position
-
-  // Convert lat/lon to 3D coordinates using the radius of the globe
-  const { x, y, z } = latLonToVector3(lat, lon, radius);  // Use radius, latitude, longitude
-
-	// Log the marker's information (only inside the loop, where `index` is defined)
-    console.log(`Marker ${index}: Lat: ${lat}, Lon: ${lon}, X: ${x}, Y: ${y}, Z: ${z}`);
-
-
-  // Set position of the marker
-  dummy.position.set(x, y, z);
-
-  // Make the marker face outward from the globe
-  dummy.lookAt(new THREE.Vector3(0, 0, 0));  // Ensure the marker faces the globe's center
-
-  // Update matrix for the marker
-  dummy.updateMatrix();
-  markerMesh.setMatrixAt(index, dummy.matrix);
-});
-
+  });
 
   // Add the phase attribute to the geometry
   markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(phaseArray, 1));
