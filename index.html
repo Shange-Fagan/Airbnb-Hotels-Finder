@@ -2606,10 +2606,6 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         const response = await fetch(`http://localhost:3000/get-place-id?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
 
-        if (data.placeId) {
-            // Generate the final Airbnb search URL with the retrieved placeId
-            const finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}&place_id=${data.placeId}`;
-            
             // Fetch the RSS feed URL using the final search URL
             const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(finalSearchUrl)}`);
             const rssData = await rssResponse.json();
