@@ -2235,6 +2235,7 @@ function loadGenericMarkers() {
       shader.uniforms.time = globalUniforms.time;
 
       shader.vertexShader = `
+      varying vec2 vUv;  // Declare UV coordinate
         attribute float phase;
         varying float vPhase;
         ${shader.vertexShader}
@@ -2242,6 +2243,7 @@ function loadGenericMarkers() {
         `#include <begin_vertex>`,
         `#include <begin_vertex>
           vPhase = phase;
+	  vUv = uv;  // Assign the UV coordinates from the geometry
         `
       );
 
@@ -2316,7 +2318,7 @@ function loadDetailedMarkers(regionCoordinates) {
     markerMesh.position.set(x, y, z);
     markerMesh.name = `marker-${marker.id}`;  // Set a unique name
 
-    scene.add(markerMesh);
+    globe2.add(markerMesh);
   });
 }
 
