@@ -3501,6 +3501,13 @@ function animate() {
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera); // If you're using labelRenderer
 }
+	  renderer.setSize(window.innerWidth, window.innerHeight);
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+});
+
 
 animate(); // Start the animation loop
 initGlobe();
