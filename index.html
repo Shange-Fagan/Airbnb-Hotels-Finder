@@ -2293,6 +2293,7 @@ function loadGenericMarkers() {
 
   // Marker Geometry and Material
 const markerGeometry = new THREE.PlaneGeometry(0.05, 0.05);  // Reduced size  // Use a smaller size, adjust as needed
+markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
 
 // Optionally scale markers for mobile
 if (window.innerWidth <= 768) {
@@ -2301,6 +2302,7 @@ if (window.innerWidth <= 768) {
 	
   const markerCount = genericMarkers.length;
   const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+	
 
   const dummy = new THREE.Object3D();
   const phaseArray = [];
