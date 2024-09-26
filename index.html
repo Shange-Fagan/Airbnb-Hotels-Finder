@@ -904,11 +904,22 @@ overflow: hidden;
   width: 100%;
   height: 100%;
 display: block; /* Initially show the globe in full screen */
-  position: absolute; /* Ensure it is above other elements */
+  position: relative; /* Ensure it is above other elements */
   top: 0;
   left: 0;
   z-index: 9999;  /* Adjust to ensure it is above other elements */
 }
+	  #globe-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;  /* Make sure the canvas is above any other elements */
+		overflow: hidden;  /* Ensure the canvas doesn’t overflow */
+}
+	  #globe-container {
+  pointer-events: auto;  /* Allow interactions */
+}
+
 	  /* UI buttons that must be clickable over the globe */
 
 
