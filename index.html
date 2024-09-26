@@ -2475,13 +2475,22 @@ document.getElementById('searchBtn').addEventListener('click', function () {
                 const response = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(searchUrl)}`);
                 const data = await response.json();
 
-                if (data.rssUrl) {
+                if (data.placeId) {
+			// Step 3: Generate the final RSS feed URL with the retrieved place_id
+            const finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}&place_id=${data.placeId}`;
+            const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(finalSearchUrl)}`);
+	       const rssData = await rssResponse.json();
+			if (rssData.rssUrl) {
                     // Create an iframe and set its src to the RSS feed URL
                     const iframe = document.createElement('iframe');
                     iframe.src = data.rssUrl;
                     document.getElementById('left-container').innerHTML = '';  // Clear any previous content
                     document.getElementById('left-container').appendChild(iframe);
-                } else {
+			} else {
+                console.error('Failed to load RSS feed');
+            }
+
+		} else {
                     console.error('Failed to load RSS feed');
                 }
             } catch (error) {
@@ -2505,7 +2514,7 @@ function generateRssUrl(searchUrl) {
 }
 
 // Example usage:
-const searchUrl = 'https://www.airbnb.com/s/Mexico/homes?checkin=2024-09-25&checkout=2024-09-26&adults=2&place_id=ChIJU1NoiDs6BIQREZgJa760ZO0';
+const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
 const dynamicRssUrl = generateRssUrl(searchUrl);
 console.log(dynamicRssUrl);  // Logs the updated RSS URL
 
