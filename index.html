@@ -3142,14 +3142,14 @@ dl3.intensity = 0.5;
 
   
   // Creating Markers
-  const markerCount = markersData2.length;
-  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial2, markerCount);
+  //const markerCount = markersData2.length;
+  //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial2, markerCount);
   
-  const dummy = new THREE.Object3D();
-  const phaseArray = [];
+  //const dummy = new THREE.Object3D();
+  //const phaseArray = [];
   
   markersData2.forEach((data, index) => {
-    const [radius, phi, theta] = data.position;
+    //const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
     dummy.lookAt(dummy.position.clone().setLength(radius + 1));
     dummy.updateMatrix();
