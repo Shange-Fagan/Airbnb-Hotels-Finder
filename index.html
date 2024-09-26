@@ -2311,12 +2311,15 @@ function loadGenericMarkers() {
   const dummy = new THREE.Object3D();
   const phaseArray = new Float32Array(markerCount);  // Allocate phase array with same count as markers
   const globeRadius = 5.1;
+	
   genericMarkers.forEach((marker, index) => {
     const [radius, lat, lon] = marker.position;  // Extract radius, latitude, and longitude
     const { x, y, z } = latLonToVector3(lat, lon, globeRadius);  // Convert to 3D coordinates
 
     // Set position of the marker
-    dummy.position.set(x, y, z);
+     // Swap x and z in this case (assuming a different coordinate system)
+    dummy.position.set(z, y, x);  // Assign z to x, and x to z
+
 
     // Make the marker face outward from the globe
     dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(globeRadius));
