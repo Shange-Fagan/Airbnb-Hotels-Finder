@@ -2257,7 +2257,7 @@ function initGlobe() {
 // Function to load generic markers
 
 // Marker Geometry and Material
-const markerGeometry = new THREE.PlaneGeometry(0.25, 0.25); // Adjust size as needed
+const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7); // Adjust size as needed
 const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
     onBeforeCompile: (shader) => {
@@ -2358,7 +2358,7 @@ function loadDetailedMarkers(regionCoordinates) {
     const { x, y, z } = latLonToVector3(marker.position[0], marker.position[1], globeRadius);
 
     // Create individual marker geometry and material
-    const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Use smaller size for detailed markers
+    const markerGeometry = new THREE.PlaneGeometry(0.25, 0.25);  // Use smaller size for detailed markers
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
 
     // Optionally scale markers for mobile
