@@ -2296,55 +2296,44 @@ function loadGenericMarkers() {
   });
 
   // Marker Geometry and Material
-const markerGeometry = new THREE.PlaneGeometry(0.05, 0.05);  // Reduced size  // Use a smaller size, adjust as needed
+  const markerGeometry = new THREE.PlaneGeometry(0.05, 0.05);  // Reduced size for markers
 
-// Optionally scale markers for mobile
-if (window.innerWidth <= 768) {
-  markerGeometry.scale(0.5, 0.5, 0.5);  // Smaller for mobile
-}
-	
+  // Optionally scale markers for mobile
+  if (window.innerWidth <= 768) {
+    markerGeometry.scale(0.5, 0.5, 0.5);  // Smaller for mobile
+  }
+  
   const markerCount = genericMarkers.length;
   const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
-	
-
+  
   const dummy = new THREE.Object3D();
-  const phaseArray = [];
-  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
+  const phaseArray = new Float32Array(markerCount);  // Allocate phase array with same count as markers
+  
+  genericMarkers.forEach((marker, index) => {
+    const [lat, lon, altitude] = marker.position;  // Extract lat, lon, and altitude from the position array
+    const { x, y, z } = latLonToVector3(lat, lon, globeRadius);  // Convert to 3D coordinates
 
-  /*genericMarkers.forEach((marker, index) => {
-    const { lat, lon } = getRegionCoordinates(marker.region); // Get lat/lon for the region
-    const { x, y, z } = latLonToVector3(lat, lon, 5.1);  // Convert to 3D position with radius 5.1
-
+    // Set position of the marker
     dummy.position.set(x, y, z);
-    dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(5)); // Assuming radius 5 for the globe
 
+    // Make the marker face outward from the globe
+    dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(globeRadius));
+
+    // Update matrix for instanced mesh
     dummy.updateMatrix();
     markerMesh.setMatrixAt(index, dummy.matrix);
-    phaseArray.push(Math.random()); // Random ripple effect
-  });*/
-	const globeRadius = 5.1;
 
-	// Example for positioning a marker:
-genericMarkers.forEach((marker, index) => {
-  const [lat, lon, altitude] = marker.position;  // Extract lat, lon, and altitude from the position array
-  const { x, y, z } = latLonToVector3(lat, lon, globeRadius);  // Convert to 3D coordinates
+    // Add random phase for each marker (used for ripple effect)
+    phaseArray[index] = Math.random();  
+  });
 
-  // Set position of the marker
-  dummy.position.set(x, y, z);
+  // Add the phase attribute to the geometry
+  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(phaseArray, 1));
 
-  // Make the marker face outward from the globe
-  dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(globeRadius));
-
-  // Update matrix for instanced mesh
-  dummy.updateMatrix();
-  markerMesh.setMatrixAt(index, dummy.matrix);
-});
-
-
-  markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
-
+  // Add marker mesh to the globe
   globe2.add(markerMesh);
 }
+
 
 // Clear existing markers
 function clearExistingMarkers() {
