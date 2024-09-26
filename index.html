@@ -1782,7 +1782,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
     globe2.material.map = nightTexture;
     scene.background = nightbackgroundTexture;
     scene.remove(cloudMesh);  // Remove clouds for night
-    markerMaterial.color.set(nightmarkerMaterial);
+  //markerMaterial.color.set(nightmarkerMaterial);
 
     // Update button text to switch back to Day
     document.getElementById("toggleButton").textContent = "Switch to Day";
@@ -1807,7 +1807,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
     globe2.material.map = dayTexture;
     scene.background = daybackgroundTexture;
     scene.add(cloudMesh);  // Add clouds for day
-    markerMaterial.color.set(daymarkerMaterial);
+  //markerMaterial.color.set(daymarkerMaterial);
 
     // Update button text to switch back to Night
     document.getElementById("toggleButton").textContent = "Switch to Night";
