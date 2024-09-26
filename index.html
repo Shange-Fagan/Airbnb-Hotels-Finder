@@ -1555,7 +1555,7 @@ loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
   isMobile ? 'js/ny (1).webp' : 'js/ny (1).png', // Bottom face
   isMobile ? 'js/pz (1).webp' : 'js/pz (1).png', // Front face
   isMobile ? 'js/nz (1).webp' : 'js/nz (1).png'  // Back face
-    ]);*/
+    ]);
 
     // Set Initial Background Cube Map
    // scene.background = dayCubeMap;
@@ -1682,28 +1682,28 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
 	    document.getElementById("dayTicker").style.display = "none";
 	    document.getElementById("mobileTicker").style.display = "block";
 	    // Set the transition to night
-        new TWEEN.Tween(shaderMaterial2.uniforms.transition)
-        .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
-        .start();
+     // new TWEEN.Tween(shaderMaterial2.uniforms.transition)
+     // .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
+     // .start();
         globe2.material.map = nightTexture;
-        //scene.background = nightCubeMap;
+      scene.background = nightCubeMap;
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
-	scene.background = nightbackgroundTexture;
+     // scene.background = nightbackgroundTexture;
 	//scene.add(starField); // Add stars for the night
         scene.remove(cloudMesh); // Remove clouds for night
         markerMaterial.color.set(nightmarkerMaterial);
         document.getElementById("toggleButton").textContent = "Switch to Day";
     } else {
         // Set the transition to night
-        new TWEEN.Tween(shaderMaterial2.uniforms.transition)
-        .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
-        .start();
+      // new TWEEN.Tween(shaderMaterial2.uniforms.transition)
+      // .to({ value: 1 }, 20000)  // Smooth transition over 2 seconds
+      // .start();
         globe2.material.map = nightTexture;
-        //scene.background = nightCubeMap;
+      scene.background = nightCubeMap;
         // Set a dark blue color for the night theme background
         //scene.background = new THREE.Color(0x000033); // Dark blue
-	scene.background = nightbackgroundTexture;
+     // scene.background = nightbackgroundTexture;
 	//scene.add(starField); // Add stars for the night
         scene.remove(cloudMesh); // Remove clouds for night
         markerMaterial.color.set(nightmarkerMaterial);
