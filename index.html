@@ -2519,7 +2519,7 @@ const dynamicRssUrl = generateRssUrl(searchUrl);
 console.log(dynamicRssUrl);  // Logs the updated RSS URL
 */
 	  // When the user clicks search, generate the search URL and fetch the RSS feed
-document.getElementById('searchBtn').addEventListener('click', async function () {
+/*document.getElementById('searchBtn').addEventListener('click', async function () {
     const location = document.getElementById('where').value;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
@@ -2581,7 +2581,56 @@ function generateRssUrl(searchUrl) {
     // Replace the parameters in the RSS URL template
     const rssUrlTemplate = `https://rss.app/new-rss-feed/rss-builder?cssGeneralTitle=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20a%3Anth-child(1)&cssContainer=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div&jsTimeout=auto&url=${encodeURIComponent(searchUrl)}`;
     return rssUrlTemplate;
-}
+}*/
+// When the user clicks search, generate the search URL and fetch the RSS feed
+document.getElementById('searchBtn').addEventListener('click', async function () {
+    const location = document.getElementById('where').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = document.getElementById('guests').value;
+    const priceMin = document.getElementById('price_min').value;
+    const priceMax = document.getElementById('price_max').value;
+
+    // Ensure all required fields are filled out
+    if (!location || !checkin || !checkout || !guests) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+
+    // Generate the initial Airbnb search URL
+    const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+
+    try {
+        // Fetch the placeId from the backend (which extracts it from Airbnb's page)
+        const response = await fetch(`http://localhost:3000/get-place-id?searchUrl=${encodeURIComponent(searchUrl)}`);
+        const data = await response.json();
+
+        if (data.placeId) {
+            // Generate the final Airbnb search URL with the retrieved placeId
+            const finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}&place_id=${data.placeId}`;
+            
+            // Fetch the RSS feed URL using the final search URL
+            const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(finalSearchUrl)}`);
+            const rssData = await rssResponse.json();
+
+            if (rssData.rssUrl) {
+                // Create an iframe and set its src to the RSS feed URL
+                const iframe = document.createElement('iframe');
+                iframe.src = rssData.rssUrl; // Set the correct RSS feed URL here
+                iframe.width = '100%';
+                iframe.height = '500px';  // Adjust as necessary
+                document.getElementById('left-container').innerHTML = '';  // Clear previous content
+                document.getElementById('left-container').appendChild(iframe);
+            } else {
+                console.error('Failed to load RSS feed');
+            }
+        } else {
+            console.error('Failed to retrieve place ID');
+        }
+    } catch (error) {
+        console.error('Error fetching RSS feed:', error);
+    }
+});
 
 
 	  document.addEventListener("DOMContentLoaded", function() {
