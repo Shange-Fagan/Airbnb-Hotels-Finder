@@ -2219,13 +2219,17 @@ const genericMarkers = [
   return { x, y, z };
 }*/
 	  function latLonToVector3(lat, lon, radius) {
-  const phi = (90 - lat) * (Math.PI / 180);  // Convert latitude to radians
-  const theta = (lon + 180) * (Math.PI / 180);  // Convert longitude to radians
-  const x = -(radius * Math.sin(phi) * Math.cos(theta));  // X coordinate
-  const y = radius * Math.cos(phi);  // Y coordinate
-  const z = radius * Math.sin(phi) * Math.sin(theta);  // Z coordinate
-  return { x, y, z };  // Return as an object
+  const phi = (90 - lat) * (Math.PI / 180);  // Latitude to radians
+  const theta = (lon + 180) * (Math.PI / 180);  // Longitude to radians
+  
+  // Ensure the radius is calculated properly
+  const x = -(radius * Math.sin(phi) * Math.cos(theta));  // X position
+  const y = radius * Math.cos(phi);  // Y position
+  const z = radius * Math.sin(phi) * Math.sin(theta);  // Z position
+
+  return { x, y, z };
 }
+
 
 globe2 = new THREE.Mesh(geometry, material2);
 // Initialize the globe and markers
