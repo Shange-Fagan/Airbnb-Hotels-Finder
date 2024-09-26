@@ -895,19 +895,23 @@ overflow: hidden;
 /* Divide the screen into two sections */
 #container {
 	display: flex;
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
+  position: relative;  /* Ensure relative positioning */
+  z-index: 0;  /* Make sure the container is behind the globe-container */
 }
 
 /* Fullscreen globe when the page loads */
 	  #globe-container {
+  position: relative;  /* Set position to relative or absolute */
   width: 100%;
   height: 100%;
-display: block; /* Initially show the globe in full screen */
-  position: relative; /* Ensure it is above other elements */
+   display: block;
   top: 0;
   left: 0;
-  z-index: 10000;  /* Adjust to ensure it is above other elements */
+  right: 0;
+  bottom: 0;
+  z-index: 10000;  /* Ensure it's in front of other elements if necessary */
 }
 	  #globe-container canvas {
   position: absolute;
