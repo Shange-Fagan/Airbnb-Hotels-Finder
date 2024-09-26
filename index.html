@@ -2335,17 +2335,7 @@ function loadGenericMarkers() {
 }
 
 
-// Clear existing markers
-function clearExistingMarkers() {
-  const markers = scene.children.filter(obj => obj.isMesh && obj.name && obj.name.startsWith('marker-'));
-  markers.forEach(marker => {
-    if (marker.geometry) marker.geometry.dispose();
-    if (marker.material) marker.material.dispose();
-    scene.remove(marker);
-  });
-}
-
-// Load detailed markers for a specific region
+/*// Load detailed markers for a specific region
 function loadDetailedMarkers(regionCoordinates) {
   clearExistingMarkers();
 
@@ -2368,6 +2358,31 @@ if (window.innerWidth <= 768) {
     markerMesh.name = `marker-${marker.id}`;  // Set a unique name
 
     globe2.add(markerMesh);
+  });
+*/
+	  // Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
+function loadDetailedMarkers(regionCoordinates) {
+  clearExistingMarkers();  // Clear previously added markers
+
+  const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates);
+
+  detailedMarkers.forEach((marker, index) => {
+    const { x, y, z } = latLonToVector3(marker.position[0], marker.position[1], globeRadius);
+
+    // Create individual marker geometry and material
+    const markerGeometry = new THREE.PlaneGeometry(0.025, 0.025);  // Use smaller size for detailed markers
+    const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
+
+    // Optionally scale markers for mobile
+    if (window.innerWidth <= 768) {
+      markerGeometry.scale(0.5, 0.5, 0.5);  // Smaller for mobile
+    }
+
+    const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
+    markerMesh.position.set(x, y, z);
+    markerMesh.name = `marker-${marker.id}`;  // Set a unique name for each marker
+
+    globe2.add(markerMesh);  // Add marker to the globe
   });
 }
 
