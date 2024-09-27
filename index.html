@@ -909,53 +909,72 @@ overflow: hidden;
 
 /* Left container transition */
 
-	  #left-container {
-    width: 50%;
-    height: calc(100vh - 150px); /* Make the height dynamic and relative to the viewport */
-    overflow-y: scroll; /* Enable scrolling */
+	/* Left container transition */
+#left-container {
+	top: 55px;
+	  height: 100vh;
     background-color: white;
     color: black;
     font-size: 16px;
     padding: 20px;
+    overflow-y: auto;
+    display: none;  /* Hidden initially */
+    width: 0;  /* Initially 0 width */
     position: relative;
-    top: 55px;
-    display: none; /* Initially hidden */
-    z-index: 10001;
-    transition: width 0.5s ease;
-}
+    transition: width 0.5s ease;  /* Smooth transition for width */
+    z-index: 10001;  /* Ensure it's in front of other elements if necessary */
 
-#left-container.show {
-    display: block;
 }
-
 	  /* Style for each post */
         .post {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 15px;
-        }
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .post img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
+.post img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
 
-        .post h3 {
-            margin-top: 10px;
-        }
+.post h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
 
-        .post a {
-            display: inline-block;
-            margin-top: 10px;
-            text-decoration: none;
-            color: #ff385c;
-            font-weight: bold;
-        }
+.post p {
+    font-size: 14px;
+    color: #717171;
+}
 
-        .post a:hover {
-            text-decoration: underline;
-        }
+.post a {
+    display: block;
+    margin-top: 10px;
+    color: #ff385c;
+    text-decoration: none;
+}
 
+.post a:hover {
+    text-decoration: underline;
+}
+
+
+#left-container.show {
+    width: 50%;  /* Expands to 50% smoothly */
+	display: block;
+	top: 55px;
+	  height: 150px;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 20000;  /* Ensure it's in front of other elements if necessary */
+}
 /* Spinner CSS */
 .spinner-container {
     display: flex;
