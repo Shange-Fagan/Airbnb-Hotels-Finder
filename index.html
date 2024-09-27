@@ -2632,20 +2632,17 @@ async function fetchAirbnbPosts(searchUrl) {
 console.log('Fetched posts:', posts);
 
 
-        // Find the container to display posts
-        const container = document.getElementById('left-container');
-        container.style.display = 'block';  // Ensure container is visible
-        container.innerHTML = posts.map(post => `
-          <div class="post">
-            <img src="${post.image}" alt="${post.title}" />
-            <h3>${post.title}</h3>
-            <p>${post.price}</p>
-            <a href="${post.link}" target="_blank">View Listing</a>
-          </div>
-        `).join('');
-    } catch (error) {
-        console.error('Error fetching Airbnb posts:', error);
-    }
+        // Display the posts on the webpage
+  const container = document.getElementById('left-container');
+  container.innerHTML = posts.map(post => `
+    <div class="post">
+      <h3>${post.title}</h3>
+      <p>${post.subtitle}</p>
+      <p>${post.listing_price_details}</p>
+      <p>${post.rating_out_of_5_stars}</p>
+    </div>
+  `).join('');
+});
 }
 
 	  document.addEventListener("DOMContentLoaded", function() {
