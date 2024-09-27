@@ -934,11 +934,19 @@ overflow: hidden;
 }
 
 #left-container {
-    background-color: white;  /* Add this to make the left container visible */
-    overflow-y: auto;  /* Scrollable if posts overflow */
-	  z-index: 10001;  /* Ensure it's in front of other elements if necessary */
+    background-color: white;  /* Ensure it has a visible background */
+    color: black;  /* Make the text color visible */
+    font-size: 16px;  /* Set a readable font size */
+    padding: 20px;  /* Add some padding for better readability */
+    overflow-y: auto;  /* Ensure scrolling if the content exceeds the height */
+    display: none;  /* Initially hidden, shown after posts are fetched */
+    width: 50%;
+    height: 100vh;
+    position: relative;
+    z-index: 10001;  /* Ensure it's in front of other elements if necessary */
 
 }
+
 
 
 
