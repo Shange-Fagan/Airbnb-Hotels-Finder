@@ -902,7 +902,7 @@ overflow: hidden;
 
 /* Fullscreen globe when the page loads */
 	  #globe-container {
-  position: relative;  /* Set position to relative or absolute */
+  position: absolute;  /* Set position to relative or absolute */
   width: 100%;
   height: 100%;
    display: block;
@@ -913,13 +913,13 @@ overflow: hidden;
   z-index: 10000;  /* Ensure it's in front of other elements if necessary */
 		  float: right;
 }
-	  #globe-container canvas {
+	 /* #globe-container canvas {
   position: relative;
   top: 0;
   left: 0;
-  z-index: 1;  /* Make sure the canvas is above any other elements */
-		overflow: hidden;  /* Ensure the canvas doesn’t overflow */
-}
+  z-index: 1;*/  /* Make sure the canvas is above any other elements */
+		/*overflow: hidden; */ /* Ensure the canvas doesn’t overflow */
+/*}*/
 	  #globe-container {
   pointer-events: auto;  /* Allow interactions */
 }
@@ -931,12 +931,11 @@ overflow: hidden;
   width: 50%;  /* Shrink to 50% width */
   height: 100vh;  /* Full height */
 	z-index: 10001;
+	  pointer-events: auto;  /* Allow interactions */
+	float: right;
+	position: relative;
 }
-/* Make the iframe container and the globe split the screen after search */
-.split-screen-left, .split-screen-right {
-    width: 50%;  /* Each container takes up half of the screen */
-    float: left;  /* This ensures they are side by side */
-}
+
 
 /* Left container transition */
 #left-container {
@@ -958,23 +957,24 @@ overflow: hidden;
 
 #left-container.show {
     width: 50%;  /* Expands to 50% smoothly */
+	display: block;
 }/* Spinner CSS */
 .spinner-container {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;  /* Full height of the container */
     z-index: 10001;
 }
 
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #000;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
+  border-left-color: #000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -2631,26 +2631,23 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         alert('Please fill out all required fields.');
         return;
     }
-	    
-    // Show both containers in split-screen mode
-    // Show the left container immediately
-    const container = document.getElementById('left-container');
-    container.style.display = 'block';  // Show the container
-	
+	    // Show spinner and transition to split screen mode
+    const leftContainer = document.getElementById('left-container');
+    const globeContainer = document.getElementById('globe-container');
+
     // Show the spinner inside the left container
-    container.innerHTML = `
+    leftContainer.innerHTML = `
         <div class="spinner-container">
             <div class="spinner"></div>
             <p class="spinner-text">Fetching Airbnb information...</p>
         </div>
     `;
-    // Make the containers split the screen after the search
-    const globeContainer = document.getElementById('globe-container');
-const leftContainer = document.getElementById('left-container');
-    globeContainer.style.width = '50%';  // Shrink the globe-container to take only half the screen
-    globeContainer.style.float = 'right'; // Float globe container to the right
-    leftContainer.style.width = '50%'; // Left container takes the other half
-    leftContainer.style.float = 'left'; // Float left container to the left
+    leftContainer.style.display = 'block'; // Ensure the left container is visible
+
+    // Shrink the globe-container to take only half the screen
+    globeContainer.classList.add('split');
+    leftContainer.classList.add('show'); // Show the left container
+
 
     // Generate the Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
