@@ -3019,7 +3019,7 @@ function switchRegion(region) {
 }
 
 
-function animateCameraPan(x, y, z, zoomLevel) {
+/*function animateCameraPan(x, y, z, zoomLevel) {
   const currentZoom = camera.zoom;
   const zoomDelta = zoomLevel - currentZoom;
   const targetPosition = { x, y, z };
@@ -3051,7 +3051,39 @@ function animateCameraPan(x, y, z, zoomLevel) {
       }, 500);
     })
     .start();
+}*/
+	  // Animate the camera pan and zoom
+function animateCameraPan(x, y, z, zoomLevel) {
+    const currentZoom = camera.zoom;
+    const targetPosition = { x, y, z };
+
+    // Smooth camera panning
+    new TWEEN.Tween(camera.position)
+        .to(targetPosition, 3000)  // Smooth panning over 3 seconds
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(() => {
+            camera.lookAt(0, 0, 0);  // Keep the globe centered
+        })
+        .start();
+
+    // Smooth camera zooming
+    new TWEEN.Tween({ zoom: currentZoom })
+        .to({ zoom: zoomLevel }, 3000)  // Smooth zoom over 3 seconds
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function (tween) {
+            camera.zoom = tween.zoom;
+            camera.updateProjectionMatrix(); // Update the camera projection matrix
+        })
+        .onComplete(function () {
+            // Restart slow auto-rotation after panning and zooming
+            setTimeout(function () {
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 0.25; // Slow rotation speed
+            }, 500);
+        })
+        .start();
 }
+
 
 console.log('Globe:', globe2);
 console.log('Camera:', camera);
