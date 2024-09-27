@@ -932,35 +932,18 @@ overflow: hidden;
 	  /* UI buttons that must be clickable over the globe */
 
 
-/* Left section for the iframe (hidden initially) */
-#iframe-container {
-  width: 0%; /* Initially, the iframe is hidden */
-  height: 100%;
-	display: none;
-}
-
 /* Make the iframe container and the globe split the screen after search */
-.split-screen #globe-container {
-  width: 50%;
-	position: relative; /* Switch to relative when split-screen */
-	display: none; 
+.split-screen-left, .split-screen-right {
+    width: 50%;  /* Each container takes up half of the screen */
+    height: 100vh;
+    float: left;  /* This ensures they are side by side */
 }
 
 #left-container {
-            width: 30%;
-            float: left;
-            margin: 10px;
-	#left-container {
-    display: none; /* Hide by default */
+    background-color: white;  /* Add this to make the left container visible */
+    overflow-y: auto;  /* Scrollable if posts overflow */
 }
 
-        }
-
-        iframe {
-            border: none;
-            width: 100%;
-            height: 600px;
-        }
 
 
 </style>
@@ -971,13 +954,8 @@ overflow: hidden;
 </head>
 <body>
 <div id="container">
-<!-- Container that holds both the iframe and the globe -->
-    <!-- Globe display -->
-    <div id="globe-container"></div>
-
-    <!-- Hidden iframe for Airbnb URL -->
-    <div id="left-container"></div> <!-- Container for the RSS feed iframe -->
-      
+<div id="left-container" class="split-screen-left"></div>
+<div id="globe-container" class="split-screen-right"></div>
     </div>
   </div>
   
