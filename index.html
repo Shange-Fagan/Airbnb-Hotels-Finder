@@ -1186,6 +1186,16 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
     renderer.setSize(window.innerWidth, window.innerHeight);
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
 }
+	  window.addEventListener('resize', () => {
+    if (window.renderer && window.camera) {
+        const newWidth = globeContainer.clientWidth;
+        const newHeight = globeContainer.clientHeight;
+        window.renderer.setSize(newWidth, newHeight);
+        window.camera.aspect = newWidth / newHeight;
+        window.camera.updateProjectionMatrix();
+    }
+});
+
 	  //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
 	  let rt;
