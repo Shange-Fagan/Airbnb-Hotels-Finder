@@ -993,10 +993,6 @@ overflow: hidden;
 </head>
 <body>
 <div id="container">
-	<div id="spinner" class="spinner-container">
-    <div class="spinner"></div>
-    <p class="spinner-text">Fetching Airbnb information...</p>
-</div>
 <div id="left-container" style="display: none;" class="split-screen-left"></div>
 <div id="globe-container" class="split-screen-right"></div>
     </div>
@@ -2628,13 +2624,22 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         alert('Please fill out all required fields.');
         return;
     }
-
+	    
+    // Show both containers in split-screen mode
+    // Show the left container immediately
+    const container = document.getElementById('left-container');
+    container.style.display = 'block';  // Show the container
+	
+    // Show the spinner inside the left container
+    container.innerHTML = `
+        <div class="spinner-container">
+            <div class="spinner"></div>
+            <p class="spinner-text">Fetching Airbnb information...</p>
+        </div>
+    `;
     // Make the containers split the screen after the search
-    const leftContainer = document.getElementById('left-container');
     const globeContainer = document.getElementById('globe-container');
 
-    // Show both containers in split-screen mode
-    leftContainer.style.display = 'block';
     globeContainer.style.width = '50%';  // Shrink the globe-container to take only half the screen
     globeContainer.style.float = 'right'; // Float globe container to the right
     leftContainer.style.width = '50%'; // Left container takes the other half
