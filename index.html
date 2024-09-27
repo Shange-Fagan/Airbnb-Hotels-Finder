@@ -2629,6 +2629,8 @@ async function fetchAirbnbPosts(searchUrl) {
     try {
         const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const posts = await response.json();
+console.log('Fetched posts:', posts);
+
 
         // Find the container to display posts
         const container = document.getElementById('left-container');
