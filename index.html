@@ -933,19 +933,26 @@ overflow: hidden;
     float: left;  /* This ensures they are side by side */
 }
 
+/* Left container transition */
 #left-container {
-    background-color: white;  /* Ensure it has a visible background */
-    color: black;  /* Make the text color visible */
-    font-size: 16px;  /* Set a readable font size */
-    padding: 20px;  /* Add some padding for better readability */
-    overflow-y: auto;  /* Ensure scrolling if the content exceeds the height */
-    display: none;  /* Initially hidden, shown after posts are fetched */
-    width: 50%;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    display: none;  /* Hidden initially */
+    width: 0;  /* Initially 0 width */
     height: 100vh;
     position: relative;
+    transition: width 0.5s ease;  /* Smooth transition for width */
     z-index: 10001;  /* Ensure it's in front of other elements if necessary */
 
 }
+
+#left-container.show {
+    width: 50%;  /* Expands to 50% smoothly */
+}
+
 
 
 
