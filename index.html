@@ -2761,6 +2761,43 @@ async function fetchAirbnbPosts(searchUrl) {
         updateSpinnerText("Error fetching Airbnb listings. Please try again.");
     }
 }
+	  // A lookup table for example (you can expand this)
+const locations = {
+    "Jamaica": { lat: 18.1096, lng: -77.2975 },
+    "New York": { lat: 40.7128, lng: -74.0060 },
+    "London": { lat: 51.5074, lng: -0.1278 },
+    // Add more locations
+};
+
+function panToLocation(location) {
+    const coords = locations[location];
+    if (coords) {
+        // Convert latitude and longitude to Three.js coordinates
+        const lat = coords.lat;
+        const lng = coords.lng;
+
+        // Adjust the camera position and look at the location
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lng + 180) * (Math.PI / 180);
+
+        const x = 500 * Math.sin(phi) * Math.cos(theta); // Example radius of globe
+        const y = 500 * Math.cos(phi);
+        const z = 500 * Math.sin(phi) * Math.sin(theta);
+
+        // Set the camera position and point it at the location
+        camera.position.set(x, y, z);
+        camera.lookAt(0, 0, 0); // This centers the globe at origin (0, 0, 0)
+    } else {
+        console.log("Location not found in lookup table.");
+    }
+}
+
+// When search button is clicked
+document.getElementById('searchBtn').addEventListener('click', function() {
+    const location = document.getElementById('where').value;
+    panToLocation(location); // Pan to the searched location
+});
+
 
 	  document.addEventListener("DOMContentLoaded", function() {
 
