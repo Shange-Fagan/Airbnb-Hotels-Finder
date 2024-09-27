@@ -2837,17 +2837,37 @@ function panToLocation(location) {
         const phi = (90 - lat) * (Math.PI / 180);
         const theta = (lng + 180) * (Math.PI / 180);
 
-        const x = 500 * Math.sin(phi) * Math.cos(theta); // Example radius of globe
-        const y = 500 * Math.cos(phi);
-        const z = 500 * Math.sin(phi) * Math.sin(theta);
+        const targetX = 500 * Math.sin(phi) * Math.cos(theta); // Adjust globe radius accordingly
+        const targetY = 500 * Math.cos(phi);
+        const targetZ = 500 * Math.sin(phi) * Math.sin(theta);
 
-        // Set the camera position and point it at the location
-        camera.position.set(x, y, z);
-        camera.lookAt(0, 0, 0); // This centers the globe at origin (0, 0, 0)
+        // Optionally, smooth out the movement by interpolating the current position to the target
+        const duration = 1000; // Time for transition (in milliseconds)
+        const steps = 60; // Number of steps for the transition
+        const stepX = (targetX - camera.position.x) / steps;
+        const stepY = (targetY - camera.position.y) / steps;
+        const stepZ = (targetZ - camera.position.z) / steps;
+
+        let currentStep = 0;
+
+        function animatePan() {
+            if (currentStep < steps) {
+                camera.position.x += stepX;
+                camera.position.y += stepY;
+                camera.position.z += stepZ;
+                camera.lookAt(0, 0, 0); // Keep the globe centered
+                currentStep++;
+                requestAnimationFrame(animatePan); // Continue the animation
+            }
+        }
+
+        // Start animation
+        animatePan();
     } else {
         console.log("Location not found in lookup table.");
     }
 }
+
 
 // When search button is clicked
 document.getElementById('searchBtn').addEventListener('click', function() {
