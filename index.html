@@ -2847,10 +2847,11 @@ function panToLocation(location) {
         // Calculate the target position in 3D space
         const phi = (90 - lat) * (Math.PI / 180);
         const theta = (lng + 180) * (Math.PI / 180);
-
-        const targetX = 500 * Math.sin(phi) * Math.cos(theta); // Adjust globe radius accordingly
-        const targetY = 500 * Math.cos(phi);
-        const targetZ = 500 * Math.sin(phi) * Math.sin(theta);
+	    
+        const radius = 5.1;  // Updated globe radius
+        const targetX = radius * Math.sin(phi) * Math.cos(theta); // Adjust globe radius accordingly
+        const targetY = radius * Math.cos(phi);
+        const targetZ = radius * Math.sin(phi) * Math.sin(theta);
 
         // Use TWEEN for smooth animation
         new TWEEN.Tween(camera.position)
