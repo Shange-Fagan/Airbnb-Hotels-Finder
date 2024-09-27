@@ -2656,6 +2656,8 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
             window.renderer.setSize(newWidth, newHeight);
             window.camera.aspect = newWidth / newHeight;
             window.camera.updateProjectionMatrix();
+		console.log(`Resized to: ${globeContainer.clientWidth}x${globeContainer.clientHeight}`);
+
         }
     }
 
