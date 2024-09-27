@@ -2932,8 +2932,6 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
 // Pan to region based on dropdown selection
 function panToRegion(region) {
   let position, zoomLevel;
-  camera.zoom = 1;  // Reset zoom
-
   console.log(`Selected region: ${region}`);  // Debug
 
   switch (region) {
@@ -2946,13 +2944,13 @@ function panToRegion(region) {
     case 'world': position = { x: 0, y: 0, z: 10 }; zoomLevel = 0.5; break;
     default: return;
   }
-  console.log()
-  stopAllTweens();
-  // Stop auto-rotation after panning
-  controls.autoRotate = false;
+
+  stopAllTweens(); // Stop any existing animations
+  controls.autoRotate = false; // Stop auto-rotation
   console.log(`Panning to x:${position.x}, y:${position.y}, z:${position.z}, zoom:${zoomLevel}`);  // Debug
+
+  // Call to animate camera pan with smoother transitions
   animateCameraPan(position.x, position.y, position.z, zoomLevel);
-    
 }
 
 function animateCameraPan(x, y, z, zoomLevel) {
