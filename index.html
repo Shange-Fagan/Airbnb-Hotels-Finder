@@ -2695,8 +2695,16 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     updateSpinnerText("Visiting Airbnb site...");
 
     // Generate the Airbnb search URL
-    const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+    // Base URL for Airbnb search
+    let searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}`;
 
+    // Only add price_min and price_max if they have values
+    if (priceMin && priceMin.trim() !== "") {
+        searchUrl += `&price_min=${priceMin}`;
+    }
+    if (priceMax && priceMax.trim() !== "") {
+        searchUrl += `&price_max=${priceMax}`;
+    }
     // Debug the search URL (you can remove this after confirming it works)
     console.log('Generated searchUrl:', searchUrl);
 
