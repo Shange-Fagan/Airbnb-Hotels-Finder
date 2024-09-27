@@ -2844,7 +2844,7 @@ function panToLocation(location) {
         const lat = coords.lat;
         const lng = coords.lng;
 
-        // Adjust the camera position and look at the location
+        // Calculate the target position in 3D space
         const phi = (90 - lat) * (Math.PI / 180);
         const theta = (lng + 180) * (Math.PI / 180);
 
@@ -2852,36 +2852,29 @@ function panToLocation(location) {
         const targetY = 500 * Math.cos(phi);
         const targetZ = 500 * Math.sin(phi) * Math.sin(theta);
 
-        // Optionally, smooth out the movement by interpolating the current position to the target
-        const duration = 1000; // Time for transition (in milliseconds)
-        const steps = 60; // Number of steps for the transition
-        const stepX = (targetX - camera.position.x) / steps;
-        const stepY = (targetY - camera.position.y) / steps;
-        const stepZ = (targetZ - camera.position.z) / steps;
+        // Use TWEEN for smooth animation
+        new TWEEN.Tween(camera.position)
+            .to({ x: targetX, y: targetY, z: targetZ }, 2000) // Smooth pan over 2 seconds
+            .easing(TWEEN.Easing.Quadratic.InOut) // Apply easing for smoother effect
+            .onUpdate(() => {
+                camera.lookAt(0, 0, 0); // Keep the camera focused on the globe's center
+            })
+            .start();
 
-        let currentStep = 0;
-
-        function animatePan() {
-            if (currentStep < steps) {
-                camera.position.x += stepX;
-                camera.position.y += stepY;
-                camera.position.z += stepZ;
-                camera.lookAt(0, 0, 0); // Keep the globe centered
-                currentStep++;
-                requestAnimationFrame(animatePan); // Continue the animation
-            }
+        // Make sure to call this to keep TWEEN animations running
+        function animate() {
+            requestAnimationFrame(animate);
+            TWEEN.update(); // Update TWEEN animations
         }
 
-        // Start animation
-        animatePan();
+        animate(); // Start the animation loop
     } else {
         console.log("Location not found in lookup table.");
     }
 }
 
-
 // When search button is clicked
-document.getElementById('searchBtn').addEventListener('click', function() {
+document.getElementById('searchBtn').addEventListener('click', function () {
     const location = document.getElementById('where').value;
     panToLocation(location); // Pan to the searched location
 });
