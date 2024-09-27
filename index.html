@@ -2933,13 +2933,41 @@ function panToRegion(region) {
   console.log(`Selected region: ${region}`);  // Debug
 
   switch (region) {
-    case 'africa': position = { x: 12.0, y: 0, z: 1.74 }; zoomLevel = 1.5; break;
-    case 'europe': position = { x: 3.5, y: 2.91, z: 0.55 }; zoomLevel = 2.0; break;
-    case 'america': position = { x: 0, y: 2.55, z: 4.42 }; zoomLevel = 2.0; break;
-    case 'south america': position = { x: 1.5, y: -0.5, z: 4.3 }; zoomLevel = 1.7; break;
-    case 'carribbean': position = { x: 0.65, y: 2.0, z: 4.6 }; zoomLevel = 2.4; break;
-    case 'asia': position = { x: -0.89, y: 3.28, z: -3.92 }; zoomLevel = 1.9; break;
-    case 'world': position = { x: 0, y: 0, z: 10 }; zoomLevel = 0.5; break;
+    case 'africa': 
+      // Adjusted position for Africa
+      position = { x: -0.3, y: 0, z: 1.74 }; 
+      zoomLevel = 1.5; 
+      break;
+      
+    case 'europe': 
+      position = { x: 3.5, y: 2.91, z: 0.55 }; 
+      zoomLevel = 2.0; 
+      break;
+      
+    case 'america': 
+      position = { x: 0, y: 2.55, z: 4.42 }; 
+      zoomLevel = 2.0; 
+      break;
+      
+    case 'south america': 
+      position = { x: 1.5, y: -0.5, z: 4.3 }; 
+      zoomLevel = 1.7; 
+      break;
+      
+    case 'carribbean': 
+      position = { x: 0.65, y: 2.0, z: 4.6 }; 
+      zoomLevel = 2.4; 
+      break;
+      
+    case 'asia': 
+      position = { x: -0.89, y: 3.28, z: -3.92 }; 
+      zoomLevel = 1.9; 
+      break;
+      
+    case 'world': 
+      position = { x: 0, y: 0, z: 10 }; 
+      zoomLevel = 0.1; 
+      break;
     default: return;
   }
 
