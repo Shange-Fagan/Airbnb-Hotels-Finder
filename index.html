@@ -2999,11 +2999,10 @@ function panToRegion(lat, lon) {
             camera.lookAt(0, 0, 0); // Always keep looking at the globe center
         })
         .start();
-
-    // Call the animate loop
-    animate();
 }
 
+// Test case: pan to Africa (10° latitude, 20° longitude)
+panToRegion(10, 20);
 
 // Example: Switch case to pan to different regions
 function switchRegion(region) {
