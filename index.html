@@ -2931,7 +2931,7 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
 // Pan to region based on dropdown selection
 	  // Pan to region based on dropdown selection
 // Pan to region based on dropdown selection
-function panToRegion(region) {
+/*function panToRegion(region) {
   let position, zoomLevel;
   console.log(`Selected region: ${region}`);  // Debug
 
@@ -2980,7 +2980,45 @@ function panToRegion(region) {
 
   // Call to animate camera pan with smoother transitions
   animateCameraPan(position.x, position.y, position.z, zoomLevel);
+}*/
+// Main function to pan and zoom to a region
+function panToRegion(lat, lon) {
+    const radius = 5.1; // Globe radius
+    const phi = (90 - lat) * (Math.PI / 180); // Convert latitude to radians
+    const theta = (lon + 180) * (Math.PI / 180); // Convert longitude to radians
+
+    const x = radius * Math.sin(phi) * Math.cos(theta);
+    const y = radius * Math.cos(phi);
+    const z = radius * Math.sin(phi) * Math.sin(theta);
+
+    // Smooth transition to new camera position
+    new TWEEN.Tween(camera.position)
+        .to({ x: x, y: y, z: z }, 2000) // Smooth pan over 2 seconds
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(() => {
+            camera.lookAt(0, 0, 0); // Always keep looking at the globe center
+        })
+        .start();
+
+    // Call the animate loop
+    animate();
 }
+
+
+// Example: Switch case to pan to different regions
+function switchRegion(region) {
+    switch (region) {
+        case 'africa': panToRegion(10, 20); break;
+        case 'europe': panToRegion(48.8566, 2.3522); break; // Paris, France
+        case 'america': panToRegion(37.7749, -122.4194); break; // San Francisco, USA
+        case 'south america': panToRegion(-14.2350, -51.9253); break; // Brazil
+        case 'carribbean': panToRegion(18.1096, -77.2975); break; // Jamaica
+        case 'asia': panToRegion(35.6895, 139.6917); break; // Tokyo, Japan
+        case 'world': panToRegion(0, 0); break; // Default global view
+        default: return;
+    }
+}
+
 
 function animateCameraPan(x, y, z, zoomLevel) {
   const currentZoom = camera.zoom;
