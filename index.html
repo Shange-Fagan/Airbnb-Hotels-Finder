@@ -905,7 +905,7 @@ overflow: hidden;
 
 /* Left container transition */
 #left-container {
-	top: 110px;
+	top: 55px;
 	  height: 150px;
     background-color: white;
     color: black;
@@ -924,6 +924,14 @@ overflow: hidden;
 #left-container.show {
     width: 50%;  /* Expands to 50% smoothly */
 	display: block;
+	top: 55px;
+	  height: 150px;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 20000;  /* Ensure it's in front of other elements if necessary */
 }/* Spinner CSS */
 .spinner-container {
     display: flex;
@@ -933,7 +941,7 @@ overflow: hidden;
   height: 100%;  /* Full height of the container */
     z-index: 20000;
 	position: absolute;
-    top: 110px;
+    top: 55px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
