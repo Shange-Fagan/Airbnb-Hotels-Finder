@@ -2624,17 +2624,6 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     const leftContainer = document.getElementById('left-container');
     const globeContainer = document.getElementById('globe-container');
 
-    // Function to resize the Three.js globe
-    function resizeThreeJS() {
-        if (window.renderer && window.camera) {
-            const newWidth = globeContainer.clientWidth;
-            const newHeight = globeContainer.clientHeight;
-            window.renderer.setSize(newWidth, newHeight);
-            window.camera.aspect = newWidth / newHeight;
-            window.camera.updateProjectionMatrix();
-        }
-    }
-
     // Show the spinner inside the left container
     leftContainer.innerHTML = `
         <div class="spinner-container">
@@ -2648,8 +2637,26 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     globeContainer.classList.add('split');
     leftContainer.classList.add('show'); // Show the left container
 
+	// Switch to split-screen layout
+    leftContainer.style.width = '50%';
+    globeContainer.style.width = '50%';
+
     // Call the resize function for Three.js
-    resizeThreeJS(); // Ensure Three.js canvas is resized properly
+    //resizeThreeJS(); // Ensure Three.js canvas is resized properly
+
+	// Ensure Three.js globe resizes after the DOM update is complete
+    setTimeout(resizeThreeJS, 500); // Delay to ensure layout transition has completed
+
+	// Function to resize the Three.js globe
+    function resizeThreeJS() {
+        if (window.renderer && window.camera) {
+            const newWidth = globeContainer.clientWidth;
+            const newHeight = globeContainer.clientHeight;
+            window.renderer.setSize(newWidth, newHeight);
+            window.camera.aspect = newWidth / newHeight;
+            window.camera.updateProjectionMatrix();
+        }
+    }
 
     // Update the spinner text to indicate visiting Airbnb
     updateSpinnerText("Visiting Airbnb site...");
