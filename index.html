@@ -2954,39 +2954,39 @@ function panToRegion(region) {
 }
 
 function animateCameraPan(x, y, z, zoomLevel) {
-  new TWEEN.Tween(camera.position)
-    .to({ x, y, z }, 2000)
+  const currentZoom = camera.zoom;
+  const zoomDelta = zoomLevel - currentZoom;
+  const targetPosition = { x, y, z };
+  const currentPosition = { x: camera.position.x, y: camera.position.y, z: camera.position.z };
+
+  // Smooth camera panning
+  new TWEEN.Tween(currentPosition)
+    .to(targetPosition, 3000)  // Smooth panning over 3 seconds
     .easing(TWEEN.Easing.Quadratic.InOut)
-    .onUpdate(() => camera.lookAt(0, 0, 0))
+    .onUpdate(() => {
+      camera.position.set(currentPosition.x, currentPosition.y, currentPosition.z);
+      camera.lookAt(0, 0, 0);  // Keep the globe centered
+    })
     .start();
-  new TWEEN.Tween(camera)
-    .to({ zoom: zoomLevel }, 2000)
+
+  // Smooth camera zooming
+  new TWEEN.Tween({ zoom: currentZoom })
+    .to({ zoom: zoomLevel }, 3000)  // Smooth zoom over 3 seconds
     .easing(TWEEN.Easing.Quadratic.InOut)
-    .onUpdate(() => camera.updateProjectionMatrix())
+    .onUpdate(function (tween) {
+      camera.zoom = tween.zoom;
+      camera.updateProjectionMatrix(); // Update the camera projection matrix
+    })
+    .onComplete(function () {
+      // Restart slow auto-rotation after panning and zooming
+      setTimeout(function () {
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.25; // Slow rotation speed
+      }, 500);
+    })
     .start();
-    new TWEEN.Tween(camera.position)
-        .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .onUpdate(function () {
-            camera.lookAt(0, 0, 0);
-        })
-        .start();
-    // Add zooming to the pan
-    new TWEEN.Tween(camera)
-        .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .onUpdate(function () {
-            camera.updateProjectionMatrix(); // Important to update the camera matrix for zoom to take effect
-        })
-        .onComplete(function () {
-            // After zoom and panning complete, restart slow auto-rotation
-            setTimeout(function () {
-                controls.autoRotate = true;
-                controls.autoRotateSpeed = 0.25; // Slow rotation speed
-            }, 500);
-        })
-        .start();
 }
+
 console.log('Globe:', globe2);
 console.log('Camera:', camera);
 
