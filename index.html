@@ -2586,11 +2586,17 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         return;
     }
 
-    // Make the globe-container visible
-    const globeContainer = document.querySelector('.split-screen #globe-container');
-    if (globeContainer) {
-        globeContainer.style.display = 'block';  // Set display to block
-    }
+    // Make the containers split the screen after the search
+    const leftContainer = document.getElementById('left-container');
+    const globeContainer = document.getElementById('globe-container');
+
+    // Show both containers in split-screen mode
+    leftContainer.style.display = 'block';
+    globeContainer.style.width = '50%';  // Shrink the globe-container to take only half the screen
+    globeContainer.style.float = 'right'; // Float globe container to the right
+    leftContainer.style.width = '50%'; // Left container takes the other half
+    leftContainer.style.float = 'left'; // Float left container to the left
+});
 
     // Generate the Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
