@@ -2645,6 +2645,16 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     const leftContainer = document.getElementById('left-container');
     const globeContainer = document.getElementById('globe-container');
 
+	function resizeThreeJS() {
+    if (window.renderer && window.camera) {
+        const newWidth = globeContainer.clientWidth;
+        const newHeight = globeContainer.clientHeight;
+        window.renderer.setSize(newWidth, newHeight);
+        window.camera.aspect = newWidth / newHeight;
+        window.camera.updateProjectionMatrix();
+    }
+}
+
     // Show the spinner inside the left container
     leftContainer.innerHTML = `
         <div class="spinner-container">
@@ -2658,14 +2668,10 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     globeContainer.classList.add('split');
     leftContainer.classList.add('show'); // Show the left container
 
-	// **Force Three.js renderer to resize after container split**
-    if (window.renderer && window.camera) {
-        const newWidth = globeContainer.clientWidth;
-        const newHeight = globeContainer.clientHeight;
-        window.renderer.setSize(newWidth, newHeight);
-        window.camera.aspect = newWidth / newHeight;
-        window.camera.updateProjectionMatrix();
-    }
+
+// Call this after the containers split
+resizeThreeJS();
+
 
     // Generate the Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
