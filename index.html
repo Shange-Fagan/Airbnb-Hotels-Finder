@@ -2615,7 +2615,7 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     // Generate the initial Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${adults}&price_min=${priceMin}&price_max=${priceMax}`;
 // Add this line to debug the searchUrl
-    console.log('Generated searchUrl: ', searchUrl);
+   /* console.log('Generated searchUrl: ', searchUrl);
     try {
 
             // Fetch the RSS feed URL using the final search URL
@@ -2639,7 +2639,25 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     } catch (error) {
         console.error('Error fetching RSS feed:', error);
     }
-});
+});*/
+
+  async function fetchAirbnbPosts() {
+    const response = await fetch('http://localhost:3000/scrape-airbnb');  // Your backend API for scraping
+    const posts = await response.json();
+
+    const container = document.getElementById('left-container'');
+    container.innerHTML = posts.map(post => `
+      <div class="post">
+        <img src="${post.image}" alt="${post.title}" />
+        <h3>${post.title}</h3>
+        <p>${post.price}</p>
+        <a href="${post.link}" target="_blank">View Listing</a>
+      </div>
+    `).join('');
+  }
+
+  fetchAirbnbPosts();
+
 	  document.addEventListener("DOMContentLoaded", function() {
 
   // Add event listener to the submit button
