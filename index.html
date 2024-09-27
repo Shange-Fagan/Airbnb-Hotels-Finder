@@ -2593,6 +2593,7 @@ function generateRssUrl(searchUrl) {
     return rssUrlTemplate;
 }*/
 // When the user clicks search, generate the search URL and fetch the RSS feed
+// When the user clicks search, generate the search URL and fetch Airbnb posts
 document.getElementById('searchBtn').addEventListener('click', async function () {
     const location = document.getElementById('where').value;
     const checkin = document.getElementById('checkin').value;
@@ -2606,64 +2607,44 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         alert('Please fill out all required fields.');
         return;
     }
-	// Make the globe-container visible
+
+    // Make the globe-container visible
     const globeContainer = document.querySelector('.split-screen #globe-container');
     if (globeContainer) {
         globeContainer.style.display = 'block';  // Set display to block
     }
 
-    // Generate the initial Airbnb search URL
-    const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${adults}&price_min=${priceMin}&price_max=${priceMax}`;
-// Send this URL to your backend to scrape Airbnb posts
-  const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
-  const posts = await response.json();
+    // Generate the Airbnb search URL
+    const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
 
-  // Display or log the scraped posts
-  console.log(posts);
+    // Debug the search URL (you can remove this after confirming it works)
+    console.log('Generated searchUrl:', searchUrl);
+
+    // Fetch Airbnb posts and display them
+    await fetchAirbnbPosts(searchUrl);
 });
-	// Add this line to debug the searchUrl
-   /* console.log('Generated searchUrl: ', searchUrl);
+
+// Function to fetch Airbnb posts from your backend and display them on the webpage
+async function fetchAirbnbPosts(searchUrl) {
     try {
+        const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+        const posts = await response.json();
 
-            // Fetch the RSS feed URL using the final search URL
-            const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(searchUrl)}`);
-            const rssData = await rssResponse.json();
-
-            if (rssData.rssUrl) {
-		    // Set left-container to display block
-                 document.getElementById('left-container').style.display = 'block';
-
-                // Create an iframe and set its src to the RSS feed URL
-                const iframe = document.createElement('iframe');
-                iframe.src = rssData.rssUrl; // Set the correct RSS feed URL here
-                iframe.width = '100%';
-                iframe.height = '500px';  // Adjust as necessary
-                document.getElementById('left-container').innerHTML = '';  // Clear previous content
-                document.getElementById('left-container').appendChild(iframe);
-            } else {
-                console.error('Failed to load RSS feed');
-	    }
+        // Find the container to display posts
+        const container = document.getElementById('left-container');
+        container.style.display = 'block';  // Ensure container is visible
+        container.innerHTML = posts.map(post => `
+          <div class="post">
+            <img src="${post.image}" alt="${post.title}" />
+            <h3>${post.title}</h3>
+            <p>${post.price}</p>
+            <a href="${post.link}" target="_blank">View Listing</a>
+          </div>
+        `).join('');
     } catch (error) {
-        console.error('Error fetching RSS feed:', error);
+        console.error('Error fetching Airbnb posts:', error);
     }
-});*/
-
-  async function fetchAirbnbPosts() {
-    const response = await fetch('http://localhost:3000/scrape-airbnb');  // Your backend API for scraping
-    const posts = await response.json();
-
-    const container = document.getElementById('left-container'');
-    container.innerHTML = posts.map(post => `
-      <div class="post">
-        <img src="${post.image}" alt="${post.title}" />
-        <h3>${post.title}</h3>
-        <p>${post.price}</p>
-        <a href="${post.link}" target="_blank">View Listing</a>
-      </div>
-    `).join('');
-  }
-
-  fetchAirbnbPosts();
+}
 
 	  document.addEventListener("DOMContentLoaded", function() {
 
