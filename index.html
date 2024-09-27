@@ -913,13 +913,14 @@ overflow: hidden;
   z-index: 10000;  /* Ensure it's in front of other elements if necessary */
 		  float: right;
 }
-	 /* #globe-container canvas {
+	  #globe-container canvas {
   position: relative;
   top: 0;
   left: 0;
-  z-index: 1;*/  /* Make sure the canvas is above any other elements */
-		/*overflow: hidden; */ /* Ensure the canvas doesn’t overflow */
-/*}*/
+  z-index: 1;  /* Make sure the canvas is above any other elements */
+	overflow: hidden; /* Ensure the canvas doesn’t overflow */
+		  display: block !important;
+}
 	  #globe-container {
   pointer-events: auto;  /* Allow interactions */
 }
