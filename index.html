@@ -2617,6 +2617,7 @@ console.log('Fetched posts:', posts);
 
         // Display the posts on the webpage
   const container = document.getElementById('left-container');
+container.style.display = 'block';
   container.innerHTML = posts.map(post => `
     <div class="post">
       <h3>${post.title}</h3>
