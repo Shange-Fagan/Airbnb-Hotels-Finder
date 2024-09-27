@@ -2642,7 +2642,9 @@ console.log('Fetched posts:', posts);
       <p>${post.rating_out_of_5_stars}</p>
     </div>
   `).join('');
-};
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+    }
 }
 
 	  document.addEventListener("DOMContentLoaded", function() {
