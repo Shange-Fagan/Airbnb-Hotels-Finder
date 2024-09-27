@@ -2630,6 +2630,14 @@ function generateRssUrl(searchUrl) {
 }*/
 // When the user clicks search, generate the search URL and fetch the RSS feed
 // When the user clicks search, generate the search URL and fetch Airbnb posts
+// Function to update the spinner text
+function updateSpinnerText(message) {
+    const spinnerText = document.querySelector('.spinner-text');
+    if (spinnerText) {
+        spinnerText.innerText = message;
+    }
+}
+
 document.getElementById('searchBtn').addEventListener('click', async function () {
     const location = document.getElementById('where').value;
     const checkin = document.getElementById('checkin').value;
@@ -2656,8 +2664,6 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
             window.renderer.setSize(newWidth, newHeight);
             window.camera.aspect = newWidth / newHeight;
             window.camera.updateProjectionMatrix();
-		console.log(`Resized to: ${globeContainer.clientWidth}x${globeContainer.clientHeight}`);
-
         }
     }
 
@@ -2665,7 +2671,7 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     leftContainer.innerHTML = `
         <div class="spinner-container">
             <div class="spinner"></div>
-            <p class="spinner-text">Fetching Airbnb information...</p>
+            <p class="spinner-text">Starting the process...</p>
         </div>
     `;
     leftContainer.style.display = 'block'; // Ensure the left container is visible
@@ -2677,11 +2683,17 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     // Call the resize function for Three.js
     resizeThreeJS(); // Ensure Three.js canvas is resized properly
 
+    // Update the spinner text to indicate visiting Airbnb
+    updateSpinnerText("Visiting Airbnb site...");
+
     // Generate the Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
 
     // Debug the search URL (you can remove this after confirming it works)
     console.log('Generated searchUrl:', searchUrl);
+
+    // Update spinner text to indicate fetching data
+    updateSpinnerText("Fetching Airbnb information...");
 
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
@@ -2690,23 +2702,33 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 async function fetchAirbnbPosts(searchUrl) {
     try {
+        // Update spinner text to indicate scraping started
+        updateSpinnerText("Scraping Airbnb listings...");
+
         const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const posts = await response.json();
+
         console.log('Fetched posts:', posts);
+
+        // Update spinner text to indicate posts fetched
+        updateSpinnerText("Displaying fetched listings...");
 
         // Display the posts on the webpage
         const container = document.getElementById('left-container');
         container.style.display = 'block';
         container.innerHTML = posts.map(post => `
             <div class="post">
-              <h3 style="color: black;">${post.title}</h3>
-              <p style="color: black;">${post.subtitle}</p>
-              <p style="color: black;">${post.listing_price_details}</p>
-              <p style="color: black;">${post.rating_out_of_5_stars}</p>
+                <h3 style="color: black;">${post.title}</h3>
+                <p style="color: black;">${post.subtitle}</p>
+                <p style="color: black;">${post.listing_price_details}</p>
+                <p style="color: black;">${post.rating_out_of_5_stars}</p>
             </div>
         `).join('');
+
     } catch (error) {
         console.error('Error fetching posts:', error);
+        // Update spinner text to indicate an error occurred
+        updateSpinnerText("Error fetching Airbnb listings. Please try again.");
     }
 }
 
