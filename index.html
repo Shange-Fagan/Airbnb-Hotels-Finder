@@ -2726,11 +2726,13 @@ async function fetchAirbnbPosts(searchUrl) {
         container.style.display = 'block';
         container.innerHTML = posts.map(post => `
             <div class="post">
-                <h3 style="color: black;">${post.title}</h3>
-                <p style="color: black;">${post.subtitle}</p>
-                <p style="color: black;">${post.listing_price_details}</p>
-                <p style="color: black;">${post.rating_out_of_5_stars}</p>
-            </div>
+                    <img src="${post.image}" alt="${post.title}" />
+                    <h3>${post.title}</h3>
+                    <p>${post.subtitle}</p>
+                    <p>${post.listing_price_details}</p>
+                    <p>${post.rating_out_of_5_stars}</p>
+                    <a href="${post.link}" target="_blank">View Listing</a>
+                </div>
         `).join('');
 
     } catch (error) {
