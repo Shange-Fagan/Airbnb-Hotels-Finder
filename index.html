@@ -951,8 +951,36 @@ overflow: hidden;
 
 #left-container.show {
     width: 50%;  /* Expands to 50% smoothly */
+}/* Spinner CSS */
+.spinner-container {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10001;
 }
 
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #000;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spinner-text {
+    margin-top: 10px;
+    text-align: center;
+    color: black;
+    font-size: 16px;
+}
 
 
 
