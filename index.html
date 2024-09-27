@@ -926,7 +926,12 @@ overflow: hidden;
 
 	  /* UI buttons that must be clickable over the globe */
 
-
+/* Split the screen when the search button is clicked */
+#globe-container.split {
+  width: 50%;  /* Shrink to 50% width */
+  height: 100vh;  /* Full height */
+  float: right;
+}
 /* Make the iframe container and the globe split the screen after search */
 .split-screen-left, .split-screen-right {
     width: 50%;  /* Each container takes up half of the screen */
@@ -2641,7 +2646,7 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     `;
     // Make the containers split the screen after the search
     const globeContainer = document.getElementById('globe-container');
-
+const leftContainer = document.getElementById('left-container');
     globeContainer.style.width = '50%';  // Shrink the globe-container to take only half the screen
     globeContainer.style.float = 'right'; // Float globe container to the right
     leftContainer.style.width = '50%'; // Left container takes the other half
