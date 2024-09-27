@@ -2712,6 +2712,15 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     // Debug the search URL (you can remove this after confirming it works)
     console.log('Generated searchUrl:', searchUrl);
 
+	// Disable globe interactions when the left container is scrolled
+    leftContainer.addEventListener('mouseenter', () => {
+        globeContainer.classList.add('disable-interaction');
+    });
+
+    leftContainer.addEventListener('mouseleave', () => {
+        globeContainer.classList.remove('disable-interaction');
+    });
+
     // Update spinner text to indicate fetching data
     updateSpinnerText("Fetching Airbnb information...");
 
