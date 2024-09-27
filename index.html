@@ -2614,7 +2614,14 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
 
     // Generate the initial Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${adults}&price_min=${priceMin}&price_max=${priceMax}`;
-// Add this line to debug the searchUrl
+// Send this URL to your backend to scrape Airbnb posts
+  const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+  const posts = await response.json();
+
+  // Display or log the scraped posts
+  console.log(posts);
+});
+	// Add this line to debug the searchUrl
    /* console.log('Generated searchUrl: ', searchUrl);
     try {
 
