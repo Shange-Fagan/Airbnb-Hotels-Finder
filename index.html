@@ -310,12 +310,12 @@ a, button, input, select, iframe {
     margin-right: 10px; /* Spacing between input fields */
     width: 220px; /* Slightly smaller width */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	color: rgba(255, 255, 255, 1);
+	color: rgba(255, 255, 255, 0.75);
 }
 
 #header input:focus, #header select:focus {
     outline: none;
-    box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline for focus similar to Airbnb */
+    /*box-shadow: 0 0 8px rgba(255, 56, 92, 0.8);*/ /* Red outline for focus similar to Airbnb */
 }
 
 
@@ -386,6 +386,12 @@ a, button, input, select, iframe {
     color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
     font-size: 14px; /* Airbnb-style font size */
 }
+	  /* Styling for Specific Inputs */
+input[type="text"]::placeholder,
+input[type="date"]::placeholder {
+  color: rgba(255, 255, 255, 0.75); /* Light gray placeholder for text and date inputs */
+  opacity: 1; /* Ensure full opacity */
+}
 
 /* Date input custom styling */
 input[type="date"] {
@@ -396,8 +402,8 @@ input[type="date"] {
     background-position: right 10px center;
     background-size: 20px;
     border: 1px solid #ddd;
-    color: #222222;
-    background-color: white;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.75);
     border-radius: 50px;
 }
 
