@@ -916,12 +916,16 @@ overflow: hidden;
     color: black;
     font-size: 16px;
     padding: 20px;
-    overflow-y: auto;
     display: none;  /* Hidden initially */
     width: 0;  /* Initially 0 width */
     position: relative;
     transition: width 0.5s ease;  /* Smooth transition for width */
     z-index: 10001;  /* Ensure it's in front of other elements if necessary */
+	display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* This will ensure each item takes up equal space */
+    gap: 15px; /* Add some spacing between the listings */
+    padding: 20px;
+    overflow-y: auto; /* Ensure it scrolls if the content overflows */
 
 }
 	  /* Style for each post */
