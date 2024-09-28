@@ -2863,101 +2863,100 @@ async function fetchAirbnbPosts(searchUrl) {
     "jamaica": { lat: 18.1096, lng: -77.2975 } // Added Jamaica
 };*/
 	  const locations = {
-    "new york": { lat: 40.7128, lng: 74.0060 },  // Flipped from -74.0060 to 74.0060
-    "los angeles": { lat: 34.0522, lng: 118.2437 },  // Flipped from -118.2437 to 118.2437
-    "chicago": { lat: 41.8781, lng: 87.6298 },  // Flipped from -87.6298 to 87.6298
-    "miami": { lat: 25.7617, lng: 80.1918 },  // Flipped from -80.1918 to 80.1918
-    "san francisco": { lat: 37.7749, lng: 122.4194 },  // Flipped from -122.4194 to 122.4194
-    "washington dc": { lat: 38.9072, lng: 77.0369 },  // Flipped from -77.0369 to 77.0369
-    "london": { lat: 51.5074, lng: 0.1278 },  // Longitude remains 0
-    "paris": { lat: 48.8566, lng: -2.3522 },  // Flipped from 2.3522 to -2.3522
-    "berlin": { lat: 52.5200, lng: -13.4050 },  // Flipped from 13.4050 to -13.4050
-    "rome": { lat: 41.9028, lng: -12.4964 },  // Flipped from 12.4964 to -12.4964
-    "madrid": { lat: 40.4168, lng: 3.7038 },  // Flipped from -3.7038 to 3.7038
-    "barcelona": { lat: 41.3851, lng: -2.1734 },  // Flipped from 2.1734 to -2.1734
-    "moscow": { lat: 55.7558, lng: -37.6173 },  // Flipped from 37.6173 to -37.6173
-    "tokyo": { lat: 35.6895, lng: -139.6917 },  // Flipped from 139.6917 to -139.6917
-    "beijing": { lat: 39.9042, lng: -116.4074 },  // Flipped from 116.4074 to -116.4074
-    "shanghai": { lat: 31.2304, lng: -121.4737 },  // Flipped from 121.4737 to -121.4737
-    "sydney": { lat: -33.8688, lng: -151.2093 },  // Flipped from 151.2093 to -151.2093
-    "melbourne": { lat: -37.8136, lng: -144.9631 },  // Flipped from 144.9631 to -144.9631
-    "rio de janeiro": { lat: -22.9068, lng: 43.1729 },  // Flipped from -43.1729 to 43.1729
-    "são paulo": { lat: -23.5505, lng: 46.6333 },  // Flipped from -46.6333 to 46.6333
-    "mexico city": { lat: 19.4326, lng: 99.1332 },  // Flipped from -99.1332 to 99.1332
-    "toronto": { lat: 43.651070, lng: 79.347015 },  // Flipped from -79.347015 to 79.347015
-    "vancouver": { lat: 49.2827, lng: 123.1207 },  // Flipped from -123.1207 to 123.1207
-    "montreal": { lat: 45.5017, lng: 73.5673 },  // Flipped from -73.5673 to 73.5673
-    "buenos aires": { lat: -34.6037, lng: 58.3816 },  // Flipped from -58.3816 to 58.3816
-    "cape town": { lat: -33.9249, lng: -18.4241 },  // Flipped from 18.4241 to -18.4241
-    "johannesburg": { lat: -26.2041, lng: -28.0473 },  // Flipped from 28.0473 to -28.0473
-    "cairo": { lat: 30.0444, lng: -31.2357 },  // Flipped from 31.2357 to -31.2357
-    "dubai": { lat: 25.2048, lng: -55.2708 },  // Flipped from 55.2708 to -55.2708
-    "istanbul": { lat: 41.0082, lng: -28.9784 },  // Flipped from 28.9784 to -28.9784
-    "delhi": { lat: 28.6139, lng: -77.209 },  // Flipped from 77.209 to -77.209
-    "mumbai": { lat: 19.0760, lng: -72.8777 },  // Flipped from 72.8777 to -72.8777
-    "hong kong": { lat: 22.3193, lng: -114.1694 },  // Flipped from 114.1694 to -114.1694
-    "bangkok": { lat: 13.7563, lng: -100.5018 },  // Flipped from 100.5018 to -100.5018
-    "singapore": { lat: 1.3521, lng: -103.8198 },  // Flipped from 103.8198 to -103.8198
-    "kuala lumpur": { lat: 3.1390, lng: -101.6869 },  // Flipped from 101.6869 to -101.6869
-    "jakarta": { lat: -6.2088, lng: -106.8456 },  // Flipped from 106.8456 to -106.8456
-    "seoul": { lat: 37.5665, lng: -126.978 },  // Flipped from 126.978 to -126.978
-    "lagos": { lat: 6.5244, lng: -3.3792 },  // Flipped from 3.3792 to -3.3792
-    "casablanca": { lat: 33.5731, lng: 7.5898 },  // Flipped from -7.5898 to 7.5898
-    "nairobi": { lat: -1.286389, lng: -36.817223 },  // Flipped from 36.817223 to -36.817223
-    "lima": { lat: -12.0464, lng: 77.0428 },  // Flipped from -77.0428 to 77.0428
-    "santiago": { lat: -33.4489, lng: 70.6693 },  // Flipped from -70.6693 to 70.6693
-    "athens": { lat: 37.9838, lng: -23.7275 },  // Flipped from 23.7275 to -23.7275
-    "lisbon": { lat: 38.7223, lng: 9.1393 },  // Flipped from -9.1393 to 9.1393
-    "vienna": { lat: 48.2082, lng: -16.3738 },  // Flipped from 16.3738 to -16.3738
-    "stockholm": { lat: 59.3293, lng: -18.0686 },  // Flipped from 18.0686 to -18.0686
-    "oslo": { lat: 59.9139, lng: -10.7522 },  // Flipped from 10.7522 to -10.7522
-    "helsinki": { lat: 60.1695, lng: -24.9354 },  // Flipped from 24.9354 to -24.9354
-    "warsaw": { lat: 52.2297, lng: -21.0122 },  // Flipped from 21.0122 to -21.0122
-    "zurich": { lat: 47.3769, lng: -8.5417 },  // Flipped from 8.5417 to -8.5417
-    "brussels": { lat: 50.8503, lng: -4.3517 },  // Flipped from 4.3517 to -4.3517
-    "amsterdam": { lat: 52.3676, lng: -4.9041 },  // Flipped from 4.9041 to -4.9041
-    "dublin": { lat: 53.3498, lng: 6.2603 },  // Flipped from -6.2603 to 6.2603
-    "copenhagen": { lat: 55.6761, lng: -12.5683 },  // Flipped from 12.5683 to -12.5683
-    "budapest": { lat: 47.4979, lng: -19.0402 },  // Flipped from 19.0402 to -19.0402
-    "prague": { lat: 50.0755, lng: -14.4378 },  // Flipped from 14.4378 to -14.4378
-    "doha": { lat: 25.276987, lng: -51.521067 },  // Flipped from 51.521067 to -51.521067
-    "jamaica": { lat: 18.1096, lng: 77.2975 },  // Flipped from -77.2975 to 77.2975
-    "united states": { lat: 37.0902, lng: 95.7129 }, // Horizontal flip applied
-    "canada": { lat: 56.1304, lng: 106.3468 },
-    "mexico": { lat: 23.6345, lng: 102.5528 },
-    "brazil": { lat: -14.2350, lng: 51.9253 },
-    "argentina": { lat: -38.4161, lng: 63.6167 },
-    "united kingdom": { lat: 55.3781, lng: 3.4360 },
-    "france": { lat: 46.6034, lng: 2.2137 },
-    "germany": { lat: 51.1657, lng: 10.4515 },
-    "italy": { lat: 41.8719, lng: 12.5674 },
-    "spain": { lat: 40.4637, lng: 3.7492 },
-    "portugal": { lat: 39.3999, lng: 8.2245 },
-    "russia": { lat: 61.5240, lng: 100.6197 }, // Flipped from -100.6197
-    "china": { lat: 35.8617, lng: 104.1954 },
-    "japan": { lat: 36.2048, lng: 138.2529 },
-    "india": { lat: 20.5937, lng: 78.9629 },
-    "australia": { lat: -25.2744, lng: 133.7751 },
-    "south africa": { lat: -30.5595, lng: 22.9375 },
-    "egypt": { lat: 26.8206, lng: 30.8025 },
-    "nigeria": { lat: 9.0820, lng: 8.6753 },
-    "kenya": { lat: -1.2921, lng: 36.8219 },
-    "jamaica": { lat: 18.1096, lng: 77.2975 },  // Updated for Jamaica
-    "south korea": { lat: 35.9078, lng: 127.7669 },
-    "indonesia": { lat: -0.7893, lng: 113.9213 },
-    "saudi arabia": { lat: 23.8859, lng: 45.0792 },
-    "iran": { lat: 32.4279, lng: 53.6880 },
-    "turkey": { lat: 38.9637, lng: 35.2433 },
-    "israel": { lat: 31.0461, lng: 34.8516 },
-    "greece": { lat: 39.0742, lng: 21.8243 },
-    "thailand": { lat: 15.8700, lng: 100.9925 },
-    "vietnam": { lat: 14.0583, lng: 108.2772 },
-    "new zealand": { lat: -40.9006, lng: 174.8860 },
-    "pakistan": { lat: 30.3753, lng: 69.3451 },
-    "afghanistan": { lat: 33.9391, lng: 67.7100 },
-    "colombia": { lat: 4.5709, lng: 74.2973 },
-    "venezuela": { lat: 6.4238, lng: 66.5897 }
-
+    "new york": { lat: 40.7128 + (-4.98), lng: -74.0060 + (-159.25) },
+    "los angeles": { lat: 34.0522 + (-4.98), lng: -118.2437 + (-159.25) },
+    "chicago": { lat: 41.8781 + (-4.98), lng: -87.6298 + (-159.25) },
+    "miami": { lat: 25.7617 + (-4.98), lng: -80.1918 + (-159.25) },
+    "san francisco": { lat: 37.7749 + (-4.98), lng: -122.4194 + (-159.25) },
+    "washington dc": { lat: 38.9072 + (-4.98), lng: -77.0369 + (-159.25) },
+    "london": { lat: 51.5074 + (-4.98), lng: -0.1278 + (-159.25) },
+    "paris": { lat: 48.8566 + (-4.98), lng: 2.3522 + (-159.25) },
+    "berlin": { lat: 52.5200 + (-4.98), lng: 13.4050 + (-159.25) },
+    "rome": { lat: 41.9028 + (-4.98), lng: 12.4964 + (-159.25) },
+    "madrid": { lat: 40.4168 + (-4.98), lng: -3.7038 + (-159.25) },
+    "barcelona": { lat: 41.3851 + (-4.98), lng: 2.1734 + (-159.25) },
+    "moscow": { lat: 55.7558 + (-4.98), lng: 37.6173 + (-159.25) },
+    "tokyo": { lat: 35.6895 + (-4.98), lng: 139.6917 + (-159.25) },
+    "beijing": { lat: 39.9042 + (-4.98), lng: 116.4074 + (-159.25) },
+    "shanghai": { lat: 31.2304 + (-4.98), lng: 121.4737 + (-159.25) },
+    "sydney": { lat: -33.8688 + (-4.98), lng: 151.2093 + (-159.25) },
+    "melbourne": { lat: -37.8136 + (-4.98), lng: 144.9631 + (-159.25) },
+    "rio de janeiro": { lat: -22.9068 + (-4.98), lng: -43.1729 + (-159.25) },
+    "são paulo": { lat: -23.5505 + (-4.98), lng: -46.6333 + (-159.25) },
+    "mexico city": { lat: 19.4326 + (-4.98), lng: -99.1332 + (-159.25) },
+    "toronto": { lat: 43.651070 + (-4.98), lng: -79.347015 + (-159.25) },
+    "vancouver": { lat: 49.2827 + (-4.98), lng: -123.1207 + (-159.25) },
+    "montreal": { lat: 45.5017 + (-4.98), lng: -73.5673 + (-159.25) },
+    "buenos aires": { lat: -34.6037 + (-4.98), lng: -58.3816 + (-159.25) },
+    "cape town": { lat: -33.9249 + (-4.98), lng: 18.4241 + (-159.25) },
+    "johannesburg": { lat: -26.2041 + (-4.98), lng: 28.0473 + (-159.25) },
+    "cairo": { lat: 30.0444 + (-4.98), lng: 31.2357 + (-159.25) },
+    "dubai": { lat: 25.2048 + (-4.98), lng: 55.2708 + (-159.25) },
+    "istanbul": { lat: 41.0082 + (-4.98), lng: 28.9784 + (-159.25) },
+    "delhi": { lat: 28.6139 + (-4.98), lng: 77.209 + (-159.25) },
+    "mumbai": { lat: 19.0760 + (-4.98), lng: 72.8777 + (-159.25) },
+    "hong kong": { lat: 22.3193 + (-4.98), lng: 114.1694 + (-159.25) },
+    "bangkok": { lat: 13.7563 + (-4.98), lng: 100.5018 + (-159.25) },
+    "singapore": { lat: 1.3521 + (-4.98), lng: 103.8198 + (-159.25) },
+    "kuala lumpur": { lat: 3.1390 + (-4.98), lng: 101.6869 + (-159.25) },
+    "jakarta": { lat: -6.2088 + (-4.98), lng: 106.8456 + (-159.25) },
+    "seoul": { lat: 37.5665 + (-4.98), lng: 126.978 + (-159.25) },
+    "lagos": { lat: 6.5244 + (-4.98), lng: 3.3792 + (-159.25) },
+    "casablanca": { lat: 33.5731 + (-4.98), lng: -7.5898 + (-159.25) },
+    "nairobi": { lat: -1.286389 + (-4.98), lng: 36.817223 + (-159.25) },
+    "lima": { lat: -12.0464 + (-4.98), lng: -77.0428 + (-159.25) },
+    "santiago": { lat: -33.4489 + (-4.98), lng: -70.6693 + (-159.25) },
+    "athens": { lat: 37.9838 + (-4.98), lng: 23.7275 + (-159.25) },
+    "lisbon": { lat: 38.7223 + (-4.98), lng: -9.1393 + (-159.25) },
+    "vienna": { lat: 48.2082 + (-4.98), lng: 16.3738 + (-159.25) },
+    "stockholm": { lat: 59.3293 + (-4.98), lng: 18.0686 + (-159.25) },
+    "oslo": { lat: 59.9139 + (-4.98), lng: 10.7522 + (-159.25) },
+    "helsinki": { lat: 60.1695 + (-4.98), lng: 24.9354 + (-159.25) },
+    "warsaw": { lat: 52.2297 + (-4.98), lng: 21.0122 + (-159.25) },
+    "zurich": { lat: 47.3769 + (-4.98), lng: 8.5417 + (-159.25) },
+    "brussels": { lat: 50.8503 + (-4.98), lng: 4.3517 + (-159.25) },
+    "amsterdam": { lat: 52.3676 + (-4.98), lng: 4.9041 + (-159.25) },
+    "dublin": { lat: 53.3498 + (-4.98), lng: -6.2603 + (-159.25) },
+    "copenhagen": { lat: 55.6761 + (-4.98), lng: 12.5683 + (-159.25) },
+    "budapest": { lat: 47.4979 + (-4.98), lng: 19.0402 + (-159.25) },
+    "prague": { lat: 50.0755 + (-4.98), lng: 14.4378 + (-159.25) },
+    "doha": { lat: 25.276987 + (-4.98), lng: 51.521067 + (-159.25) },
+    "jamaica": { lat: 18.1096 + (-4.98), lng: 77.2975 + (-159.25) },
+    "united states": { lat: 37.0902 + (-4.98), lng: 95.7129 + (-159.25) },
+    "canada": { lat: 56.1304 + (-4.98), lng: 106.3468 + (-159.25) },
+    "mexico": { lat: 23.6345 + (-4.98), lng: 102.5528 + (-159.25) },
+    "brazil": { lat: -14.2350 + (-4.98), lng: 51.9253 + (-159.25) },
+    "argentina": { lat: -38.4161 + (-4.98), lng: 63.6167 + (-159.25) },
+    "united kingdom": { lat: 55.3781 + (-4.98), lng: 3.4360 + (-159.25) },
+    "france": { lat: 46.6034 + (-4.98), lng: 2.2137 + (-159.25) },
+    "germany": { lat: 51.1657 + (-4.98), lng: 10.4515 + (-159.25) },
+    "italy": { lat: 41.8719 + (-4.98), lng: 12.5674 + (-159.25) },
+    "spain": { lat: 40.4637 + (-4.98), lng: 3.7492 + (-159.25) },
+    "portugal": { lat: 39.3999 + (-4.98), lng: 8.2245 + (-159.25) },
+    "russia": { lat: 61.5240 + (-4.98), lng: 100.6197 + (-159.25) },
+    "china": { lat: 35.8617 + (-4.98), lng: 104.1954 + (-159.25) },
+    "japan": { lat: 36.2048 + (-4.98), lng: 138.2529 + (-159.25) },
+    "india": { lat: 20.5937 + (-4.98), lng: 78.9629 + (-159.25) },
+    "australia": { lat: -25.2744 + (-4.98), lng: 133.7751 + (-159.25) },
+    "south africa": { lat: -30.5595 + (-4.98), lng: 22.9375 + (-159.25) },
+    "egypt": { lat: 26.8206 + (-4.98), lng: 30.8025 + (-159.25) },
+    "nigeria": { lat: 9.0820 + (-4.98), lng: 8.6753 + (-159.25) },
+    "kenya": { lat: -1.2921 + (-4.98), lng: 36.8219 + (-159.25) },
+    "jamaica": { lat: 18.1096 + (-4.98), lng: 77.2975 + (-159.25) },
+    "south korea": { lat: 35.9078 + (-4.98), lng: 127.7669 + (-159.25) },
+    "indonesia": { lat: -0.7893 + (-4.98), lng: 113.9213 + (-159.25) },
+    "saudi arabia": { lat: 23.8859 + (-4.98), lng: 45.0792 + (-159.25) },
+    "iran": { lat: 32.4279 + (-4.98), lng: 53.6880 + (-159.25) },
+    "turkey": { lat: 38.9637 + (-4.98), lng: 35.2433 + (-159.25) },
+    "israel": { lat: 31.0461 + (-4.98), lng: 34.8516 + (-159.25) },
+    "greece": { lat: 39.0742 + (-4.98), lng: 21.8243 + (-159.25) },
+    "thailand": { lat: 15.8700 + (-4.98), lng: 100.9925 + (-159.25) },
+    "vietnam": { lat: 14.0583 + (-4.98), lng: 108.2772 + (-159.25) },
+    "new zealand": { lat: -40.9006 + (-4.98), lng: 174.8860 + (-159.25) },
+    "pakistan": { lat: 30.3753 + (-4.98), lng: 69.3451 + (-159.25) },
+    "afghanistan": { lat: 33.9391 + (-4.98), lng: 67.7100 + (-159.25) },
+    "colombia": { lat: 4.5709 + (-4.98), lng: 74.2973 + (-159.25) },
+    "venezuela": { lat: 6.4238 + (-4.98), lng: 66.5897 + (-159.25) }
 };
 
 
