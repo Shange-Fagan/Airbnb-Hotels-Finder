@@ -454,7 +454,45 @@ input[type="number"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Consistent box-shadow */
 }
 
+/* Number input with custom arrows */
+.number-input {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 10px;
+    width: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+.number-input input {
+    font-size: 16px;
+    padding: 10px 0;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    width: 50px;
+    outline: none;
+}
+
+.number-input button {
+    background-color: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.number-input button:hover {
+    color: #ff385c; /* Airbnb red on hover */
+}
+
+.number-input button:focus {
+    outline: none;
+}
 
 
 /*#regionPopup {
