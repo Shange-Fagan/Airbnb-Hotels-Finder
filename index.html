@@ -455,7 +455,7 @@ input[type="number"] {
 }
 
 /* Number input with custom arrows */
-.number-input {
+input[type="number"] {
     display: flex;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.15);
@@ -465,7 +465,7 @@ input[type="number"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.number-input input {
+input[type="number"]:input {
     font-size: 16px;
     padding: 10px 0;
     border: none;
@@ -476,7 +476,7 @@ input[type="number"] {
     outline: none;
 }
 
-.number-input button {
+input[type="number"]:button {
     background-color: transparent;
     border: none;
     color: rgba(255, 255, 255, 0.75);
@@ -486,11 +486,11 @@ input[type="number"] {
     transition: color 0.3s ease;
 }
 
-.number-input button:hover {
+input[type="number"]:button:hover {
     color: #ff385c; /* Airbnb red on hover */
 }
 
-.number-input button:focus {
+input[type="number"]:button:focus {
     outline: none;
 }
 
