@@ -322,7 +322,7 @@ a, button, input, select, iframe {
     outline: none;
       box-shadow: 0 0 10px rgba(255, 56, 92, 1);*/ /* Red outline for focus similar to Airbnb */
 }
-	  ##header input:hover #header select:hover {
+	  ##header input:mouse-over #header select:mouse-over {
   outline: none;
       box-shadow: 0 0 8px rgba(255, 56, 92, 0.8);*/ /* Red outline for focus similar to Airbnb */
 }
@@ -338,13 +338,14 @@ a, button, input, select, iframe {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.1); /* Amazon-like box shadow */
-    transition: box-shadow 0.2s ease-in-out;
+     transition: all 0.3s ease;
+    box-shadow: 0 9px 18px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Similar shadow */
+}
 }
 
 #header button:hover {
     background-color: #e03a56; /* Darker red on hover */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 2px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+    box-shadow: 0 12px 24px rgba(0, 115, 187, 0.6), 0 3px 6px rgba(0, 115, 187, 0.2);
 }
 
 /* Search section layout */
