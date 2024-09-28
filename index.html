@@ -2708,6 +2708,14 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         alert('Please fill out all required fields.');
         return;
     }
+// JavaScript to close the left-container and show the Three.js canvas
+document.getElementById('close-btn').addEventListener('click', function() {
+    // Hide the left container
+    document.getElementById('left-container').style.display = 'none';
+
+    // Optionally, bring back the Three.js canvas
+    document.getElementById('threejs-canvas').style.display = 'block';
+});
 
     // Show spinner and transition to split screen mode
     const leftContainer = document.getElementById('left-container');
