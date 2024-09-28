@@ -334,10 +334,13 @@ a, button, input, select, iframe {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.1); /* Amazon-like box shadow */
+    transition: box-shadow 0.2s ease-in-out;
 }
 
 #header button:hover {
     background-color: #e03a56; /* Darker red on hover */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 2px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
 /* Search section layout */
@@ -352,14 +355,9 @@ a, button, input, select, iframe {
     max-width: 100%; /* Ensure responsiveness */
     flex-wrap: wrap; /* Wrap content if it overflows */
 	color: white;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.1); /* Amazon-like box shadow */
-    transition: box-shadow 0.2s ease-in-out;
 	z-index: 10002; /* Ensure the entire search section is clickable */
 }
-#header .search-section:hover {
-    background-color: #e7b11d; /* Slightly darker on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 2px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
-}
+	  
 #header .logo {
     margin-right: auto; /* Push logo to the left */
     font-weight: bold;
