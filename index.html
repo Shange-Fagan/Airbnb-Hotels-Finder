@@ -446,7 +446,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: default;
     padding: 0px;
     color: rgba(255, 255, 255, 0.75);
+}/* Hide default number input arrows */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
+
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield; 
+}
+
+/* Style number input */
+input[type="number"] {
+    background-color: rgba(255, 255, 255, 0.15); /* Match other inputs' background */
+    color: rgba(255, 255, 255, 0.75); /* Text color */
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px; /* Same rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Consistent box-shadow */
+}
+
 
 
 
