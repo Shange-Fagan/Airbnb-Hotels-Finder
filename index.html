@@ -1086,7 +1086,7 @@ overflow: hidden;
 <body>
 <div id="container">
 <div id="left-container" style="display: none;" class="split-screen-left"></div>
-<button id="close-btn" class="close-btn">X</button>
+<button id="closeBtn" class="close-btn">X</button>
 <div id="globe-container" class="split-screen-right"></div>
     </div>
   </div>
@@ -2738,13 +2738,20 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
         return;
     }
 // JavaScript to close the left-container and show the Three.js canvas
-document.getElementById('close-btn').addEventListener('click', function() {
-    // Hide the left container
-    document.getElementById('left-container').style.display = 'none';
+// Function to handle the search button click
+document.getElementById('searchBtn').addEventListener('click', function () {
+    // Show the close button
+    document.getElementById('closeBtn').style.display = 'block';
 
-    // Optionally, bring back the Three.js canvas
-    document.getElementById('threejs-canvas').style.display = 'block';
 });
+
+// Function to handle the close button click
+document.getElementById('closeBtn').addEventListener('click', function () {
+    // Hide the close button and the left container
+    document.getElementById('closeBtn').style.display = 'none';
+    document.getElementById('leftContainer').style.display = 'none';
+});
+
 
     // Show spinner and transition to split screen mode
     const leftContainer = document.getElementById('left-container');
