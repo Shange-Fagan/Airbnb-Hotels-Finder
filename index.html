@@ -432,7 +432,11 @@ input[type="date"] {
   background-color: rgba(255, 255, 255, 0.15); /* Background */
   border-radius: 10px;
 }
-
+/* Red hover for date picker */
+input[type="date"]:hover, input[type="date"]:focus {
+    box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline similar to Airbnb */
+    outline: none;
+}
 input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0; /* Hide the default calendar icon */
 }
