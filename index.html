@@ -351,7 +351,6 @@ a, button, input, select, iframe {
 /* Search section layout */
 #header .search-section {
     display: flex;
-    align-items: center;
     border-radius: 50px; /* Fully rounded container */
     padding: 10px 15px; /* Reduce padding */
     width: auto; /* Adjust width based on content */
@@ -457,14 +456,14 @@ input[type="number"] {
 }
 
 /* Container for custom number input with arrows */
-.number-input-container {
+#header .number-input-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 /* Custom increment/decrement buttons */
-.number-input-container button {
+#header .number-input-container button {
     background-color: transparent;
     border: none;
     color: rgba(255, 255, 255, 0.75);
@@ -474,11 +473,11 @@ input[type="number"] {
     transition: color 0.3s ease;
 }
 
-.number-input-container button:hover {
+#header .number-input-container button:hover {
     color: #ff385c; /* Airbnb red on hover */
 }
 
-.number-input-container button:focus {
+#header .number-input-container button:focus {
     outline: none;
 }
 
