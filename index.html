@@ -2992,8 +2992,6 @@ function normalizeLocation(input) {
     // Convert the input to lowercase and trim any whitespace
     return input.toLowerCase().trim();
 }
-
-// Updated panToLocation function
 function panToLocation(location) {
     const normalizedLocation = normalizeLocation(location);
     const coords = locations[normalizedLocation];
@@ -3002,6 +3000,7 @@ function panToLocation(location) {
         // Convert latitude and longitude to Three.js coordinates
         const lat = coords.lat;
         const lng = coords.lng;
+        const zoom = coords.zoom || 3.0; // Default zoom level if not provided
 
         // Calculate the target position in 3D space
         const phi = (90 - lat) * (Math.PI / 180);
@@ -3018,6 +3017,15 @@ function panToLocation(location) {
             .easing(TWEEN.Easing.Quadratic.InOut) // Apply easing for smoother effect
             .onUpdate(() => {
                 camera.lookAt(0, 0, 0); // Keep the camera focused on the globe's center
+            })
+            .start();
+
+        // Use another TWEEN for zooming effect
+        new TWEEN.Tween(camera)
+            .to({ zoom: zoom }, 2000) // Smooth zoom over 2 seconds
+            .easing(TWEEN.Easing.Quadratic.InOut) // Apply easing for smoother effect
+            .onUpdate(() => {
+                camera.updateProjectionMatrix(); // Make sure to update the projection matrix after zoom changes
             })
             .start();
 
