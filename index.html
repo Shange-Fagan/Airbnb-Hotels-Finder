@@ -433,6 +433,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0px;
     color: rgba(255, 255, 255, 0.75);
 }/* Hide default number input arrows */
+/* Hide default number input arrows */
 input[type="number"]::-webkit-inner-spin-button, 
 input[type="number"]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
@@ -452,31 +453,19 @@ input[type="number"] {
     border: 1px solid #e0e0e0;
     border-radius: 50px; /* Same rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Consistent box-shadow */
+    width: 50px;
+    text-align: center; /* Center the number */
 }
 
-/* Number input with custom arrows */
-input[type="number"] {
+/* Container for custom number input with arrows */
+.number-input-container {
     display: flex;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 50px;
-    padding: 10px;
-    width: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    justify-content: center;
 }
 
-input[type="number"]:input {
-    font-size: 16px;
-    padding: 10px 0;
-    border: none;
-    background-color: transparent;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.75);
-    width: 50px;
-    outline: none;
-}
-
-input[type="number"]:button {
+/* Custom increment/decrement buttons */
+.number-input-container button {
     background-color: transparent;
     border: none;
     color: rgba(255, 255, 255, 0.75);
@@ -486,13 +475,14 @@ input[type="number"]:button {
     transition: color 0.3s ease;
 }
 
-input[type="number"]:button:hover {
+.number-input-container button:hover {
     color: #ff385c; /* Airbnb red on hover */
 }
 
-input[type="number"]:button:focus {
+.number-input-container button:focus {
     outline: none;
 }
+
 
 
 /*#regionPopup {
