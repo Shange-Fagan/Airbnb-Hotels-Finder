@@ -2270,8 +2270,8 @@ function getDetailedMarkersForRegion(regionCoordinates) {
   ];
 }
 	  // Function to pan the globe and load markers based on a location search
-function searchForLocation(locationName) {
-  const normalizedLocation2 = normalizeLocation2(locationName);  // Normalize input (e.g., lowercase)
+function searchForLocation(regions) {
+  const normalizedLocation2 = normalizeLocation2(regions);  // Normalize input (e.g., lowercase)
   // Check if the location exists in the regions database
   const regionCoordinates = regions[normalizedLocation2];
   if (regionCoordinates) {
@@ -2281,7 +2281,7 @@ function searchForLocation(locationName) {
   }
 }
 	  // Function to normalize the input location name
-function normalizeLocation(input) {
+function normalizeLocation2(input) {
   return input.toLowerCase().trim();
 }
 // Get region coordinates based on region name
@@ -3829,5 +3829,24 @@ animate(); // Start the animation loop
 }
 animate();*/
   </script>
+
+<script type="text/javascript">
+  function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+  }
+
+  window.onload = function() {
+    let texture;
+    if (isMobileDevice()) {
+      // Load lighter textures for mobile (4K or 8K)
+      texture = 'mobile_texture.jpg';  // Placeholder for mobile texture
+    } else {
+      // Load 16K textures for desktop
+      texture = 'desktop_texture_16k.jpg';  // Placeholder for desktop texture
+    }
+    document.getElementById('globe-container').style.backgroundImage = "url('" + texture + "')";
+  };
+</script>
+
 </body>
 </html>
