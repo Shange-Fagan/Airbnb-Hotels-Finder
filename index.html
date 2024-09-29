@@ -2455,7 +2455,7 @@ markersData.forEach((data, index) => {
 });
 
 // Add the markers to the scene
-//scene.add(markers);
+scene.add(markers);
 
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 
@@ -2513,7 +2513,7 @@ function loadDetailedMarkers(regionCoordinates) {
 }
 
 // Pan globe to a region
-/*function panGlobeToRegion(regionCoordinates) {
+function panGlobeToRegion(regionCoordinates) {
   if (camera && controls) {
     const { x, y, z } = latLonToVector3(regionCoordinates.lat, regionCoordinates.lon, 20);
     const targetPosition = new THREE.Vector3(x, y, z);
@@ -2525,6 +2525,8 @@ function loadDetailedMarkers(regionCoordinates) {
       .start();
 
     loadDetailedMarkers(regionCoordinates);  // Load markers for the region
+	  // Load generic markers for all other regions
+    loadGenericMarkers();  // Keep other region markers visible
   }
 }
 
@@ -2534,7 +2536,7 @@ function getDetailedMarkersForRegion(regionCoordinates) {
     { id: 101, position: [regionCoordinates.lat + 0.1, regionCoordinates.lon + 0.1] },
     { id: 102, position: [regionCoordinates.lat + 0.2, regionCoordinates.lon + 0.2] },
   ];
-}*/
+}
 	  // Function to pan the globe and load markers based on a location search
 function searchForLocation(locationName) {
   const normalizedLocation = normalizeLocation(locationName);  // Normalize input (e.g., lowercase)
@@ -4062,7 +4064,7 @@ function loadMarkers(selectedCategory) {
     data.worldPosition = dummy.position.clone();
   });
 
-  scene.add(markers);
+  //scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
