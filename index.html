@@ -1019,6 +1019,33 @@ overflow: hidden;
   }
 }
 
+
+#left-container {
+    height: 80vh;  /* Adjust height so header and ticker remain visible */
+    width: 50%;  /* Expands to 50% smoothly */
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    display: grid;  /* Enable grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create grid layout */
+    gap: 20px; /* Add gap between grid items */
+    z-index: 20010;
+}
+
+.post {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+.post img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
 	   <script async src="https://fundingchoicesmessages.google.com/i/pub-5689710336620898?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
@@ -3849,5 +3876,85 @@ animate();*/
   };
 </script>
 
+
+<div id="loadingIcon" class="spinner-container">
+    <div class="spinner"></div>
+    <div class="spinner-text" id="loadingMessage">Fetching Airbnb information...</div>
+</div>
+
+<script type="text/javascript">
+  function updateLoadingMessage(stage) {
+      const loadingMessages = {
+          1: 'Fetching Airbnb information...',
+          2: 'Analyzing webpage...',
+          3: 'Collecting data...',
+          4: 'Formatting information...',
+          5: 'Ready to present!'
+      };
+      document.getElementById('loadingMessage').innerText = loadingMessages[stage];
+  }
+
+  // Example: Update the loading message over time
+  setTimeout(() => updateLoadingMessage(2), 2000);
+  setTimeout(() => updateLoadingMessage(3), 4000);
+  setTimeout(() => updateLoadingMessage(4), 6000);
+  setTimeout(() => updateLoadingMessage(5), 8000);
+</script>
+
+
+<script type="text/javascript">
+function panToRegion(region) {
+    let position, zoomLevel;
+    switch (region) {
+        case 'africa':
+            position = { x: 17.5, y: 5, z: 2.0 };
+            zoomLevel = 2.0;
+            break;
+        case 'europe':
+            position = { x: 0.0, y: 5.5, z: 1.75 };
+            zoomLevel = 2.5;
+            break;
+        case 'america':
+            position = { x: -3.0, y: 2.0, z: 1.75 };
+            zoomLevel = 2.2;
+            break;
+        case 'south america':
+            position = { x: -3.0, y: -3.0, z: 2.0 };
+            zoomLevel = 2.0;
+            break;
+        case 'asia':
+            position = { x: 7.0, y: 3.0, z: 1.8 };
+            zoomLevel = 2.3;
+            break;
+        default:
+            position = { x: 0, y: 0, z: 3 }; // Default to world view
+            zoomLevel = 1.0;
+            break;
+    }
+
+    animateCameraPan(position.x, position.y, position.z, zoomLevel);
+}
+
+function animateCameraPan(x, y, z, zoomLevel) {
+    new TWEEN.Tween(camera.position)
+        .to({ x: x, y: y, z: z }, 2000)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+    new TWEEN.Tween(camera)
+        .to({ zoom: zoomLevel }, 2000)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(() => camera.updateProjectionMatrix())
+        .start();
+}
+</script>
+
+
+<script type="text/javascript">
+document.getElementById('searchBtn').addEventListener('click', function() {
+    document.getElementById('globe-container').classList.add('split');  // Resize the canvas to 50%
+});
+</script>
+
 </body>
 </html>
+
