@@ -500,6 +500,7 @@ input[type="number"] {
   appearance: none; /* Remove default select arrow styling for a custom look */
   -webkit-appearance: none; /* For WebKit browsers */
 		display: block;
+		z-index: 10000;
 }
 	  #regionPopup select:focus {
   outline: none; /* Remove the blue outline on focus */
@@ -603,7 +604,7 @@ iframe::-webkit-scrollbar {
     display: none;  
     justify-content: center;
     align-items: center;
-    z-index: 10001; /* Ensure it's on top of everything */
+    z-index: 10010; /* Ensure it's on top of everything */
   }
 	  #newsOverlaynighttheme {
     position: absolute;
@@ -617,14 +618,14 @@ iframe::-webkit-scrollbar {
     display: none;  
     justify-content: center;
     align-items: center;
-    z-index: 10001; /* Ensure it's on top of everything */
+    z-index: 10010; /* Ensure it's on top of everything */
   }
   #newsIframe {
     width: 80%;
     height: 80%;
     /*background: rgba(255, 255, 255, 0.5);*/
     background: none;
-    z-index: 1; /* Lower than the close button */
+    z-index: 100025; /* Lower than the close button */
   }
 	  #newsIframenighttheme {
     width: 80%;
