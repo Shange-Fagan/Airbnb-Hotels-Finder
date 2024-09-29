@@ -1046,6 +1046,50 @@ overflow: hidden;
     border-radius: 10px;
 }
 
+
+#left-container {
+    height: 80vh;  /* Adjust height so the header and ticker remain visible */
+    width: 50%;  /* Expands to 50% smoothly */
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    display: grid;  /* Enable grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create grid layout */
+    gap: 20px; /* Add gap between grid items */
+    z-index: 20010;
+}
+
+#loadingIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  /* Center the spinner */
+    width: 50px;
+    height: 50px;
+    display: none;
+}
+
+.spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner-text {
+    margin-top: 10px;
+    text-align: center;
+    color: black;
+    font-size: 16px;
+}
+
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
 	   <script async src="https://fundingchoicesmessages.google.com/i/pub-5689710336620898?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
@@ -3953,6 +3997,48 @@ function animateCameraPan(x, y, z, zoomLevel) {
 document.getElementById('searchBtn').addEventListener('click', function() {
     document.getElementById('globe-container').classList.add('split');  // Resize the canvas to 50%
 });
+</script>
+
+
+<script>
+  // Function to hide region select dropdown when clicking outside of it
+  document.addEventListener('click', function(event) {
+    var regionSelect = document.getElementById('regionSelectDropdown');
+    var regionSelectBtn = document.getElementById('regionSelectBtn');
+    
+    // Check if click happened outside the dropdown and button
+    if (regionSelect && !regionSelect.contains(event.target) && !regionSelectBtn.contains(event.target)) {
+      regionSelect.style.display = 'none';
+    }
+  });
+</script>
+
+
+<script type="text/javascript">
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    document.getElementById('globe-container').classList.add('split');  // Resize the canvas to 50%
+
+    // Show loading spinner and update messages
+    const loadingIcon = document.getElementById('loadingIcon');
+    loadingIcon.style.display = 'block';
+    updateLoadingMessage(1);
+
+    setTimeout(() => updateLoadingMessage(2), 2000);
+    setTimeout(() => updateLoadingMessage(3), 4000);
+    setTimeout(() => updateLoadingMessage(4), 6000);
+    setTimeout(() => updateLoadingMessage(5), 8000);
+  });
+
+  function updateLoadingMessage(stage) {
+    const loadingMessages = {
+      1: 'Fetching Airbnb information...',
+      2: 'Analyzing webpage...',
+      3: 'Collecting data...',
+      4: 'Formatting information...',
+      5: 'Ready to present!'
+    };
+    document.getElementById('loadingMessage').innerText = loadingMessages[stage];
+  }
 </script>
 
 </body>
