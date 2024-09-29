@@ -2455,7 +2455,7 @@ markersData.forEach((data, index) => {
 });
 
 // Add the markers to the scene
-scene.add(markers);
+//scene.add(markers);
 
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 
@@ -2526,7 +2526,7 @@ function panGlobeToRegion(regionCoordinates) {
 
     loadDetailedMarkers(regionCoordinates);  // Load markers for the region
 	  // Load generic markers for all other regions
-    loadGenericMarkers();  // Keep other region markers visible
+    scene.add(markers);  // Keep other region markers visible
   }
 }
 
