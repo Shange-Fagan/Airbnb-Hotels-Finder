@@ -2553,7 +2553,7 @@ function getDetailedMarkersForRegion(regionCoordinates) {
 }
 	  // Function to pan the globe and load markers based on a location search
 function searchForLocation(locationName) {
-  const normalizedLocation = normalizeLocation(locationName);  // Normalize input (e.g., lowercase)
+  const normalizedLocation2 = normalizeLocation2(locationName);  // Normalize input (e.g., lowercase)
 
   // Check if the location exists in the regions database
   const regionCoordinates = regions[normalizedLocation];
@@ -2565,7 +2565,7 @@ function searchForLocation(locationName) {
   }
 }
 	  // Function to normalize the input location name
-function normalizeLocation(input) {
+function normalizeLocation2(input) {
   return input.toLowerCase().trim();
 }
 
