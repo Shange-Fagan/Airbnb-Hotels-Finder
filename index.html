@@ -1090,6 +1090,49 @@ overflow: hidden;
     font-size: 16px;
 }
 
+
+#left-container {
+    height: 80vh;  /* Adjust height so the header and ticker remain visible */
+    width: 55%;  /* Slightly larger than the globe */
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 20px;
+    overflow-y: auto;
+    display: grid;  /* Enable grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Create grid layout for 2-3 listings per row */
+    gap: 20px; /* Add gap between grid items */
+    z-index: 20010;
+}
+.post {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+.post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.post-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+.post-price {
+    color: #ff385c;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.post-rating {
+    color: #999;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
 	   <script async src="https://fundingchoicesmessages.google.com/i/pub-5689710336620898?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
@@ -4038,6 +4081,74 @@ document.getElementById('searchBtn').addEventListener('click', function() {
       5: 'Done!'
     };
     document.getElementById('loadingMessage').innerText = loadingMessages[stage];
+  }
+</script>
+
+
+<script>
+  // Change header background color and switch ticker on search
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    // Change header background color to white
+    document.getElementById('header').style.backgroundColor = '#fff';
+    
+    // Hide the dayTicker and show the search ticker (you will need to update the URL)
+    document.getElementById('dayTicker').style.display = 'none';
+    document.getElementById('searchTicker').style.display = 'block';
+  });
+</script>
+
+
+<script>
+  function panToRegion(region) {
+    let position, zoomLevel;
+    switch (region) {
+        case 'africa':
+            position = { x: 12.0, y: 0, z: 1.74 }; 
+            zoomLevel = 1.5;
+            break;
+        case 'europe':
+            position = { x: 3.5, y: 2.91, z: 0.55 };
+            zoomLevel = 2.0;
+            break;
+        case 'america':
+            position = { x: 0, y: 2.55, z: 4.42 };
+            zoomLevel = 2.0;
+            break;
+        case 'south america':
+            position = { x: 1.5, y: -0.5, z: 4.3 };
+            zoomLevel = 1.7;
+            break;
+        case 'caribbean':  // Fixing the Caribbean position
+            position = { x: 0.65, y: 1.8, z: 4.0 };
+            zoomLevel = 2.5;
+            break;
+        case 'asia':
+            position = { x: -0.89, y: 3.28, z: -3.92 };
+            zoomLevel = 1.9;
+            break;
+        case 'world':
+            position = { x: 0, y: 0, z: 10 };
+            zoomLevel = 0.5;
+            break;
+        default:
+            console.log('Region not recognized');
+            return;
+    }
+    animateCameraPan(position.x, position.y, position.z, zoomLevel);
+  }
+
+  function animateCameraPan(x, y, z, zoomLevel) {
+    new TWEEN.Tween(camera.position)
+        .to({ x: x, y: y, z: z }, 2000)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .start();
+    new TWEEN.Tween(camera)
+        .to({ zoom: zoomLevel }, 2000)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(function () {
+            camera.updateProjectionMatrix();
+        })
+        .start();
   }
 </script>
 
