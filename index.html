@@ -2351,7 +2351,7 @@ const markersData = [
   { id: 8, position: [5.1, 1.2, 0.2], iframeSrc: "https://rss.app/embed/v1/list/qvlJz8EBa0yKiH2i" },
   { id: 9, position: [5.1, 0.6, 1.45], iframeSrc: "https://rss.app/embed/v1/list/VQIhB1FM0tC17q5Y" },
 ];
-const genericMarkers = [
+/*const genericMarkers = [
   { id: 1, position: [5.1, 1.2, 1.5], region: 'africa' },
   { id: 2, position: [5.1, 0.7, 1.8], region: 'europe' },
   { id: 3, position: [5.1, 0.9, 0], region: 'america' },
@@ -2361,7 +2361,7 @@ const genericMarkers = [
   { id: 7, position: [5.1, 0.9, 4], region: 'japan' },
   { id: 8, position: [5.1, 1.2, 0.2], region: 'carribbean' },
   { id: 9, position: [5.1, 0.6, 1.45], region: 'uk' },
-];
+];*/
 	  // Convert latitude and longitude to 3D vector coordinates
 /*function latLonToVector3(lat, lon, radius) {
   const phi = (90 - lat) * (Math.PI / 180);
@@ -2558,13 +2558,13 @@ function normalizeLocation(input) {
 // Get region coordinates based on region name
 function getRegionCoordinates(region) {
   const regions = {
-    "africa": { lat: 10, lon: 20 },
-    "europe": { lat: 50, lon: 10 },
-    "america": { lat: 40, lon: -100 },
-    'south america': { lat: -10, lon: -55 },
-    "carribbean": { lat: 20, lon: -75 },
-    "asia": { lat: 30, lon: 100 },
-    "world": { lat: 0, lon: 0 },
+    "africa": { lat: 10, lng: 20 },
+    "europe": { lat: 50, lng: 10 },
+    "america": { lat: 40, lng: -100 },
+    'south america': { lat: -10, lng: -55 },
+    "carribbean": { lat: 20, lng: -75 },
+    "asia": { lat: 30, lng: 100 },
+    "world": { lat: 0, lng: 0 },
     "new york": { lat: 40.7128, lng: -74.0060 },
     "los angeles": { lat: 34.0522, lng: -118.2437 },
     "chicago": { lat: 41.8781, lng: -87.6298 },
