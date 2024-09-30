@@ -178,7 +178,7 @@
             document.getElementById("globe-container").appendChild(renderer.domElement);
             
             const geometry = new THREE.SphereGeometry(5.1, 32, 32);
-            const texture = new THREE.TextureLoader().load('path/to/your/earth-texture.jpg'); // Replace with your texture path
+            const texture = new THREE.TextureLoader().load('js/Earth_Diffuse.jpg'); // Replace with your texture path
             const material = new THREE.MeshBasicMaterial({ map: texture });
             const globe = new THREE.Mesh(geometry, material);
             scene.add(globe);
