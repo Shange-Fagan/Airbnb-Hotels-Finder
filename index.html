@@ -1401,6 +1401,56 @@ overflow: hidden;
     <a href="https://instagram.com/shangefagan" target="_blank">Instagram</a>
   </footer>
 <div id="header">
+<!-- Increment and Decrement Buttons for Date Pickers -->
+<div class="date-picker-container">
+    <button id="checkinIncrease">↑</button>
+    <input type="date" id="checkin" name="checkin" placeholder="Check-in date">
+    <button id="checkinDecrease">↓</button>
+</div>
+<div class="date-picker-container">
+    <button id="checkoutIncrease">↑</button>
+    <input type="date" id="checkout" name="checkout" placeholder="Check-out date">
+    <button id="checkoutDecrease">↓</button>
+</div>
+<select id="priceCategory">
+    <option value="general">General</option>
+    <option value="cheapest">Cheapest</option>
+    <option value="midPrice">Mid Price</option>
+    <option value="expensive">Most Expensive</option>
+</select>
+<!-- Ensure existing scripts are kept intact -->
+<script type="module">
+    // Existing imports and setup code
+    // ... (Keep existing setup code)
+
+    // Load markers on initial load
+    function loadMarkers() {
+        scene.add(markers); // Assuming markers is defined
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        const selectedCategory = document.getElementById('priceCategory').value;
+        if (selectedCategory === 'cheapest') {
+            scene.add(markersDataforCheapestAirbnbs); // Ensure these datasets are defined
+        } else if (selectedCategory === 'midPrice') {
+            scene.add(markersDataforMidPriceAirbnbs);
+        } else if (selectedCategory === 'expensive') {
+            scene.add(markersDataforExpensiveAirbnbs);
+        }
+        // Other existing functionalities
+    });
+
+    // Region selection dropdown functionality
+    document.getElementById('regionSelect').addEventListener('change', function() {
+        const selectedRegion = this.value;
+        panToRegion(selectedRegion); // Call pan function with selected region
+        // Load relevant markers for the selected region
+    });
+
+    // Call loadMarkers on initial load
+    loadMarkers(); // Call this function to load markers initially
+</script>
+
   <input type="text" id="where" name="destination" placeholder="Search destinations">
   <input type="date" id="checkin" name="checkin" placeholder="Check-in date">
   <input type="date" id="checkout" name="checkout" placeholder="Check-out date">
