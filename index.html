@@ -2676,16 +2676,12 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     const priceMin = document.getElementById('price_min').value;
     const priceMax = document.getElementById('price_max').value;
     // Ensure all required fields are filled out
+	document.getElementById('closeBtn').style.display = 'block';
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
         return;
     }
 // JavaScript to close the left-container and show the Three.js canvas
-// Function to handle the search button click
-document.getElementById('searchBtn').addEventListener('click', function () {
-    // Show the close button
-    document.getElementById('closeBtn').style.display = 'block';
-});
 // Function to handle the close button click
 document.getElementById('closeBtn').addEventListener('click', function () {
     // Hide the close button and the left container
@@ -2748,6 +2744,8 @@ document.getElementById('closeBtn').addEventListener('click', function () {
     updateSpinnerText("Fetching Airbnb information...");
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
+	console.log('Generated searchUrl:', searchUrl);
+
 });
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 async function fetchAirbnbPosts(searchUrl) {
