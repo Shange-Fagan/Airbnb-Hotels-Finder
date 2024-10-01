@@ -2815,20 +2815,16 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     const guests = document.getElementById('adults').value;
     const priceMin = document.getElementById('price_min').value;
     const priceMax = document.getElementById('price_max').value;
-
+    
+    // Show the close button
+    document.getElementById('closeBtn').style.display = 'block';
+	
     // Ensure all required fields are filled out
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
         return;
     }
 // JavaScript to close the left-container and show the Three.js canvas
-// Function to handle the search button click
-document.getElementById('searchBtn').addEventListener('click', function () {
-    // Show the close button
-    document.getElementById('closeBtn').style.display = 'block';
-
-});
-
 // Function to handle the close button click
 document.getElementById('closeBtn').addEventListener('click', function () {
     // Hide the close button and the left container
@@ -2906,6 +2902,14 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
+	console.log('Generated searchUrl:', searchUrl);
+	console.log('Generated searchUrl:location', location);
+	console.log('Generated searchUrl:checkin', checkin);
+	console.log('Generated searchUrl:checkout', checkout);
+	console.log('Generated searchUrl:guests', guests);
+	console.log('Generated searchUrl:priceMin', priceMin);
+	console.log('Generated searchUrl:priceMax', priceMax);
+	
 });
 
 // Function to fetch Airbnb posts from your backend and display them on the webpage
