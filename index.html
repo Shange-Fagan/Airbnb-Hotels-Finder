@@ -5,6 +5,7 @@
   <title>Airbnb Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Stylesheets and scripts will be included here -->
   <style>
   /* Global Styles */
 html, body {
@@ -15,9 +16,11 @@ html, body {
   overflow: hidden;
   /*font-family: "Syne", sans-serif;*/
 }
+
 a, button, input, select, iframe {
   pointer-events: auto;
 }
+
 /* Info and Credits */
 #info,
 #credits {
@@ -28,10 +31,12 @@ a, button, input, select, iframe {
   color: rgba(255, 255, 255, 0.5);
   z-index: 1;
 }
+
 #info {
   bottom: 3.75vh;
   font-size: 0.75rem;
 }
+
 #credits {
       bottom: 2vh;
       font-size: 0.75rem; /* Smaller, more discreet font size */
@@ -41,6 +46,7 @@ a, button, input, select, iframe {
       color: #1e90ff;
       text-decoration: none;
     }
+
     #credits a:hover {
       text-decoration: underline;
     }
@@ -56,6 +62,7 @@ a, button, input, select, iframe {
       font-family: Monospace;
        text-align: center;
       z-index: 9999;
+    
 }
 	  #mobileTicker {
   display: none; /* Show day ticker by default */
@@ -66,6 +73,7 @@ a, button, input, select, iframe {
       font-family: Monospace;
        text-align: center;
       z-index: 10000;
+    
 }
 	  /* Responsive Ticker for Mobile */
     /*@media (max-width: 768px) {
@@ -115,6 +123,7 @@ a, button, input, select, iframe {
   padding: 0;
   display: none; /* Hidden by default */
 /*}*/
+    
  .marker-label * {
   /* Styles here could affect all child elements, including the iframe */
 }
@@ -137,9 +146,11 @@ a, button, input, select, iframe {
   /*background-color: rgba(255, 255, 255, 0.9);*/ /* Optional background for better visibility */
   /*overflow: hidden;*/ /* Hide any content that overflows */
 }
+	  
 .marker-label.active {
   display: block;
 }
+
 /*.marker-label .close-button {
   position: absolute;
   top: 25px;
@@ -207,9 +218,11 @@ a, button, input, select, iframe {
   justify-content: center;
   align-items: center;
 }
+
 /*.close-button:hover {
   background: rgba(0, 0, 0, 0.8); /* Add a hover effect */
 /*}*/
+
 .marker-label iframe {
   width: 100%; /* Make iframe take full width */
   height: 300px; /* Adjust height as needed */
@@ -217,15 +230,18 @@ a, button, input, select, iframe {
   display: block; /* Ensure iframe is a block element */
   /*z-index: 1;*/
 }
+
 .close-button:hover {
   opacity: 1;
   color: red; /* Optional color change on hover */
 }
+
 /*.marker-label .content {
   margin: 4px;
   width: calc(100% - 8px); // Adjust for margins 
   height: calc(100% - 8px);
 }*/
+
 .marker-label iframe {
   /*width: 100%;
   height: 100%;
@@ -262,166 +278,139 @@ a, button, input, select, iframe {
   border-radius: 25px; /* Rounded corners for inputs */
 	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+
     #toggleButton:hover {
       background-color: rgba(225, 225, 225, 0.35);
 	    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
     }
 	  /* Airbnb-style Header */
-  /* Airbnb-style Header */
-  /* Airbnb-style Header */
  /* Airbnb-style Header */
- #header {
-  position: absolute;
-  top: 55px;
-       width: 100%;
-  display: flex;
-  justify-content: space-between; /* Center the header content */
-  align-items: center;
-  /*background-color: white;*/ /* White background */
-        background-color: rgba(255, 255, 255, 0.15);
-  padding: 20px 40px; /* Padding for spacing */
-  border-bottom: 0px solid #e0e0e0; /* Light bottom border */
-    /*box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);*/
+/* Airbnb-style Header */
+#header {
+    position: fixed; /* Fixed to stay at the top while scrolling */
+    top: 55px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the header content */
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 12px 0px; /* Reduce padding for a cleaner, compact look */
+    /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/ /* Light shadow for depth */
     z-index: 10001;
-    
 }
 
+/* Inputs and dropdowns styling */
 #header input, #header select {
-  font-size: 16px; /* Larger font for inputs */
-  padding: 10px 15px; /* Padding inside inputs */
-  border: 0px solid #e0e0e0; /* Border similar to Airbnb */
-    /*color: rgba(255, 255, 255, 0.75);*/
-    /*color: #222222;*/
-    /*color: #717171;*/
-       background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 25px; /* Rounded corners for inputs */
-  margin-right: 10px; /* Spacing between input fields */
-  width: 250px; /* Set width for input fields */
-    /*box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);*/
+    font-size: 16px; /* Slightly smaller font size */
+    padding: 10px 15px; /* Padding inside inputs */
+    border: 0px solid #ddd; /* Light gray border */
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50px; /* Fully rounded corners for inputs */
+    margin-right: 10px; /* Spacing between input fields */
+    width: 220px; /* Slightly smaller width */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10002; /* Make sure inputs are interactive */
+	color: rgba(255, 255, 255, 0.75);
+    width: 150px; /* Set width to auto */
+    max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 #header input:focus, #header select:focus {
-  outline: none;
-  border-color: #ff385c; /* Red outline for focus similar to Airbnb */
+    outline: none;
+      box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline for focus similar to Airbnb */
+}
+	  #header input:hover, #header select:hover {
+      box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline for focus similar to Airbnb */
 }
 
+
+/* Button Styling */
 #header button {
-  background-color: #ff385c; /* Airbnb red color */
-  border: none;
-  padding: 10px 25px; /* Padding for button */
-  border-radius: 25px; /* Rounded button */
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    z-index: 10002; /* Ensure the button is interactive */
+    background-color: #ff385c; /* Airbnb red color */
+    border: none;
+    padding: 10px 20px; /* Slightly smaller padding */
+    border-radius: 50px; /* Fully rounded button */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Initial shadow */
 }
 
 #header button:hover {
-  background-color: #e03a56; /* Darker red on hover */
+    background-color: #e03a56; /* Darker red on hover */
+    box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
+    /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
+animation: pulseShadow 0.6s ease-in-out infinite alternate; /* Animation on hover */
+}
+/* Keyframes for box shadow pulse animation */
+@keyframes pulseShadow {
+    0% {
+        box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(0, 115, 255, 1), 0 0 8px rgba(0, 115, 255, 0.75); /* Pulsating effect */
+    }
 }
 
+/* Search section layout */
 #header .search-section {
-    color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10002; /* Ensure the entire search section is clickable */
+    display: flex;
+    border-radius: 50px; /* Fully rounded container */
+    padding: 10px 15px; /* Reduce padding */
+    width: auto; /* Adjust width based on content */
+    max-width: 100%; /* Ensure responsiveness */
+    flex-wrap: wrap; /* Wrap content if it overflows */
+	color: white;
+	z-index: 10002; /* Ensure the entire search section is clickable */
 }
-
-#header .search-section input {
-  margin-right: 10px; /* Spacing between the input fields */
-  color: white;
-}
-
+	  
 #header .logo {
-  margin-right: auto; /* Push logo to the left */
-  font-weight: bold;
-  font-size: 20px;
-  color: #ff385c; /* Airbnb logo color */
+    margin-right: auto; /* Push logo to the left */
+    font-weight: bold;
+    font-size: 24px; /* Slightly bigger logo text */
+    color: #ff385c; /* Airbnb logo color */
 }
 
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-  #header {
-    flex-direction: column;
-  }
+    #header {
+        flex-direction: column;
+        padding: 10px 0; /* Reduce padding for mobile */
+    }
 
-  #header input {
-    width: 100%;
-    margin-bottom: 10px;
-      color: rgba(255, 255, 255, 0.75);
-  }
+    #header input {
+        width: 100%; /* Full width on mobile */
+        margin-bottom: 10px;
+    }
 
-  #header button {
-    width: 100%;
-  }
-}
-      /*#header input::placeholder {
-  color: #717171;*//* Light gray placeholder text */
-  /*font-size: 16px;*//* Airbnb-style font size */
-/*}*/
+    #header button {
+        width: 100%; /* Full width button on mobile */
+    }
 
-#header input {
-  /*color: #222222;*/ /* Darker gray/black for user-inputted text */
-  background-color: rgba(255, 255, 255, 0.15);
-  /*border: 1px solid #e0e0e0;*/ /* Light border similar to Airbnb */
-    border: 0px solid #e0e0e0; /* Border similar to Airbnb */
-  padding: 10px 15px;
-  border-radius: 25px; /* Rounded edges */
-  width: 250px;
-  margin-right: 10px;
-    color: rgba(255, 255, 255, 0.75);
+    #header .search-section {
+        flex-direction: column; /* Stack inputs vertically */
+        width: 100%;
+        margin-top: 10px;
+    }
 }
 
-#header input:focus {
-  border-color: #ff385c; /* Red border when focused, Airbnb style */
-  outline: none;
-}
-      /* Styling for the placeholder text in all inputs, including the date input */
-/* General Placeholder Styling */
+/* Placeholder text styling */
 #header input::placeholder {
-  color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
-  opacity: 1; /* Ensure full opacity */
+    color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
+    font-size: 16px; /* Airbnb-style font size */
 }
-
-/* Styling for Specific Inputs */
-#header input[type="text"]::placeholder,
-#header input[type="date"]::placeholder {
+	  /* Styling for Specific Inputs */
+input[type="text"]::placeholder,
+input[type="date"]::placeholder {
   color: rgba(255, 255, 255, 0.75); /* Light gray placeholder for text and date inputs */
   opacity: 1; /* Ensure full opacity */
 }
-      input[type="date" i] {
-    font-family: monospace;
-    padding-inline-start: 1px;
-    cursor: default;
-    padding: 0px;
-    color: rgba(255, 255, 255, 0.75);
-}
 
-/* Older browser support for placeholders */
-#header input::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-#header input::-moz-placeholder {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-#header input:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-#header input::-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-#header input::placeholder {
-  color: rgba(255, 255, 255, 0.75);
-}
+/* Date input custom styling */
 /* Style the input[type="date"] */
 input[type="date"] {
   appearance: none; /* Remove default appearance */
@@ -435,14 +424,71 @@ input[type="date"] {
   background-color: rgba(255, 255, 255, 0.15); /* Background */
   border-radius: 10px;
 }
-
+/* Red hover for date picker */
+input[type="date"]:hover, input[type="date"]:focus {
+    box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline similar to Airbnb */
+    outline: none;
+}
 input[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0; /* Hide the default calendar icon */
+    opacity: 0; /* Hide the default calendar icon */
+}
+	  input[type="date" i] {
+    font-family: monospace;
+    padding-inline-start: 1px;
+    cursor: default;
+    padding: 0px;
+    color: rgba(255, 255, 255, 0.75);
+}/* Hide default number input arrows */
+/* Hide default number input arrows */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
 
-  
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield; 
+}
 
-  
+/* Style number input */
+input[type="number"] {
+    background-color: rgba(255, 255, 255, 0.15); /* Match other inputs' background */
+    color: rgba(255, 255, 255, 0.75); /* Text color */
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px; /* Same rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Consistent box-shadow */
+    width: 50px;
+    text-align: center; /* Center the number */
+}
+
+/* Container for custom number input with arrows */
+#header .number-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom increment/decrement buttons */
+#header .number-input-container button {
+    background-color: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: color 0.3s ease;
+}
+
+#header .number-input-container button:hover {
+    color: #ff385c; /* Airbnb red on hover */
+}
+
+#header .number-input-container button:focus {
+    outline: none;
+}
+
 
 
 /*#regionPopup {
@@ -472,11 +518,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-width: 400px; /* Limit the width for smaller screens */
   width: 100%;
 }
+
 #regionPopup h1, #regionPopup h2, #regionPopup p {
   /*color: #333;*/ /* Darker text color for better readability */
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 50px; /* Add space between title and content */
 }
+
 	#regionPopup select {
   font-size: 16px;
   padding: 10px;
@@ -493,14 +541,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   appearance: none; /* Remove default select arrow styling for a custom look */
   -webkit-appearance: none; /* For WebKit browsers */
 		display: block;
-		z-index: 10000;
 }
 	  #regionPopup select:focus {
   outline: none; /* Remove the blue outline on focus */
 }
+
 #regionPopup select option {
   padding: 10px; /* Add padding to options */
 }
+
 #regionPopup button {
   background-color: #ff385c; /* Airbnb red */
   color: white;
@@ -511,9 +560,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 #regionPopup button:hover {
   background-color: #e03a56; /* Slightly darker red on hover */
 }
+
 	  #content {
   display: none;
   flex-direction: row;
@@ -534,6 +585,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-width: 400px;
   width: 100%;
 }
+
 #confirmationMessage h2 {
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 10px;
@@ -542,6 +594,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgba(255, 255, 255, 0.75);
 	font-family: 'Airbnb Cereal App', 'Helvetica Neue', 'Arial', sans-serif;
 }
+
 /* Region Select Button Styling */
 /* Region Select Button Styling */
 #regionSelectBtn {
@@ -559,6 +612,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
   z-index: 10001;
 }
+
 #regionSelectBtn:hover {
   background-color: rgba(225, 225, 225, 0.35);
    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
@@ -576,12 +630,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   right: 50px; /* Adjust based on your layout */
   z-index: 10002; /* Ensure it is visible above other elements */
 }
+	  
 #regionSelectDropdown:hover {
   background-color: rgba(245, 245, 245, 0.35);
 }
 	  #regionSelectBtn, #submitRegion {
   z-index: 10001; /* Ensure these elements are interactive */
 }
+
+	  
 /* Remove scrollbar from iframes */
 iframe::-webkit-scrollbar {
   display: none;
@@ -597,7 +654,7 @@ iframe::-webkit-scrollbar {
     display: none;  
     justify-content: center;
     align-items: center;
-    z-index: 10010; /* Ensure it's on top of everything */
+    z-index: 10001; /* Ensure it's on top of everything */
   }
 	  #newsOverlaynighttheme {
     position: absolute;
@@ -611,14 +668,15 @@ iframe::-webkit-scrollbar {
     display: none;  
     justify-content: center;
     align-items: center;
-    z-index: 10010; /* Ensure it's on top of everything */
+    z-index: 10001; /* Ensure it's on top of everything */
   }
+  
   #newsIframe {
     width: 80%;
     height: 80%;
     /*background: rgba(255, 255, 255, 0.5);*/
     background: none;
-    z-index: 100025; /* Lower than the close button */
+    z-index: 1; /* Lower than the close button */
   }
 	  #newsIframenighttheme {
     width: 80%;
@@ -627,6 +685,7 @@ iframe::-webkit-scrollbar {
     background: none;
     z-index: 1; /* Lower than the close button */
   }
+
 	  #newsButton {
     position: absolute;
       right: 15px;
@@ -646,10 +705,13 @@ iframe::-webkit-scrollbar {
   border-radius: 25px; /* Rounded corners for inputs */
 	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 #newsButton:hover {
   background-color: rgba(225, 225, 225, 0.35);
 	border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
+
 }
+	  
 	  #closeNewsButton {
   position: absolute;
   top: 10px;
@@ -664,12 +726,13 @@ iframe::-webkit-scrollbar {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  z-index: 10035;
+  z-index: 10002;
   /*display: flex;*/
   display: none;
   justify-content: center;
   align-items: center;
 }
+
 #closeNewsButton:hover {
   /*background-color: rgba(255, 255, 255, 0.2);*/ /* Optional hover effect */
   color: red; /* Optional color change on hover */
@@ -696,14 +759,17 @@ iframe::-webkit-scrollbar {
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 	  #markerContainer {
   position: relative;
   display: inline-block; /* Ensures it wraps tightly around marker label */
 }
+	
 	  /* Style the select dropdown */
 /*select {
   position: absolute;
@@ -753,6 +819,7 @@ background-size: 10px; *//* Adjust this as needed */
 select::-ms-expand {
   display: none; /* Hide the arrow in IE/Edge */
 }
+
 select:after {
   content: '\25BC'; /* Adds a downwards arrow */
   position: absolute;
@@ -760,19 +827,25 @@ select:after {
   top: 50%; /* Centers it vertically */
   transform: translateY(-25%); /* Moves the arrow down slightly */
 }
+
 select:hover {
   border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
 	background-color: rgba(225, 225, 255, 0.35);
 }
+
 select:focus {
   border-color: #ff385c; /* Red border when focused */
   outline: none; /* Remove the default outline */
 }
+
+
 /* Style the dropdown options */
 select option {
   background-color: white;
   color: #333;
 }
+
+
 	/* Responsive Design */
     @media (max-width: 768px) {
       /* Adjust the size and placement of the globe on mobile */
@@ -788,11 +861,13 @@ select option {
     background-color: rgba(255, 255, 255, 0.2);
 overflow: hidden;    
   }
+	    
 	    #newsButton {
         font-size: 10px;
         padding: 3px 7px;
         top: 55px;
       }
+
       /*#dayTicker, #nightTicker {
         height: 60px;*/ /* Reduce height for mobile */
         /*font-size: 12px;
@@ -803,6 +878,7 @@ overflow: hidden;
         font-size: 12px;
 	width: 100vw;
       }
+
       #credits {
         font-size: 0.6rem; /* Make credits even smaller on mobile */
       }
@@ -812,11 +888,13 @@ overflow: hidden;
 	    footer {
       font-size: 0.4rem;
     }
+
       /* Adjust globe view on smaller devices by zooming out */
       body {
         overflow: hidden;
       }
 }
+	
 	  /* Footer Styles */
     footer {
       position: fixed;
@@ -832,10 +910,12 @@ overflow: hidden;
       /*font-size: 0.9rem;*/
       /*z-index: 9999;*/
     }
+
     footer a {
       color: #1e90ff;
       text-decoration: none;
     }
+
     footer a:hover {
       text-decoration: underline;
     }
@@ -854,6 +934,7 @@ overflow: hidden;
   z-index: 0;  /* Make sure the container is behind the globe-container */
 	display: flex;  /* Use flexbox to manage layout */
 }
+
 /* Fullscreen globe when the page loads */
 	  #globe-container {
   position: relative;  /* Set position to relative or absolute */
@@ -875,22 +956,29 @@ overflow: hidden;
 	overflow: hidden; /* Ensure the canvas doesn’t overflow */
 		  display: block !important;
 }
+	  
 	  #globe-container {
     pointer-events: auto; /* Disable globe interactions */
 }
 	  #globe-container.disable-interaction {
     pointer-events: none; /* Disable globe interactions */
 }
+
 	  /* UI buttons that must be clickable over the globe */
+
 /* Split the screen when the search button is clicked */
 #globe-container.split {
   width: 50%;  /* Shrink to 50% width */
   height: 100vh;  /* Full height */
+	
 	  pointer-events: auto;  /* Allow interactions */
 	float: right;
 	position: relative;
 }
+
+
 /* Left container transition */
+
 	/* Left container transition */
 #left-container {
 	height: 100vh;
@@ -908,6 +996,7 @@ overflow: hidden;
     gap: 15px; /* Add some spacing between the listings */
     padding: 20px;
     overflow-y: auto; /* Ensure it scrolls if the content overflows */
+
 }	.close-btn {
     position: absolute;
     top: 10px;
@@ -920,9 +1009,11 @@ overflow: hidden;
     display: none; /* Hidden initially */
     z-index: 10002; /* Ensure it's on top of other elements */
 }
+
 .close-btn:hover {
     color: #ff385c; /* Highlight on hover */
 }  /* Style for each post */
+
 	  .post {
     background-color: white;
     border-radius: 10px;
@@ -930,17 +1021,21 @@ overflow: hidden;
     padding: 15px;
     text-align: center;
 }
+
 .post img {
     max-width: 100%;
     border-radius: 10px;
 }
+
 #left-container::-webkit-scrollbar {
     width: 10px;
 }
+
 #left-container::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
 }        
+
 #left-container.show {
     width: 50%;  /* Expands to 50% smoothly */
 	display: block;
@@ -963,6 +1058,7 @@ overflow: hidden;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: #000;
@@ -971,110 +1067,11 @@ overflow: hidden;
   height: 50px;
   animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-.spinner-text {
-    margin-top: 10px;
-    text-align: center;
-    color: black;
-    font-size: 16px;
-}
-
-@media only screen and (max-width: 768px) {
-  body {
-    font-size: 14px;
-    overflow-x: hidden;
-  }
-
-  /* Load lighter texture for mobile */
-  .texture {
-    background-image: url('mobile_texture.jpg'); /* Placeholder for a mobile texture */
-    background-size: cover;
-  }
-
-  /* Remove unnecessary functionality for mobile */
-  #searchBtn, #newsButton, #closeNewsButton {
-    display: none;
-  }
-  
-  /* Simplified header for mobile */
-  #header input, #header button {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  /* Adjust region select */
-  #regionSelectBtn {
-    padding: 10px 15px;
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-}
-
-
-#left-container {
-    height: 80vh;  /* Adjust height so header and ticker remain visible */
-    width: 50%;  /* Expands to 50% smoothly */
-    background-color: white;
-    color: black;
-    font-size: 16px;
-    padding: 20px;
-    overflow-y: auto;
-    display: grid;  /* Enable grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create grid layout */
-    gap: 20px; /* Add gap between grid items */
-    z-index: 20010;
-}
-
-.post {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-}
-.post img {
-    max-width: 100%;
-    border-radius: 10px;
-}
-
-
-#left-container {
-    height: 80vh;  /* Adjust height so the header and ticker remain visible */
-    width: 50%;  /* Expands to 50% smoothly */
-    background-color: white;
-    color: black;
-    font-size: 16px;
-    padding: 20px;
-    overflow-y: auto;
-    display: grid;  /* Enable grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create grid layout */
-    gap: 20px; /* Add gap between grid items */
-    z-index: 20010;
-}
-
-#loadingIcon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);  /* Center the spinner */
-    width: 50px;
-    height: 50px;
-    display: none;
-}
-
-.spinner-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 20000;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 .spinner-text {
     margin-top: 10px;
@@ -1084,97 +1081,7 @@ overflow: hidden;
 }
 
 
-#left-container {
-    height: 80vh;  /* Adjust height so the header and ticker remain visible */
-    width: 55%;  /* Slightly larger than the globe */
-    background-color: white;
-    color: black;
-    font-size: 16px;
-    padding: 20px;
-    overflow-y: auto;
-    display: grid;  /* Enable grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Create grid layout for 2-3 listings per row */
-    gap: 20px; /* Add gap between grid items */
-    z-index: 20010;
-}
-.post {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-}
-.post img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-.post-title {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
-    margin-top: 10px;
-}
-.post-price {
-    color: #ff385c;
-    font-weight: bold;
-    margin-top: 5px;
-}
-.post-rating {
-    color: #999;
-    font-size: 14px;
-    margin-top: 5px;
-}
 
-
-#header input {
-    color: #333;  /* Change input text to black when header background is white */
-}
-
-
-#left-container {
-    height: calc(100vh - 120px);  /* Leave space for header and ticker */
-    width: 55%;  /* Larger than the globe container */
-    background-color: white;
-    color: black;
-    font-size: 16px;
-    padding: 20px;
-    overflow-y: auto;
-    display: grid;  /* Enable grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Create grid layout */
-    gap: 20px; /* Add gap between grid items */
-    z-index: 20010;
-}
-
-
-.post {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-}
-.post img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-.post-title {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
-    margin-top: 10px;
-}
-.post-price {
-    color: #ff385c;
-    font-weight: bold;
-    margin-top: 5px;
-}
-.post-rating {
-    color: #999;
-    font-size: 14px;
-    margin-top: 5px;
-}
 
 </style>
 	<meta name="google-adsense-account" content="ca-pub-5689710336620898">
@@ -1189,16 +1096,20 @@ overflow: hidden;
 <div id="globe-container" class="split-screen-right"></div>
     </div>
   </div>
+  
+  <!-- Info Section -->
   <div id="info">Click the markers to show the label</div>
   <div id="credits">
     Made by
     <a href="https://github.com/Shange-Fagan" target="_blank" rel="noopener">Shange Fagan</a>
   </div>
+	<!-- Footer Section -->
   <footer>
     © 2024 Airbnb Assistant. All rights reserved. 
     <a href="https://www.linkedin.com/in/shange-fagan-bba3a3239/" target="_blank">LinkedIn</a> | 
     <a href="https://instagram.com/shangefagan" target="_blank">Instagram</a>
   </footer>
+
 <div id="header">
   <input type="text" id="where" name="destination" placeholder="Search destinations">
   <input type="date" id="checkin" name="checkin" placeholder="Check-in date">
@@ -1208,12 +1119,14 @@ overflow: hidden;
   <input type="number" id="price_max" name="price_max" placeholder="Max price (optional)">
   <button id="searchBtn">Search</button>
 </div>
+	
 <div id="regionPopup">
   <h2>Welcome to Airbnb Assistant</h2>
   <p>Select your region</p>
   <select id="regionSelect">
     <option value="africa">Africa</option>
     <option value="europe">Europe</option>
+    <!-- more regions -->
     <option value="america">America</option>
     <option value="south america">South America</option>
     <option value="carribbean">Carribbean</option>
@@ -1222,13 +1135,19 @@ overflow: hidden;
   </select>
   <button id="submitRegion">Submit</button>
 </div>
+	
 <div id="confirmationMessage" style="display: none;">
   <h2>Thank you</h2>
   <p>
-    Please enter the details of your travel above, and we'll do our best to find the best airbnbs tailored to your needs, or feel free to browse the best airbnbs around the world, You can filter by price range and region using the buttons above.
+    Please enter the details of your travel above, and we'll do our best to find the right airbnbs tailored to your needs, or feel free to browse the best airbnbs around the world, You can filter by price range and region using the buttons above.
   </p>
 </div>
+
+<!-- Region Select button -->
 <button id="regionSelectBtn">Region Select</button>
+
+
+<!-- Tickers -->
   <iframe
     id="dayTicker"
     src="https://rss.app/embed/v1/ticker/3j0jw7ksCqckLNRl"
@@ -1248,8 +1167,10 @@ overflow: hidden;
     frameborder="0"
     sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
   ></iframe>
+  <!-- Marker Labels (Will be dynamically generated) -->
   <div id="labels-container"></div>
   <div id="loadingIcon" class="loading-spinner"></div>
+  <!-- Import Map -->
   <script type="importmap">
   {
     "imports": {
@@ -1262,9 +1183,14 @@ overflow: hidden;
   }
   </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+
+	
 <button id="toggleButton">Switch to Night</button>
 <button id="newsButton">Latest Airbnbs</button>
+  <!-- The iframe containers will be added dynamically -->
+  <!-- X Button to close the iframe -->
 <button id="closeNewsButton">×</button>
+  <!-- Iframe overlay for news articles -->
 <div id="newsOverlay" style="display: none;">
   <iframe id="newsIframe" width="900" height="1600" src="https://rss.app/embed/v1/magazine/5J869AE7cqDlimdE" frameborder="0"></iframe>
 </div>
@@ -1277,6 +1203,11 @@ overflow: hidden;
   <option value="midPrice">Mid Price</option>
   <option value="expensive">Most Expensive</option>
 </select>
+
+  <!-- Scripts -->
+  <!-- Include Three.js and other dependencies here -->
+
+  <!-- Main JavaScript -->
   <script type="module">
     // JavaScript code will go here
     import * as THREE from "https://unpkg.com/three@0.136.0/build/three.module.js";
@@ -1290,22 +1221,27 @@ overflow: hidden;
 import { EffectComposer } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/EffectComposer.js?v=1';
 import { RenderPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/RenderPass.js?v=1';
 import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/postprocessing/UnrealBloomPass.js?v=1';
+
+  
   // Scene Setup
   const scene = new THREE.Scene();
   /*const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 2000);*/
   let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.set(20, 0.5, 15).setLength(25);
+	  
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   //renderer.setSize(innerWidth, innerHeight);
   //renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
   document.body.appendChild(renderer.domElement);
+  
   // Label Renderer
   const labelRenderer = new CSS2DRenderer();
   labelRenderer.setSize(innerWidth, innerHeight);
   labelRenderer.domElement.style.position = 'absolute';
   labelRenderer.domElement.style.top = '0px';
   document.body.appendChild(labelRenderer.domElement);
+  
   // Controls
   let controls = new OrbitControls(camera, labelRenderer.domElement);
   //controls.enableZoom = true;
@@ -1318,18 +1254,24 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
   controls.maxDistance = 25;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
+
+
    // Lighting - Reduced intensity to reduce glare
     /*const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft ambient light
     scene.add(ambientLight);
+
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); // Reduced intensity
     directionalLight.position.set(5, 5, 5); // Adjust position
     scene.add(directionalLight);*/
+  
   // Global Uniforms
   const globalUniforms = {
     time: { value: 0 },
   };
+  
   // Handle Window Resize
   window.addEventListener('resize', onWindowResize);
+  
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -1345,26 +1287,35 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
         window.camera.updateProjectionMatrix();
     }
 });
+
 	  //let dayTexture, nightTexture;
     let isDay = true; // Track whether it's currently day or night
 	  let rt;
+
 	  let texture;
+
 /*document.getElementById('newsButton').addEventListener('click', function() {
   if (isDay) {
     const newsOverlaynighttheme = document.getElementById('newsOverlaynighttheme');  
     const newsOverlay = document.getElementById('newsOverlay');
+
     newsOverlaynighttheme.style.display = 'flex';  // Show the night theme news overlay
     newsOverlay.style.display = 'none';  // Hide the day theme news overlay
+
     const closeNewsButton = document.getElementById('closeNewsButton');
     closeNewsButton.style.display = 'flex';  // Show the close button
+
   } else {
     const newsOverlay = document.getElementById('newsOverlay');
     const newsOverlaynighttheme = document.getElementById('newsOverlaynighttheme');
+
     newsOverlay.style.display = 'flex';  // Show the day theme news overlay
     newsOverlaynighttheme.style.display = 'none';  // Hide the night theme news overlay
+
     const closeNewsButton = document.getElementById('closeNewsButton');
     closeNewsButton.style.display = 'flex';  // Show the close button
   }
+
   // Toggle day/night mode
   isDay = !isDay;
 }); // This closes the addEventListener function correctly
@@ -1382,17 +1333,26 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
     newsOverlayNight.style.display = 'flex';
     newsOverlayDay.style.display = 'none';
   }
+
   // Display the close button in both cases
   closeNewsButton.style.display = 'flex';
+
 	  });
+		  
+	
   //const selectedRegion = document.getElementById('regionSelect').value;
+
 		  /*document.addEventListener("DOMContentLoaded", function() {
+			  
   // Your existing event listeners and code go here
+			  
   document.getElementById('submitRegion').addEventListener('click', function() {
   // Close the initial region popup
   document.getElementById('regionPopup').style.display = 'none';
+
   // Show the confirmation message
   document.getElementById('confirmationMessage').style.display = 'block';
+
   // Hide the confirmation message after 5 seconds
   setTimeout(function() {
     document.getElementById('confirmationMessage').style.display = 'none';
@@ -1401,8 +1361,11 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
   panToRegion(selectedRegion);
 });
 });*/
+	    
+
  /*  // Always visible region select button
   document.getElementById('regionSelectBtn').style.display = 'block';
+
   document.getElementById('regionSelectBtn').addEventListener('click', function() {
     // Check if dropdown already exists to avoid adding multiple
     if (!document.getElementById('regionSelectDropdown')) {
@@ -1418,9 +1381,12 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.136.0/examples/jsm/po
         <option value="asia">Asia</option>
 	<option value="world">World</option>
       `;
+      
       this.insertAdjacentElement('afterend', regionSelect);
+
 // Ensure it's visible and styled correctly
     regionSelect.style.display = 'block';
+
       // Pan the camera to the selected region when changed
       regionSelect.addEventListener('change', function() {
         let selectedRegion = this.value;
@@ -1440,9 +1406,11 @@ function stopAllTweens() {
 	function panToRegion(region) {
     let position;
     let zoomLevel;
+
     // Reset zoom to default value before transitioning
     camera.zoom = 1;
     camera.updateProjectionMatrix(); // Apply the reset zoom value
+
     switch (region) {
         case 'africa':
             position = { x: 12.0, y: 0, z: 1.74 }; // Increased the x-value to move further right
@@ -1477,11 +1445,14 @@ function stopAllTweens() {
             console.log('Region not recognized');
             return;
     }
+
     // Stop auto-rotation after panning
     controls.autoRotate = false;
+
     // Animate camera panning and zooming
     animateCameraPan(position.x, position.y, position.z, zoomLevel);
 }
+
 function animateCameraPan(x, y, z, zoomLevel) {
     new TWEEN.Tween(camera.position)
         .to({ x: x, y: y, z: z }, 2000) // Smoothly pan over 2 seconds
@@ -1490,6 +1461,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
             camera.lookAt(0, 0, 0);
         })
         .start();
+
     // Add zooming to the pan
     new TWEEN.Tween(camera)
         .to({ zoom: zoomLevel }, 2000) // Adjust zoom over the same duration
@@ -1508,6 +1480,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
 }*/
 const earthRadius = 5.1; // Adjust this to match your globe's size
 const textureLoader = new THREE.TextureLoader();
+
 	  /*const cloudTexture2 = textureLoader.load("js/Earth_Cloud.jpg");
 	  const cloudGeometry = new THREE.SphereGeometry(earthRadius * 1.005, 64, 64);
 const cloudMaterial2 = new THREE.MeshPhongMaterial({
@@ -1517,16 +1490,20 @@ const cloudMaterial2 = new THREE.MeshPhongMaterial({
 });
 const cloudMesh2 = new THREE.Mesh(cloudGeometry, cloudMaterial2);
 scene.add(cloudMesh2);*/
+	  
 /*document.getElementById('searchBtn').addEventListener('click', () => {
   const where = document.getElementById('where').value;
   const when = document.getElementById('when').value;
   const guests = document.getElementById('guests').value;
+
   // Show results iframe
   const iframeSrc = generateAirbnbUrl(where, when, guests);
   document.getElementById('resultsIframe').src = iframeSrc;
+
   // Adjust layout
   document.getElementById('content').style.display = 'flex';
 });*/
+
 /*function generateAirbnbUrl(where, when, guests) {
   return `https://www.airbnb.com/s/${where}/homes?checkin=${when}&guests=${guests}`;
 }
@@ -1536,12 +1513,14 @@ scene.add(cloudMesh2);*/
     addMarkerToGlobe(marker);
   });
 }*/
+
 	 /* document.getElementById('newsButton').addEventListener('click', function() {
   const newsOverlay = document.getElementById('newsOverlay');
   newsOverlay.style.display = 'flex';  // Show the news iframe
 const closeNewsButton = document.getElementById('closeNewsButton');
   closeNewsButton.style.display = 'flex';  // Show the news iframe
 });*/
+
 document.getElementById('closeNewsButton').addEventListener('click', function() {
   document.getElementById('newsOverlay').style.display = 'none';  // Close the news iframe
 document.getElementById('newsOverlaynighttheme').style.display = 'none';
@@ -1551,23 +1530,30 @@ document.getElementById('closeNewsButton').style.display = 'none';  // Close the
 function closeNewsOverlayOnClick(event) {
   const newsOverlay = document.getElementById('newsOverlay');
   const newsIframe = document.getElementById('newsIframe');
+
   // Check if the click was outside the news overlay iframe
   if (newsOverlay.style.display === 'block' && !newsIframe.contains(event.target)) {
     newsOverlay.style.display = 'none'; // Hide the overlay
   }
 }
+
 // Function to close the night theme overlay
 function closeNewsOverlayNightOnClick(event) {
   const newsOverlayNight = document.getElementById('newsOverlaynighttheme');
   const newsIframeNight = document.getElementById('newsIframenighttheme');
+
   // Check if the click was outside the night theme overlay iframe
   if (newsOverlayNight.style.display === 'block' && !newsIframeNight.contains(event.target)) {
     newsOverlayNight.style.display = 'none'; // Hide the night theme overlay
   }
 }
+
 // Add event listeners to close overlays when clicking outside
 document.addEventListener('click', closeNewsOverlayOnClick);
 document.addEventListener('click', closeNewsOverlayNightOnClick);
+
+
+	  
 const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png')
   const cloudMaterial = new THREE.ShaderMaterial({
   uniforms: {
@@ -1591,9 +1577,11 @@ const cloudTexture = new THREE.TextureLoader().load('https://mrdoob.com/lab/java
   `,
   transparent: true
 });
+
 // Create geometry and apply the shader material
 const cloudGeo = new THREE.PlaneGeometry(800, 800);
 const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
+
 // Position the clouds in the scene
 //cloudMesh.position.set(-100, -100, -500);// Add clouds after texture is loaded
 //cloudMesh.position.set(-200, -100, -700);// Add clouds after texture is loaded
@@ -1607,6 +1595,7 @@ const cloudMesh = new THREE.Mesh(cloudGeo, cloudMaterial);
 const nightmarkerMaterial = new THREE.Color('#FE8C02');
 	  //const daymarkerMaterial = new THREE.Color('#00FF00');
 //const nightmarkerMaterial = new THREE.Color('#FFFFFF');
+
 const markerMaterial2 = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial,
     onBeforeCompile: (shader) => {
@@ -1633,17 +1622,22 @@ const markerMaterial2 = new THREE.MeshBasicMaterial({
         float lenUv = length(lUv);
         val = max(val, 1. - step(0.25, lenUv)); // central circle
         val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
         float tShift = fract(time * 0.5 + vPhase);
         val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
         if (val < 0.5) discard;
+
         vec4 diffuseColor = vec4( diffuse, opacity );`
       );
     },
   });
   markerMaterial2.defines = { USE_UV: '' };
+
     // Track loaded textures
 let texturesLoaded = 0;
 const totalTextures = 4; // Update this if you have more or fewer textures
+
 function checkTexturesLoaded() {
   texturesLoaded++;
   if (texturesLoaded === totalTextures) {
@@ -1656,10 +1650,13 @@ function checkTexturesLoaded() {
     } else {
         camera.position.set(20, 0.5, 15).setLength(16);    // Default z position for desktop or larger screens
     }
+	  
     //let dayTexture, nightTexture;
     //let isDay = true; // Track whether it's currently day or night
+
 // Load Textures
 //const textureLoader = new THREE.TextureLoader();
+
 // Background Texture
    /* const loader = new THREE.TextureLoader();
 loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
@@ -1667,9 +1664,11 @@ loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
   rt.fromEquirectangularTexture(renderer, texture);
   //scene.background = rt.texture;
 });*/
+
 	  // Load the Cube Map
       const cubeTextureLoader = new THREE.CubeTextureLoader();
 	  const isMobile = /Mobi/i.test(navigator.userAgent);
+
 /*const cubeMap = cubeTextureLoader.load([
   isMobile ? 'js/px.webp' : 'js/px.png', // Right face
   isMobile ? 'js/nx.webp' : 'js/nx.png', // Left face
@@ -1712,6 +1711,7 @@ loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
   isMobile ? 'js/pz (1).webp' : 'js/pz (1).png', // Front face
   isMobile ? 'js/nz (1).webp' : 'js/nz (1).png'  // Back face
     ]);*/
+
     // Set Initial Background Cube Map
    // scene.background = dayCubeMap;
    // scene.background = new THREE.Color(0x87CEEB); // Light sky blue
@@ -1719,26 +1719,33 @@ loader.load('textures/TCom_Aerials0006_3_L.jpg', function (texture) {
 const canvas = document.createElement('canvas');
 canvas.width = 1024;
 canvas.height = 1024;
+
 const context = canvas.getContext('2d');
+
 // Create gradient from light sky blue to deep space blue
 const gradient = context.createRadialGradient(512, 512, 100, 512, 512, 512);
 gradient.addColorStop(0, '#87CEEB');  // Light sky blue near Earth
 gradient.addColorStop(1, '#4682B4');  // Deep space blue at edges
 context.fillStyle = gradient;
 context.fillRect(0, 0, canvas.width, canvas.height);
+
 // Create a texture from the canvas
 const daybackgroundTexture = new THREE.CanvasTexture(canvas);
+
 // Create a gradient for the night scene background
 const canvas2 = document.createElement('canvas');
 canvas2.width = 1024;
 canvas2.height = 1024;
+
 const context2 = canvas2.getContext('2d');  // Use the correct 'canvas2'
+
 // Create gradient from dark blue to slightly lighter blue
 const gradient2 = context2.createRadialGradient(512, 512, 100, 512, 512, 512);
 gradient2.addColorStop(0, '#000033');  // Darker blue (center near Earth)
 gradient2.addColorStop(1, '#000066');  // Slightly lighter blue for edges (space)
 context2.fillStyle = gradient2;
 context2.fillRect(0, 0, canvas2.width, canvas2.height);
+
 // Create a texture from the canvas
 const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 	  // Load Textures
@@ -1758,7 +1765,9 @@ const nightbackgroundTexture = new THREE.CanvasTexture(canvas2);
 const dayBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
 	  const normalMap = textureLoader.load('js/Earth_Normal.jpg'); // Use a realistic normal map
 const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/earth-topology.png");
+
 	  //const textureLoader = new THREE.TextureLoader();
+
 // Load the texture
 /*const dayTexture = textureLoader.load(
   'js/Earth_Diffuse.jpg',
@@ -1770,20 +1779,28 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     console.error('An error occurred loading the texture: ', err);
   }
 );*/
+
+
 // Ensure correct wrapping
 dayTexture.wrapS = THREE.ClampToEdgeWrapping;
 dayTexture.wrapT = THREE.ClampToEdgeWrapping;
+
 // Use appropriate filtering
 dayTexture.minFilter = THREE.LinearFilter; // Smooths texture when zoomed
 dayTexture.magFilter = THREE.LinearFilter;
 dayTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases texture quality at glancing angles
+
+
 	  // Ensure correct wrapping
 nightTexture.wrapS = THREE.ClampToEdgeWrapping;
 nightTexture.wrapT = THREE.ClampToEdgeWrapping;
+
 // Use appropriate filtering
 nightTexture.minFilter = THREE.LinearFilter;
 nightTexture.magFilter = THREE.LinearFilter;
 nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases texture quality at glancing angles
+
+  
 	  const shaderMaterial2 = new THREE.ShaderMaterial({
   uniforms: {
     dayTexture: { type: 't', value: dayTexture },
@@ -1809,6 +1826,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
     }
   `,
 });
+
 	// Set the background of the scene
         scene.add(cloudMesh);
 	scene.background = daybackgroundTexture;
@@ -1850,7 +1868,9 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
         document.getElementById("dayTicker").style.display = "none";
         document.getElementById("nightTicker").style.display = "block";
 	    	document.getElementById("mobileTicker").style.display = "none";
+
     }
+        
       } else {
 	      // Check if the user is on a mobile device
     if (window.innerWidth <= 768) {  // This checks for mobile devices based on screen width
@@ -1892,6 +1912,7 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
       globe2.material.needsUpdate = true;
       isDay = !isDay;
     }
+
 	// Add Event Listener to the Toggle Button
 	    document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
 */
@@ -1908,15 +1929,18 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
       document.getElementById("nightTicker").style.display = "block";
       document.getElementById("mobileTicker").style.display = "none";
     }
+
     // Smooth transition to night
     new TWEEN.Tween(shaderMaterial2.uniforms.transition)
       .to({ value: 1 }, 20000)  // Smooth transition over 20 seconds
       .start();
+    
     // Update globe and scene for night
     globe2.material.map = nightTexture;
     scene.background = nightbackgroundTexture;
     scene.remove(cloudMesh);  // Remove clouds for night
   markerMaterial.color.set(nightmarkerMaterial);
+
     // Update button text to switch back to Day
     document.getElementById("toggleButton").textContent = "Switch to Day";
   } else {
@@ -1930,25 +1954,32 @@ nightTexture.anisotropy = renderer.capabilities.getMaxAnisotropy(); // Increases
       document.getElementById("nightTicker").style.display = "none";
       document.getElementById("mobileTicker").style.display = "none";
     }
+
     // Smooth transition to day
     new TWEEN.Tween(shaderMaterial2.uniforms.transition)
       .to({ value: 0 }, 20000)  // Smooth transition over 20 seconds
       .start();
+
     // Update globe and scene for day
     globe2.material.map = dayTexture;
     scene.background = daybackgroundTexture;
     scene.add(cloudMesh);  // Add clouds for day
   markerMaterial.color.set(daymarkerMaterial);
+
     // Update button text to switch back to Night
     document.getElementById("toggleButton").textContent = "Switch to Night";
   }
+
   // Ensure globe material updates
   globe2.material.needsUpdate = true;
+
   // Toggle the `isDay` state after the transition
   isDay = !isDay;
 }
+
 // Add Event Listener to the Toggle Button
 document.getElementById('toggleButton').addEventListener('click', toggleDayNight);
+
 		/*// Load Textures
   //const textureLoader = new THREE.TextureLoader();
   const dayTexture = textureLoader.load("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
@@ -1967,6 +1998,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
     sphereHeight,
     sphereDepth
   );
+
   const sphereWidth2 = 5.099;
   const sphereHeight2 = 128.1;
   const sphereDepth2 = 128.1;
@@ -1977,6 +2009,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
   );
   //const textureLoader = new THREE.TextureLoader();
   const shaderMaterial = new THREE.ShaderMaterial({});
+
   const material = new THREE.ShaderMaterial({
     vertexShader: `
                 varying vec2 vertexUV;
@@ -2007,6 +2040,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
                          vec4(atmosphere +texture2D(bumpMap, vertexUV).xyz, 2.0);
                      }
                     `,
+
     uniforms: {
       /*"color": { value: new THREE.Color( 0xffffff ) },
   			"diffuse": { value: new THREE.Color( 0xffffff ) },*/
@@ -2019,9 +2053,11 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
           "//unpkg.com/three-globe/example/img/earth-topology.png"
         ),
       },
+
       bumpScale: {
         value: 0,
       },
+
       specularMap: {
         value: new THREE.TextureLoader().load(
           "//unpkg.com/three-globe/example/img/earth-water.png"
@@ -2035,6 +2071,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
                           }*/
     },
   });
+
   /*const atmosphere = new THREE.Mesh(
     new THREE.SphereGeometry(5.1, 128.1, 128.1),
     new THREE.ShaderMaterial({
@@ -2060,6 +2097,7 @@ const nightBumpMap = textureLoader.load("//unpkg.com/three-globe/example/img/ear
       side: THREE.BackSide,
     })
   );
+	  
 	atmosphere.scale.set(1, 1, 1);	
 	  */
   const material2 = new THREE.MeshPhongMaterial({
@@ -2080,7 +2118,9 @@ normalMap: normalMap,
   /*scene.add(atmosphere);*/
   scene.add(globe);
   //scene.add(globe2);
+
 let globe2;
+
 /*const genericMarkers = [
   { id: 1, position: [5.1, 1.2, 1.5], region: 'africa' },
   { id: 2, position: [5.1, 0.7, 1.8], region: 'europe' },
@@ -2092,14 +2132,17 @@ let globe2;
   { id: 8, position: [5.1, 1.2, 0.2], region: 'carribbean' },
   { id: 9, position: [5.1, 0.6, 1.45], region: 'uk' },
 ];
+
 // Initialize the globe and markers
 function initGlobe() {
   //scene = new THREE.Scene();
   //camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
   //camera.position.set(0, 0, 20); // Adjust camera distance as needed
+
   //renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globe-container').appendChild(renderer.domElement);
+
   /*const controls = new OrbitControls(camera, labelRenderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.25;
@@ -2108,28 +2151,34 @@ function initGlobe() {
   controls.maxDistance = 25;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;*/
+
   // Create globe geometry and material
   //const globeGeometry = new THREE.SphereGeometry(5, 64, 64);
   //const textureLoader = new THREE.TextureLoader();
   //const globeMaterial = new THREE.MeshBasicMaterial({
     //map: textureLoader.load('js/Earth_Diffuse.jpg'),
   //});
+
   /*globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
+
   // Load and display generic markers
   loadGenericMarkers();
+
   // Start the animation loop
   //animate();
 }
 // Function to load generic markers
 // Function to load generic markers
 function loadGenericMarkers() {
+
   // Marker material with custom shader for ripple effect
   const markerMaterial = new THREE.MeshBasicMaterial({
     color: daymarkerMaterial, // Ensure this color is defined
     onBeforeCompile: (shader) => {
       // Add custom uniform for time
       shader.uniforms.time = globalUniforms.time; // Ensure globalUniforms.time is defined
+
       // Modify vertex shader to include the phase attribute
       shader.vertexShader = `
         attribute float phase;
@@ -2141,6 +2190,7 @@ function loadGenericMarkers() {
           vPhase = phase; // de-synch of ripples
         `
       );
+
       // Modify fragment shader to create ripple effects based on time
       shader.fragmentShader = `
         uniform float time;
@@ -2154,46 +2204,63 @@ function loadGenericMarkers() {
         float lenUv = length(lUv);
         val = max(val, 1. - step(0.25, lenUv)); // central circle
         val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
         float tShift = fract(time * 0.5 + vPhase);
         val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
         if (val < 0.5) discard;
+
         vec4 diffuseColor = vec4( diffuse, opacity );`
       );
     },
   });
+
   // Define UV usage for the marker material
   markerMaterial.defines = { USE_UV: '' };
+
   // Marker geometry (planar markers with custom shader)
   const markerGeometry = new THREE.PlaneGeometry(0.2, 0.2); // Adjust size as needed
+
   // Create the instanced mesh for markers
   const markerCount = genericMarkers.length;
   const markerMesh = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
+
   // Dummy object for setting transformations per instance
   const dummy = new THREE.Object3D();
+
   // Add phase array for random ripple timing per marker
   const phaseArray = [];
+
   // Loop through markers and set position/rotation/scale for each instance
   genericMarkers.forEach((marker, index) => {
     const [x, y, z] = marker.position;
+
     // Set position using spherical coordinates
     dummy.position.set(x, y, z);
+  
     // Make the marker face outward from the globe (normal vector)
     dummy.lookAt(dummy.position.clone().normalize().multiplyScalar(5)); // Assuming radius 5 for the globe
+
     // Apply the transformation to the dummy
     dummy.updateMatrix();
+
     // Set matrix for the instanced mesh
     markerMesh.setMatrixAt(index, dummy.matrix);
+
     // Assign a random phase for ripple timing
     phaseArray.push(Math.random());
   });
+
   // Add phase attribute to the geometry
   markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
+
   // Add markers to the scene
   scene.add(markerMesh);
 };
 	  // Function to clear existing markers
 function clearExistingMarkers() {
   const markers = globe2.children.filter(obj => obj.name && obj.name.startsWith('marker-'));
+
   markers.forEach(marker => {
     // Dispose of the geometry and material to free up memory
     if (marker.geometry) marker.geometry.dispose();
@@ -2208,10 +2275,12 @@ function clearExistingMarkers() {
     globe2.remove(marker);  // Remove the marker from the scene
   });
 }
+
 // Function to load detailed markers for a specific region
 function loadDetailedMarkers(regionCoordinates) {
 	// Clear existing markers if needed
   clearExistingMarkers();
+
   const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Get detailed markers
   detailedMarkers.forEach(marker => {
     const [x, y, z] = marker.position;
@@ -2222,6 +2291,8 @@ function loadDetailedMarkers(regionCoordinates) {
     globe2.add(markerMesh);
   });
 }
+	
+
 // Example: Get detailed markers for a region (dummy data)
 function getDetailedMarkersForRegion(regionCoordinates) {
   return [
@@ -2229,18 +2300,21 @@ function getDetailedMarkersForRegion(regionCoordinates) {
     { id: 102, position: [regionCoordinates.lat + 0.2, regionCoordinates.lon + 0.2, 1.8] },
   ];
 }
+
 // Pan globe to a region
 function panGlobeToRegion(regionCoordinates) {
   if (camera && controls) {
     const { x, y, z } = latLonToVector3(regionCoordinates.lat, regionCoordinates.lon, 20);
     camera.position.set(x, y, z);
     controls.update();
+
     // Load detailed markers for the searched region
     loadDetailedMarkers(regionCoordinates);
   } else {
     console.error('Camera or controls not initialized.');
   }
 }
+
 // Convert latitude and longitude to 3D vector coordinates
 function latLonToVector3(lat, lon, radius) {
   const phi = (90 - lat) * (Math.PI / 180);
@@ -2300,19 +2374,26 @@ const markersData = [
 	  function latLonToVector3(lat, lng, radius) {
   const phi = (90 - lat) * (Math.PI / 180);  // Latitude to radians
   const theta = (lng + 180) * (Math.PI / 180);  // Longitude to radians
+  
   // Ensure the radius is calculated properly
   const x = -(radius * Math.sin(phi) * Math.cos(theta));  // X position
   const y = radius * Math.cos(phi);  // Y position
   const z = radius * Math.sin(phi) * Math.sin(theta);  // Z position
+
   return { x, y, z };
 }
+
+
 globe2 = new THREE.Mesh(geometry, material2);
 // Initialize the globe and markers
+
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globe-container').appendChild(renderer.domElement);
+
   //globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
 // Function to load generic markers
+
 // Marker Geometry and Material
 const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
 const markerMaterial = new THREE.MeshBasicMaterial({
@@ -2341,85 +2422,114 @@ const markerMaterial = new THREE.MeshBasicMaterial({
         float lenUv = length(lUv);
         val = max(val, 1. - step(0.25, lenUv)); // central circle
         val = max(val, step(0.4, lenUv) - step(0.5, lenUv)); // outer circle
+
         float tShift = fract(time * 0.5 + vPhase);
         val = max(val, step(0.4 + (tShift * 0.6), lenUv) - step(0.5 + (tShift * 0.5), lenUv)); // ripple
+
         if (val < 0.5) discard;
+
         vec4 diffuseColor = vec4( diffuse, opacity );`
       );
     },
   });
   markerMaterial.defines = { USE_UV: '' };
+
 if (window.innerWidth <= 768) {
   markerGeometry.scale(1.25, 1.25, 1.25); // Scale for mobile
 }
+
 // Creating Markers
 const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
+
 const dummy = new THREE.Object3D();
 markersData.forEach((data, index) => {
   const [radius, phi, theta] = data.position; // Spherical coordinates (radius, phi, theta)
+
   // Use setFromSphericalCoords for spherical positioning on the globe
   dummy.position.setFromSphericalCoords(radius, phi, theta);
   dummy.lookAt(dummy.position.clone().setLength(radius + 1)); // Ensure marker faces outward
   dummy.updateMatrix();
   markers.setMatrixAt(index, dummy.matrix);
+
   data.worldPosition = dummy.position.clone(); // Store position for interaction (optional)
 });
+
 // Add the markers to the scene
 //scene.add(markers);
+
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
+
+
+
 /*// Load detailed markers for a specific region
 function loadDetailedMarkers(regionCoordinates) {
   clearExistingMarkers();
+
   const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates);
   detailedMarkers.forEach(marker => {
     const { x, y, z } = latLonToVector3(marker.position[0], marker.position[1], 5.1);  // Adjust radius as needed
     // Marker Geometry and Material
 const markerGeometry = new THREE.PlaneGeometry(0.025, 0.025);  // Use a smaller size, adjust as needed
+
 // Optionally scale markers for mobile
 if (window.innerWidth <= 768) {
   markerGeometry.scale(0.5, 0.5, 0.5);  // Smaller for mobile
 }
+
+
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
+
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.position.set(x, y, z);
     markerMesh.name = `marker-${marker.id}`;  // Set a unique name
+
     globe2.add(markerMesh);
   });
 */
 	  // Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
 function loadDetailedMarkers(regionCoordinates) {
   clearExistingMarkers();  // Clear previously added markers
+
   const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates);
+
   detailedMarkers.forEach((marker, index) => {
     const { x, y, z } = latLonToVector3(marker.position[0], marker.position[1], globeRadius);
+
     // Create individual marker geometry and material
     const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Use smaller size for detailed markers
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
+
     // Optionally scale markers for mobile
     if (window.innerWidth <= 768) {
       markerGeometry.scale(1.25, 1.25, 1.25);  // Smaller for mobile
     }
+
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.position.set(x, y, z);
     markerMesh.name = `marker-${marker.id}`;  // Set a unique name for each marker
+
     globe2.add(markerMesh);  // Add marker to the globe
   });
 }
+
 // Pan globe to a region
 function panGlobeToRegion(regionCoordinates) {
   if (camera && controls) {
     const { x, y, z } = latLonToVector3(regionCoordinates.lat, regionCoordinates.lng, 20);
     const targetPosition = new THREE.Vector3(x, y, z);
+
     new TWEEN.Tween(camera.position)
       .to(targetPosition, 2000)  // Smooth pan over 2 seconds
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(() => controls.update())
       .start();
+
     loadDetailedMarkers(regionCoordinates);  // Load markers for the region
 	  // Load generic markers for all other regions
     scene.add(markers);  // Keep other region markers visible
   }
 }
+
 // Example: Get detailed markers for a region
 function getDetailedMarkersForRegion(regionCoordinates) {
   return [
@@ -2428,10 +2538,12 @@ function getDetailedMarkersForRegion(regionCoordinates) {
   ];
 }
 	  // Function to pan the globe and load markers based on a location search
-function searchForLocation(regions) {
-  const normalizedLocation2 = normalizeLocation2(regions);  // Normalize input (e.g., lowercase)
+function searchForLocation(locationName) {
+  const normalizedLocation = normalizeLocation(locationName);  // Normalize input (e.g., lowercase)
+
   // Check if the location exists in the regions database
-  const regionCoordinates = regions[normalizedLocation2];
+  const regionCoordinates = regions[normalizedLocation];
+  
   if (regionCoordinates) {
     panGlobeToRegion(regionCoordinates);  // Pan the globe to the searched location
   } else {
@@ -2439,9 +2551,10 @@ function searchForLocation(regions) {
   }
 }
 	  // Function to normalize the input location name
-function normalizeLocation2(input) {
+function normalizeLocation(input) {
   return input.toLowerCase().trim();
 }
+
 // Get region coordinates based on region name
 function getRegionCoordinates(region) {
   const regions = {
@@ -2514,14 +2627,17 @@ function getRegionCoordinates(region) {
   };
   return regions[region] || { lat: 0, lon: 0 };  // Default to world coordinates
 }
+	  
 // Animation loop
 //function animate() {
   //requestAnimationFrame(animate);
   //controls.update();
   //renderer.render(scene, camera);
 //}
+
 // Perform search and pan the globe
 /*function performSearch(searchUrl, regionCoordinates) {
+
 	// Ensure iframe exists before referencing
 const iframe = document.getElementById('airbnbIframe');
 if (iframe) {
@@ -2529,9 +2645,12 @@ if (iframe) {
 } else {
   console.error('Iframe not found.');
 }
+	
   document.getElementById('container').classList.add('split-screen');
+	
   panGlobeToRegion(regionCoordinates);
 }*/
+
 /*// Trigger search and globe pan when search button is clicked
 document.getElementById('searchBtn').addEventListener('click', function () {
   const where = document.getElementById('where').value;
@@ -2540,10 +2659,12 @@ document.getElementById('searchBtn').addEventListener('click', function () {
   const guests = document.getElementById('guests').value;
   const priceMin = document.getElementById('price_min').value;
   const priceMax = document.getElementById('price_max').value;
+
   if (!where || !checkin || !checkout || !guests) {
     alert('Please fill out all required fields.');
     return;
   }
+
   const searchUrl = `https://www.airbnb.com/s/${where}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
   const regionCoordinates = { lat: 50, lon: 10 };  // Example coordinates
   performSearch(searchUrl, regionCoordinates);
@@ -2556,16 +2677,20 @@ document.getElementById('searchBtn').addEventListener('click', function () {
             const guests = document.getElementById('guests').value;
             const priceMin = document.getElementById('price-min').value;
             const priceMax = document.getElementById('price-max').value;
+
             if (!location || !checkin || !checkout || !guests) {
                 alert('Please fill out all required fields.');
                 return;
             }
+
             // Generate the search URL dynamically
             const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+
             try {
                 // Make a request to the Node.js server to get the RSS feed URL
                 const response = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(searchUrl)}`);
                 const data = await response.json();
+
                 if (data.placeId) {
 			// Step 3: Generate the final RSS feed URL with the retrieved place_id
             const finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}&place_id=${data.placeId}`;
@@ -2580,6 +2705,7 @@ document.getElementById('searchBtn').addEventListener('click', function () {
 			} else {
                 console.error('Failed to load RSS feed');
             }
+
 		} else {
                     console.error('Failed to load RSS feed');
                 }
@@ -2591,14 +2717,18 @@ document.getElementById('searchBtn').addEventListener('click', function () {
 function generateRssUrl(searchUrl) {
   // Extract parameters from the user input (e.g., searchUrl)
   const urlParams = new URLSearchParams(searchUrl);
+
   const checkin = urlParams.get('checkin') || '2024-09-25';
   const checkout = urlParams.get('checkout') || '2024-09-26';
   const adults = urlParams.get('adults') || '2';
   const placeId = urlParams.get('place_id') || 'ChIJU1NoiDs6BIQREZgJa760ZO0';  // Default place_id for Mexico
+  
   // Replace the parameters in the RSS URL template
   const rssUrlTemplate = 'https://rss.app/new-rss-feed/rss-builder?cssGeneralTitle=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20a%3Anth-child(1)&cssContainer=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div&jsTimeout=auto&url=https%3A%2F%2Fwww.airbnb.com%2Fs%2FMexico%2Fhomes%3Ftab_id%3Dhome_tab%26refinement_paths%255B%255D%3D%252Fhomes%26adults%3D${adults}%26checkin%3D${checkin}%26checkout%3D${checkout}%26place_id%3D${placeId}';
+
   return rssUrlTemplate;
 }
+
 // Example usage:
 const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
 const dynamicRssUrl = generateRssUrl(searchUrl);
@@ -2612,23 +2742,29 @@ console.log(dynamicRssUrl);  // Logs the updated RSS URL
     const guests = document.getElementById('guests').value;
     const priceMin = document.getElementById('price_min').value;
     const priceMax = document.getElementById('price_max').value;
+
     // Ensure all required fields are filled out
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
         return;
     }
+
     // Generate the initial Airbnb search URL
     const searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}`;
+
     try {
         // Fetch the placeId from the backend (which extracts it from Airbnb's page)
         const response = await fetch(`http://localhost:3000/get-place-id?searchUrl=${encodeURIComponent(searchUrl)}`);
         const data = await response.json();
+
         if (data.placeId) {
             // Generate the final Airbnb search URL with the retrieved placeId
             const finalSearchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&guests=${guests}&price_min=${priceMin}&price_max=${priceMax}&place_id=${data.placeId}`;
+            
             // Fetch the RSS feed URL using the final search URL
             const rssResponse = await fetch(`http://localhost:3000/get-rss?searchUrl=${encodeURIComponent(finalSearchUrl)}`);
             const rssData = await rssResponse.json();
+
             if (rssData.rssUrl) {
                 // Create an iframe and set its src to the RSS feed URL
                 const iframe = document.createElement('iframe');
@@ -2647,14 +2783,17 @@ console.log(dynamicRssUrl);  // Logs the updated RSS URL
         console.error('Error fetching RSS feed:', error);
     }
 });
+
 // Function to generate the dynamic RSS URL based on user input
 function generateRssUrl(searchUrl) {
     // Extract parameters from the user input (e.g., searchUrl)
     const urlParams = new URLSearchParams(searchUrl);
+
     const checkin = urlParams.get('checkin') || '2024-09-25';
     const checkout = urlParams.get('checkout') || '2024-09-26';
     const adults = urlParams.get('adults') || '2';
     const placeId = urlParams.get('place_id') || 'ChIJU1NoiDs6BIQREZgJa760ZO0';  // Default place_id for Mexico
+    
     // Replace the parameters in the RSS URL template
     const rssUrlTemplate = `https://rss.app/new-rss-feed/rss-builder?cssGeneralTitle=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20a%3Anth-child(1)&cssContainer=div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20main%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div%20%3E%20div&jsTimeout=auto&url=${encodeURIComponent(searchUrl)}`;
     return rssUrlTemplate;
@@ -2668,6 +2807,7 @@ function updateSpinnerText(message) {
         spinnerText.innerText = message;
     }
 }
+
 document.getElementById('searchBtn').addEventListener('click', async function () {
     const location = document.getElementById('where').value;
     const checkin = document.getElementById('checkin').value;
@@ -2675,22 +2815,32 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     const guests = document.getElementById('adults').value;
     const priceMin = document.getElementById('price_min').value;
     const priceMax = document.getElementById('price_max').value;
+
     // Ensure all required fields are filled out
-	document.getElementById('closeBtn').style.display = 'block';
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
         return;
     }
 // JavaScript to close the left-container and show the Three.js canvas
+// Function to handle the search button click
+document.getElementById('searchBtn').addEventListener('click', function () {
+    // Show the close button
+    document.getElementById('closeBtn').style.display = 'block';
+
+});
+
 // Function to handle the close button click
 document.getElementById('closeBtn').addEventListener('click', function () {
     // Hide the close button and the left container
     document.getElementById('closeBtn').style.display = 'none';
     document.getElementById('leftContainer').style.display = 'none';
 });
+
+
     // Show spinner and transition to split screen mode
     const leftContainer = document.getElementById('left-container');
     const globeContainer = document.getElementById('globe-container');
+
     // Show the spinner inside the left container
     leftContainer.innerHTML = `
         <div class="spinner-container">
@@ -2699,16 +2849,21 @@ document.getElementById('closeBtn').addEventListener('click', function () {
         </div>
     `;
     leftContainer.style.display = 'block'; // Ensure the left container is visible
+
     // Shrink the globe-container to take only half the screen
     globeContainer.classList.add('split');
     leftContainer.classList.add('show'); // Show the left container
+
 	// Switch to split-screen layout
     leftContainer.style.width = '50%';
     globeContainer.style.width = '50%';
+
     // Call the resize function for Three.js
     //resizeThreeJS(); // Ensure Three.js canvas is resized properly
+
 	// Ensure Three.js globe resizes after the DOM update is complete
     setTimeout(resizeThreeJS, 500); // Delay to ensure layout transition has completed
+
 	// Function to resize the Three.js globe
     function resizeThreeJS() {
         if (window.renderer && window.camera) {
@@ -2719,11 +2874,14 @@ document.getElementById('closeBtn').addEventListener('click', function () {
             window.camera.updateProjectionMatrix();
         }
     }
+
     // Update the spinner text to indicate visiting Airbnb
     updateSpinnerText("Visiting Airbnb site...");
+
     // Generate the Airbnb search URL
     // Base URL for Airbnb search
     let searchUrl = `https://www.airbnb.com/s/${location}/homes?checkin=${checkin}&checkout=${checkout}&adults=${guests}`;
+
     // Only add price_min and price_max if they have values
     if (priceMin && priceMin.trim() !== "") {
         searchUrl += `&price_min=${priceMin}`;
@@ -2733,30 +2891,37 @@ document.getElementById('closeBtn').addEventListener('click', function () {
     }
     // Debug the search URL (you can remove this after confirming it works)
     console.log('Generated searchUrl:', searchUrl);
+
 	// Disable globe interactions when the left container is scrolled
     leftContainer.addEventListener('mouseenter', () => {
         globeContainer.classList.add('disable-interaction');
     });
+
     leftContainer.addEventListener('mouseleave', () => {
         globeContainer.classList.remove('disable-interaction');
     });
+
     // Update spinner text to indicate fetching data
     updateSpinnerText("Fetching Airbnb information...");
+
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
-	console.log('Generated searchUrl:', searchUrl);
-
 });
+
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 async function fetchAirbnbPosts(searchUrl) {
     try {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Scraping Airbnb listings...");
+
         const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const posts = await response.json();
+
         console.log('Fetched posts:', posts);
+
         // Update spinner text to indicate posts fetched
         updateSpinnerText("Displaying fetched listings...");
+
         // Display the posts on the webpage
         const container = document.getElementById('left-container');
         container.style.display = 'block';
@@ -2770,6 +2935,7 @@ async function fetchAirbnbPosts(searchUrl) {
 	      <a href="${post.link}" target="_blank" class="view-link">View Listing</a>
 	    </div>
         `).join('');
+
     } catch (error) {
         console.error('Error fetching posts:', error);
         // Update spinner text to indicate an error occurred
@@ -2839,6 +3005,7 @@ async function fetchAirbnbPosts(searchUrl) {
     "doha": { lat: 25.276987, lng: 51.521067 },
     "jamaica": { lat: 18.1096, lng: -77.2975 } // Added Jamaica
 };*/
+
 	  const locations = {
     "new york": { lat: 40.7128, lng: -74.0060, zoom: 2.5 },
     "los angeles": { lat: 34.0522, lng: -118.2437, zoom: 2.2 },
@@ -2934,6 +3101,12 @@ async function fetchAirbnbPosts(searchUrl) {
     "colombia": { lat: 4.5709, lng: -74.2973, zoom: 2.7 },
     "venezuela": { lat: 6.4238, lng: -66.5897, zoom: 2.7 }
 };
+
+
+
+
+
+
 // Function to normalize input and accept lower/upper case spelling
 function normalizeLocation(input) {
     // Convert the input to lowercase and trim any whitespace
@@ -2942,18 +3115,22 @@ function normalizeLocation(input) {
 function panToLocation(location) {
     const normalizedLocation = normalizeLocation(location);
     const coords = locations[normalizedLocation];
+    
     if (coords) {
         // Convert latitude and longitude to Three.js coordinates
         const lat = coords.lat;
         const lng = coords.lng;
         const zoom = coords.zoom || 3.0; // Default zoom level if not provided
+
         // Calculate the target position in 3D space
         const phi = (90 - lat) * (Math.PI / 180);
         const theta = (lng + 180) * (Math.PI / 180);
+	    
         const radius = 5.1;  // Updated globe radius
         const targetX = radius * Math.sin(phi) * Math.cos(theta); // Adjust globe radius accordingly
         const targetY = radius * Math.cos(phi);
         const targetZ = radius * Math.sin(phi) * Math.sin(theta);
+
         // Use TWEEN for smooth animation
         new TWEEN.Tween(camera.position)
             .to({ x: targetX, y: targetY, z: targetZ }, 2000) // Smooth pan over 2 seconds
@@ -2962,6 +3139,7 @@ function panToLocation(location) {
                 camera.lookAt(0, 0, 0); // Keep the camera focused on the globe's center
             })
             .start();
+
         // Use another TWEEN for zooming effect
         new TWEEN.Tween(camera)
             .to({ zoom: zoom }, 2000) // Smooth zoom over 2 seconds
@@ -2970,34 +3148,44 @@ function panToLocation(location) {
                 camera.updateProjectionMatrix(); // Make sure to update the projection matrix after zoom changes
             })
             .start();
+
         // Make sure to call this to keep TWEEN animations running
         function animate() {
             requestAnimationFrame(animate);
             TWEEN.update(); // Update TWEEN animations
         }
+
         animate(); // Start the animation loop
     } else {
         console.log("Location not found in lookup table.");
     }
 }
+
 // When search button is clicked
 document.getElementById('searchBtn').addEventListener('click', function () {
     const location = document.getElementById('where').value;
     panToLocation(location); // Pan to the searched location
 });
+
+
 	  document.addEventListener("DOMContentLoaded", function() {
+
   // Add event listener to the submit button
   document.getElementById('submitRegion').addEventListener('click', function() {
     // Close the initial region popup
     document.getElementById('regionPopup').style.display = 'none';
+
     // Show the confirmation message
     document.getElementById('confirmationMessage').style.display = 'block';
+
     // Hide the confirmation message after 10 seconds
     setTimeout(function() {
       document.getElementById('confirmationMessage').style.display = 'none';
     }, 20000);
+
     // Capture the selected region from the dropdown
     const selectedRegion = document.getElementById('regionSelect').value;
+
     // Pan to the selected region
     panToRegion(selectedRegion);
   });
@@ -3025,55 +3213,68 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     });
   }
 });
+
 // Pan to region based on dropdown selection
 	  // Pan to region based on dropdown selection
 // Pan to region based on dropdown selection
 function panToRegion(region) {
   let position, zoomLevel;
   console.log(`Selected region: ${region}`);  // Debug
+
   switch (region) {
     case 'africa':
       // Adjusted x value to pan the camera more to the right
       position = { x: 16.0, y: 0, z: 1.74 }; 
       zoomLevel = 1.5; 
       break;
+      
     case 'europe': 
       position = { x: 3.5, y: 2.91, z: 0.55 }; 
       zoomLevel = 2.0; 
       break;
+      
     case 'america': 
       position = { x: 0, y: 2.55, z: 4.42 }; 
       zoomLevel = 2.0; 
       break;
+      
     case 'south america': 
       position = { x: 1.5, y: -0.5, z: 4.3 }; 
       zoomLevel = 1.7; 
       break;
+      
     case 'carribbean': 
       position = { x: 0.65, y: 2.0, z: 4.6 }; 
       zoomLevel = 2.4; 
       break;
+      
     case 'asia': 
       position = { x: -0.89, y: 3.28, z: -3.92 }; 
       zoomLevel = 1.9; 
       break;
+      
     case 'world': 
       position = { x: 16.0, y: 0, z: 1.74 }; 
       zoomLevel = 1.4; 
       break;
     default: return;
   }
+
   stopAllTweens(); // Stop any existing animations
   controls.autoRotate = false; // Stop auto-rotation
   console.log(`Panning to x:${position.x}, y:${position.y}, z:${position.z}, zoom:${zoomLevel}`);  // Debug
+
   // Call to animate camera pan with smoother transitions
   animateCameraPan(position.x, position.y, position.z, zoomLevel);
 }
+
+
 function animateCameraPan(x, y, z, zoomLevel) {
   const currentZoom = camera.zoom;
   const zoomDelta = zoomLevel - currentZoom;
   const targetPosition = { x, y, z };
   const currentPosition = { x: camera.position.x, y: camera.position.y, z: camera.position.z };
+
   // Smooth camera panning
   new TWEEN.Tween(currentPosition)
     .to(targetPosition, 3000)  // Smooth panning over 3 seconds
@@ -3083,6 +3284,7 @@ function animateCameraPan(x, y, z, zoomLevel) {
       camera.lookAt(0, 0, 0);  // Keep the globe centered
     })
     .start();
+
   // Smooth camera zooming
   new TWEEN.Tween({ zoom: currentZoom })
     .to({ zoom: zoomLevel }, 3000)  // Smooth zoom over 3 seconds
@@ -3100,8 +3302,11 @@ function animateCameraPan(x, y, z, zoomLevel) {
     })
     .start();
 }
+
+
 console.log('Globe:', globe2);
 console.log('Camera:', camera);
+
   // custom globe material
   const globeMaterial = globe.material;
   material.bumpScale = 10;
@@ -3113,6 +3318,7 @@ console.log('Camera:', camera);
       globeMaterial.shininess = 15;
     }
   );
+
   /*setTimeout(() => {
     // wait for scene to be populated (asynchronously)
     var dl = new THREE.DirectionalLight(0xffffff, 1);
@@ -3131,9 +3337,11 @@ console.log('Camera:', camera);
   //scene.add(dl3);
   const light2 = new THREE.AmbientLight(0x808080); // soft white light
   scene.add(light2);
+
   var light = new THREE.DirectionalLight(0xf0f0f0, 1);
   light.position.set(5, 3, 5);
   scene.add(light);*/
+	  
 // Create directional light and reduce its intensity
 	  setTimeout(() => {
 var dl = new THREE.DirectionalLight(0xffffff, 0.3); // Reduced intensity
@@ -3144,18 +3352,23 @@ dl.position.set(1, 1, 1);
 const directionalLight = new THREE.DirectionalLight(0x909090, 0.5); // Reduced intensity
 directionalLight.position.set(-1, -1, -1);
 scene.add(directionalLight);
+
 var dl2 = new THREE.DirectionalLight(0xffffff, 0.5); // Reduced intensity
 dl2.position.set(0, 1, 1);
 //scene.add(dl2);
+
 var dl3 = new THREE.DirectionalLight(0xffffff, 0.5); // Reduced intensity
 dl3.position.set(3, 2, 1);
 //scene.add(dl3);
+
 // Ambient light for soft lighting, unchanged
 const light2 = new THREE.AmbientLight(0x808080); // soft white light
 scene.add(light2);
+
 var light = new THREE.DirectionalLight(0xf0f0f0, 0.5); // Reduced intensity
 light.position.set(5, 3, 5);
 scene.add(light);
+
 // Update intensity for directional lights dynamically if needed
 directionalLight.intensity = 0.5;
 dl2.intensity = 0.5;
@@ -3647,11 +3860,16 @@ dl3.intensity = 0.5;
 if (window.innerWidth <= 768) {
   markerGeometry.scale(1.25, 1.25, 1.25); // Scale markers for mobile
 }*/
+
+
+  
   // Creating Markers
   //const markerCount = markersData2.length;
   //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial2, markerCount);
+  
   //const dummy = new THREE.Object3D();
   //const phaseArray = [];
+  
   /*markersData2.forEach((data, index) => {
     //const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
@@ -3661,41 +3879,51 @@ if (window.innerWidth <= 768) {
     phaseArray.push(Math.random());
     data.worldPosition = dummy.position.clone();
   });
+  
   markerGeometry.setAttribute('phase', new THREE.InstancedBufferAttribute(new Float32Array(phaseArray), 1));
   //scene.add(markers);*/
     // Labels Container
   const labelsContainer = document.getElementById('labels-container');
+  
   // Create Labels
 markersData.forEach((data) => {
   // Create Label Div
   const labelDiv = document.createElement('div');
   labelDiv.className = 'marker-label';
   labelDiv.id = `label-${data.id}`;
+
   // Close Button
   const closeButton = document.createElement('button');
   closeButton.className = 'close-button';
   closeButton.innerText = '×';
   labelDiv.appendChild(closeButton);
+
   // Close Button Event Listener
   closeButton.addEventListener('click', (event) => {
     console.log('Close button clicked'); // Check if this appears in the console
     event.stopPropagation(); // Stop the event from propagating up the DOM
     labelDiv.classList.remove('active');
+    
     // Resume globe autorotation when the label is closed
     controls.autoRotate = true;
+    
     // Re-enable the OrbitControls
     controls.enabled = true;
   });
+
   // Content Div
   const contentDiv = document.createElement('div');
   contentDiv.className = 'content';
   labelDiv.appendChild(contentDiv);
+
   // Append to Labels Container
   labelsContainer.appendChild(labelDiv);
+
   // CSS2DObject
   const labelObject = new CSS2DObject(labelDiv);
   labelObject.position.copy(data.worldPosition);
   scene.add(labelObject);
+
   // Store label object for interaction
   data.labelObject = labelObject;
   labelDiv.addEventListener('mousedown', (event) => {
@@ -3705,23 +3933,30 @@ markersData.forEach((data) => {
     event.stopPropagation();
   });
 });
+
 // Raycaster for Interaction
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
+	  
 /*let activeLabel = null; // Keep track of the currently open iframe
+	  
 window.addEventListener('pointerdown', (event) => {
   pointer.x = (event.clientX / innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / innerHeight) * 2 + 1;
   raycaster.setFromCamera(pointer, camera);
+
   const intersects = raycaster.intersectObject(markers).filter((m) => {
     return m.uv.subScalar(0.5).length() * 2 < 0.25;
   });
+
   if (intersects.length > 0) {
     const instanceId = intersects[0].instanceId;
     const data = markersData[instanceId];
+	  
 	  // Update Label Content
     const labelDiv = document.getElementById(`label-${data.id}`);
     const contentDiv = labelDiv.querySelector('.content');
+	  
 	  // Check if the iframe is related to the marker (specific iframe)
     if (!contentDiv.querySelector('iframe')) {
 	  // Add loading spinner inside the content div
@@ -3729,12 +3964,16 @@ window.addEventListener('pointerdown', (event) => {
     <div class="loading-spinner" style="pointer-events:none;"></div>
     <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="no" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
     `;
+
     const iframe = labelDiv.querySelector('iframe');
     const spinner = contentDiv.querySelector('.loading-spinner');
+	   
 	    // Show Label
     labelDiv.classList.add('active');
+	    
 	    iframe.addEventListener('load', () => {
 	console.log('Iframe loaded');
+	    
 	// Hide loading spinner when iframe finishes loading
       spinner.style.display = 'none';
       iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
@@ -3748,15 +3987,18 @@ window.addEventListener('pointerdown', (event) => {
       }
 		    // Set the new active label
       activeLabel = labelDiv;
+	    
     });
 	  // Show loading spinner
     //const loadingIcon = document.getElementById('loadingIcon');
     //loadingIcon.style.display = 'block';
+	  
     // Add a listener to detect when the iframe loses focus and re-enable the controls
     console.log(iframe); // Check if the iframe element is being correctly selected
     }
   } */
 // Close iframe when clicking outside of it
+	  
     // Close iframe when clicking outside of it
    /* document.addEventListener('click', function(event) {
   if (!labelDiv.contains(event.target)) {
@@ -3781,9 +4023,11 @@ window.addEventListener('pointerdown', (event) => {
           activeLabel = null; // No active label after close
         }
       });
+
 	    // Stop the globe's autorotation and disable OrbitControls
     controls.autoRotate = false;
     controls.enabled = false; // Disable the controls while interacting with the iframe
+
   }
 }
 });*/
@@ -3794,18 +4038,23 @@ const markersDataSets = {
   midPrice: markersDataforMidPriceAirbnbs,
   expensive: markersDataforExpensiveAirbnbs,
 };
+
 let activeMarkersData = markersData; // Default to markersData
 let activeLabel = null; // Keep track of open iframe
 //let markers; // Declare it outside, so it is accessible globally.
+
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
   scene.remove(markers);
+	
 // Set active markers data
   activeMarkersData = markersDataSets[selectedCategory];
+
   // Create new markers for the selected category
   //const markerCount = activeMarkersData.length;
   //const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markerCount);
   //const dummy = new THREE.Object3D();
+
   activeMarkersData.forEach((data, index) => {
     const [radius, phi, theta] = data.position;
     dummy.position.setFromSphericalCoords(radius, phi, theta);
@@ -3814,25 +4063,32 @@ function loadMarkers(selectedCategory) {
     markers.setMatrixAt(index, dummy.matrix);
     data.worldPosition = dummy.position.clone();
   });
-  scene.add(markers);
+
+  //scene.add(markers);
+
   // Add interactivity to the new markers
   setupMarkerInteraction();
 }
+	  
 // Set up marker click event
 function setupMarkerInteraction() {
   window.addEventListener('pointerdown', (event) => {
     pointer.x = (event.clientX / innerWidth) * 2 - 1;
     pointer.y = -(event.clientY / innerHeight) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
+
     const intersects = raycaster.intersectObject(markers).filter((m) => {
       return m.uv.subScalar(0.5).length() * 2 < 0.25;
     });
+
     if (intersects.length > 0) {
       const instanceId = intersects[0].instanceId;
       const data = activeMarkersData[instanceId];
+
 	    // Update Label Content
       const labelDiv = document.getElementById(`label-${data.id}`);
       const contentDiv = labelDiv.querySelector('.content');
+
 	    // Check if the iframe is already loaded
 	    if (!contentDiv.querySelector('iframe')) {
 		    // Always update the content and attach the iframe, even if previously clicked
@@ -3843,15 +4099,19 @@ function setupMarkerInteraction() {
     labelDiv.classList.add('active');
     controls.autoRotate = false;
     controls.enabled = false;
+
     // Disable pointer events on the globe while interacting with the iframe
     renderer.domElement.style.pointerEvents = 'none';
+		    
     const iframe = labelDiv.querySelector('iframe');
     const spinner = contentDiv.querySelector('.loading-spinner');
+
 	   iframe.addEventListener('load', () => {
           spinner.style.display = 'none';
           iframe.style.pointerEvents = 'all';
         });
     labelDiv.classList.add('active');
+
         // Close any previously active label
         if (activeLabel && activeLabel !== labelDiv) {
           activeLabel.classList.remove('active');
@@ -3860,6 +4120,7 @@ function setupMarkerInteraction() {
 }
 	    // Remove previous `pointerdown` listeners if any
     document.removeEventListener('pointerdown', closeIframe);
+
     // Add event listener to close iframe when clicking outside
     document.addEventListener('pointerdown', closeIframe);
     }
@@ -3880,50 +4141,66 @@ document.getElementById('airbnbSelector').addEventListener('change', function() 
   const selectedCategory = this.value;
   loadMarkers(selectedCategory);
 });
+
 // Load markers for default category on page load
 loadMarkers('general');
+		    
 	 /* let activeLabel = null; // Keep track of the currently open iframe
+
 window.addEventListener('pointerdown', (event) => {
   pointer.x = (event.clientX / innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / innerHeight) * 2 + 1;
   raycaster.setFromCamera(pointer, camera);
+
   const intersects = raycaster.intersectObject(markers).filter((m) => {
     return m.uv.subScalar(0.5).length() * 2 < 0.25;
   });
+
   if (intersects.length > 0) {
     const instanceId = intersects[0].instanceId;
     const data = markersData[instanceId];
+
     // Update Label Content
     const labelDiv = document.getElementById(`label-${data.id}`);
     const contentDiv = labelDiv.querySelector('.content');
+
     // Always update the content and attach the iframe, even if previously clicked
     contentDiv.innerHTML = `
       <div class="loading-spinner" style="pointer-events:none;"></div>
       <iframe src="${data.iframeSrc}" frameborder="0" width="275" height="249" scrolling="yes" allowfullscreen="true" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" loading="eager"></iframe>
     `;
+
     const iframe = labelDiv.querySelector('iframe');
     const spinner = contentDiv.querySelector('.loading-spinner');
+
     labelDiv.classList.add('active');
     controls.autoRotate = false;
     controls.enabled = false;
+
     // Disable pointer events on the globe while interacting with the iframe
     renderer.domElement.style.pointerEvents = 'none';
+
     iframe.addEventListener('load', () => {
       spinner.style.display = 'none';
       iframe.style.pointerEvents = 'all'; // Enable iframe interaction after loading
+
       // Close any previously active label
       if (activeLabel && activeLabel !== labelDiv) {
         activeLabel.classList.remove('active');
       }
+
       // Set the new active label
       activeLabel = labelDiv;
     });
+
     // Remove previous `pointerdown` listeners if any
     document.removeEventListener('pointerdown', closeIframe);
+
     // Add event listener to close iframe when clicking outside
     document.addEventListener('pointerdown', closeIframe);
   }
 });
+
 // Function to close the active iframe if clicked outside
 function closeIframe(event) {
   if (activeLabel && !activeLabel.contains(event.target)) {
@@ -3935,30 +4212,43 @@ function closeIframe(event) {
   }
 }
 }*/
+
+
+
+
 	  // Loading spinner functionality
 /*document.getElementById('labels-container').addEventListener('click', function() {
   const loadingIcon = document.getElementById('loadingIcon');
+  
   // Show loading icon when iframe is clicked
   loadingIcon.style.display = 'block';
+  
   // Hide the loading icon after a set timeout (3 seconds in this case)
   setTimeout(() => {
     loadingIcon.style.display = 'none';
   }, 3000); // Adjust time as needed
 });*/
+
+
+
 // Animation Loop
 //const clock = new THREE.Clock();
 // Animation loop that ensures the TWEEN library is updated
 const clock = new THREE.Clock();
 function animate() {
     requestAnimationFrame(animate);
+    
     // Update tween animations
     TWEEN.update(); 
+	
     // Update time uniform for any shaders if needed
     globalUniforms.time.value = clock.getElapsedTime();
+
     // Update controls
     if (controls.enabled) {
         controls.update();
     }
+
     // Render the scene
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera); // If you're using labelRenderer
@@ -3969,259 +4259,27 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 });
+
+
 animate(); // Start the animation loop
 /*function animate() {
   requestAnimationFrame(animate);
   TWEEN.update(); // Required to make the transition work
   // Update time uniform
   globalUniforms.time.value = clock.getElapsedTime();
+	
   // Update controls
   if (controls.enabled) {
     controls.update();
   }
+
   // Render
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }
+
 animate();*/
+
   </script>
-
-<script type="text/javascript">
-  /*function isMobileDevice() {
-    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-  }*/
-
-  /*window.onload = function() {
-    let texture;
-    if (isMobileDevice()) {
-      // Load lighter textures for mobile (4K or 8K)
-      texture = 'mobile_texture.jpg';  // Placeholder for mobile texture
-    } else {
-      // Load 16K textures for desktop
-      texture = 'desktop_texture_16k.jpg';  // Placeholder for desktop texture
-    }
-    document.getElementById('globe-container').style.backgroundImage = "url('" + texture + "')";
-  };*/
-</script>
-
-
-<div id="loadingIcon" class="spinner-container">
-    <div class="spinner"></div>
-    <div class="spinner-text" id="loadingMessage">Fetching Airbnb information...</div>
-</div>
-
-<script type="text/javascript">
-  function updateLoadingMessage(stage) {
-      const loadingMessages = {
-          1: 'Fetching Airbnb information...',
-          2: 'Analyzing webpage...',
-          3: 'Collecting data...',
-          4: 'Formatting information...',
-          5: 'Ready to present!'
-      };
-      document.getElementById('loadingMessage').innerText = loadingMessages[stage];
-  }
-
-  // Example: Update the loading message over time
-  setTimeout(() => updateLoadingMessage(2), 2000);
-  setTimeout(() => updateLoadingMessage(3), 4000);
-  setTimeout(() => updateLoadingMessage(4), 6000);
-  setTimeout(() => updateLoadingMessage(5), 8000);
-</script>
-
-
-<script type="text/javascript">
-function panToRegion(region) {
-    let position, zoomLevel;
-    switch (region) {
-        case 'africa':
-            position = { x: 17.5, y: 5, z: 2.0 };
-            zoomLevel = 2.0;
-            break;
-        case 'europe':
-            position = { x: 0.0, y: 5.5, z: 1.75 };
-            zoomLevel = 2.5;
-            break;
-        case 'america':
-            position = { x: -3.0, y: 2.0, z: 1.75 };
-            zoomLevel = 2.2;
-            break;
-        case 'south america':
-            position = { x: -3.0, y: -3.0, z: 2.0 };
-            zoomLevel = 2.0;
-            break;
-        case 'asia':
-            position = { x: 7.0, y: 3.0, z: 1.8 };
-            zoomLevel = 2.3;
-            break;
-        default:
-            position = { x: 0, y: 0, z: 3 }; // Default to world view
-            zoomLevel = 1.0;
-            break;
-    }
-
-    animateCameraPan(position.x, position.y, position.z, zoomLevel);
-}
-
-function animateCameraPan(x, y, z, zoomLevel) {
-    new TWEEN.Tween(camera.position)
-        .to({ x: x, y: y, z: z }, 2000)
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .start();
-    new TWEEN.Tween(camera)
-        .to({ zoom: zoomLevel }, 2000)
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .onUpdate(() => camera.updateProjectionMatrix())
-        .start();
-}
-</script>
-
-
-<script type="text/javascript">
-document.getElementById('searchBtn').addEventListener('click', function() {
-    document.getElementById('globe-container').classList.add('split');  // Resize the canvas to 50%
-});
-</script>
-
-
-<script>
-  // Function to hide region select dropdown when clicking outside of it
-  document.addEventListener('click', function(event) {
-    var regionSelect = document.getElementById('regionSelectDropdown');
-    var regionSelectBtn = document.getElementById('regionSelectBtn');
-    
-    // Check if click happened outside the dropdown and button
-    if (regionSelect && !regionSelect.contains(event.target) && !regionSelectBtn.contains(event.target)) {
-      regionSelect.style.display = 'none';
-    }
-  });
-</script>
-
-
-<script type="text/javascript">
-  document.getElementById('searchBtn').addEventListener('click', function() {
-    document.getElementById('globe-container').classList.add('split');  // Resize the canvas to 50%
-
-    // Show loading spinner and update messages
-    const loadingIcon = document.getElementById('loadingIcon');
-    loadingIcon.style.display = 'block';
-    updateLoadingMessage(1);
-
-    setTimeout(() => updateLoadingMessage(2), 2000);
-    setTimeout(() => updateLoadingMessage(3), 4000);
-    setTimeout(() => updateLoadingMessage(4), 6000);
-    setTimeout(() => updateLoadingMessage(5), 8000);
-  });
-
-  function updateLoadingMessage(stage) {
-    const loadingMessages = {
-      1: 'Fetching Airbnb information...',
-      2: 'Analyzing webpage...',
-      3: 'Collecting data...',
-      4: 'Formatting information...',
-      5: 'Done!'
-    };
-    document.getElementById('loadingMessage').innerText = loadingMessages[stage];
-  }
-</script>
-
-
-<script>
-  // Change header background color and switch ticker on search
-  document.getElementById('searchBtn').addEventListener('click', function() {
-    // Change header background color to white
-    document.getElementById('header').style.backgroundColor = '#fff';
-    
-    // Hide the dayTicker and show the search ticker (you will need to update the URL)
-    document.getElementById('dayTicker').style.display = 'none';
-    document.getElementById('searchTicker').style.display = 'block';
-  });
-</script>
-
-
-<script>
-  function panToRegion(region) {
-    let position, zoomLevel;
-    switch (region) {
-        case 'africa':
-            position = { x: 12.0, y: 0, z: 1.74 }; 
-            zoomLevel = 1.5;
-            break;
-        case 'europe':
-            position = { x: 3.5, y: 2.91, z: 0.55 };
-            zoomLevel = 2.0;
-            break;
-        case 'america':
-            position = { x: 0, y: 2.55, z: 4.42 };
-            zoomLevel = 2.0;
-            break;
-        case 'south america':
-            position = { x: 1.5, y: -0.5, z: 4.3 };
-            zoomLevel = 1.7;
-            break;
-        case 'caribbean':  // Fixing the Caribbean position
-            position = { x: 0.65, y: 1.8, z: 4.0 };
-            zoomLevel = 2.5;
-            break;
-        case 'asia':
-            position = { x: -0.89, y: 3.28, z: -3.92 };
-            zoomLevel = 1.9;
-            break;
-        case 'world':
-            position = { x: 0, y: 0, z: 10 };
-            zoomLevel = 0.5;
-            break;
-        default:
-            console.log('Region not recognized');
-            return;
-    }
-    animateCameraPan(position.x, position.y, position.z, zoomLevel);
-  }
-
-  function animateCameraPan(x, y, z, zoomLevel) {
-    new TWEEN.Tween(camera.position)
-        .to({ x: x, y: y, z: z }, 2000)
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .start();
-    new TWEEN.Tween(camera)
-        .to({ zoom: zoomLevel }, 2000)
-        .easing(TWEEN.Easing.Quadratic.InOut)
-        .onUpdate(function () {
-            camera.updateProjectionMatrix();
-        })
-        .start();
-  }
-</script>
-
-
-<iframe
-    id="searchTicker"
-    src="https://rss.app/embed/v1/ticker/drjICgXpka7g2vRG"
-    frameborder="0"
-    style="display: none;"  <!-- Initially hidden until search is pressed -->
-    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
-></iframe>
-
-
-<script>
-  document.getElementById('searchBtn').addEventListener('click', function() {
-    // Change header background color to white
-    document.getElementById('header').style.backgroundColor = '#fff';
-    
-    // Hide the dayTicker and show the searchTicker
-    document.getElementById('dayTicker').style.display = 'none';
-    document.getElementById('searchTicker').style.display = 'block';
-  });
-</script>
-
-
-<script>
-  document.getElementById('searchBtn').addEventListener('click', function() {
-    // Ensure only the correct loading spinner is visible
-    document.getElementById('loadingIcon').style.display = 'none';
-  });
-</script>
-
 </body>
 </html>
-
