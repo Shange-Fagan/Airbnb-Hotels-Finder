@@ -267,8 +267,8 @@ a, button, input, select, iframe {
 	    border-color: #ff385c; /* Red border on hover for consistency with Airbnb style */
     }
 	  /* Airbnb-style Header */
- /* Airbnb-style Header */
-	   /* Airbnb-style Header */
+  /* Airbnb-style Header */
+  /* Airbnb-style Header */
  /* Airbnb-style Header */
  #header {
   position: absolute;
@@ -441,210 +441,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
   
-/* Airbnb-style Header */
-#header {
-    position: fixed; /* Fixed to stay at the top while scrolling */
-    top: 55px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Center the header content */
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 12px 0px; /* Reduce padding for a cleaner, compact look */
-    /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/ /* Light shadow for depth */
-    z-index: 10001;
-}
-/* Inputs and dropdowns styling */
-#header input, #header select {
-    font-size: 16px; /* Slightly smaller font size */
-    padding: 10px 15px; /* Padding inside inputs */
-    border: 0px solid #ddd; /* Light gray border */
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 50px; /* Fully rounded corners for inputs */
-    margin-right: 10px; /* Spacing between input fields */
-    width: 220px; /* Slightly smaller width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	color: rgba(255, 255, 255, 0.75);
-    width: 150px; /* Set width to auto */
-    max-width: max-content; /* Ensure it adjusts based on the placeholder or content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    white-space: nowrap; /* Prevent wrapping */
-}
 
-#header input:focus, #header select:focus {
-    outline: none;
-      box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline for focus similar to Airbnb */
-}
-	  #header input:hover, #header select:hover {
-      box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline for focus similar to Airbnb */
-}
-/* Button Styling */
-#header button {
-    background-color: #ff385c; /* Airbnb red color */
-    border: none;
-    padding: 10px 20px; /* Slightly smaller padding */
-    border-radius: 50px; /* Fully rounded button */
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 115, 187, 0.4), 0 1px 3px rgba(0, 115, 187, 0.12); /* Initial shadow */
-}
-#header button:hover {
-    background-color: #e03a56; /* Darker red on hover */
-    box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5); /* Brighter, thinner, blue shadow */
-    /*border: 2px solid rgba(0, 115, 255, 0.8);*/ /* Optional: Blue border to make it more pronounced */
-animation: pulseShadow 0.6s ease-in-out infinite alternate; /* Animation on hover */
-}
-/* Keyframes for box shadow pulse animation */
-@keyframes pulseShadow {
-    0% {
-        box-shadow: 0 0 12px rgba(0, 115, 255, 0.8), 0 0 4px rgba(0, 115, 255, 0.5);
-    }
-    100% {
-        box-shadow: 0 0 20px rgba(0, 115, 255, 1), 0 0 8px rgba(0, 115, 255, 0.75); /* Pulsating effect */
-    }
-}
-/* Search section layout */
-#header .search-section {
-    display: flex;
-    border-radius: 50px; /* Fully rounded container */
-    padding: 10px 15px; /* Reduce padding */
-    width: auto; /* Adjust width based on content */
-    max-width: 100%; /* Ensure responsiveness */
-    flex-wrap: wrap; /* Wrap content if it overflows */
-	color: white;
-	z-index: 10002; /* Ensure the entire search section is clickable */
-}
-#header .logo {
-    margin-right: auto; /* Push logo to the left */
-    font-weight: bold;
-    font-size: 24px; /* Slightly bigger logo text */
-    color: #ff385c; /* Airbnb logo color */
-}
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    #header {
-        flex-direction: column;
-        padding: 10px 0; /* Reduce padding for mobile */
-    }
-    #header input {
-        width: 100%; /* Full width on mobile */
-        margin-bottom: 10px;
-    }
-    #header button {
-        width: 100%; /* Full width button on mobile */
-    }
-    #header .search-section {
-        flex-direction: column; /* Stack inputs vertically */
-        width: 100%;
-        margin-top: 10px;
-    }
-}
-/* Placeholder text styling */
-#header input::placeholder {
-    color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
-    font-size: 16px; /* Airbnb-style font size */
-}
-	  /* Styling for Specific Inputs */
-input[type="text"]::placeholder,
-input[type="date"]::placeholder {
-  color: rgba(255, 255, 255, 0.75); /* Light gray placeholder for text and date inputs */
-  opacity: 1; /* Ensure full opacity */
-}
-/* Date input custom styling */
-/* Style the input[type="date"] */
-input[type="date"] {
-  appearance: none; /* Remove default appearance */
-  -webkit-appearance: none; /* For Safari */
-  padding: 10px;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>') no-repeat;
-  background-position: right 10px center; /* Position the icon */
-  background-size: 20px; /* Adjust the size of the icon */
-  border: 1px solid #e0e0e0;
-  color: rgba(255, 255, 255, 0.75); /* Text color */
-  background-color: rgba(255, 255, 255, 0.15); /* Background */
-  border-radius: 10px;
-}
-/* Red hover for date picker */
-input[type="date"]:hover, input[type="date"]:focus {
-    box-shadow: 0 0 8px rgba(255, 56, 92, 0.8); /* Red outline similar to Airbnb */
-    outline: none;
-}
-input[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0; /* Hide the default calendar icon */
-}
-	  input[type="date" i] {
-    font-family: monospace;
-    padding-inline-start: 1px;
-    cursor: default;
-    padding: 0px;
-    color: rgba(255, 255, 255, 0.75);
-}/* Hide default number input arrows */
-/* Hide default number input arrows */
-input[type="number"]::-webkit-inner-spin-button, 
-input[type="number"]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-}
-/* For Firefox */
-input[type="number"] {
-    -moz-appearance: textfield; 
-}
-/* Style number input */
-input[type="number"] {
-    background-color: rgba(255, 255, 255, 0.15); /* Match other inputs' background */
-    color: rgba(255, 255, 255, 0.75); /* Text color */
-    padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 50px; /* Same rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Consistent box-shadow */
-    width: 50px;
-    text-align: left; /* Center the number */
-}
-/* Container for custom number input with arrows */
-#header .number-input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-/* Custom increment/decrement buttons */
-#header .number-input-container button {
-    background-color: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 18px;
-    cursor: pointer;
-    padding: 0 10px;
-    transition: color 0.3s ease;
-}
-#header .number-input-container button:hover {
-    color: #ff385c; /* Airbnb red on hover */
-}
-#header .number-input-container button:focus {
-    outline: none;
-}
-	  /* Ensure date inputs have the same color */
-input[type="date"], input[type="text"] {
-    color: rgba(255, 255, 255, 0.75); /* Input text color */
-}
+  
 
-/* Ensure number inputs have the same color */
-input[type="number"] {
-    color: rgba(255, 255, 255, 0.75); /* Input text color */
-}
-
-/* Placeholder text styling */
-#header input::placeholder {
-    color: rgba(255, 255, 255, 0.75); /* Light gray placeholder text */
-}
-
-/* Date input custom styling */
-input[type="date"] {
-    color: rgba(255, 255, 255, 0.75); /* Text color */
-}
 
 /*#regionPopup {
   position: fixed;
@@ -2877,16 +2676,12 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     const priceMin = document.getElementById('price_min').value;
     const priceMax = document.getElementById('price_max').value;
     // Ensure all required fields are filled out
+	document.getElementById('closeBtn').style.display = 'block';
     if (!location || !checkin || !checkout || !guests) {
         alert('Please fill out all required fields.');
         return;
     }
 // JavaScript to close the left-container and show the Three.js canvas
-// Function to handle the search button click
-document.getElementById('searchBtn').addEventListener('click', function () {
-    // Show the close button
-    document.getElementById('closeBtn').style.display = 'block';
-});
 // Function to handle the close button click
 document.getElementById('closeBtn').addEventListener('click', function () {
     // Hide the close button and the left container
@@ -2949,6 +2744,8 @@ document.getElementById('closeBtn').addEventListener('click', function () {
     updateSpinnerText("Fetching Airbnb information...");
     // Fetch Airbnb posts and display them
     await fetchAirbnbPosts(searchUrl);
+	console.log('Generated searchUrl:', searchUrl);
+
 });
 // Function to fetch Airbnb posts from your backend and display them on the webpage
 async function fetchAirbnbPosts(searchUrl) {
