@@ -2932,7 +2932,6 @@ async function fetchAirbnbPosts(searchUrl) {
 
         const response = await fetch(`https://airbnb-assistant-658639f68fd7.herokuapp.com/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const posts = await response.json();
-        console.log('Response:', await response.text());
 
         console.log('Fetched posts:', posts);
 
