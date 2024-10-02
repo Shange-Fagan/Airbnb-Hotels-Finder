@@ -1174,6 +1174,23 @@ overflow: hidden;
     frameborder="0"
     sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
   ></iframe>
+	<iframe
+    id="searchTicker"
+    src="https://rss.app/embed/v1/ticker/drjICgXpka7g2vRG"
+    frameborder="0"
+    style="display: none;"  <!-- Initially hidden until search is pressed -->
+    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox"
+></iframe>
+
+
+<script>
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    // Hide the dayTicker and show the searchTicker
+    document.getElementById('dayTicker').style.display = 'none';
+    document.getElementById('nightTicker').style.display = 'none';
+    document.getElementById('searchTicker').style.display = 'block';
+  });
+</script>
   <!-- Marker Labels (Will be dynamically generated) -->
   <div id="labels-container"></div>
   <div id="loadingIcon" class="loading-spinner"></div>
