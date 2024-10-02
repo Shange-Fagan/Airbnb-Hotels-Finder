@@ -3266,8 +3266,8 @@ function loadMarkersForRegionAndCategory(region, category) {
   }
 	  // Clear the existing markers and add new ones based on the category
     clearExistingMarkers();
-    markersData.forEach(marker => {
-        addMarkerToGlobe(marker);
+    markersData.forEach(markers => {
+       scene.add(markers);
     });
 };
 });
