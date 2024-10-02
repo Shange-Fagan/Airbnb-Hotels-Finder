@@ -3270,6 +3270,35 @@ function loadMarkersForRegionAndCategory(region, category) {
         addMarkerToGlobe(marker);
     });
 });
+function getMarkersDataForPopularListings(region) {
+    // Example logic: Fetch the popular listings for the specified region
+    return [
+        { lat: 51.5074, lon: -0.1278, name: 'London Popular Listing', price: '£120/night' },
+        // Add more markers...
+    ];
+}
+
+function getMarkersDataForCheapestListings(region) {
+    // Example logic: Fetch the cheapest listings for the specified region
+    return [
+        { lat: 48.8566, lon: 2.3522, name: 'Paris Cheapest Listing', price: '€50/night' },
+        // Add more markers...
+    ];
+}
+	  function getMarkersDataForMidPriceListings(region) {
+    // Example logic: Fetch the cheapest listings for the specified region
+    return [
+        { lat: 48.8566, lon: 2.3522, name: 'Paris Cheapest Listing', price: '€50/night' },
+        // Add more markers...
+    ];
+}
+	  function getMarkersDataForExpensiveListings(region) {
+    // Example logic: Fetch the cheapest listings for the specified region
+    return [
+        { lat: 48.8566, lon: 2.3522, name: 'Paris Cheapest Listing', price: '€50/night' },
+        // Add more markers...
+    ];
+}
 
 // Pan to region based on dropdown selection
 	  // Pan to region based on dropdown selection
