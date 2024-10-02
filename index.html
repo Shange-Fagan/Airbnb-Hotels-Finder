@@ -2934,13 +2934,13 @@ async function fetchAirbnbPosts(searchUrl) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const posts = await response.json();
-        console.log('Fetched posts:', posts);
+        //const posts = await response.json();
+        //console.log('Fetched posts:', posts);
         // Process and display the posts as needed
     } catch (error) {
         console.error('Error fetching posts:', error);
     }
-
+        const posts = await response.json();
 
         console.log('Fetched posts:', posts);
 
