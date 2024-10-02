@@ -2826,7 +2826,13 @@ document.getElementById('searchBtn').addEventListener('click', async function ()
     const guests = document.getElementById('adults').value;
     const priceMin = document.getElementById('price_min').value;
     const priceMax = document.getElementById('price_max').value;
-    
+	
+    const inputs = document.querySelectorAll('#header input');
+    inputs.forEach(input => {
+        input.style.color = 'darkgrey';  // Change placeholder text to dark grey
+    });
+    document.getElementById('header').style.backgroundColor = 'white';  // Change header background to white
+	
     // Show the close button
     document.getElementById('closeBtn').style.display = 'block';
 	
