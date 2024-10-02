@@ -3243,7 +3243,32 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
       panToRegion(selectedRegion);
     });
+	  // Load markers based on region and price category
+function loadMarkersForRegionAndCategory(region, category) {
+    let markersData;
+    
+    // Fetch the markers data based on the region and category
+    switch (category) {
+        case 'popular':
+            markersData = getMarkersDataForPopularListings(region);
+            break;
+        case 'cheapest':
+            markersData = getMarkersDataForCheapestListings(region);
+            break;
+        case 'midPrice':
+            markersData = getMarkersDataForMidPriceListings(region);
+            break;
+        case 'expensive':
+            markersData = getMarkersDataForExpensiveListings(region);
+            break;
+    }
+
   }
+	  // Clear the existing markers and add new ones based on the category
+    clearExistingMarkers();
+    markersData.forEach(marker => {
+        addMarkerToGlobe(marker);
+    });
 });
 
 // Pan to region based on dropdown selection
@@ -4077,7 +4102,7 @@ let activeLabel = null; // Keep track of open iframe
 
 function loadMarkers(selectedCategory) {
   // Remove existing markers from the scene
-  scene.remove(markers);
+  //scene.remove(markers);
 	
 // Set active markers data
   activeMarkersData = markersDataSets[selectedCategory];
@@ -4096,7 +4121,7 @@ function loadMarkers(selectedCategory) {
     data.worldPosition = dummy.position.clone();
   });
 
-  scene.add(markers);
+  //scene.add(markers);
 
   // Add interactivity to the new markers
   setupMarkerInteraction();
