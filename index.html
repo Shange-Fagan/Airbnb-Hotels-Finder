@@ -3238,6 +3238,9 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
     regionSelect.style.display = 'block';
     regionSelect.addEventListener('change', function () {
       let selectedRegion = this.value;
+      const selectedCategory = document.getElementById('priceCategorySelect').value;
+	// Load appropriate markers for the selected region and category
+    loadMarkersForRegionAndCategory(selectedRegion, selectedCategory);
       panToRegion(selectedRegion);
     });
   }
