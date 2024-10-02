@@ -3155,7 +3155,7 @@ function panToLocation(location) {
         const phi = (90 - lat) * (Math.PI / 180);
         const theta = (lng + 180) * (Math.PI / 180);
 	    
-        const radius = 5.1;  // Updated globe radius
+        const radius = 5.0;  // Updated globe radius
         const targetX = radius * Math.sin(phi) * Math.cos(theta); // Adjust globe radius accordingly
         const targetY = radius * Math.cos(phi);
         const targetZ = radius * Math.sin(phi) * Math.sin(theta);
