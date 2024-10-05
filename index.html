@@ -3324,26 +3324,34 @@ document.getElementById('regionSelectBtn').addEventListener('click', function ()
       panToRegion(selectedRegion);
     });
 	  // Load markers based on region and price category
-function loadMarkersForRegionAndCategory(region, category) {
-    let markersData;
-    
-    // Fetch the markers data based on the region and category
-    switch (category) {
-        case 'popular':
-            markersData = getMarkersDataForPopularListings(region);
-            break;
-        case 'cheapest':
-            markersData = getMarkersDataForCheapestListings(region);
-            break;
-        case 'midPrice':
-            markersData = getMarkersDataForMidPriceListings(region);
-            break;
-        case 'expensive':
-            markersData = getMarkersDataForExpensiveListings(region);
-            break;
-    }
+// Load markers based on region and price category
+async function loadMarkersForRegionAndCategory(region, category) {
+    try {
+        // Display loading spinner or status
+        updateSpinnerText("Fetching listings for " + region + "...");
 
-  }
+        // Fetch the listings data from your backend based on region and category
+        const response = await fetch(`https://bnb-navigator.com/scrape-airbnb?region=${region}&category=${category}`);
+        const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
+        
+        // Clear the existing markers before adding new ones
+        clearExistingMarkers();
+        
+        // Add the new markers to the scene
+        markersData.forEach(marker => {
+            let markerObject = createMarker(marker);
+            scene.add(markerObject);
+        });
+
+        // Update spinner text once loading is complete
+        updateSpinnerText("Listings loaded for " + region);
+
+    } catch (error) {
+        console.error("Error fetching listings:", error);
+        updateSpinnerText("Error loading listings for " + region);
+    }
+}
+
 	  // Clear the existing markers and add new ones based on the category
     clearExistingMarkers();
     markersData.forEach(markers => {
