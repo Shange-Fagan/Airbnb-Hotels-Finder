@@ -802,7 +802,26 @@ background-size: 10px; *//* Adjust this as needed */
   border-radius: 25px; *//* Rounded corners for inputs */
 	   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }*/
-	  airbnbSelector {
+	  select {
+  position: absolute;
+  right: 15px;
+  top: 280px;
+  padding: 4.5px 9.5px; /* Add padding for a better look */
+  font-size: 12px; /* Increase the font size for better readability */
+  color: rgba(255, 255, 255, 0.75); /* Keep the light gray text color */
+  background-color: rgba(255, 255, 255, 0.15); /* Transparent background with slight white tint */
+  border: 0px solid #e0e0e0; /* Add a border to separate the dropdown */
+  border-radius: 25px; /* Rounded corners for the select box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  appearance: none; /* Removes the default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="rgba(255, 255, 255, 0.75)"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center; /* Adjusted to move the arrow down */
+  background-size: 12px; /* Adjust the size of the arrow */
+  cursor: pointer;
+  z-index: 10001;
+}
+	  #airbnbSelector {
   position: absolute;
   right: 15px;
   top: 320px;
@@ -844,7 +863,7 @@ select:focus {
   outline: none; /* Remove the default outline */
 }
 
-priceCategorySelect {
+#priceCategorySelect {
   position: absolute;
   right: 15px;
   top: 280px;
