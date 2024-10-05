@@ -1260,17 +1260,33 @@ overflow: hidden;
   </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
 <script>
-  // Function to hide region select dropdown when clicking outside of it
+  // Function to toggle the visibility of the region select dropdown when clicking the button
+  document.getElementById('regionSelectBtn').addEventListener('click', function(event) {
+    var regionSelect = document.getElementById('regionSelectDropdown');
+    
+    // Toggle the visibility of the dropdown
+    if (regionSelect.style.display === 'block') {
+      regionSelect.style.display = 'none';
+    } else {
+      regionSelect.style.display = 'block';
+    }
+    
+    // Prevent the click from propagating to the document listener (so it won't hide immediately)
+    event.stopPropagation();
+  });
+
+  // Function to hide the region select dropdown when clicking outside of it
   document.addEventListener('click', function(event) {
     var regionSelect = document.getElementById('regionSelectDropdown');
     var regionSelectBtn = document.getElementById('regionSelectBtn');
     
-    // Check if click happened outside the dropdown and button
+    // Check if the click happened outside the dropdown and button
     if (regionSelect && !regionSelect.contains(event.target) && !regionSelectBtn.contains(event.target)) {
       regionSelect.style.display = 'none';
     }
   });
 </script>
+
 	
 <button id="toggleButton">Switch to Night</button>
 <button id="newsButton">Latest Airbnbs</button>
