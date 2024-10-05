@@ -1175,28 +1175,23 @@ overflow: hidden;
   </select>
   <button id="submitRegion">Submit</button>
 </div>
+	<!-- Add this dropdown for price categories -->
 	<select id="priceCategorySelect">
     <optgroup label="Region-Specific Categories">
-        <option value="popular">📍Most Popular (Region)</option>
-        <option value="cheapest">📍Cheapest (Region)</option>
-        <option value="midPrice">📍Mid Price (Region)</option>
-        <option value="expensive">📍Most Expensive (Region)</option>
+        <option value="popular">Most Popular (Region)📍</option>
+        <option value="cheapest">Cheapest (Region)📍</option>
+        <option value="midPrice">Mid Price (Region)📍</option>
+        <option value="expensive">Most Expensive (Region)📍</option>
     </optgroup>
     <optgroup label="World Categories">
-        <option value="general">🌍Most Popular (World)</option>
-        <option value="cheapestWorld">🌍Cheapest (World)</option>
-        <option value="midPriceWorld">🌍Mid Price (World)</option>
-        <option value="expensiveWorld">🌍Most Expensive (World)</option>
+        <option value="general">Most Popular (World)🌍</option>
+        <option value="cheapestWorld">Cheapest (World)🌍</option>
+        <option value="midPriceWorld">Mid Price (World)🌍</option>
+        <option value="expensiveWorld">Most Expensive (World)🌍</option>
     </optgroup>
 </select>
 
-	<!-- Add this dropdown for price categories -->
-<select id="priceCategorySelect">
-    <option value="popular">Most Popular</option>
-    <option value="cheapest">Cheapest by region</option>
-    <option value="midPrice">Mid-Price by region</option>
-    <option value="expensive">Most Expensive by region</option>
-</select>
+
 
 <div id="confirmationMessage" style="display: none;">
   <h2>Thank you</h2>
@@ -1287,12 +1282,7 @@ overflow: hidden;
 <div id="newsOverlaynighttheme" style="display: none;">
   <iframe id="newsIframenighttheme" width="900" height="1600" src="https://rss.app/embed/v1/magazine/l8d8McKVHYpe6MzA" frameborder="0"></iframe>
 </div>
-	<select id="airbnbSelector">
-	<option value="general">General</option>
-  <option value="cheapest">Cheapest in world</option>
-  <option value="midPrice">Mid Price in world</option>
-  <option value="expensive">Most Expensive in world</option>
-</select>
+	
 
   <!-- Scripts -->
   <!-- Include Three.js and other dependencies here -->
@@ -4193,9 +4183,9 @@ window.addEventListener('pointerdown', (event) => {
 	  // Define different markers data sets
 const markersDataSets = {
     general: markersData,
-  cheapest: markersDataforCheapestAirbnbs,
-  midPrice: markersDataforMidPriceAirbnbs,
-  expensive: markersDataforExpensiveAirbnbs,
+  cheapestWorld: markersDataforCheapestAirbnbs,
+  midPriceWorld: markersDataforMidPriceAirbnbs,
+  expensiveWorld: markersDataforExpensiveAirbnbs,
 };
 
 let activeMarkersData = markersData; // Default to markersData
@@ -4296,7 +4286,7 @@ function closeIframe(event) {
 }
 }
 	  // Add event listener for dropdown selection
-document.getElementById('airbnbSelector').addEventListener('change', function() {
+document.getElementById('priceCategorySelect').addEventListener('change', function() {
   const selectedCategory = this.value;
   loadMarkers(selectedCategory);
 });
