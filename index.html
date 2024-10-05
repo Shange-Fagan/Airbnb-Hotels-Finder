@@ -2610,14 +2610,22 @@ function loadDetailedMarkers(regionCoordinates) {
 }
 // Example: Get detailed markers for a region
 // Get detailed markers for a region (can be dynamic or hardcoded)
-function getDetailedMarkersForRegion(regionCoordinates) {
-  return [
-    { id: 1, lat: regionCoordinates.lat + 0.1, lng: regionCoordinates.lng + 0.1 },
-    { id: 2, lat: regionCoordinates.lat + 0.2, lng: regionCoordinates.lng + 0.2 },
-    { id: 3, lat: regionCoordinates.lat + 0.3, lng: regionCoordinates.lng + 0.3 },
-    // Add more markers as needed...
-  ];
+// Fetch detailed markers dynamically from an API or backend service
+async function getDetailedMarkersForRegion(region) {
+  try {
+    // Make an API request to fetch the markers data for the specific region
+    const response = await fetch(`https://your-api-endpoint.com/get-markers?region=${region}`);
+    
+    // Parse the JSON response to get the markers data
+    const markersData = await response.json(); 
+
+    return markersData; // Assuming the response contains an array of markers
+  } catch (error) {
+    console.error('Error fetching detailed markers for region:', error);
+    return []; // Return an empty array if there's an error
+  }
 }
+
 
 
 // Pan globe to a region
