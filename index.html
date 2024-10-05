@@ -4183,9 +4183,9 @@ window.addEventListener('pointerdown', (event) => {
 	  // Define different markers data sets
 const markersDataSets = {
     general: markersData,
-  cheapestWorld: markersDataforCheapestAirbnbs,
-  midPriceWorld: markersDataforMidPriceAirbnbs,
-  expensiveWorld: markersDataforExpensiveAirbnbs,
+  cheapest: markersDataforCheapestAirbnbs,
+  midPrice: markersDataforMidPriceAirbnbs,
+  expensive: markersDataforExpensiveAirbnbs,
 };
 
 let activeMarkersData = markersData; // Default to markersData
@@ -4286,7 +4286,7 @@ function closeIframe(event) {
 }
 }
 	  // Add event listener for dropdown selection
-document.getElementById('priceCategorySelect').addEventListener('change', function() {
+document.getElementById('airbnbSelector').addEventListener('change', function() {
   const selectedCategory = this.value;
   loadMarkers(selectedCategory);
 });
