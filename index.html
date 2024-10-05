@@ -2585,29 +2585,36 @@ if (window.innerWidth <= 768) {
   });
 */
 	  // Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
-function loadDetailedMarkers(regionCoordinates) {
-  // First, clear the existing markers
-  clearExistingMarkers(); 
+// Load detailed markers for a specific region (use regular Mesh for dynamic marker count)
+async function loadDetailedMarkers(regionCoordinates) {
+  clearExistingMarkers();  // Clear previously added markers
 
-  const detailedMarkers = getDetailedMarkersForRegion(regionCoordinates); // Fetch the detailed markers for the selected region
-  
-  // Iterate through the detailed markers
+  // Fetch detailed markers dynamically for the region
+  const detailedMarkers = await getDetailedMarkersForRegion(regionCoordinates); 
+
+  // Iterate through the fetched markers and add them to the scene
   detailedMarkers.forEach((marker, index) => {
-    // Convert lat/lng to 3D positions on the globe
-    const { x, y, z } = latLonToVector3(marker.lat, marker.lng, globeRadius);
+    const { lat, lng } = marker;  // Use latitude and longitude
+    const { x, y, z } = latLonToVector3(lat, lng, globeRadius); // Convert to 3D coordinates
 
-    // Create the marker's geometry and material
-    const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Adjust size as needed
+    // Create individual marker geometry and material
+    const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Use smaller size for detailed markers
     const markerMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, side: THREE.DoubleSide });
+
+    // Optionally scale markers for mobile
+    if (window.innerWidth <= 768) {
+      markerGeometry.scale(1.25, 1.25, 1.25);  // Smaller for mobile
+    }
 
     const markerMesh = new THREE.Mesh(markerGeometry, markerMaterial);
     markerMesh.position.set(x, y, z);
-    markerMesh.name = `marker-${marker.id}`;  // Ensure each marker has a unique name
+    markerMesh.name = `marker-${marker.id}`;  // Set a unique name for each marker
 
     // Add the marker to the scene (on the globe)
-    scene.add(markerMesh); 
+    globe2.add(markerMesh);  
   });
 }
+
 // Example: Get detailed markers for a region
 // Get detailed markers for a region (can be dynamic or hardcoded)
 // Fetch detailed markers dynamically from an API or backend service
