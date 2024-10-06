@@ -1261,6 +1261,7 @@ overflow: hidden;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
 <script>
   // Function to toggle the visibility of the region select dropdown when clicking the button
+	document.addEventListener("DOMContentLoaded", function() {
   document.getElementById('regionSelectBtn').addEventListener('click', function(event) {
     var regionSelect = document.getElementById('regionSelectDropdown');
     
@@ -1285,6 +1286,7 @@ overflow: hidden;
       regionSelect.style.display = 'none';
     }
   });
+});
 </script>
 
 	
@@ -2553,7 +2555,7 @@ markersData.forEach((data, index) => {
 });
 
 // Add the markers to the scene
-//scene.add(markers);
+scene.add(markers);
 
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 
