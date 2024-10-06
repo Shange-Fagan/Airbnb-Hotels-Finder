@@ -3362,6 +3362,8 @@ async function loadMarkersForRegionAndCategory(region, category) {
 
         // Update spinner text once loading is complete
         updateSpinnerText("Listings loaded for " + region);
+	    console.log(`Fetching markers from: https://bnb-navigator.com/scrape-airbnb?region=${region}&category=${category}`);
+
 
     } catch (error) {
         console.error("Error fetching listings:", error);
