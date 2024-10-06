@@ -2553,7 +2553,7 @@ markersData.forEach((data, index) => {
 });
 
 // Add the markers to the scene
-scene.add(markers);
+//scene.add(markers);
 
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 
@@ -2595,7 +2595,7 @@ async function loadDetailedMarkers(regionCoordinates) {
   // Iterate through the fetched markers and add them to the scene
   detailedMarkers.forEach((marker, index) => {
     const { lat, lng } = marker;  // Use latitude and longitude
-    const { x, y, z } = latLonToVector3(lat, lng, globeRadius); // Convert to 3D coordinates
+    const { x, y, z } = latLonToVector3(lat, lng, earthRadius); // Convert to 3D coordinates
 
     // Create individual marker geometry and material
     const markerGeometry = new THREE.PlaneGeometry(0.7, 0.7);  // Use smaller size for detailed markers
@@ -2611,7 +2611,7 @@ async function loadDetailedMarkers(regionCoordinates) {
     markerMesh.name = `marker-${marker.id}`;  // Set a unique name for each marker
 
     // Add the marker to the scene (on the globe)
-    globe2.add(markerMesh);  
+    scene.add(markerMesh);  
   });
 }
 
@@ -3252,7 +3252,7 @@ function panToLocation(location) {
         const phi = (90 - lat) * (Math.PI / 180);
         const theta = (lng + 180) * (Math.PI / 180);
 	    
-        const radius = 5.0;  // Updated globe radius
+        const radius = 5.1;  // Updated globe radius
         const targetX = radius * Math.sin(phi) * Math.cos(theta); // Adjust globe radius accordingly
         const targetY = radius * Math.cos(phi);
         const targetZ = radius * Math.sin(phi) * Math.sin(theta);
