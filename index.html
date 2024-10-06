@@ -2678,7 +2678,7 @@ function panGlobeToRegion(regionCoordinates) {
       .to({}, 2000)  // Add a delay equal to the camera pan
       .onComplete(() => {
         loadDetailedMarkers(regionCoordinates);  // Load detailed markers for the region
-        loadGenericMarkers();  // Load generic markers
+        loadGenericMarkers(markersData);  // Load generic markers
       })
       .start();
   }
