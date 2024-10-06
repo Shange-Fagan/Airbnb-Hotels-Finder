@@ -2687,7 +2687,7 @@ async function loadDetailedMarkers(regionCoordinates) {
 async function getDetailedMarkersForRegion(region) {
   try {
     // Make an API request to fetch the markers data for the specific region
-    const response = await fetch(`https://airbnb-assistant.herokuapp.com/get-markers?region=${region}&category=${category}`, {
+    const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
 });
@@ -3421,13 +3421,13 @@ async function loadMarkersForRegionAndCategory(region, category) {
         updateSpinnerText("Fetching listings for " + region + "...");
 
         // Fetch the listings data from your backend based on region and category
-        const response = await fetch(`https://airbnb-assistant.herokuapp.com/get-markers?region=${region}&category=${category}`, {
+        const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
 });
         const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
         console.log(`Fetching markers from: ${url}`);
-	    console.log(`Fetching markers from: https://airbnb-assistant.herokuapp.com/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: http://localhost:3000/get-markers?region=${region}&category=${category}`);
 
         // Clear the existing markers before adding new ones
         clearExistingMarkers();
@@ -3443,7 +3443,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
 
         // Update spinner text once loading is complete
         updateSpinnerText("Listings loaded for " + region);
-	    console.log(`Fetching markers from: https://airbnb-assistant.herokuapp.com/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: http://localhost:3000/get-markers?region=${region}&category=${category}`);
 
 
     } catch (error) {
