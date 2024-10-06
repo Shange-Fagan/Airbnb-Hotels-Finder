@@ -2493,6 +2493,7 @@ globe2 = new THREE.Mesh(geometry, material2);
   //globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
 	 const dummy = new THREE.Object3D();
+	  const markers = new THREE.InstancedMesh(markerGeometry, markerMaterial, markersData.length);
 // Function to load generic markers
 function loadGenericMarkers(markersData) {
   // Check if the scene, marker data, and necessary variables are available
