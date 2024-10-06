@@ -2687,7 +2687,10 @@ async function loadDetailedMarkers(regionCoordinates) {
 async function getDetailedMarkersForRegion(region) {
   try {
     // Make an API request to fetch the markers data for the specific region
-    const response = await fetch(`https://airbnb-assistant.herokuapp.com/get-markers?region=${region}&category=${category}`);
+    const response = await fetch(`https://airbnb-assistant.herokuapp.com/get-markers?region=${region}&category=${category}`, {
+  method: 'GET',
+  credentials: 'include',  // If you need cookies or credentials
+});
     // Parse the JSON response to get the markers data
     const markersData = await response.json(); 
 console.log(response.json());
