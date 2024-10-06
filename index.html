@@ -2666,10 +2666,15 @@ function panGlobeToRegion(regionCoordinates) {
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(() => controls.update())
       .start();
-
-    loadDetailedMarkers(regionCoordinates);  // Load markers for the region
-	  // Load generic markers for all other regions
-    scene.add(markers);  // Keep other region markers visible
+	  
+	  // Load markers for the specific region after panning is complete
+    new TWEEN.Tween()
+      .to({}, 2000)  // Add a delay equal to the camera pan
+      .onComplete(() => {
+        loadDetailedMarkers(regionCoordinates);  // Load detailed markers for the region
+        loadGenericMarkers();  // Load generic markers
+      })
+      .start();
   }
 }
 	  // Function to pan the globe and load markers based on a location search
