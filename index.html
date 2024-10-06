@@ -2493,7 +2493,12 @@ globe2 = new THREE.Mesh(geometry, material2);
   //globe2 = new THREE.Mesh(geometry, material2);
   scene.add(globe2);
 // Function to load generic markers
-
+function loadGenericMarkers(markersData) {
+  // Check if the scene, marker data, and necessary variables are available
+  if (!scene || !markersData || markersData.length === 0) {
+    console.warn('Scene or markers data not available');
+    return;
+  }
 // Marker Geometry and Material
 const markerGeometry = new THREE.PlaneGeometry(1.1, 1.1); // Adjust size as needed
 const markerMaterial = new THREE.MeshBasicMaterial({
@@ -2556,7 +2561,8 @@ markersData.forEach((data, index) => {
 
 // Add the markers to the scene
 scene.add(markers);
-
+}
+	 loadGenericMarkers(markersData);
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
 
 
