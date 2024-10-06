@@ -3350,14 +3350,18 @@ async function loadMarkersForRegionAndCategory(region, category) {
         // Fetch the listings data from your backend based on region and category
         const response = await fetch(`https://bnb-navigator.com/scrape-airbnb?region=${region}&category=${category}`);
         const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
-        
+        console.log(`Fetching markers from: ${url}`);
+
         // Clear the existing markers before adding new ones
         clearExistingMarkers();
         
         // Add the new markers to the scene
         markersData.forEach(marker => {
-            let markerObject = createMarker(marker);
-            scene.add(markerObject);
+            console.log('Creating marker:', marker);
+	    let markerObject = createMarker(marker);
+	    console.log('Marker Object:', markerObject);
+	    scene.add(markerObject);
+
         });
 
         // Update spinner text once loading is complete
