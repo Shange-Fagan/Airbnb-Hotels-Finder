@@ -2691,7 +2691,7 @@ async function getDetailedMarkersForRegion(region) {
     
     // Parse the JSON response to get the markers data
     const markersData = await response.json(); 
-
+console.log(response.json());
     return markersData; // Assuming the response contains an array of markers
   } catch (error) {
     console.error('Error fetching detailed markers for region:', error);
