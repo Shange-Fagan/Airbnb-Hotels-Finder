@@ -2604,6 +2604,32 @@ scene.add(markers);
 }
 	 loadGenericMarkers(markersData);
 // Labels, Raycasting, and Interactions (leave as is from your original logic)
+// Assuming each marker has a reference in the HTML list and vice versa
+function highlightMarker(markerId) {
+    const marker = markers.find(m => m.id === markerId);  // Find the marker by ID
+    if (marker) {
+        marker.material.color.set('green');  // Highlight the marker in green
+    }
+}
+
+document.querySelectorAll('.listing').forEach(listing => {
+    listing.addEventListener('mouseover', () => {
+        const markerId = listing.getAttribute('data-marker-id');  // Ensure the listings have a marker ID
+        highlightMarker(markerId);
+    });
+
+    listing.addEventListener('mouseout', () => {
+        const markerId = listing.getAttribute('data-marker-id');
+        unhighlightMarker(markerId);  // Reset the marker's color
+    });
+});
+
+function unhighlightMarker(markerId) {
+    const marker = markers.find(m => m.id === markerId);
+    if (marker) {
+        marker.material.color.set('original_color');  // Reset to original color
+    }
+}
 
 
 
