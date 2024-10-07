@@ -3139,7 +3139,7 @@ async function fetchAirbnbPosts(searchUrl) {
         // Update spinner text to indicate scraping started
         updateSpinnerText("Scraping Airbnb listings...");
 
-        const response = await fetch(`http://bnb-navigator.com/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
+        const response = await fetch(`http://localhost:3000/scrape-airbnb?searchUrl=${encodeURIComponent(searchUrl)}`);
         const posts = await response.json();
 
         console.log('Fetched posts:', posts);
@@ -3447,13 +3447,13 @@ async function loadMarkersForRegionAndCategory(region, category) {
         updateSpinnerText("Fetching listings for " + region + "...");
 
         // Fetch the listings data from your backend based on region and category
-        const response = await fetch(`http://bnb-navigator.com/get-markers?region=${region}&category=${category}`, {
+        const response = await fetch(`http://localhost:3000/get-markers?region=${region}&category=${category}`, {
   method: 'GET',
   credentials: 'include',  // If you need cookies or credentials
 });
         const markersData = await response.json();  // Assuming the backend returns a JSON array of markers
         console.log(`Fetching markers from: ${url}`);
-	    console.log(`Fetching markers from: http://bnb-navigator.com/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: http://localhost:3000/get-markers?region=${region}&category=${category}`);
 
         // Clear the existing markers before adding new ones
         clearExistingMarkers();
@@ -3469,7 +3469,7 @@ async function loadMarkersForRegionAndCategory(region, category) {
 
         // Update spinner text once loading is complete
         updateSpinnerText("Listings loaded for " + region);
-	    console.log(`Fetching markers from: http://bnb-navigator.com/get-markers?region=${region}&category=${category}`);
+	    console.log(`Fetching markers from: http://localhost:3000/get-markers?region=${region}&category=${category}`);
 
 
     } catch (error) {
